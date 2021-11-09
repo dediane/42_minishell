@@ -22,11 +22,13 @@ int main(int ac, char **av, char **envp)
 	while (1)
 	{
 		line = readline( "Minishell$ " );
-		if (line[0] != '\0')
+		if (line[0] != '\0' || ft_strnstr("exit", line, 4) == 0)
 		{
 			parsing(line);
 			ft_exec(line, envp);
 		}
+		if(ft_strnstr("exit", line, 4))
+			exit(1);
 		/*printf("minishell $ - ");
 		readline();
 		//get_next_line(1, &line);
