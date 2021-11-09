@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 19:28:36 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/11/09 12:34:05 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/11/09 12:43:15 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ int main(int ac, char **av, char **envp)
 	while (1)
 	{
 		line = readline( "Minishell$ " );
-		if (line)
+		if (line[0] != '\0')
 		{
-			ft_parsing(line);
+			parsing(line);
 			ft_exec(line, envp);
 		}
 		/*printf("minishell $ - ");

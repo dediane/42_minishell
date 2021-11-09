@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 19:27:16 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/11/09 12:12:20 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/11/09 12:35:45 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,6 @@ typedef	struct s_parsing
 //exec
 void	ft_exec(char *line, char **envp);
 
+//parsing
+int	parsing(char *argv);
 #endif

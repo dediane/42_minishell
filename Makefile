@@ -6,12 +6,13 @@
 #    By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/26 19:30:34 by ddecourt          #+#    #+#              #
-#    Updated: 2021/11/09 12:09:06 by ddecourt         ###   ########.fr        #
+#    Updated: 2021/11/09 12:36:15 by ddecourt         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS =	srcs/minishell.c \
 		srcs/exec/exec.c \
+		srcs/parsing/parsing.c \
 
 OBJS = ${SRCS:.c=.o}
 

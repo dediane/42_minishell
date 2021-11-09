@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:03:55 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/11/09 12:11:36 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/11/09 12:43:52 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 void	ft_exec(char *line, char **envp)
 {
-	printf("line = %s\n", line);
+	printf("%s\n", line);
 	(void)envp;
 }
