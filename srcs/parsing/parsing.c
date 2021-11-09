@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/26 19:27:16 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/11/09 10:20:03 by bben-yaa         ###   ########.fr       */
+/*   Created: 2021/11/09 10:03:50 by bben-yaa          #+#    #+#             */
+/*   Updated: 2021/11/09 10:26:31 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "../inc/minishell.h"
 
-# include <stdio.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include "../libft/libft.h"
-
-typedef	struct s_parsing
+int	parsing(char *argv, t_parsing *param)
 {
-	int		cmd;
-	char	**cmd;
-	char	**arg;
-	int		pipe;
-}			t_parsing;
+	int	i;
 
-#endif
+	i = 0;
+	while(argv[i])
+	{
+		while(argv[i] == ' ' || argv[i] == '\t')
+			i++;
+		if (argv[i])
+			return (1); ///faire fonction parsing comande///
+		return (1); ///print new prompt car on a parser QUE des spaces and tabs///
+	}
+	return (0); ///argv n'hesite pas -> print new comande
+}
