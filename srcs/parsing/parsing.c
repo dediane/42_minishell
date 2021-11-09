@@ -6,14 +6,14 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 10:03:50 by bben-yaa          #+#    #+#             */
-/*   Updated: 2021/11/09 17:54:58 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2021/11/09 19:32:56 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-int	parsing(char *argv)
-{
+//int	parsing(char *argv)
+//{
 	//t_parsing param;
 	//int	i;
 	//char buf; //va lire char par char on alloue 1 char et on free a chaque fois
@@ -70,7 +70,7 @@ int	parsing(char *argv)
 		*/
 	//}
 	//return (0); ///argv n'hesite pas -> print new comande
-}
+//}
 
 /////-> si parsing == 0 -> print new prompt
 /////-> si parsing == 1 -> executer commande

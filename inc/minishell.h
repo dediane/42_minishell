@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 19:27:16 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/11/09 12:35:45 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/11/09 20:03:15 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,9 @@ void	ft_exec(char *line, char **envp);
 
 //parsing
 int	parsing(char *argv);
+
+//built_in
+int	ft_env(int fd, char **envp);
+int	ft_pwd(int fd, char** envp);
+
 #endif
