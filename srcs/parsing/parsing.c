@@ -3,25 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 10:03:50 by bben-yaa          #+#    #+#             */
 /*   Updated: 2021/11/09 17:54:58 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minishell.h"
+#include "../../inc/minishell.h"
 
-int	parsing(char *argv, t_parsing *param)
+int	parsing(char *argv)
 {
-	int	i;
-	char buf; //va lire char par char on alloue 1 char et on free a chaque fois
+	//t_parsing param;
+	//int	i;
+	//char buf; //va lire char par char on alloue 1 char et on free a chaque fois
 
-	i = 0;
+	/*i = 0;
 	init
 	while(argv[i])
 	{
-		buf = malloc(sizeof(char) * 1);
+		buf = malloc(sizeof(char) * 1);*/
 		/*
 			explication pour le parsing
 			en faite on va alloue au fur a mesure
@@ -59,7 +60,7 @@ int	parsing(char *argv, t_parsing *param)
 				- ft_add_to_tab(la fonction va aloue a partir du tabs courant + 1 et copier le tabs courant dans le nouveau)
 				- fonction qui alloue un char* + 1 du s1 copie du s1 dans le new + ajoute le char en param(char *s1, char c) return new
 		*/
-		free(buf);		
+		//free(buf);		
 		/* OLD PARSING
 			while(argv[i] == ' ' || argv[i] == '\t')
 				i++;
@@ -67,6 +68,15 @@ int	parsing(char *argv, t_parsing *param)
 				return (1); ///faire fonction parsing comande///
 			return (1); ///print new prompt car on a parser QUE des spaces and tabs///
 		*/
-	}
-	return (0); ///argv n'hesite pas -> print new comande
+	//}
+	//return (0); ///argv n'hesite pas -> print new comande
 }
+
+/////-> si parsing == 0 -> print new prompt
+/////-> si parsing == 1 -> executer commande
+/////-> si parsing == -1 -> print message "Error" + new prompt
+
+/*int	parsing_comande(char *argv, t_parsing *param, int *i)
+{
+	
+}*/

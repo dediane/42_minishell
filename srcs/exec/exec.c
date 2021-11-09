@@ -1,36 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/26 19:27:16 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/11/09 12:35:45 by ddecourt         ###   ########.fr       */
+/*   Created: 2021/11/09 12:03:55 by ddecourt          #+#    #+#             */
+/*   Updated: 2021/11/09 12:43:52 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "../../inc/minishell.h"
 
-# include <stdio.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include "../libft/libft.h"
-
-typedef	struct s_parsing
+void	ft_exec(char *line, char **envp)
 {
-	int		nb_cmd;
-	char	**cmd;
-	char	**arg;
-	int		pipe;
-}			t_parsing;
-
-//exec
-void	ft_exec(char *line, char **envp);
-
-//parsing
-int	parsing(char *argv);
-#endif
+	printf("%s\n", line);
+	(void)envp;
+}
