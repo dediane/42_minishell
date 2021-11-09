@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 19:28:36 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/11/09 20:24:22 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/11/10 00:09:35 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ int main(int ac, char **av, char **envp)
 		return (ft_putstr("Error: not argument accepted\n"), 1);
 	while (1)
 	{
-		line = readline( "\033[1;35m Minishell$ \033[0m" );
+		line = readline("\033[1;35m Minishell$ \033[0m");
 		if (line[0] != '\0' || ft_strnstr("exit", line, 4) == 0)
 		{
-			//ft_env(envp, 1);
+			ft_env(1, envp);
 			//parsing(line);
-			ft_pwd(1, envp);
+			// ft_pwd(1, envp);
 			//ft_exec(line, envp);
 		}
 		//if(ft_strnstr("exit", line, 4))
