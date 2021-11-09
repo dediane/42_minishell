@@ -1,32 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/26 19:28:36 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/11/09 12:02:07 by ddecourt         ###   ########.fr       */
+/*   Created: 2021/11/09 12:03:55 by ddecourt          #+#    #+#             */
+/*   Updated: 2021/11/09 12:11:36 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minishell.h"
+#include "../../inc/minishell.h"
 
-int main(int ac, char **av, char **envp)
+void	ft_exec(char *line, char **envp)
 {
-	char *line = NULL;
-
-	(void)av;
-	if (ac != 1)
-		return (ft_putstr("Error: not argument accepted\n"), 1);
-	while (1)
-	{
-		line = readline( "Minishell$ " );
-		ft_exec(line, envp);
-		/*printf("minishell $ - ");
-		readline();
-		//get_next_line(1, &line);
-		printf("%s\n", line);*/
-	}
-	return (0);
+	printf("line = %s\n", line);
+	(void)envp;
 }
