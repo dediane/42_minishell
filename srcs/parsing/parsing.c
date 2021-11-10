@@ -6,12 +6,14 @@
 /*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 10:03:50 by bben-yaa          #+#    #+#             */
-/*   Updated: 2021/11/10 14:23:46 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2021/11/10 15:01:41 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
+//int	parsing(char *argv)
+//{
 	//t_parsing param;
 	//int	i;
 	//char buf; //va lire char par char on alloue 1 char et on free a chaque fois
@@ -68,7 +70,8 @@
 		*/
 	//}
 	//return (0); ///argv n'hesite pas -> print new comande
-	
+//}
+
 /////-> si parsing == 0 -> print new prompt
 /////-> si parsing == 1 -> executer commande
 /////-> si parsing == -1 -> print message "Error" + new prompt

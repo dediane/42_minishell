@@ -6,7 +6,7 @@
 /*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 19:27:16 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/11/10 12:26:19 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2021/11/10 15:01:40 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,9 @@ void	ft_exec(char *line, char **envp);
 
 //parsing
 int	parsing(char *argv);
+
+//built_in
+int	ft_env(int fd, char **envp);
+int	ft_pwd(int fd, char** envp);
+
 #endif
