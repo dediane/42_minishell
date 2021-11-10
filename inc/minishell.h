@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 19:27:16 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/11/09 12:35:45 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/11/10 12:26:19 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@
 typedef	struct s_parsing
 {
 	int		nb_cmd;
-	char	**cmd;
-	char	**arg;
+	char	**tabs; //il y a la commande et les arguments dedans
 	int		pipe;
 }			t_parsing;
 
