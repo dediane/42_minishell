@@ -15,13 +15,17 @@ typedef	struct s_parsing
 	int		pipe;
 }			t_parsing;
 
-//exec
+////////exec
 void	ft_exec(char *line, char **envp);
 
-//parsing
+////////parsing
+//parsing.c
 int	parsing(char *argv);
 
-//built_in
+//parsing_utils.c
+int init_param(t_parsing *param);
+
+////////built_in
 int	ft_env(int fd, char **envp);
 int	ft_pwd(int fd, char** envp);
 

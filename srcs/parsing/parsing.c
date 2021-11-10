@@ -6,7 +6,7 @@
 /*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 10:03:50 by bben-yaa          #+#    #+#             */
-/*   Updated: 2021/11/10 15:01:41 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2021/11/10 17:50:30 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,30 +78,40 @@
 
 int	parsing(char *argv)
 {
-	t_parsing	*param;
+	t_parsing	param;
 	int			i;
-	char		buf;
-	char		*line;
+	char		*buf;
+	//char		*line;
 
 	i = 0;
-	init_param(&param); //->fonction pour init la structure;
-	while(argv[i] == ' ' || argv[i] == '/t')
-		i++;//on a passer tout les spaces et tabs du debut
+	
+	
+	if (!init_param(&param)) //->fonction pour init la structure; **bien checker**
+		return (-1); //protection si l'allocution echoue//
+	while(argv[i] == ' ' || argv[i] == '\t')
+		i++;//on a passer tout les spaces et tabs du debut **checker**
 	while(argv[i])
 	{
 		buf = malloc(sizeof(char) * 1);
-		line = malloc (sizeof(char) * (i + 1));
-		if (arg[i] == 34)//c'est l'ascii du char " double quotes
+		//line = malloc (sizeof(char) * (i + 1));
+		if (argv[i] == 34)//c'est l'ascii du char " double quotes
 			printf("faire fonction pour mettre dans tab tout ce qu'il y a dans les doubles quotes\n");
-		else if (argv[i] == "'")
+		else if (argv[i] == 39)//c'est l'ascii du char ' simple quote
 			printf("faire fonction pour mettre dans tab tout ce qu'il y a dans les simple quote\n");
 		else if (argv[i] == '|')
 			printf("nouveau maillon a faire car nouvelle commande\n");
 		else if (argv[i] == ' ')
+		{
+			i++;//pour passer le ' '
 			printf("allouer une nouvelle ligne pour le tabs copier line dans tabs\n");
-		buf = argv[i]; //on est sur ici que argv[i] est un char autre que | ' " ou espace
+		}
+		buf[0] = argv[i]; //on est sur ici que argv[i] est un char autre que | ' " ou espace
+		buf[1] = '\0';
+		printf("buf vaut %s\n", buf);
 		//fonction : mettre dans line tout en allouant et free a chaque fois//
+		i++;
 		free(buf);
 	}
 	//une fois argv tabs contient la commande et ses arguments//
+	return (1);
 }
