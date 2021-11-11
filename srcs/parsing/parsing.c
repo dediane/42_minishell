@@ -6,7 +6,7 @@
 /*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 10:03:50 by bben-yaa          #+#    #+#             */
-/*   Updated: 2021/11/10 17:50:30 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2021/11/11 10:45:42 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,11 +81,10 @@ int	parsing(char *argv)
 	t_parsing	param;
 	int			i;
 	char		*buf;
-	//char		*line;
+	char		*line;
 
 	i = 0;
-	
-	
+	line = NULL;
 	if (!init_param(&param)) //->fonction pour init la structure; **bien checker**
 		return (-1); //protection si l'allocution echoue//
 	while(argv[i] == ' ' || argv[i] == '\t')
@@ -93,7 +92,6 @@ int	parsing(char *argv)
 	while(argv[i])
 	{
 		buf = malloc(sizeof(char) * 1);
-		//line = malloc (sizeof(char) * (i + 1));
 		if (argv[i] == 34)//c'est l'ascii du char " double quotes
 			printf("faire fonction pour mettre dans tab tout ce qu'il y a dans les doubles quotes\n");
 		else if (argv[i] == 39)//c'est l'ascii du char ' simple quote
@@ -103,12 +101,20 @@ int	parsing(char *argv)
 		else if (argv[i] == ' ')
 		{
 			i++;//pour passer le ' '
+			printf("line vaut %s\n", line);
 			printf("allouer une nouvelle ligne pour le tabs copier line dans tabs\n");
+			if (!ft_tabs(&param, line))
+				return (0);
+			printf("tab[0] %s\n", param.tabs[0]);
+			printf("tab[1] %s\n", param.tabs[1]);
+			line = NULL;//new tabs[i]
 		}
-		buf[0] = argv[i]; //on est sur ici que argv[i] est un char autre que | ' " ou espace
+		buf[0] = argv[i]; //on est sur que ici que argv[i] est un char autre que | ' " ou espace
 		buf[1] = '\0';
 		printf("buf vaut %s\n", buf);
-		//fonction : mettre dans line tout en allouant et free a chaque fois//
+		if (!(line = ft_line(line, buf[0])))//fonction : mettre dans line tout en allouant et free a chaque fois//
+			return (0);// ->allocation a echouer
+		//printf("line after copy line + buf in line vaut %s\n", line);
 		i++;
 		free(buf);
 	}

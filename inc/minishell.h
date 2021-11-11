@@ -23,7 +23,12 @@ void	ft_exec(char *line, char **envp);
 int	parsing(char *argv);
 
 //parsing_utils.c
-int init_param(t_parsing *param);
+int 	init_param(t_parsing *param);
+char	*ft_line(char *line, char buf);
+int		ft_tabs(t_parsing *parsing, char *line);
+int		ft_len_tabs(char **tab);
+
+
 
 ////////built_in
 int	ft_env(int fd, char **envp);
