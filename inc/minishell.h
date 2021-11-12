@@ -28,6 +28,9 @@ char	*ft_line(char *line, char buf);
 int		ft_tabs(t_parsing *parsing, char *line);
 int		ft_len_tabs(char **tab);
 
+//parsing_tabs.c
+int		ft_paste_tab(t_parsing *param, char **new, char *line);
+
 
 
 ////////built_in

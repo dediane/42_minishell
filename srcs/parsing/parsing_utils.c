@@ -66,11 +66,11 @@ char	**ft_malloc_tab(t_parsing *param, int len, char *line)
 		new[1] = NULL;
 		return (new);
 	}
-	if (!(new = malloc(sizeof(char *) * len + 1))) //line + NULL
+	if (!(new = malloc(sizeof(char *) * len + 2))) //line + NULL
 		return (0);
-	//ft_paste_tab(param, line); // A FAIRE
+	ft_paste_tab(param, new, line);
 	//copier old tabs in new + mettre line dans le dernier tab[i] et tab[++i] = NULL 
-	free(param->tabs);
+	//free_tabs(param->tab);
 	return (new);
 }
 

@@ -6,7 +6,7 @@
 /*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 10:03:50 by bben-yaa          #+#    #+#             */
-/*   Updated: 2021/11/11 10:45:42 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2021/11/12 15:17:02 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,13 @@ int	parsing(char *argv)
 			printf("allouer une nouvelle ligne pour le tabs copier line dans tabs\n");
 			if (!ft_tabs(&param, line))
 				return (0);
-			printf("tab[0] %s\n", param.tabs[0]);
-			printf("tab[1] %s\n", param.tabs[1]);
+			int l = 0;
+			while (param.tabs[l])
+			{
+				printf("tab[%d] %s\n", l, param.tabs[l]);
+				l++;
+			}
+			printf("tab[%d] %s\n", l, param.tabs[l]);
 			line = NULL;//new tabs[i]
 		}
 		buf[0] = argv[i]; //on est sur que ici que argv[i] est un char autre que | ' " ou espace
@@ -115,7 +120,8 @@ int	parsing(char *argv)
 		if (!(line = ft_line(line, buf[0])))//fonction : mettre dans line tout en allouant et free a chaque fois//
 			return (0);// ->allocation a echouer
 		//printf("line after copy line + buf in line vaut %s\n", line);
-		i++;
+		while (argv[i] == ' ')
+			i++;
 		free(buf);
 	}
 	//une fois argv tabs contient la commande et ses arguments//
