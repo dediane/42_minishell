@@ -24,5 +24,6 @@ int	parsing(char *argv);
 //built_in
 int	ft_env(int fd, char **envp);
 int	ft_pwd(int fd, char** envp);
+void ft_exit(char *exit_line);
 
 #endif
