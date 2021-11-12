@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 19:48:02 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/11/10 00:03:39 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/11/11 00:43:40 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@ int	ft_pwd(int fd, char** envp)
 	while(path[++i])
 		write(fd, &path[i], 1);
 	write(fd, "\n", 1);
+	free(path);
 	return (0);
 }
