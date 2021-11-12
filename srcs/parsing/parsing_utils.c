@@ -61,7 +61,6 @@ char	**ft_malloc_tab(t_parsing *param, int len, char *line)
 	{
 		if (!(new = malloc(sizeof(char *) * 2))) //line + NULL
 			return (0);
-		printf("la\n");
 		new[0] = line;
 		new[1] = NULL;
 		return (new);

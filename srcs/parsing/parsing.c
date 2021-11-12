@@ -6,7 +6,7 @@
 /*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 10:03:50 by bben-yaa          #+#    #+#             */
-/*   Updated: 2021/11/12 15:17:02 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2021/11/12 16:00:32 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,30 +100,32 @@ int	parsing(char *argv)
 			printf("nouveau maillon a faire car nouvelle commande\n");
 		else if (argv[i] == ' ')
 		{
-			i++;//pour passer le ' '
-			printf("line vaut %s\n", line);
+			while (argv[i] == ' ')
+				i++;
 			printf("allouer une nouvelle ligne pour le tabs copier line dans tabs\n");
 			if (!ft_tabs(&param, line))
-				return (0);
-			int l = 0;
-			while (param.tabs[l])
-			{
-				printf("tab[%d] %s\n", l, param.tabs[l]);
-				l++;
-			}
-			printf("tab[%d] %s\n", l, param.tabs[l]);
+				return (0);			
 			line = NULL;//new tabs[i]
 		}
-		buf[0] = argv[i]; //on est sur que ici que argv[i] est un char autre que | ' " ou espace
+		if (!argv[i])
+			break ;
+		buf[0] = argv[i];//on est sur que ici que argv[i] est un char autre que | ' " ou espace
 		buf[1] = '\0';
 		printf("buf vaut %s\n", buf);
 		if (!(line = ft_line(line, buf[0])))//fonction : mettre dans line tout en allouant et free a chaque fois//
-			return (0);// ->allocation a echouer
-		//printf("line after copy line + buf in line vaut %s\n", line);
-		while (argv[i] == ' ')
-			i++;
+			return (0);// ->allocation a echoue
+		i++;
 		free(buf);
 	}
+	if (!ft_tabs(&param, line))
+		return (0);
 	//une fois argv tabs contient la commande et ses arguments//
+	int l = 0;
+	while (param.tabs[l])
+	{
+		printf("tab[%d] %s\n", l, param.tabs[l]);
+		l++;
+	}
+	printf("tab[%d] %s\n", l, param.tabs[l]);
 	return (1);
 }
