@@ -30,6 +30,9 @@ int		ft_len_tabs(char **tab);
 
 //parsing_tabs.c
 int		ft_paste_tab(t_parsing *param, char **new, char *line);
+void	free_tabs(char **tabs);
+char	ft_strcpy(char *dest, char *src);
+
 
 
 

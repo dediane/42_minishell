@@ -29,7 +29,30 @@ int	ft_paste_tab(t_parsing *param, char **new, char *line)
 		i = 0;
 		y++;
 	}
-	new[y] = line;
+	if (!(new[y] = malloc(sizeof(char) * (ft_strlen(line) + 1))))
+		return (0);
+	ft_strcpy(new[y], line);
 	new[++y] = NULL;
 	return (1);
+}
+
+void	free_tabs(char **tabs)
+{
+	int	i;
+
+	i = 0;
+	if (tabs)
+	{
+		while (tabs[i])
+		{
+			if (tabs[i])
+			{
+				free(tabs[i]);
+				tabs[i] = NULL;
+			}
+			i++;
+		}
+	}
+	free(tabs);
+	tabs = NULL;
 }
