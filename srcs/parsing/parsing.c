@@ -6,7 +6,7 @@
 /*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 10:03:50 by bben-yaa          #+#    #+#             */
-/*   Updated: 2021/11/13 12:21:10 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2021/11/13 13:42:44 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,13 +112,13 @@ int	parsing(char *argv)
 			line = NULL;//new tabs[i]
 			
 			
-			int l = 0;
+			/*int l = 0;
 			while (param.tabs[l])
 			{
 				printf("tab[%d] %s\n", l, param.tabs[l]);
 				l++;
 			}
-			printf("tab[%d] %s\n", l, param.tabs[l]);
+			printf("tab[%d] %s\n", l, param.tabs[l]);*/
 			
 			/*if (argv[i])
 			{
@@ -133,8 +133,12 @@ int	parsing(char *argv)
 		printf("buf vaut %s\n", buf);
 		if (!(line = ft_line(line, buf[0])))		//fonction : mettre dans line tout en allouant et free a chaque fois//
 			return (0);								// ->allocation a echoue
-	
-		i++; 										//only if (argv[i]) ->condtion a mettre
+		i++;										//only if (argv[i]) ->condtion a mettre
+		if (!argv[i] && line)
+		{
+			if (!ft_tabs(&param, line))
+				return (0);
+		}
 		free(buf);
 	}
 
@@ -144,13 +148,13 @@ int	parsing(char *argv)
 	
 	////////////////////////////////////////
 	
-	/*int l = 0;
+	int l = 0;
 	while (param.tabs[l])
 	{
 		printf("tab[%d] %s\n", l, param.tabs[l]);
 		l++;
 	}
-	printf("tab[%d] %s\n", l, param.tabs[l]);*/
+	printf("tab[%d] %s\n", l, param.tabs[l]);
 	
 	///////////////////////////////////////->print tabs
 	
