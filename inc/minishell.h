@@ -34,6 +34,8 @@ char	**ft_malloc_tab(t_parsing *param, int len_tab, char *line);
 int		ft_len_tabs(char **tab);
 int		ft_tabs(t_parsing *parsing, char *line);
 
+//parsing_quote.c
+int		ft_add_double_quote(t_parsing *param, int *i, char *argv, char *line);
 
 
 

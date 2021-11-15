@@ -6,7 +6,7 @@
 /*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 10:03:50 by bben-yaa          #+#    #+#             */
-/*   Updated: 2021/11/13 14:49:25 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2021/11/15 10:50:21 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,9 @@ int	parsing(char *argv)
 		{	
 			printf("faire fonction pour mettre dans tab tout ce qu'il y a dans les doubles quotes\n");
 			printf("line quote vaut %s et i %d\n", line, i);
+			if (!ft_add_double_quote(&param, &i, argv, line))
+				return (0);
+			i++;
 			line = NULL;
 		}	
 		else if (argv[i] == 39)//c'est l'ascii du char ' simple quote
@@ -117,19 +120,23 @@ int	parsing(char *argv)
 				return (0);			
 			line = NULL;
 		}
-		if (!argv[i])
-			break ;
-		buf[0] = argv[i];							//on est sur que ici que argv[i] est un char autre que | ' " ou espace
-		buf[1] = '\0';
-		printf("buf vaut %s\n", buf);
-		if (!(line = ft_line(line, buf[0])))		//fonction : mettre dans line tout en allouant et free a chaque fois//
-			return (0);								// ->allocation a echoue
-		i++;										//only if (argv[i]) ->condtion a mettre
-		if (!argv[i] && line && argv[i] != 34)
+		else
 		{
-			printf("ici pour argv[%d] %c\n", i, argv[i]);
-			if (!ft_tabs(&param, line))
-				return (0);
+			if (!argv[i])
+				break ;
+			buf[0] = argv[i];							//on est sur que ici que argv[i] est un char autre que | ' " ou espace
+			buf[1] = '\0';
+			printf("argv[%d] after condition vaut %c-\n", i, argv[i]);
+			printf("buf vaut %s\n", buf);
+			if (!(line = ft_line(line, buf[0])))		//fonction : mettre dans line tout en allouant et free a chaque fois//
+				return (0);								// ->allocation a echoue
+			i++;										//only if (argv[i]) ->condtion a mettre
+			if (!argv[i] && line)
+			{
+				printf("ici pour argv[%d] %c\n", i, argv[i]);
+				if (!ft_tabs(&param, line))
+					return (0);
+			}
 		}
 		free(buf);
 	}

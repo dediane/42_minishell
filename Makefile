@@ -6,7 +6,7 @@
 #    By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/26 19:30:34 by ddecourt          #+#    #+#              #
-#    Updated: 2021/11/15 10:10:43 by bben-yaa         ###   ########.fr        #
+#    Updated: 2021/11/15 10:48:06 by bben-yaa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ SRCS =	srcs/minishell.c \
 		srcs/parsing/parsing.c \
 		srcs/parsing/parsing_utils.c \
 		srcs/parsing/parsing_tabs.c \
+		srcs/parsing/parsing_quote.c \
 		srcs/built_in/env.c \
 		srcs/built_in/pwd.c \
 		srcs/built_in/exit.c \
