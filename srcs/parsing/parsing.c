@@ -6,7 +6,7 @@
 /*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 10:03:50 by bben-yaa          #+#    #+#             */
-/*   Updated: 2021/11/15 10:50:21 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2021/11/15 14:14:33 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,15 @@ int	parsing(char *argv)
 			printf("line quote vaut %s et i %d\n", line, i);
 			if (!ft_add_double_quote(&param, &i, argv, line))
 				return (0);
-			i++;
+			printf("argv[%d] == %c\n", i, argv[i]);
+			if (argv[i + 1] == ' ')
+			{
+				i++;
+				while (argv[i] == ' ')
+					i++;
+			}
+			if (argv[i + 1] == '\0')
+				break ;
 			line = NULL;
 		}	
 		else if (argv[i] == 39)//c'est l'ascii du char ' simple quote
