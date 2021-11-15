@@ -1,33 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/09 19:48:02 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/11/12 17:06:03 by ddecourt         ###   ########.fr       */
+/*   Created: 2021/11/12 13:50:59 by ddecourt          #+#    #+#             */
+/*   Updated: 2021/11/12 19:06:02 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-int	ft_pwd(int fd, char** envp)
+void ft_exit(char *exit_line)
 {
-	int		i;
-	char	*ret_ptr;
-	char	*path;
+	int size;
+	//int flag;
+	int i;
 
-	i = -1;
-		i = -1;
-	while (envp[++i])
+	size = ft_strlen(exit_line);
+	if (ft_strnstr(exit_line, "exit", 4) && size == 4)
 	{
-		ret_ptr = ft_strnstr(envp[i], "PWD", 3);
-		if (ret_ptr != 0)
-			path = ft_strjoin(ret_ptr, "\n");
+		//fonction pour free tous nos mallocs.
+		exit(0);
 	}
-	i = 3;
-	while(path[++i])
-		write(fd, &path[i], 1);
-	return (0);
+	if (size > 4)
+	{
+		if (exit_line[4] == ' ')
+		{
+			i = -1;
+			//while ()
+		}
+		if (exit_line[4] != ' ')
+		{
+			//fonction pour free tous nos mallocs.
+			ft_putstr_fd(exit_line, 2);
+			ft_putstr_fd(": command not found\n", 2);
+		}
+	}
+	return;
 }

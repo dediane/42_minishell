@@ -6,7 +6,7 @@
 /*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 19:28:36 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/11/10 16:04:45 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2021/11/15 10:10:32 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,15 @@ int main(int ac, char **av, char **envp)
 	while (1)
 	{
 		line = readline("\033[1;35m Minishell$ \033[0m");
-		if (line[0] != '\0' || ft_strnstr("exit", line, 4) == 0)
+		if (ft_strnstr("exit", line, 4))
+			ft_exit(line);
+		if (line[0] != '\0')
 		{
-			parsing(line);
+			ft_pwd(1, envp);
 			//ft_env(1, envp);
-			// ft_pwd(1, envp);
+			//parsing(line);
 			//ft_exec(line, envp);
 		}
-		//if(ft_strnstr("exit", line, 4))
-		//	exit(1);
-		/*printf("minishell $ - ");
-		readline();
-		//get_next_line(1, &line);
-		printf("%s\n", line);*/
 	}
 	return (0);
 }

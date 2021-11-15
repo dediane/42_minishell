@@ -6,7 +6,7 @@
 /*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 10:03:50 by bben-yaa          #+#    #+#             */
-/*   Updated: 2021/11/13 13:42:44 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2021/11/13 14:49:25 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,15 @@ int	parsing(char *argv)
 		i++;//on a passer tout les spaces et tabs du debut **checker**
 	while(argv[i])
 	{
+		printf("argv[%d] vaut %c-\n", i, argv[i]);
 		buf = malloc(sizeof(char) * 1);
-		if (argv[i] == 34)//c'est l'ascii du char " double quotes
+		//if (argv[i] == 34)//c'est l'ascii du char " double quotes
+		if (argv[i] == 34)
+		{	
 			printf("faire fonction pour mettre dans tab tout ce qu'il y a dans les doubles quotes\n");
+			printf("line quote vaut %s et i %d\n", line, i);
+			line = NULL;
+		}	
 		else if (argv[i] == 39)//c'est l'ascii du char ' simple quote
 			printf("faire fonction pour mettre dans tab tout ce qu'il y a dans les simple quote\n");
 		else if (argv[i] == '|')
@@ -109,22 +115,7 @@ int	parsing(char *argv)
 			printf("line fini vaut %s\n", line);
 			if (!ft_tabs(&param, line))
 				return (0);			
-			line = NULL;//new tabs[i]
-			
-			
-			/*int l = 0;
-			while (param.tabs[l])
-			{
-				printf("tab[%d] %s\n", l, param.tabs[l]);
-				l++;
-			}
-			printf("tab[%d] %s\n", l, param.tabs[l]);*/
-			
-			/*if (argv[i])
-			{
-				while (argv[i] == ' ')
-				i++;
-			}*/
+			line = NULL;
 		}
 		if (!argv[i])
 			break ;
@@ -134,8 +125,9 @@ int	parsing(char *argv)
 		if (!(line = ft_line(line, buf[0])))		//fonction : mettre dans line tout en allouant et free a chaque fois//
 			return (0);								// ->allocation a echoue
 		i++;										//only if (argv[i]) ->condtion a mettre
-		if (!argv[i] && line)
+		if (!argv[i] && line && argv[i] != 34)
 		{
+			printf("ici pour argv[%d] %c\n", i, argv[i]);
 			if (!ft_tabs(&param, line))
 				return (0);
 		}
