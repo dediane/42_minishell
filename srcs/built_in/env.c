@@ -1,36 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/26 19:28:36 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/11/14 14:23:21 by ddecourt         ###   ########.fr       */
+/*   Created: 2021/11/09 19:23:58 by ddecourt          #+#    #+#             */
+/*   Updated: 2021/11/09 19:49:15 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minishell.h"
+#include "../../inc/minishell.h"
 
-int main(int ac, char **av, char **envp)
+int	ft_env(int fd, char **envp)
 {
-	char *line = NULL;
-
-	(void)av;
-	if (ac != 1)
-		return (ft_putstr("Error: not argument accepted\n"), 1);
-	while (1)
+	int i;
+	
+	i = -1;
+	while (envp[++i])
 	{
-		line = readline("\033[1;35m Minishell$ \033[0m");
-		if (ft_strnstr(line, "exit", ft_strlen(line)))
-			ft_exit(line);
-		if (line[0] != '\0')
-		{
-			ft_pwd(1, envp);
-			//ft_env(1, envp);
-			//parsing(line);
-			//ft_exec(line, envp);
-		}
+		write(fd, envp[i], ft_strlen(envp[i]));
+		write(fd, "\n", 1);
 	}
 	return (0);
 }

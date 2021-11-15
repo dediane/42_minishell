@@ -2,3 +2,4 @@ minishell
 *.o
 *.swp
 *.a
+.vscode

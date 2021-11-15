@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/26 19:27:16 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/10/26 19:45:57 by ddecourt         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
@@ -19,5 +7,23 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "../libft/libft.h"
+
+typedef	struct s_parsing
+{
+	int		nb_cmd;
+	char	**tabs; //il y a la commande et les arguments dedans
+	int		pipe;
+}			t_parsing;
+
+//exec
+void	ft_exec(char *line, char **envp);
+
+//parsing
+int	parsing(char *argv);
+
+//built_in
+int	ft_env(int fd, char **envp);
+int	ft_pwd(int fd, char** envp);
+void ft_exit(char *exit_line);
 
 #endif

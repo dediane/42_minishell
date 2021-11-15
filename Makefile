@@ -6,11 +6,16 @@
 #    By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/26 19:30:34 by ddecourt          #+#    #+#              #
-#    Updated: 2021/10/26 19:44:32 by ddecourt         ###   ########.fr        #
+#    Updated: 2021/11/12 19:17:55 by ddecourt         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS =	srcs/minishell.c \
+		srcs/exec/exec.c \
+		srcs/parsing/parsing.c \
+		srcs/built_in/env.c \
+		srcs/built_in/pwd.c \
+		srcs/built_in/exit.c \
 
 OBJS = ${SRCS:.c=.o}
 
@@ -28,7 +33,7 @@ RM = rm -f
 
 $(NAME):    ${OBJS}
 		make -C libft
-		${CC} ${CFLAGS} ${OBJS} -o ${NAME}
+		${CC} ${CFLAGS} ${OBJS} -I -L./libft/ -lreadline -lm ./libft/libft.a -o ${NAME}
 
 all:	${NAME}
 

@@ -1,36 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/26 19:28:36 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/11/14 14:23:21 by ddecourt         ###   ########.fr       */
+/*   Created: 2021/11/09 19:48:02 by ddecourt          #+#    #+#             */
+/*   Updated: 2021/11/12 17:06:03 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/minishell.h"
+#include "../../inc/minishell.h"
 
-int main(int ac, char **av, char **envp)
+int	ft_pwd(int fd, char** envp)
 {
-	char *line = NULL;
+	int		i;
+	char	*ret_ptr;
+	char	*path;
 
-	(void)av;
-	if (ac != 1)
-		return (ft_putstr("Error: not argument accepted\n"), 1);
-	while (1)
+	i = -1;
+		i = -1;
+	while (envp[++i])
 	{
-		line = readline("\033[1;35m Minishell$ \033[0m");
-		if (ft_strnstr(line, "exit", ft_strlen(line)))
-			ft_exit(line);
-		if (line[0] != '\0')
-		{
-			ft_pwd(1, envp);
-			//ft_env(1, envp);
-			//parsing(line);
-			//ft_exec(line, envp);
-		}
+		ret_ptr = ft_strnstr(envp[i], "PWD", 3);
+		if (ret_ptr != 0)
+			path = ft_strjoin(ret_ptr, "\n");
 	}
+	i = 3;
+	while(path[++i])
+		write(fd, &path[i], 1);
 	return (0);
 }
