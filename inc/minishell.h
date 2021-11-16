@@ -13,6 +13,7 @@ typedef	struct s_parsing
 	int		nb_cmd;
 	char	**tabs; //il y a la commande et les arguments dedans
 	int		pipe;
+	int		ret;
 }			t_parsing;
 
 ////////exec
@@ -36,6 +37,8 @@ int		ft_tabs(t_parsing *parsing, char *line);
 
 //parsing_quote.c
 int		ft_add_double_quote(t_parsing *param, int *i, char *argv, char *line);
+int		ft_add_simple_quote(t_parsing *param, int *i, char *argv, char *line);
+
 
 
 

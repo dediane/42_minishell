@@ -6,7 +6,7 @@
 /*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 10:03:50 by bben-yaa          #+#    #+#             */
-/*   Updated: 2021/11/15 14:14:33 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2021/11/16 11:32:19 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,22 +97,45 @@ int	parsing(char *argv)
 		if (argv[i] == 34)
 		{	
 			printf("faire fonction pour mettre dans tab tout ce qu'il y a dans les doubles quotes\n");
-			printf("line quote vaut %s et i %d\n", line, i);
-			if (!ft_add_double_quote(&param, &i, argv, line))
+			if (line)	//->pour gerer les cas d'interpretation si on a a="ls -la"
+			{
+				if (!ft_tabs(&param, line))
+					return (0);	//->secure malloc
+				line = NULL;
+			}
+			if (!ft_add_double_quote(&param, &i, argv, line))	//-> pck on malloc
 				return (0);
-			printf("argv[%d] == %c\n", i, argv[i]);
-			if (argv[i + 1] == ' ')
+			if (argv[i + 1] == ' ')		//->on pass tout les espaces
 			{
 				i++;
 				while (argv[i] == ' ')
 					i++;
 			}
-			if (argv[i + 1] == '\0')
+			if (argv[i + 1] == '\0')	//->si on arrive a la fin de argv
 				break ;
 			line = NULL;
-		}	
+		}
 		else if (argv[i] == 39)//c'est l'ascii du char ' simple quote
+		{
 			printf("faire fonction pour mettre dans tab tout ce qu'il y a dans les simple quote\n");
+			if (line)	//->pour gerer les cas d'interpretation si on a a='ls -la'
+			{
+				if (!ft_tabs(&param, line))
+					return (0);	//->secure malloc
+				line = NULL;
+			}
+			if (!ft_add_simple_quote(&param, &i, argv, line))
+				return (0);
+			if (argv[i + 1] == ' ')		//->on pass tout les espaces
+			{
+				i++;
+				while (argv[i] == ' ')
+					i++;
+			}
+			if (argv[i + 1] == '\0')	//->si on arrive a la fin de argv
+				break ;
+			line = NULL;
+		}
 		else if (argv[i] == '|')
 			printf("nouveau maillon a faire car nouvelle commande\n");
 		else if (argv[i] == ' ')
@@ -123,7 +146,6 @@ int	parsing(char *argv)
 				i++;
 			}
 			printf("allouer une nouvelle ligne pour le tabs copier line dans tabs\n");	
-			printf("line fini vaut %s\n", line);
 			if (!ft_tabs(&param, line))
 				return (0);			
 			line = NULL;
@@ -134,14 +156,12 @@ int	parsing(char *argv)
 				break ;
 			buf[0] = argv[i];							//on est sur que ici que argv[i] est un char autre que | ' " ou espace
 			buf[1] = '\0';
-			printf("argv[%d] after condition vaut %c-\n", i, argv[i]);
 			printf("buf vaut %s\n", buf);
 			if (!(line = ft_line(line, buf[0])))		//fonction : mettre dans line tout en allouant et free a chaque fois//
 				return (0);								// ->allocation a echoue
 			i++;										//only if (argv[i]) ->condtion a mettre
 			if (!argv[i] && line)
 			{
-				printf("ici pour argv[%d] %c\n", i, argv[i]);
 				if (!ft_tabs(&param, line))
 					return (0);
 			}
@@ -154,7 +174,6 @@ int	parsing(char *argv)
 	//une fois argv tabs contient la commande et ses arguments//
 	
 	////////////////////////////////////////
-	
 	int l = 0;
 	while (param.tabs[l])
 	{
