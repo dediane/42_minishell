@@ -43,9 +43,25 @@ char	*get_path(char **envp, char *to_find)
 	return (NULL);
 }
 
+int	change_env(char **envp)
+{
+	int i;
+	int j;
+
+	i = -1;
+	while (envp[i][0] != NULL)
+	{
+		if ()
+	}
+}
+
 int	ft_cd(char **envp, char *path)
 {
-	if (path)
-		chdir(ft_get_home(envp));
-	if ()
+	//if (ft_strncmp(path, "cd", 3) == 0)
+	char *home;
+	(void)path;
+	home = ft_get_home(envp);
+	printf("%s\n", home);
+	chdir(home);
+	return (0);
 }
