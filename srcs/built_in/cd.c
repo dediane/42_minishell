@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 00:14:45 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/11/11 15:11:42 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/11/18 23:49:58 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,16 @@ int	change_env(char **envp, char *path, char *new_path)
 
 int	ft_cd(char **envp, char *path)
 {
-	//if (ft_strncmp(path, "cd", 3) == 0)
-	char *home;
 	char buffer[4096];
-	(void)path;
-	home = ft_get_home(envp);
+	
+	if (ft_strncmp(path, "..", 3) == 0)
+	{
+		
+	}
+	if (path == NULL)
+		path = ft_get_home(envp);
 	change_env(envp, "OLDPWD", getcwd(buffer, 4096));
-	change_env(envp, "PWD", home);
-	//chdir(home);
+	change_env(envp, "PWD", path);
+	chdir(path);
 	return (0);
 }
