@@ -12,16 +12,15 @@
 
 #include "../../inc/minishell.h"
 
-/*char *ft_get_home(char **envp)
+char *ft_get_home(char **envp)
 {
-	int i;
-	char *ret_ptr;
 	char *path;
 
-	i = -1;
-	get_path(envp, "HOME");
-	return (NULL);
-}*/
+	path = get_path(envp, "HOME");
+	if (path == NULL)
+		return (NULL);
+	return (path);
+}
 
 char	*get_path(char **envp, char *to_find)
 {
@@ -44,9 +43,9 @@ char	*get_path(char **envp, char *to_find)
 	return (NULL);
 }
 
-/*int	ft_cd(char **envp, char *path)
+int	ft_cd(char **envp, char *path)
 {
-	if (!path)
-		return(1);
+	if (path)
+		chdir(ft_get_home(envp));
 	if ()
-}*/
+}

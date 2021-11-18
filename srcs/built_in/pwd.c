@@ -14,13 +14,6 @@
 
 int	ft_pwd(int fd, char** envp)
 {
-	//int		i;
-	//char	*ret_ptr;
-	//char	*path;
-
-	//i = -1;
-	//	i = -1;
-	//get_path(envp, "PWD");
 	ft_putstr_fd(get_path(envp,"PWD"), fd);
 	return (0);
 }
