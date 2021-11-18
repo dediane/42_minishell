@@ -40,6 +40,7 @@ int		ft_add_double_quote(t_parsing *param, int *i, char *argv, char *line);
 
 
 ////////built_in
+char	*get_path(char **envp, char *to_find);
 int	ft_env(int fd, char **envp);
 int	ft_pwd(int fd, char** envp);
 void ft_exit(char *exit_line);

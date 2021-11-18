@@ -27,9 +27,9 @@ int main(int ac, char **av, char **envp)
 			ft_exit(line);
 		if (line[0] != '\0')
 		{
-			//ft_pwd(1, envp);
+			ft_pwd(1, envp);
 			//ft_env(1, envp);
-			parsing(line);
+			//parsing(line);
 			//ft_exec(line, envp);
 		}
 	}

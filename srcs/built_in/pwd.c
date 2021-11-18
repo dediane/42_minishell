@@ -14,20 +14,13 @@
 
 int	ft_pwd(int fd, char** envp)
 {
-	int		i;
-	char	*ret_ptr;
-	char	*path;
+	//int		i;
+	//char	*ret_ptr;
+	//char	*path;
 
-	i = -1;
-		i = -1;
-	while (envp[++i])
-	{
-		ret_ptr = ft_strnstr(envp[i], "PWD", 3);
-		if (ret_ptr != 0)
-			path = ft_strjoin(ret_ptr, "\n");
-	}
-	i = 3;
-	while(path[++i])
-		write(fd, &path[i], 1);
+	//i = -1;
+	//	i = -1;
+	//get_path(envp, "PWD");
+	ft_putstr_fd(get_path(envp,"PWD"), fd);
 	return (0);
 }

@@ -19,6 +19,7 @@ SRCS =	srcs/minishell.c \
 		srcs/built_in/env.c \
 		srcs/built_in/pwd.c \
 		srcs/built_in/exit.c \
+		srcs/built_in/cd.c \
 
 OBJS = ${SRCS:.c=.o}
 
