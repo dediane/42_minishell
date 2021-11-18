@@ -12,8 +12,11 @@
 
 #include "../../inc/minishell.h"
 
-int	ft_pwd(int fd, char*** envp)
+int	ft_pwd(int fd, char** envp)
 {
-	ft_putstr_fd(get_path(envp,"PWD"), fd);
+	int i;
+
+	i = -1;
+	ft_putstr_fd(get_path(envp,"PWD", &i), fd);
 	return (0);
 }

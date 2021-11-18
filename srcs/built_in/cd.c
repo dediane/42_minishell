@@ -15,25 +15,25 @@
 char *ft_get_home(char **envp)
 {
 	char *path;
+	int i;
 
-	path = get_path(envp, "HOME");
+	i = -1;
+	path = get_path(envp, "HOME", &i);
 	if (path == NULL)
 		return (NULL);
 	return (path);
 }
 
-char	*get_path(char **envp, char *to_find)
+char	*get_path(char **envp, char *to_find, int *i)
 {
-	int i;
 	int size;
 	char *ret_ptr;
 	char *path;
 
-	i = -1;
 	size = ft_strlen(to_find);
-	while (envp[++i])
+	while (envp[++(*i)])
 	{
-		ret_ptr = ft_strnstr(envp[i], to_find , size);
+		ret_ptr = ft_strnstr(envp[*i], to_find , size);
 		if (ret_ptr != 0)
 		{
 			path = ft_strjoin(ret_ptr + (size + 1), "\n");
@@ -43,25 +43,29 @@ char	*get_path(char **envp, char *to_find)
 	return (NULL);
 }
 
-int	change_env(char **envp)
+int	change_env(char **envp, char *path, char *new_path)
 {
 	int i;
-	int j;
+	char *ret_ptr;
 
 	i = -1;
-	while (envp[i][0] != NULL)
-	{
-		if ()
-	}
+	ret_ptr = get_path(envp, path, &i);
+	printf("before changes -> %s\n", envp[i]);
+	envp[i] = ft_substr(envp[i], 0, ft_strlen(path) + 1);
+	envp[i] = ft_strjoin(envp[i], new_path);
+	printf("after changes -> %s\n", envp[i]);
+	return (0);
 }
 
 int	ft_cd(char **envp, char *path)
 {
 	//if (ft_strncmp(path, "cd", 3) == 0)
 	char *home;
+	char buffer[4096];
 	(void)path;
 	home = ft_get_home(envp);
-	printf("%s\n", home);
-	chdir(home);
+	change_env(envp, "OLDPWD", getcwd(buffer, 4096));
+	change_env(envp, "PWD", home);
+	//chdir(home);
 	return (0);
 }
