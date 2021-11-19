@@ -6,7 +6,7 @@
 /*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 10:03:50 by bben-yaa          #+#    #+#             */
-/*   Updated: 2021/11/19 15:42:06 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2021/11/19 15:59:34 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,15 +86,11 @@ int	parsing(char *argv, t_parsing *param)
 	line = NULL;
 	if (!alloue_elem(param))
 		return (-1);
-									/*if (!init_param(param)) //->fonction pour init la structure; **bien checker**
-										return (-1); //protection si l'allocution echoue//*/
-	printf("here before print\n");
-	printf("param %p\n", param);
-	printf("pipe de param %d\n", param->pipe);
-	printf("here after print\n");
+	if (!init_param(param)) //->fonction pour init la structure; **bien checker**
+		return (-1); //protection si l'allocution echoue//*/
+	param->next = NULL;
 	while(argv[i] == ' ' || argv[i] == '\t')
 		i++;						//on a passer tout les spaces et tabs du debut **checker**
-	
 	while(argv[i])
 	{
 		printf("argv[%d] vaut %c-\n", i, argv[i]);
@@ -188,5 +184,7 @@ int	parsing(char *argv, t_parsing *param)
 	printf("tab[%d] %s\n", l, param->tabs[l]);
 	
 	///////////////////////////////////////->print tabs	
+
+
 	return (1);
 }
