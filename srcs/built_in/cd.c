@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 00:14:45 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/11/18 23:49:58 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/11/19 00:03:34 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,11 @@ int	change_env(char **envp, char *path, char *new_path)
 int	ft_cd(char **envp, char *path)
 {
 	char buffer[4096];
+	int i;
 	
-	if (ft_strncmp(path, "..", 3) == 0)
-	{
-		
-	}
+	i = -1;
+	if (ft_strncmp(path, "-", 2) == 0)
+		path = get_path(envp, "OLDPWD", &i);
 	if (path == NULL)
 		path = ft_get_home(envp);
 	change_env(envp, "OLDPWD", getcwd(buffer, 4096));
