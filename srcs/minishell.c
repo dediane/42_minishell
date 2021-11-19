@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 19:28:36 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/11/14 14:23:21 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/11/18 23:46:53 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int main(int ac, char **av, char **envp)
 	char *line = NULL;
 
 	(void)av;
+	(void)envp;
 	if (ac != 1)
 		return (ft_putstr("Error: not argument accepted\n"), 1);
 	while (1)
@@ -27,6 +28,9 @@ int main(int ac, char **av, char **envp)
 		if (line[0] != '\0')
 		{
 			ft_pwd(1, envp);
+			ft_cd(envp, "/Users");
+			ft_pwd(1, envp);
+			ft_cd(envp, "/Users/dianedecourt");
 			//ft_env(1, envp);
 			//parsing(line);
 			//ft_exec(line, envp);

@@ -15,15 +15,36 @@ typedef	struct s_parsing
 	int		pipe;
 }			t_parsing;
 
-//exec
+////////exec
 void	ft_exec(char *line, char **envp);
 
-//parsing
+////////parsing
+//parsing.c
 int	parsing(char *argv);
 
-//built_in
+//parsing_utils.c
+int 	init_param(t_parsing *param);
+char	*ft_line(char *line, char buf);
+char	ft_strcpy(char *dest, char *src);
+
+//parsing_tabs.c
+int		ft_paste_tab(t_parsing *param, char **new, char *line);
+void	free_tabs(char **tabs);
+char	**ft_malloc_tab(t_parsing *param, int len_tab, char *line);
+int		ft_len_tabs(char **tab);
+int		ft_tabs(t_parsing *parsing, char *line);
+
+//parsing_quote.c
+int		ft_add_double_quote(t_parsing *param, int *i, char *argv, char *line);
+
+
+
+////////built_in
+char	*get_path(char **envp, char *to_find, int *i);
+char *ft_get_home(char **envp);
+int	ft_cd(char **envp, char *path);
 int	ft_env(int fd, char **envp);
-int	ft_pwd(int fd, char** envp);
+int	ft_pwd(int fd, char **envp);
 void ft_exit(char *exit_line);
 
 #endif
