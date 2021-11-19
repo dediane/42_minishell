@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 19:28:36 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/11/18 23:46:53 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/11/19 12:43:10 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,11 @@
 int main(int ac, char **av, char **envp)
 {
 	char *line = NULL;
+	t_parsing	*param;	
 
 	(void)av;
 	(void)envp;
+	param = NULL;
 	if (ac != 1)
 		return (ft_putstr("Error: not argument accepted\n"), 1);
 	while (1)
@@ -27,12 +29,12 @@ int main(int ac, char **av, char **envp)
 			ft_exit(line);
 		if (line[0] != '\0')
 		{
-			ft_pwd(1, envp);
-			ft_cd(envp, "/Users");
-			ft_pwd(1, envp);
-			ft_cd(envp, "/Users/dianedecourt");
+			//ft_pwd(1, envp);
+			//ft_cd(envp, "/Users");
+			//ft_pwd(1, envp);
+			//ft_cd(envp, "/Users/dianedecourt");
 			//ft_env(1, envp);
-			//parsing(line);
+			parsing(line, param);
 			//ft_exec(line, envp);
 		}
 	}

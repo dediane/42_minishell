@@ -10,7 +10,8 @@ int	init_param(t_parsing *param)
 {
 	param->nb_cmd = 0;
 	param->tabs = NULL;
-	param->pipe = 0;
+	param->pipe = 1;
+	param->ret = 0;
 	return (1);
 }
 

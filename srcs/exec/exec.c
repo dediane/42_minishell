@@ -3,14 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:03:55 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/11/14 16:51:53 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/11/19 11:50:09 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
+
+
+/*
 
 //Fonction qui execute les commandes, à besoin en parametres:
 // 2 fd (in & out)
@@ -69,3 +72,5 @@ void	ft_exec(t_parsing *params, char **envp)
 {
 	
 }
+
+*/

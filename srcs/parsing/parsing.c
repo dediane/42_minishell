@@ -6,7 +6,7 @@
 /*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 10:03:50 by bben-yaa          #+#    #+#             */
-/*   Updated: 2021/11/16 11:32:19 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2021/11/19 13:01:34 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,63 +76,68 @@
 /////-> si parsing == 1 -> executer commande
 /////-> si parsing == -1 -> print message "Error" + new prompt
 
-int	parsing(char *argv)
+int	parsing(char *argv, t_parsing *param)
 {
-	t_parsing	param;
 	int			i;
 	char		*buf;
 	char		*line;
 
 	i = 0;
 	line = NULL;
-	if (!init_param(&param)) //->fonction pour init la structure; **bien checker**
-		return (-1); //protection si l'allocution echoue//
+	if (!alloue_elem(param))
+		return (-1);
+									/*if (!init_param(param)) //->fonction pour init la structure; **bien checker**
+										return (-1); //protection si l'allocution echoue//*/
+	printf("here before print\n");
+	printf("param %p\n", param);
+	printf("pipe de param %d\n", param->pipe);
+	printf("here after print\n");
 	while(argv[i] == ' ' || argv[i] == '\t')
-		i++;//on a passer tout les spaces et tabs du debut **checker**
+		i++;						//on a passer tout les spaces et tabs du debut **checker**
+	
 	while(argv[i])
 	{
 		printf("argv[%d] vaut %c-\n", i, argv[i]);
 		buf = malloc(sizeof(char) * 1);
-		//if (argv[i] == 34)//c'est l'ascii du char " double quotes
 		if (argv[i] == 34)
 		{	
 			printf("faire fonction pour mettre dans tab tout ce qu'il y a dans les doubles quotes\n");
-			if (line)	//->pour gerer les cas d'interpretation si on a a="ls -la"
+			if (line)						//->pour gerer les cas d'interpretation si on a a="ls -la"
 			{
-				if (!ft_tabs(&param, line))
-					return (0);	//->secure malloc
+				if (!ft_tabs(param, line))
+					return (0);				//->secure malloc
 				line = NULL;
 			}
-			if (!ft_add_double_quote(&param, &i, argv, line))	//-> pck on malloc
+			if (!ft_add_double_quote(param, &i, argv, line))	//-> pck on malloc
 				return (0);
-			if (argv[i + 1] == ' ')		//->on pass tout les espaces
+			if (argv[i + 1] == ' ')			//->on pass tout les espaces
 			{
 				i++;
 				while (argv[i] == ' ')
 					i++;
 			}
-			if (argv[i + 1] == '\0')	//->si on arrive a la fin de argv
+			if (argv[i + 1] == '\0')		//->si on arrive a la fin de argv
 				break ;
 			line = NULL;
 		}
-		else if (argv[i] == 39)//c'est l'ascii du char ' simple quote
+		else if (argv[i] == 39)				//c'est l'ascii du char ' simple quote
 		{
 			printf("faire fonction pour mettre dans tab tout ce qu'il y a dans les simple quote\n");
-			if (line)	//->pour gerer les cas d'interpretation si on a a='ls -la'
+			if (line)						//->pour gerer les cas d'interpretation si on a a='ls -la'
 			{
-				if (!ft_tabs(&param, line))
-					return (0);	//->secure malloc
+				if (!ft_tabs(param, line))
+					return (0);				//->secure malloc
 				line = NULL;
 			}
-			if (!ft_add_simple_quote(&param, &i, argv, line))
+			if (!ft_add_simple_quote(param, &i, argv, line))
 				return (0);
-			if (argv[i + 1] == ' ')		//->on pass tout les espaces
+			if (argv[i + 1] == ' ')			//->on pass tout les espaces
 			{
 				i++;
 				while (argv[i] == ' ')
 					i++;
 			}
-			if (argv[i + 1] == '\0')	//->si on arrive a la fin de argv
+			if (argv[i + 1] == '\0')		//->si on arrive a la fin de argv
 				break ;
 			line = NULL;
 		}
@@ -146,7 +151,7 @@ int	parsing(char *argv)
 				i++;
 			}
 			printf("allouer une nouvelle ligne pour le tabs copier line dans tabs\n");	
-			if (!ft_tabs(&param, line))
+			if (!ft_tabs(param, line))
 				return (0);			
 			line = NULL;
 		}
@@ -162,7 +167,7 @@ int	parsing(char *argv)
 			i++;										//only if (argv[i]) ->condtion a mettre
 			if (!argv[i] && line)
 			{
-				if (!ft_tabs(&param, line))
+				if (!ft_tabs(param, line))
 					return (0);
 			}
 		}
@@ -175,14 +180,13 @@ int	parsing(char *argv)
 	
 	////////////////////////////////////////
 	int l = 0;
-	while (param.tabs[l])
+	while (param->tabs[l])
 	{
-		printf("tab[%d] %s\n", l, param.tabs[l]);
+		printf("tab[%d] %s\n", l, param->tabs[l]);
 		l++;
 	}
-	printf("tab[%d] %s\n", l, param.tabs[l]);
+	printf("tab[%d] %s\n", l, param->tabs[l]);
 	
-	///////////////////////////////////////->print tabs
-	
+	///////////////////////////////////////->print tabs	
 	return (1);
 }

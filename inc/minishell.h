@@ -10,10 +10,11 @@
 
 typedef	struct s_parsing
 {
-	int		nb_cmd;
-	char	**tabs; //il y a la commande et les arguments dedans
-	int		pipe;
-	int		ret;
+	int					nb_cmd;
+	char				**tabs; //il y a la commande et les arguments dedans
+	int					pipe;
+	int					ret;
+	struct s_parsing	*next;
 }			t_parsing;
 
 ////////exec
@@ -21,7 +22,7 @@ void	ft_exec(char *line, char **envp);
 
 ////////parsing
 //parsing.c
-int	parsing(char *argv);
+int	parsing(char *argv, t_parsing *param);
 
 //parsing_utils.c
 int 	init_param(t_parsing *param);
@@ -38,6 +39,9 @@ int		ft_tabs(t_parsing *parsing, char *line);
 //parsing_quote.c
 int		ft_add_double_quote(t_parsing *param, int *i, char *argv, char *line);
 int		ft_add_simple_quote(t_parsing *param, int *i, char *argv, char *line);
+
+//stack_alloc.c
+int		alloue_elem(t_parsing *param);
 
 
 
