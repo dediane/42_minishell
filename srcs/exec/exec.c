@@ -18,7 +18,7 @@
 // la liste des commandes et arguments sous forme de char **
 //----------------------------------------------------------------//
 
-int	exec_process(int *pipe, int *fd, char **argv, char **envp)
+/*int	exec_process(int *pipe, int *fd, char **argv, char **envp)
 {
 	char	**path_array;
 	char	**cmd;
@@ -68,4 +68,4 @@ char	*find_path(char *cmd, char **path_array)
 void	ft_exec(t_parsing *params, char **envp)
 {
 	
-}
+}*/
