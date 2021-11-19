@@ -6,7 +6,7 @@
 /*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 19:28:36 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/11/19 12:43:10 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2021/11/19 15:42:39 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 int main(int ac, char **av, char **envp)
 {
 	char *line = NULL;
-	t_parsing	*param;	
+	t_parsing	param;	
 
 	(void)av;
 	(void)envp;
-	param = NULL;
+	//param = NULL;
 	if (ac != 1)
 		return (ft_putstr("Error: not argument accepted\n"), 1);
 	while (1)
@@ -34,7 +34,7 @@ int main(int ac, char **av, char **envp)
 			//ft_pwd(1, envp);
 			//ft_cd(envp, "/Users/dianedecourt");
 			//ft_env(1, envp);
-			parsing(line, param);
+			parsing(line, &param);
 			//ft_exec(line, envp);
 		}
 	}
