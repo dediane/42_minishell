@@ -6,7 +6,7 @@
 /*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 10:03:50 by bben-yaa          #+#    #+#             */
-/*   Updated: 2021/11/19 15:59:34 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2021/11/19 17:10:54 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,16 +81,18 @@ int	parsing(char *argv, t_parsing *param)
 	int			i;
 	char		*buf;
 	char		*line;
+	t_parsing	*tmp;
 
 	i = 0;
 	line = NULL;
 	if (!alloue_elem(param))
 		return (-1);
-	if (!init_param(param)) //->fonction pour init la structure; **bien checker**
-		return (-1); //protection si l'allocution echoue//*/
+	if (!init_param(param)) 		//->fonction pour init la structure; **bien checker**
+		return (-1); 				//protection si l'allocution echoue//*/
 	param->next = NULL;
 	while(argv[i] == ' ' || argv[i] == '\t')
 		i++;						//on a passer tout les spaces et tabs du debut **checker**
+	tmp = param;
 	while(argv[i])
 	{
 		printf("argv[%d] vaut %c-\n", i, argv[i]);
@@ -98,47 +100,70 @@ int	parsing(char *argv, t_parsing *param)
 		if (argv[i] == 34)
 		{	
 			printf("faire fonction pour mettre dans tab tout ce qu'il y a dans les doubles quotes\n");
-			if (line)						//->pour gerer les cas d'interpretation si on a a="ls -la"
+			if (line)											//->pour gerer les cas d'interpretation si on a a="ls -la"
 			{
-				if (!ft_tabs(param, line))
-					return (0);				//->secure malloc
+				if (!ft_tabs(tmp, line))
+					return (0);									//->secure malloc
 				line = NULL;
 			}
-			if (!ft_add_double_quote(param, &i, argv, line))	//-> pck on malloc
+			if (!ft_add_double_quote(tmp, &i, argv, line))	//-> pck on malloc
 				return (0);
-			if (argv[i + 1] == ' ')			//->on pass tout les espaces
+
+			///////tout les cas apres avoir mis les doubles quotes dans le tabs//////
+			
+			if (argv[i + 1] == '\0')							//->si on arrive a la fin de argv
+				break ;
+			if (argv[i + 1] == 34 || argv[i + 1] == 39)			//pour gerer le cas de "bonjour"'cava'"comment"
+				i++;
+			else if (argv[i + 1] == ' ')						//->on pass tout les espaces
 			{
 				i++;
 				while (argv[i] == ' ')
 					i++;
 			}
-			if (argv[i + 1] == '\0')		//->si on arrive a la fin de argv
-				break ;
+			
 			line = NULL;
 		}
-		else if (argv[i] == 39)				//c'est l'ascii du char ' simple quote
+
+		
+		else if (argv[i] == 39)								//c'est l'ascii du char ' simple quote
 		{
 			printf("faire fonction pour mettre dans tab tout ce qu'il y a dans les simple quote\n");
-			if (line)						//->pour gerer les cas d'interpretation si on a a='ls -la'
+			if (line)										//->pour gerer les cas d'interpretation si on a a='ls -la'
 			{
-				if (!ft_tabs(param, line))
-					return (0);				//->secure malloc
+				if (!ft_tabs(tmp, line))
+					return (0);								//->secure malloc
 				line = NULL;
 			}
-			if (!ft_add_simple_quote(param, &i, argv, line))
+			if (!ft_add_simple_quote(tmp, &i, argv, line))
 				return (0);
-			if (argv[i + 1] == ' ')			//->on pass tout les espaces
+			
+			///////tout les cas apres avoir mis les simple quote dans le tabs//////
+			
+			if (argv[i + 1] == '\0')						//->si on arrive a la fin de argv
+				break ;
+			line = NULL;
+			if (argv[i + 1] == 34 || argv[i + 1] == 39)		//pour gerer le cas de "bonjour"'cava'"comment"
+				i++;
+			else if (argv[i + 1] == ' ')					//->on pass tout les espaces
 			{
 				i++;
 				while (argv[i] == ' ')
 					i++;
 			}
-			if (argv[i + 1] == '\0')		//->si on arrive a la fin de argv
-				break ;
-			line = NULL;
+			
 		}
 		else if (argv[i] == '|')
+		{
 			printf("nouveau maillon a faire car nouvelle commande\n");
+			printf("l'ancien maillon a pipe pour %d\n", tmp->pipe);
+			ft_add_maillon(param);
+			//tmp = tmp->next;
+			printf("le nouveau maillon a pipe pour %d\n", tmp->pipe);
+			i++;
+			while(argv[i] && argv[i] == ' ')
+				i++;
+		}
 		else if (argv[i] == ' ')
 		{
 			if (argv[i])
@@ -147,7 +172,7 @@ int	parsing(char *argv, t_parsing *param)
 				i++;
 			}
 			printf("allouer une nouvelle ligne pour le tabs copier line dans tabs\n");	
-			if (!ft_tabs(param, line))
+			if (!ft_tabs(tmp, line))
 				return (0);			
 			line = NULL;
 		}
@@ -163,28 +188,35 @@ int	parsing(char *argv, t_parsing *param)
 			i++;										//only if (argv[i]) ->condtion a mettre
 			if (!argv[i] && line)
 			{
-				if (!ft_tabs(param, line))
+				if (!ft_tabs(tmp, line))
 					return (0);
 			}
 		}
 		free(buf);
 	}
-
-	//if (!ft_tabs(&param, line))
-	//	return (0);
-	//une fois argv tabs contient la commande et ses arguments//
 	
 	////////////////////////////////////////
-	int l = 0;
-	while (param->tabs[l])
-	{
-		printf("tab[%d] %s\n", l, param->tabs[l]);
-		l++;
-	}
-	printf("tab[%d] %s\n", l, param->tabs[l]);
 	
-	///////////////////////////////////////->print tabs	
+	t_parsing *tmp2;
 
+	tmp2 = param;
+	i = 0;
+	int l = 0;
+	while(tmp2)
+	{
+		printf("//////maillon %d//////\n", i);
+		while (tmp2->tabs[l])
+		{
+			printf("tab[%d] %s\n", l, tmp2->tabs[l]);
+			l++;
+		}
+		printf("tab[%d] %s\n", l, tmp2->tabs[l]);
+		printf("on est d'accord que le next %p\n", tmp2->next);
+		tmp2 = tmp2->next;
+		i++;
+	}
+
+	///////////////////////////////////////->print tabs tout en lisant la liste chainee	
 
 	return (1);
 }

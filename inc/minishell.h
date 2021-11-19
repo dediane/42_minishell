@@ -42,6 +42,7 @@ int		ft_add_simple_quote(t_parsing *param, int *i, char *argv, char *line);
 
 //stack_alloc.c
 int		alloue_elem(t_parsing *param);
+int		ft_add_maillon(t_parsing *param);
 
 
 

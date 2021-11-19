@@ -20,3 +20,23 @@ int		alloue_elem(t_parsing *param)
 		param = new;
 	return (1);
 }
+
+int		ft_add_maillon(t_parsing *param)
+{
+	t_parsing	*tmp;
+	t_parsing	*new;
+
+	tmp = param;
+	while(tmp->next)
+		tmp = tmp->next;
+	new = (t_parsing *)malloc(sizeof(t_parsing));
+	if (!new)
+		return (0);
+	param = new;
+	new->next = NULL;
+	new->pipe = 0;
+	new->ret = 0;
+	new->tabs = NULL;
+	new->nb_cmd = 0;
+	return (1);
+}
