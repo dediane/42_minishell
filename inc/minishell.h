@@ -43,8 +43,11 @@ int		ft_add_simple_quote(t_parsing *param, int *i, char *argv, char *line);
 
 
 ////////built_in
+char	*get_path(char **envp, char *to_find, int *i);
+char *ft_get_home(char **envp);
+int	ft_cd(char **envp, char *path);
 int	ft_env(int fd, char **envp);
-int	ft_pwd(int fd, char** envp);
+int	ft_pwd(int fd, char **envp);
 void ft_exit(char *exit_line);
 
 #endif
