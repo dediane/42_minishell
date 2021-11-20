@@ -32,7 +32,7 @@ int		ft_add_maillon(t_parsing *param)
 	new = (t_parsing *)malloc(sizeof(t_parsing));
 	if (!new)
 		return (0);
-	param = new;
+	tmp->next = new;
 	new->next = NULL;
 	new->pipe = 0;
 	new->ret = 0;

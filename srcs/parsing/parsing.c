@@ -6,7 +6,7 @@
 /*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 10:03:50 by bben-yaa          #+#    #+#             */
-/*   Updated: 2021/11/19 17:10:54 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2021/11/20 16:00:25 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,7 @@ int	parsing(char *argv, t_parsing *param)
 			printf("nouveau maillon a faire car nouvelle commande\n");
 			printf("l'ancien maillon a pipe pour %d\n", tmp->pipe);
 			ft_add_maillon(param);
-			//tmp = tmp->next;
+			tmp = tmp->next;
 			printf("le nouveau maillon a pipe pour %d\n", tmp->pipe);
 			i++;
 			while(argv[i] && argv[i] == ' ')
@@ -205,6 +205,7 @@ int	parsing(char *argv, t_parsing *param)
 	while(tmp2)
 	{
 		printf("//////maillon %d//////\n", i);
+		printf("pipe %d\n", tmp2->pipe);
 		while (tmp2->tabs[l])
 		{
 			printf("tab[%d] %s\n", l, tmp2->tabs[l]);
@@ -212,10 +213,10 @@ int	parsing(char *argv, t_parsing *param)
 		}
 		printf("tab[%d] %s\n", l, tmp2->tabs[l]);
 		printf("on est d'accord que le next %p\n", tmp2->next);
+		l = 0;
 		tmp2 = tmp2->next;
 		i++;
 	}
-
 	///////////////////////////////////////->print tabs tout en lisant la liste chainee	
 
 	return (1);
