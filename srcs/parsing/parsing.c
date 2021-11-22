@@ -6,7 +6,7 @@
 /*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 10:03:50 by bben-yaa          #+#    #+#             */
-/*   Updated: 2021/11/20 16:00:25 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2021/11/22 13:39:07 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int	parsing(char *argv, t_parsing *param)
 		if (argv[i] == 34)
 		{	
 			printf("faire fonction pour mettre dans tab tout ce qu'il y a dans les doubles quotes\n");
-			if (line)											//->pour gerer les cas d'interpretation si on a a="ls -la"
+			if (line)											//->pour gls erer les cas d'interpretation si on a a="ls -la"
 			{
 				if (!ft_tabs(tmp, line))
 					return (0);									//->secure malloc
@@ -164,6 +164,24 @@ int	parsing(char *argv, t_parsing *param)
 			while(argv[i] && argv[i] == ' ')
 				i++;
 		}
+		else if ((argv[i] == '<' || argv[i] == '>') && argv[i - 1] == ' ')
+		{
+			printf("creer line jusqu'a trouver un espace et le mettre dans *file\n");
+			/*if (argv[i + 1] == '<')
+				param->type = '<<';
+			else if (argv[i + 1] == '>')
+				param->type = '<<';
+			else*/
+				param->type = argv[i];
+				printf("enum param->type %c\n",param->type);
+				//param->type = argv[i];
+			ft_add_file(tmp, &i, argv, line);		//alloue line (= nom du fichier) pour le mettre dans la stack file
+			printf("param->type vaut %c\n", param->type);/*
+			while (argv[i] == ' ' || argv[i] == '<' || argv[i] == '>')
+				i++;*/
+			line = NULL; //line free dans 
+			i++;
+		}
 		else if (argv[i] == ' ')
 		{
 			if (argv[i])
@@ -197,19 +215,27 @@ int	parsing(char *argv, t_parsing *param)
 	
 	////////////////////////////////////////
 	
-	t_parsing *tmp2;
-
+	t_parsing	*tmp2;
+	t_file		*curs;
 	tmp2 = param;
 	i = 0;
 	int l = 0;
+	int j = 0;
 	while(tmp2)
 	{
+		curs = tmp2->file;
 		printf("//////maillon %d//////\n", i);
 		printf("pipe %d\n", tmp2->pipe);
 		while (tmp2->tabs[l])
 		{
 			printf("tab[%d] %s\n", l, tmp2->tabs[l]);
 			l++;
+		}
+		while (curs)
+		{
+			printf("name_file %d vaut %s\n", j, curs->name);
+			j++;
+			curs = curs->next;
 		}
 		printf("tab[%d] %s\n", l, tmp2->tabs[l]);
 		printf("on est d'accord que le next %p\n", tmp2->next);

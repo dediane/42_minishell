@@ -8,12 +8,26 @@
 # include <readline/history.h>
 # include "../libft/libft.h"
 
+typedef struct s_file
+{
+	char			*name;
+	struct s_file	*next;
+}				t_file;
+
 typedef	struct s_parsing
 {
 	int					nb_cmd;
 	char				**tabs; //il y a la commande et les arguments dedans
 	int					pipe;
 	int					ret;
+	enum				type
+	{
+		//ll = '<<',
+		//rr = '>>',
+		l = '<',
+		r = '>',
+	}type;
+	t_file				*file;
 	struct s_parsing	*next;
 }			t_parsing;
 
@@ -44,7 +58,9 @@ int		ft_add_simple_quote(t_parsing *param, int *i, char *argv, char *line);
 int		alloue_elem(t_parsing *param);
 int		ft_add_maillon(t_parsing *param);
 
-
+//add_file.c
+int		ft_add_file(t_parsing *param, int *i, char *argv, char *line);
+int	ft_add_to_fstack(t_file *file, char *line);
 
 
 ////////built_in

@@ -37,6 +37,8 @@ int		ft_add_maillon(t_parsing *param)
 	new->pipe = 0;
 	new->ret = 0;
 	new->tabs = NULL;
+	new->type = 0;
+	new->file = NULL;
 	new->nb_cmd = 0;
 	return (1);
 }

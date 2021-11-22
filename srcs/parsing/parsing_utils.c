@@ -12,6 +12,8 @@ int	init_param(t_parsing *param)
 	param->tabs = NULL;
 	param->pipe = 0;
 	param->ret = 0;
+	param->type = 0;
+	param->file = NULL;
 	return (1);
 }
 
@@ -27,7 +29,7 @@ char	*ft_line(char *line, char buf)
 		new[0] = buf;
 		new[1] = '\0';
 		return (new);
-	}	
+	}
 	i = ft_strlen(line);
 	if (!(new = malloc(sizeof(char) * (i + 2)))) //line + buf + '\0'
 		return (0);
