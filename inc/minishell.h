@@ -56,6 +56,8 @@ int		ft_tabs(t_parsing *parsing, char *line);
 //parsing_quote.c
 int		ft_add_double_quote(t_parsing *param, int *i, char *argv, char *line);
 int		ft_add_simple_quote(t_parsing *param, int *i, char *argv, char *line);
+int		ft_check_quote(char *line, int a);
+
 
 //stack_alloc.c
 int		alloue_elem(t_parsing *param);
