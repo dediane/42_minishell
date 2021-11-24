@@ -6,7 +6,7 @@
 /*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 10:03:50 by bben-yaa          #+#    #+#             */
-/*   Updated: 2021/11/24 10:22:23 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2021/11/24 11:13:01 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,7 +164,7 @@ int	parsing(char *argv, t_parsing *param)
 			while(argv[i] && argv[i] == ' ')
 				i++;
 		}
-		else if ((argv[i] == '<' || argv[i] == '>') && argv[i - 1] == ' ')
+		else if ((argv[i] == '<' || argv[i] == '>') && (argv[i - 1] == ' '|| i == 0))
 		{
 			printf("creer line jusqu'a trouver un espace et le mettre dans *file\n");
 			/*if (argv[i + 1] == '<')
@@ -185,6 +185,8 @@ int	parsing(char *argv, t_parsing *param)
 		}
 		else if (argv[i] == ' ')
 		{
+			printf("ici space\n");
+			printf("argv[%d] char c -%c-\n", i, argv[i]);
 			if (argv[i])
 			{
 				while (argv[i] == ' ')
@@ -210,6 +212,7 @@ int	parsing(char *argv, t_parsing *param)
 				if (!ft_tabs(tmp, line))
 					return (0);
 			}
+			printf("line after buf %s\n", line);
 		}
 		free(buf);
 	}

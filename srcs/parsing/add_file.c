@@ -19,7 +19,6 @@ int	ft_add_file(t_parsing *param, int *i, char *argv, char *line)
 			return (0);
 		(*i)++;
 	}
-	printf("line dans << vaut %s\n", line);
 	if (!ft_add_to_fstack(param, line))
 		return (0);
 	free(line);
@@ -43,19 +42,17 @@ int	ft_add_to_fstack(t_parsing *param, char *line)
 	{
 		new->next = NULL;
 		ft_strcpy(new_name, line);
-		printf("new name = %s\n", new_name);
 		new->name = new_name;
 		param->file = new;
 	}
-	/*else if (param->file)
+	else if (param->file)
 	{
 		while (tmp->next)
 			tmp = tmp->next;
 		new->next = NULL;
 		ft_strcpy(new_name, line);
-		printf("new name = %s\n", new_name);
 		new->name = new_name;
 		tmp->next  = new;
-	}*/
+	}
 	return (1);
 }
