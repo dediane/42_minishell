@@ -60,7 +60,7 @@ int		ft_add_maillon(t_parsing *param);
 
 //add_file.c
 int		ft_add_file(t_parsing *param, int *i, char *argv, char *line);
-int	ft_add_to_fstack(t_file *file, char *line);
+int		ft_add_to_fstack(t_parsing *param, char *line);
 
 
 ////////built_in

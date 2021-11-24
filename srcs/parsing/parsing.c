@@ -6,7 +6,7 @@
 /*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 10:03:50 by bben-yaa          #+#    #+#             */
-/*   Updated: 2021/11/22 13:39:07 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2021/11/24 10:22:23 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,8 +176,9 @@ int	parsing(char *argv, t_parsing *param)
 				printf("enum param->type %c\n",param->type);
 				//param->type = argv[i];
 			ft_add_file(tmp, &i, argv, line);		//alloue line (= nom du fichier) pour le mettre dans la stack file
-			printf("param->type vaut %c\n", param->type);/*
-			while (argv[i] == ' ' || argv[i] == '<' || argv[i] == '>')
+			printf("param->type vaut %c\n", param->type);
+			//printf("file->name vaut %p\n", tmp->file);/*
+			/*while (argv[i] == ' ' || argv[i] == '<' || argv[i] == '>')
 				i++;*/
 			line = NULL; //line free dans 
 			i++;
@@ -231,6 +232,7 @@ int	parsing(char *argv, t_parsing *param)
 			printf("tab[%d] %s\n", l, tmp2->tabs[l]);
 			l++;
 		}
+		printf("curs before = %p\n", curs);
 		while (curs)
 		{
 			printf("name_file %d vaut %s\n", j, curs->name);
@@ -240,6 +242,7 @@ int	parsing(char *argv, t_parsing *param)
 		printf("tab[%d] %s\n", l, tmp2->tabs[l]);
 		printf("on est d'accord que le next %p\n", tmp2->next);
 		l = 0;
+		j = 0;
 		tmp2 = tmp2->next;
 		i++;
 	}
