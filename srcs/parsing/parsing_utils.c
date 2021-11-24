@@ -12,7 +12,7 @@ int	init_param(t_parsing *param)
 	param->tabs = NULL;
 	param->pipe = 0;
 	param->ret = 0;
-	param->type = 0;
+	param->type = NONE;
 	param->file = NULL;
 	return (1);
 }

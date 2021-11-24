@@ -6,7 +6,7 @@
 /*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 10:03:50 by bben-yaa          #+#    #+#             */
-/*   Updated: 2021/11/24 11:13:01 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2021/11/24 13:50:59 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,13 +167,15 @@ int	parsing(char *argv, t_parsing *param)
 		else if ((argv[i] == '<' || argv[i] == '>') && (argv[i - 1] == ' '|| i == 0))
 		{
 			printf("creer line jusqu'a trouver un espace et le mettre dans *file\n");
-			/*if (argv[i + 1] == '<')
-				param->type = '<<';
-			else if (argv[i + 1] == '>')
-				param->type = '<<';
-			else*/
-				param->type = argv[i];
-				printf("enum param->type %c\n",param->type);
+			if (argv[i + 1] != '<' && argv[i] == '<')
+				param->type = IN;
+			else if (argv[i + 1] != '>' && argv[i] == '>')
+				param->type = OUT;
+			else if (argv[i + 1] == '<' && argv[i] == '<')
+				param->type = DOUBLEIN;
+			else if (argv[i + 1] == '>' && argv[i] == '>')
+				param->type = DOUBLEOUT;
+			printf("enum param->type %c\n",param->type);
 				//param->type = argv[i];
 			ft_add_file(tmp, &i, argv, line);		//alloue line (= nom du fichier) pour le mettre dans la stack file
 			printf("param->type vaut %c\n", param->type);
@@ -229,7 +231,7 @@ int	parsing(char *argv, t_parsing *param)
 	{
 		curs = tmp2->file;
 		printf("//////maillon %d//////\n", i);
-		printf("pipe %d\n", tmp2->pipe);
+		printf("enume type %u\n", tmp2->type);
 		while (tmp2->tabs[l])
 		{
 			printf("tab[%d] %s\n", l, tmp2->tabs[l]);

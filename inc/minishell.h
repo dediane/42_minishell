@@ -14,19 +14,22 @@ typedef struct s_file
 	struct s_file	*next;
 }				t_file;
 
+typedef enum	e_filetype
+{
+	NONE,
+	IN,
+	OUT,
+	DOUBLEOUT,
+	DOUBLEIN,
+}t_filetype;
+
 typedef	struct s_parsing
 {
 	int					nb_cmd;
 	char				**tabs; //il y a la commande et les arguments dedans
 	int					pipe;
 	int					ret;
-	enum				type
-	{
-		//ll = '<<',
-		//rr = '>>',
-		l = '<',
-		r = '>',
-	}type;
+	t_filetype			type;
 	t_file				*file;
 	struct s_parsing	*next;
 }			t_parsing;
