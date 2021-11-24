@@ -60,3 +60,18 @@ char	ft_strcpy(char *dest, char *src)
 	return (*dest);
 }
 
+int	ft_init(t_parsing *param)
+{
+	if (!alloue_elem(param))
+		return (0);
+	if (!init_param(param)) 		//->fonction pour init la structure; **bien checker**
+		return (0); 				//protection si l'allocution echoue//*/
+	param->next = NULL;
+	return (1);
+}
+
+void	ft_pass_space(char *argv, int *i)
+{
+	while(argv[(*i)] == ' ' || argv[(*i)] == '\t')
+		(*i)++;						//on a passer tout les spaces et tabs du debut **checker**
+}

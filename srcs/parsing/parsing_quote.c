@@ -8,6 +8,33 @@
 
 
 #include "../../inc/minishell.h"
+int ft_double_quote(char *line, int *i, char *argv, t_parsing *param)
+{
+	if (line)											//->pour gls erer les cas d'interpretation si on a a="ls -la"
+	{
+		if (!ft_tabs(param, line))
+			return (0);									//->secure malloc
+		line = NULL;
+	}
+	if (!ft_add_double_quote(param, i, argv, line))	//-> pck on malloc
+		return (0);
+	return (1);
+	///////tout les cas apres avoir mis les doubles quotes dans le tabs//////
+}
+
+void	ft_pass_dquote(char *argv, int *i)
+{
+	if (argv[(*i) + 1] == 34 || argv[(*i) + 1] == 39)			//pour gerer le cas de "bonjour"'cava'"comment"
+		(*i)++;
+	else if (argv[(*i) + 1] == ' ')						//->on pass tout les espaces
+	{
+		(*i)++;
+		while (argv[(*i)] == ' ')
+			(*i)++;
+	}
+	if (argv[(*i) + 1] == '<' || argv[(*i) + 1] == '>')	//c'est si la cmd = echo "hello">map.txt
+		(*i)++;
+}
 
 int	ft_add_double_quote(t_parsing *param, int *i, char *argv, char *line)
 {

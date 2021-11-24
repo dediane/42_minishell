@@ -14,6 +14,13 @@ typedef struct s_file
 	struct s_file	*next;
 }				t_file;
 
+typedef struct s_env
+{
+  char          *variable;
+  char          *interpretation_variable; //(le nom est trop long la mais c'est pour que tu comprenne X))
+  struct s_env  *next;
+}				t_env;
+
 typedef enum	e_filetype
 {
 	NONE,
@@ -45,6 +52,10 @@ int	parsing(char *argv, t_parsing *param);
 int 	init_param(t_parsing *param);
 char	*ft_line(char *line, char buf);
 char	ft_strcpy(char *dest, char *src);
+int		ft_init(t_parsing *param);
+void	ft_pass_space(char *argv, int *i);
+
+
 
 //parsing_tabs.c
 int		ft_paste_tab(t_parsing *param, char **new, char *line);
@@ -57,6 +68,18 @@ int		ft_tabs(t_parsing *parsing, char *line);
 int		ft_add_double_quote(t_parsing *param, int *i, char *argv, char *line);
 int		ft_add_simple_quote(t_parsing *param, int *i, char *argv, char *line);
 int		ft_check_quote(char *line, int a);
+int 	ft_double_quote(char *line, int *i, char *argv, t_parsing *param);
+void	ft_pass_dquote(char *argv, int *i);
+
+//parsing_quote2.c
+int 	ft_simple_quote(char *line, int *i, char *argv, t_parsing *param);
+void	ft_pass_squote(char *argv, int *i);
+
+
+//check_redoc.c
+void	ft_define_redicretcion(char *argv, int *i, t_parsing *param);
+int	ft_check_redoc(char *argv, int i);
+
 
 
 //stack_alloc.c

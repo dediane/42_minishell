@@ -6,7 +6,7 @@
 /*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 10:03:50 by bben-yaa          #+#    #+#             */
-/*   Updated: 2021/11/24 14:22:40 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2021/11/24 16:54:30 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,13 +85,9 @@ int	parsing(char *argv, t_parsing *param)
 
 	i = 0;
 	line = NULL;
-	if (!alloue_elem(param))
-		return (-1);
-	if (!init_param(param)) 		//->fonction pour init la structure; **bien checker**
-		return (-1); 				//protection si l'allocution echoue//*/
-	param->next = NULL;
-	while(argv[i] == ' ' || argv[i] == '\t')
-		i++;						//on a passer tout les spaces et tabs du debut **checker**
+	if (!ft_init(param))
+		return (0);
+	ft_pass_space(argv, &i);
 	tmp = param;
 	while(argv[i])
 	{
@@ -99,59 +95,22 @@ int	parsing(char *argv, t_parsing *param)
 		if (argv[i] == 34)
 		{	
 			//printf("faire fonction pour mettre dans tab tout ce qu'il y a dans les doubles quotes\n");
-			if (line)											//->pour gls erer les cas d'interpretation si on a a="ls -la"
-			{
-				if (!ft_tabs(tmp, line))
-					return (0);									//->secure malloc
-				line = NULL;
-			}
-			if (!ft_add_double_quote(tmp, &i, argv, line))	//-> pck on malloc
+			if (!ft_double_quote(line, &i, argv, tmp))
 				return (0);
-
-			///////tout les cas apres avoir mis les doubles quotes dans le tabs//////
-			
-			if (argv[i + 1] == '\0')							//->si on arrive a la fin de argv
+			if (argv[i + 1] == '\0')//->si on arrive a la fin de argv
 				break ;
-			if (argv[i + 1] == 34 || argv[i + 1] == 39)			//pour gerer le cas de "bonjour"'cava'"comment"
-				i++;
-			else if (argv[i + 1] == ' ')						//->on pass tout les espaces
-			{
-				i++;
-				while (argv[i] == ' ')
-					i++;
-			}
-			if (argv[i + 1] == '<' || argv[i + 1] == '>')	//c'est si la cmd = echo "hello">map.txt
-				i++;
+			ft_pass_dquote(argv, &i);
 			line = NULL;
 		}
-
-		
 		else if (argv[i] == 39)								//c'est l'ascii du char ' simple quote
 		{
 			//printf("faire fonction pour mettre dans tab tout ce qu'il y a dans les simple quote\n");
-			if (line)										//->pour gerer les cas d'interpretation si on a a='ls -la'
-			{
-				if (!ft_tabs(tmp, line))
-					return (0);								//->secure malloc
-				line = NULL;
-			}
-			if (!ft_add_simple_quote(tmp, &i, argv, line))
+			if (!ft_simple_quote(line, &i, argv, tmp))
 				return (0);
-			
-			///////tout les cas apres avoir mis les simple quote dans le tabs//////
-			
-			if (argv[i + 1] == '\0')						//->si on arrive a la fin de argv
+			if (argv[i + 1] == '\0')//->si on arrive a la fin de argv
 				break ;
+			ft_pass_squote(argv, &i);
 			line = NULL;
-			if (argv[i + 1] == 34 || argv[i + 1] == 39)		//pour gerer le cas de "bonjour"'cava'"comment"
-				i++;
-			else if (argv[i + 1] == ' ')					//->on pass tout les espaces
-			{
-				i++;
-				while (argv[i] == ' ')
-					i++;
-			}
-			
 		}
 		else if (argv[i] == '|')
 		{
@@ -165,21 +124,15 @@ int	parsing(char *argv, t_parsing *param)
 		else if ((argv[i] == '<' || argv[i] == '>'))//&& (argv[i - 1] == ' '|| i == 0))
 		{
 			//printf("creer line jusqu'a trouver un espace et le mettre dans *file\n");
+			if (!ft_check_redoc(argv, i))
+				return (0);
 			if (line)										//->pour gerer les cas d'interpretation si on a a='ls -la'
 			{
 				if (!ft_tabs(tmp, line))
 					return (0);								//->secure malloc
 				line = NULL;
 			}
-			////// ft_define_redicretcion(char *argv, int *i, t_parsing *param);
-			if (argv[i + 1] != '<' && argv[i] == '<')
-				param->type = IN;
-			else if (argv[i + 1] != '>' && argv[i] == '>')
-				param->type = OUT;
-			else if (argv[i + 1] == '<' && argv[i] == '<')
-				param->type = DOUBLEIN;
-			else if (argv[i + 1] == '>' && argv[i] == '>')
-				param->type = DOUBLEOUT;
+			ft_define_redicretcion(argv, &i, tmp);
 			ft_add_file(tmp, &i, argv, line);		//alloue line (= nom du fichier) pour le mettre dans la stack file
 			while (argv[i] == ' ' || argv[i] == '<' || argv[i] == '>')
 				i++;
@@ -203,12 +156,12 @@ int	parsing(char *argv, t_parsing *param)
 			buf[0] = argv[i];							//on est sur que ici que argv[i] est un char autre que | ' " ou espace
 			buf[1] = '\0';
 			if (!(line = ft_line(line, buf[0])))		//fonction : mettre dans line tout en allouant et free a chaque fois//
-				return (0);								// ->allocation a echoue
+				return (0);							// ->allocation a echoue
 			i++;										//only if (argv[i]) ->condtion a mettre
 			if (!argv[i] && line)
 			{
-				if (!ft_tabs(tmp, line))
-					return (0);
+			if (!ft_tabs(tmp, line))
+				return (0);
 			}
 		}
 		free(buf);
