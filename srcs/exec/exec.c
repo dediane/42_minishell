@@ -68,9 +68,30 @@ char	*find_path(char *cmd, char **path_array)
 	return (NULL);
 }*/
 
-/*void	ft_exec(t_parsing *params, char **envp)
+/*int open_file(t_parsing *params, char file)
 {
-	
+	int fd;
+	if (ft_strncmp(params->tabs[0], '>', 2) == 0)
+		return(fd = open(file, O_RDWR | O_TRUNC | O_CREAT, 0664));
+	if (ft_strncmp(params->tabs[0], '>>', 3) == 0)
+		return(fd = open(file, O_RDWR | O_CREAT, 0664));
+	if (ft_strncmp(params->tabs[0], '<', 2) == 0)
+		return(fd = open(file, O_RDONLY));
 }
 
-*/
+int	is_built_in(char **line, char **envp)
+{
+	if (ft_strncmp(line[0], "cd", 3) == 0)
+	{
+		if (line[1] && check_cd_path(line[1]))
+			ft_cd(envp, line[1]);
+	}
+	if (ft_strncmp(line[0], "pwd", 4) == 0)
+		ft_pwd()
+}
+
+void	ft_exec(t_parsing *params, char **envp)
+{
+	if (is_built_in(params->tabs[0], envp)
+
+}*/

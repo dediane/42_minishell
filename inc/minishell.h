@@ -6,6 +6,12 @@
 # include <stdlib.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <sys/types.h>
+# include <sys/wait.h>
+# include <sys/stat.h>
+# include <fcntl.h>
+# include <errno.h>
+# include <string.h>
 # include "../libft/libft.h"
 
 typedef struct s_file
