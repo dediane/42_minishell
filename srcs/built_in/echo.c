@@ -32,20 +32,24 @@ int	ft_echo(int fd, char **arg)
 {
 	int size;
 	int n;
+	int i;
 	
 	size = 0;
 	while (arg[size])
 		size++;
 	if (size == 1)
 		ft_putchar_fd('\n', fd);
-	if (size > 1)
-		n = check_n(arg[1]);
+	n = check_n(arg[1]);
 	if (n == 0)
 	{
-		ft_putstr_fd(arg[1], fd);
+		i = 0;
+		while (arg[++i])
+			ft_putstr_fd(arg[i], fd);
 		ft_putchar_fd('\n', fd);
 	}
 	if (n == 1)
-		ft_putstr_fd(arg[1], fd);
+		i = 1;
+		while (arg[++i])
+		ft_putstr_fd(arg[i], fd);
 	return (0);
 }

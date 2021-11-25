@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:03:55 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/11/19 11:50:09 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2021/11/25 16:56:15 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 // la liste des commandes et arguments sous forme de char **
 //----------------------------------------------------------------//
 
-int	exec_process(int *pipe, int *fd, char **argv, char **envp)
+/*int	exec_process(int *pipe, int *fd, char **argv, char **envp)
 {
 	char	**path_array;
 	char	**cmd;

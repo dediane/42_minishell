@@ -28,6 +28,7 @@ void ft_exit(char *exit_line)
 	if (ft_strnstr(exit_line, "exit", ft_strlen(exit_line)) && flag == 0)
 	{
 		//fonction pour free tous nos mallocs.
+		ft_putstr_fd("exit\n", 1);
 		exit(0);
 	}
 	if (flag == 1)

@@ -67,8 +67,9 @@ int	ft_cd(char **envp, char *path)
 		path = get_path(envp, "OLDPWD", &i);
 	if (path == NULL)
 		path = ft_get_home(envp);
+	if (chdir(path) == -1)
+		return(perror(path), 2);
 	change_env(envp, "OLDPWD", getcwd(buffer, 4096));
 	change_env(envp, "PWD", path);
-	chdir(path);
 	return (0);
 }
