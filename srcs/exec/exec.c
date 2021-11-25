@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:03:55 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/11/25 16:56:15 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/11/25 17:02:31 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,13 @@ char	*find_path(char *cmd, char **path_array)
 	return (NULL);
 }
 
-void	ft_exec(t_parsing *params, char **envp)
+/*void	ft_exec(t_parsing *params, char **envp)
 {
 	
+<<<<<<< HEAD
 }
 
 */
+=======
+}*/
+>>>>>>> exec
