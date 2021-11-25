@@ -13,18 +13,21 @@ int	ft_paste_tab(t_parsing *param, char **new, char *line)
 	int	i;
 	int	y;
 
-	i = -1;
-	y = -1;
-	while (param->tabs[++y])
+	i = 0;
+	y = 0;
+	while (param->tabs[y])
 	{
-
-		new[y] = malloc(sizeof(char) * ft_strlen(param->tabs[y] + 1)); //aloue chaque ligne du tabs
+		new[y] = malloc(sizeof(char) * (ft_strlen(param->tabs[y]) + 1)); //aloue chaque ligne du tabs
 		if (!new[y])	
 			return (0);
-		while (param->tabs[y][++i])
+		while (param->tabs[y][i])
+		{	
 			new[y][i] = param->tabs[y][i];
+			i++;
+		}
 		new[y][i] = '\0';
-		i = -1;
+		i = 0;
+		y++;
 	}
 	if (!(new[y] = malloc(sizeof(char) * (ft_strlen(line) + 1))))
 		return (0);

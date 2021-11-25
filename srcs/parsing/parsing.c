@@ -6,7 +6,7 @@
 /*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 10:03:50 by bben-yaa          #+#    #+#             */
-/*   Updated: 2021/11/24 16:54:30 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2021/11/25 12:44:25 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int	parsing(char *argv, t_parsing *param)
 	tmp = param;
 	while(argv[i])
 	{
-		buf = malloc(sizeof(char) * 1);
+		buf = malloc(sizeof(char) * 2);
 		if (argv[i] == 34)
 		{	
 			//printf("faire fonction pour mettre dans tab tout ce qu'il y a dans les doubles quotes\n");

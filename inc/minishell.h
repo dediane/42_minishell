@@ -17,7 +17,7 @@ typedef struct s_file
 typedef struct s_env
 {
   char          *variable;
-  char          *interpretation_variable; //(le nom est trop long la mais c'est pour que tu comprenne X))
+  char          *var_def; //interpretation de la variable
   struct s_env  *next;
 }				t_env;
 
@@ -46,7 +46,7 @@ void	ft_exec(char *line, char **envp);
 
 ////////parsing
 //parsing.c
-int	parsing(char *argv, t_parsing *param);
+int		parsing(char *argv, t_parsing *param);
 
 //parsing_utils.c
 int 	init_param(t_parsing *param);
@@ -78,7 +78,7 @@ void	ft_pass_squote(char *argv, int *i);
 
 //check_redoc.c
 void	ft_define_redicretcion(char *argv, int *i, t_parsing *param);
-int	ft_check_redoc(char *argv, int i);
+int		ft_check_redoc(char *argv, int i);
 
 
 
@@ -90,13 +90,19 @@ int		ft_add_maillon(t_parsing *param);
 int		ft_add_file(t_parsing *param, int *i, char *argv, char *line);
 int		ft_add_to_fstack(t_parsing *param, char *line);
 
+//env_liste.c
+int		env_list(t_env  **env, char **envp);
+int		ft_malloc_env(t_env	**env);
+int		ft_find_variable(t_env *env, char *envp);
+void	free_env(t_env **env);
+
 
 ////////built_in
 char	*get_path(char **envp, char *to_find, int *i);
-char *ft_get_home(char **envp);
-int	ft_cd(char **envp, char *path);
-int	ft_env(int fd, char **envp);
-int	ft_pwd(int fd, char **envp);
-void ft_exit(char *exit_line);
+char	*ft_get_home(char **envp);
+int		ft_cd(char **envp, char *path);
+int		ft_env(int fd, char **envp);
+int		ft_pwd(int fd, char **envp);
+void	ft_exit(char *exit_line);
 
 #endif
