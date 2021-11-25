@@ -6,7 +6,7 @@
 /*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 19:28:36 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/11/25 14:50:34 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2021/11/25 16:53:58 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ int main(int ac, char **av, char **envp)
 {
 	char *line = NULL;
 	t_parsing	param;	
-	t_env		*env;
+	//t_env		*env; pour envp en liste 
 
 	(void)av;
 	(void)envp;
 	//(void *)param = NULL;
-	env = NULL;
+	//env = NULL;
 	if (ac != 1)
 		return (ft_putstr("Error: not argument accepted\n"), 1);
 	while (1)
@@ -36,7 +36,7 @@ int main(int ac, char **av, char **envp)
 			//ft_pwd(1, envp);
 			//ft_cd(envp, "/Users/dianedecourt");
 			//ft_env(1, envp);
-			env_list(&env, envp);
+			//env_list(&env, envp); envp transformer en liste
 			parsing(line, &param); //return -1 ou 0 si l'allocution echoue ou les quotes ne sont pas fermees ou les > sont plus de deux 
 			//ft_exec(line, envp);
 		}
