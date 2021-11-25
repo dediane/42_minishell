@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:03:55 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/11/25 17:04:26 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/11/25 17:06:17 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 // 2 fd (in & out)
 // le PATH d'environnement sous forme de char **
 // la liste des commandes et arguments sous forme de char **
-//----------------------------------------------------------------//
+//----------------------------------------------------------------//*/
 
 /*int	exec_process(int *pipe, int *fd, char **argv, char **envp)
 {
@@ -66,7 +66,7 @@ char	*find_path(char *cmd, char **path_array)
 	ft_putstr_fd(": command not found\n", 2);
 	exit(127);
 	return (NULL);
-}
+}*/
 
 /*void	ft_exec(t_parsing *params, char **envp)
 {
