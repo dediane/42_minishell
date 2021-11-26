@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 19:28:36 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/11/26 16:51:33 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/11/26 16:55:38 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int main(int ac, char **av, char **envp)
 			ft_exit(line);
 		if (line[0] != '\0')
 		{
-			parsing(line, &param); //return -1 ou 0 si l'allocution echoue ou les quotes ne sont pas fermees ou les > sont plus de deux ++
+			parsing(line, &param); //return -1 ou 0 si l'allocution echoue ou les quotes ne sont pas fermees ou les > sont plus de deux 
 			ft_exec(&param, envp);
 		}
 	}
