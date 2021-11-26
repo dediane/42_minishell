@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:03:55 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/11/26 16:17:59 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/11/26 18:25:19 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,45 @@ char	*find_path(char *cmd, char **path_array)
 	return (NULL);
 }*/
 
+char	**get_cmd_path(char **envp)
+{
+	int		i;
+	int		j;
+	char	*path;
+
+	i = -1;
+	j = -1;
+	while (envp[++i])
+	{
+		if (ft_strnstr(envp[i], "PATH", 4) != 0)
+			path = ft_strnstr(envp[i], "PATH", 4);
+	}
+	return (ft_split(path + 5, ':'));
+}
+
+char *get_right_path(t_parsing *params, char **envp)
+{
+	char *path;
+	char **path_array;
+	int i;
+
+	i = 0;
+	path_array = get_cmd_path(envp);
+	while (path_array[i])
+		printf("Path_array = %s\n", path_array[i++]);
+	i = 0;
+	while (path_array[++i])
+	{
+		path = ft_strjoin(path_array[i], "/");
+		path = ft_strjoin(path, params->tabs[0]);
+		if (access(path, F_OK) == 0)
+			return (path);
+	}
+	ft_putstr_fd(params->tabs[0], 2);
+	ft_putstr_fd(": command not found\n", 2);
+	return (NULL);
+}
+
 int open_file(t_parsing *params, char *file)
 {
 	int fd;
@@ -85,6 +124,6 @@ void	ft_exec(t_parsing *params, char **envp)
 {
 	if (is_built_in(params, params->tabs[0], envp))
 		return;
-	else
-		printf("Not a build in cmd\n");
+	else 
+		printf("right path = %s\n", get_right_path(params, envp));
 }
