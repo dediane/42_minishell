@@ -57,7 +57,7 @@ void	ft_exec(t_parsing *params, char **envp);
 int open_file(t_parsing *params, char *file);
 
 //build_in.c
-int	is_built_in(t_parsing *params, char *line, char **envp);
+int	is_built_in(t_parsing *params, char *cmd, char **envp);
 
 ////////parsing
 //parsing.c

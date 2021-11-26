@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 00:47:40 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/11/26 14:15:57 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/11/26 16:41:19 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,12 @@ int	ft_echo(int fd, char **arg)
 	while (arg[size])
 		size++;
 	if (size == 1)
+	{
 		ft_putchar_fd('\n', fd);
+		return(0);
+	}
 	size = 0;
-	while (arg[i][0] == '-')
+	while (arg[i] && arg[i][0] == '-')
 	{
 		n = check_n(arg[i]);
 		if (n == 0)
@@ -55,7 +58,11 @@ int	ft_echo(int fd, char **arg)
 			break;
 	}
 	while (arg[i])
-		ft_putstr_fd(arg[i++], fd);
+		{
+			ft_putstr_fd(arg[i++], fd);
+			if (arg[i])
+				ft_putchar_fd(' ', fd);
+		}
 	if (n == 1 && size == 0)
 		ft_putchar_fd('\n', fd);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:03:55 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/11/26 13:35:44 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/11/26 16:17:59 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,25 +80,6 @@ int open_file(t_parsing *params, char *file)
 	else
 		return(fd = open(file, O_RDONLY));
 }
-
-/*int	is_built_in(char **line, char **envp)
-{
-	if (ft_strncmp(line[0], "cd", 3) == 0)
-	{
-		if (line[1] && check_cd_path(line[1]))
-			ft_cd(envp, line[1]);
-	}
-	if (ft_strncmp(line[0], "pwd", 4) == 0)
-		ft_pwd()
-	if (ft_strncmp(line[0], "echo", 5) == 0)
-		ft_echo()
-	if (ft_strncmp(line[0], "env", 4) == 0)
-		ft_env()
-	if (ft_strncmp(line[0], "export", 7) == 0)
-		ft_export()
-	if (ft_strncmp(line[0], "unset", 6) == 0)
-		ft_unset()
-}*/
 
 void	ft_exec(t_parsing *params, char **envp)
 {
