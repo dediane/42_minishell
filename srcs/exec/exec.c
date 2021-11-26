@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:03:55 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/11/26 18:25:19 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/11/27 00:54:19 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,18 @@ char	*find_path(char *cmd, char **path_array)
 	return (NULL);
 }*/
 
+int	exec_process(char **cmd, char *path, char **envp)
+{
+	int pid;
+
+	pid = fork();
+	if (pid == 0)
+		execve(path, cmd, envp);
+	else
+		waitpid(pid, 0, 0);
+	return (0);
+}
+
 char	**get_cmd_path(char **envp)
 {
 	int		i;
@@ -92,9 +104,6 @@ char *get_right_path(t_parsing *params, char **envp)
 
 	i = 0;
 	path_array = get_cmd_path(envp);
-	while (path_array[i])
-		printf("Path_array = %s\n", path_array[i++]);
-	i = 0;
 	while (path_array[++i])
 	{
 		path = ft_strjoin(path_array[i], "/");
@@ -125,5 +134,6 @@ void	ft_exec(t_parsing *params, char **envp)
 	if (is_built_in(params, params->tabs[0], envp))
 		return;
 	else 
-		printf("right path = %s\n", get_right_path(params, envp));
+		exec_process(params->tabs, get_right_path(params, envp), envp);
+		//printf("right path = %s\n", get_right_path(params, envp));
 }
