@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 10:03:50 by bben-yaa          #+#    #+#             */
-/*   Updated: 2021/11/15 14:14:33 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2021/11/26 17:29:58 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,55 +76,76 @@
 /////-> si parsing == 1 -> executer commande
 /////-> si parsing == -1 -> print message "Error" + new prompt
 
-int	parsing(char *argv)
+int	parsing(char *argv, t_parsing *param)
 {
-	t_parsing	param;
 	int			i;
 	char		*buf;
 	char		*line;
+	t_parsing	*tmp;
 
 	i = 0;
 	line = NULL;
-	if (!init_param(&param)) //->fonction pour init la structure; **bien checker**
-		return (-1); //protection si l'allocution echoue//
-	while(argv[i] == ' ' || argv[i] == '\t')
-		i++;//on a passer tout les spaces et tabs du debut **checker**
+	if (!ft_init(param))
+		return (0);
+	ft_pass_space(argv, &i);
+	tmp = param;
 	while(argv[i])
 	{
-		printf("argv[%d] vaut %c-\n", i, argv[i]);
-		buf = malloc(sizeof(char) * 1);
-		//if (argv[i] == 34)//c'est l'ascii du char " double quotes
+		buf = malloc(sizeof(char) * 2);
 		if (argv[i] == 34)
 		{	
-			printf("faire fonction pour mettre dans tab tout ce qu'il y a dans les doubles quotes\n");
-			printf("line quote vaut %s et i %d\n", line, i);
-			if (!ft_add_double_quote(&param, &i, argv, line))
+			//printf("faire fonction pour mettre dans tab tout ce qu'il y a dans les doubles quotes\n");
+			if (!ft_double_quote(line, &i, argv, tmp))
 				return (0);
-			printf("argv[%d] == %c\n", i, argv[i]);
-			if (argv[i + 1] == ' ')
-			{
-				i++;
-				while (argv[i] == ' ')
-					i++;
-			}
-			if (argv[i + 1] == '\0')
+			if (argv[i + 1] == '\0')//->si on arrive a la fin de argv
 				break ;
+			ft_pass_dquote(argv, &i);
 			line = NULL;
-		}	
-		else if (argv[i] == 39)//c'est l'ascii du char ' simple quote
-			printf("faire fonction pour mettre dans tab tout ce qu'il y a dans les simple quote\n");
+		}
+		else if (argv[i] == 39)								//c'est l'ascii du char ' simple quote
+		{
+			//printf("faire fonction pour mettre dans tab tout ce qu'il y a dans les simple quote\n");
+			if (!ft_simple_quote(line, &i, argv, tmp))
+				return (0);
+			if (argv[i + 1] == '\0')//->si on arrive a la fin de argv
+				break ;
+			ft_pass_squote(argv, &i);
+			line = NULL;
+		}
 		else if (argv[i] == '|')
-			printf("nouveau maillon a faire car nouvelle commande\n");
+		{
+			//printf("nouveau maillon a faire car nouvelle commande\n");
+			ft_add_maillon(param);
+			tmp = tmp->next;
+			i++;
+			while(argv[i] && argv[i] == ' ')
+				i++;
+		}
+		else if ((argv[i] == '<' || argv[i] == '>'))//&& (argv[i - 1] == ' '|| i == 0))
+		{
+			//printf("creer line jusqu'a trouver un espace et le mettre dans *file\n");
+			if (!ft_check_redoc(argv, i))
+				return (0);
+			if (line)										//->pour gerer les cas d'interpretation si on a a='ls -la'
+			{
+				if (!ft_tabs(tmp, line))
+					return (0);								//->secure malloc
+				line = NULL;
+			}
+			ft_define_redicretcion(argv, &i, tmp);
+			ft_add_file(tmp, &i, argv, line);		//alloue line (= nom du fichier) pour le mettre dans la stack file
+			while (argv[i] == ' ' || argv[i] == '<' || argv[i] == '>')
+				i++;
+			line = NULL; //line free dans ft_add_file
+		}
 		else if (argv[i] == ' ')
 		{
 			if (argv[i])
 			{
 				while (argv[i] == ' ')
 				i++;
-			}
-			printf("allouer une nouvelle ligne pour le tabs copier line dans tabs\n");	
-			printf("line fini vaut %s\n", line);
-			if (!ft_tabs(&param, line))
+			}	
+			if (!ft_tabs(tmp, line))
 				return (0);			
 			line = NULL;
 		}
@@ -134,36 +155,52 @@ int	parsing(char *argv)
 				break ;
 			buf[0] = argv[i];							//on est sur que ici que argv[i] est un char autre que | ' " ou espace
 			buf[1] = '\0';
-			printf("argv[%d] after condition vaut %c-\n", i, argv[i]);
-			printf("buf vaut %s\n", buf);
 			if (!(line = ft_line(line, buf[0])))		//fonction : mettre dans line tout en allouant et free a chaque fois//
-				return (0);								// ->allocation a echoue
+				return (0);							// ->allocation a echoue
 			i++;										//only if (argv[i]) ->condtion a mettre
 			if (!argv[i] && line)
 			{
-				printf("ici pour argv[%d] %c\n", i, argv[i]);
-				if (!ft_tabs(&param, line))
-					return (0);
+			if (!ft_tabs(tmp, line))
+				return (0);
 			}
 		}
 		free(buf);
 	}
-
-	//if (!ft_tabs(&param, line))
-	//	return (0);
-	//une fois argv tabs contient la commande et ses arguments//
 	
 	////////////////////////////////////////
-	
+	/*
+	t_parsing	*tmp2;
+	t_file		*curs;
+	tmp2 = param;
+	i = 0;
 	int l = 0;
-	while (param.tabs[l])
+	int j = 0;
+	while(tmp2)
 	{
-		printf("tab[%d] %s\n", l, param.tabs[l]);
-		l++;
-	}
-	printf("tab[%d] %s\n", l, param.tabs[l]);
-	
-	///////////////////////////////////////->print tabs
-	
+		curs = tmp2->file;
+		printf("//////maillon %d//////\n", i);
+		printf("enume type %u\n", tmp2->type);
+		while (tmp2->tabs[l])
+		{
+			printf("tab[%d] %s\n", l, tmp2->tabs[l]);
+			l++;
+		}
+		printf("tab[%d] %s\n", l, tmp2->tabs[l]);
+		printf("curs before = %p\n", curs);
+		while (curs)
+		{
+			printf("name_file %d vaut %s\n", j, curs->name);
+			j++;
+			curs = curs->next;
+		}
+		printf("on est d'accord que le next %p\n", tmp2->next);
+		l = 0;
+		j = 0;
+		tmp2 = tmp2->next;
+		i++;
+		
+	}*/
+	///////////////////////////////////////->print tabs tout en lisant la liste chainee	et les files et type
+
 	return (1);
 }

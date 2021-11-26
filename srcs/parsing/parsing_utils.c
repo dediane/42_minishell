@@ -11,6 +11,9 @@ int	init_param(t_parsing *param)
 	param->nb_cmd = 0;
 	param->tabs = NULL;
 	param->pipe = 0;
+	param->ret = 0;
+	param->type = NONE;
+	param->file = NULL;
 	return (1);
 }
 
@@ -26,7 +29,7 @@ char	*ft_line(char *line, char buf)
 		new[0] = buf;
 		new[1] = '\0';
 		return (new);
-	}	
+	}
 	i = ft_strlen(line);
 	if (!(new = malloc(sizeof(char) * (i + 2)))) //line + buf + '\0'
 		return (0);
@@ -57,3 +60,18 @@ char	ft_strcpy(char *dest, char *src)
 	return (*dest);
 }
 
+int	ft_init(t_parsing *param)
+{
+	if (!alloue_elem(param))
+		return (0);
+	if (!init_param(param)) 		//->fonction pour init la structure; **bien checker**
+		return (0); 				//protection si l'allocution echoue//*/
+	param->next = NULL;
+	return (1);
+}
+
+void	ft_pass_space(char *argv, int *i)
+{
+	while(argv[(*i)] == ' ' || argv[(*i)] == '\t')
+		(*i)++;						//on a passer tout les spaces et tabs du debut **checker**
+}

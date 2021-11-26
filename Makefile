@@ -3,22 +3,30 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+         #
+#    By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/26 19:30:34 by ddecourt          #+#    #+#              #
-#    Updated: 2021/11/15 10:48:06 by bben-yaa         ###   ########.fr        #
+#    Updated: 2021/11/26 13:37:48 by ddecourt         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS =	srcs/minishell.c \
 		srcs/exec/exec.c \
+		srcs/exec/built_in.c \
 		srcs/parsing/parsing.c \
 		srcs/parsing/parsing_utils.c \
 		srcs/parsing/parsing_tabs.c \
 		srcs/parsing/parsing_quote.c \
+		srcs/parsing/parsing_quote_2.c \
+		srcs/parsing/add_file.c \
+		srcs/parsing/stack_alloc.c \
+		srcs/parsing/check_redoc.c \
+		srcs/parsing/env_liste.c \
 		srcs/built_in/env.c \
 		srcs/built_in/pwd.c \
 		srcs/built_in/exit.c \
+		srcs/built_in/cd.c \
+		srcs/built_in/echo.c \
 
 OBJS = ${SRCS:.c=.o}
 
@@ -28,7 +36,7 @@ HEADER = inc/minishell.h
 
 CC = clang
 
-CFLAGS = -Wall -Werror -Wextra -g #-fsanitize=address 
+CFLAGS = -Wall -Werror -Wextra -g3 -fsanitize=address 
 RM = rm -f
 
 .c.o:
