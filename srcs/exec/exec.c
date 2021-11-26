@@ -77,6 +77,8 @@ char	*find_path(char *cmd, char **path_array)
 		return(fd = open(file, O_RDWR | O_CREAT, 0664));
 	if (ft_strncmp(params->tabs[0], '<', 2) == 0)
 		return(fd = open(file, O_RDONLY));
+	else
+		return(fd = open(file, O_RDONLY));
 }
 
 int	is_built_in(char **line, char **envp)
@@ -88,6 +90,14 @@ int	is_built_in(char **line, char **envp)
 	}
 	if (ft_strncmp(line[0], "pwd", 4) == 0)
 		ft_pwd()
+	if (ft_strncmp(line[0], "echo", 5) == 0)
+		ft_echo()
+	if (ft_strncmp(line[0], "env", 4) == 0)
+		ft_env()
+	if (ft_strncmp(line[0], "export", 7) == 0)
+		ft_export()
+	if (ft_strncmp(line[0], "unset", 6) == 0)
+		ft_unset()
 }
 
 void	ft_exec(t_parsing *params, char **envp)
