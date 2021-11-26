@@ -3,15 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+         #
+#    By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/26 19:30:34 by ddecourt          #+#    #+#              #
-#    Updated: 2021/11/25 15:24:18 by bben-yaa         ###   ########.fr        #
+#    Updated: 2021/11/26 13:37:48 by ddecourt         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS =	srcs/minishell.c \
 		srcs/exec/exec.c \
+		srcs/exec/built_in.c \
 		srcs/parsing/parsing.c \
 		srcs/parsing/parsing_utils.c \
 		srcs/parsing/parsing_tabs.c \
@@ -25,6 +26,7 @@ SRCS =	srcs/minishell.c \
 		srcs/built_in/pwd.c \
 		srcs/built_in/exit.c \
 		srcs/built_in/cd.c \
+		srcs/built_in/echo.c \
 
 OBJS = ${SRCS:.c=.o}
 

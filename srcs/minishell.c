@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 19:28:36 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/11/25 16:53:58 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2021/11/26 13:25:44 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int main(int ac, char **av, char **envp)
 			//ft_env(1, envp);
 			//env_list(&env, envp); envp transformer en liste
 			parsing(line, &param); //return -1 ou 0 si l'allocution echoue ou les quotes ne sont pas fermees ou les > sont plus de deux 
+			ft_exec(&param, envp);
 			//ft_exec(line, envp);
 		}
 	}

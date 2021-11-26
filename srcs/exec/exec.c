@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:03:55 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/11/26 12:17:07 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/11/26 13:35:44 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,20 +68,20 @@ char	*find_path(char *cmd, char **path_array)
 	return (NULL);
 }*/
 
-/*int open_file(t_parsing *params, char file)
+int open_file(t_parsing *params, char *file)
 {
 	int fd;
-	if (ft_strncmp(params->tabs[0], '>', 2) == 0)
+	if (ft_strncmp(params->tabs[0], ">", 2) == 0)
 		return(fd = open(file, O_RDWR | O_TRUNC | O_CREAT, 0664));
-	if (ft_strncmp(params->tabs[0], '>>', 3) == 0)
+	if (ft_strncmp(params->tabs[0], ">>", 3) == 0)
 		return(fd = open(file, O_RDWR | O_CREAT, 0664));
-	if (ft_strncmp(params->tabs[0], '<', 2) == 0)
+	if (ft_strncmp(params->tabs[0], "<", 2) == 0)
 		return(fd = open(file, O_RDONLY));
 	else
 		return(fd = open(file, O_RDONLY));
 }
 
-int	is_built_in(char **line, char **envp)
+/*int	is_built_in(char **line, char **envp)
 {
 	if (ft_strncmp(line[0], "cd", 3) == 0)
 	{
@@ -98,10 +98,12 @@ int	is_built_in(char **line, char **envp)
 		ft_export()
 	if (ft_strncmp(line[0], "unset", 6) == 0)
 		ft_unset()
-}
+}*/
 
 void	ft_exec(t_parsing *params, char **envp)
 {
-	if (is_built_in(params, params->tabs[0], envp)
-
-}*/
+	if (is_built_in(params, params->tabs[0], envp))
+		return;
+	else
+		printf("Not a build in cmd\n");
+}

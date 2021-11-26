@@ -14,6 +14,11 @@
 # include <string.h>
 # include "../libft/libft.h"
 
+
+# define STDIN 0
+# define STDOUT 1
+# define STDERR 2
+
 typedef struct s_file
 {
 	char			*name;
@@ -48,7 +53,11 @@ typedef	struct s_parsing
 }			t_parsing;
 
 ////////exec
-void	ft_exec(char *line, char **envp);
+void	ft_exec(t_parsing *params, char **envp);
+int open_file(t_parsing *params, char *file);
+
+//build_in.c
+int	is_built_in(t_parsing *params, char *line, char **envp);
 
 ////////parsing
 //parsing.c
@@ -60,8 +69,6 @@ char	*ft_line(char *line, char buf);
 char	ft_strcpy(char *dest, char *src);
 int		ft_init(t_parsing *param);
 void	ft_pass_space(char *argv, int *i);
-
-
 
 //parsing_tabs.c
 int		ft_paste_tab(t_parsing *param, char **new, char *line);
@@ -86,8 +93,6 @@ void	ft_pass_squote(char *argv, int *i);
 void	ft_define_redicretcion(char *argv, int *i, t_parsing *param);
 int		ft_check_redoc(char *argv, int i);
 
-
-
 //stack_alloc.c
 int		alloue_elem(t_parsing *param);
 int		ft_add_maillon(t_parsing *param);
@@ -110,5 +115,5 @@ int		ft_cd(char **envp, char *path);
 int		ft_env(int fd, char **envp);
 int		ft_pwd(int fd, char **envp);
 void	ft_exit(char *exit_line);
-
+int	ft_echo(int fd, char **arg);
 #endif
