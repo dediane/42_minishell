@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:03:55 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/11/25 17:06:17 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/11/26 12:17:07 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,6 @@ int	is_built_in(char **line, char **envp)
 
 void	ft_exec(t_parsing *params, char **envp)
 {
-	if (is_built_in(params->tabs[0], envp)
+	if (is_built_in(params, params->tabs[0], envp)
 
 }*/
