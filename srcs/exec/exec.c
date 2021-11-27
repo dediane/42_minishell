@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:03:55 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/11/27 00:54:19 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/11/27 17:40:09 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,9 +131,15 @@ int open_file(t_parsing *params, char *file)
 
 void	ft_exec(t_parsing *params, char **envp)
 {
+	char *right_path;
+	
 	if (is_built_in(params, params->tabs[0], envp))
 		return;
 	else 
-		exec_process(params->tabs, get_right_path(params, envp), envp);
+	{
+		right_path = get_right_path(params, envp);
+		if (right_path != NULL)
+			exec_process(params->tabs, right_path, envp);
 		//printf("right path = %s\n", get_right_path(params, envp));
+	}
 }
