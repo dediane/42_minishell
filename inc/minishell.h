@@ -47,6 +47,8 @@ typedef	struct s_parsing
 	char				**tabs; //il y a la commande et les arguments dedans
 	int					pipe;
 	int					ret;
+	int					fd_stdout;
+	int					fd_stdin;
 	t_filetype			type;
 	t_file				*file;
 	struct s_parsing	*next;

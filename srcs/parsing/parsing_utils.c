@@ -12,6 +12,8 @@ int	init_param(t_parsing *param)
 	param->tabs = NULL;
 	param->pipe = 0;
 	param->ret = 0;
+	param->fd_stdin = 0;
+	param->fd_stdout = 0;
 	param->type = NONE;
 	param->file = NULL;
 	return (1);
