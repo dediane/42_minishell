@@ -53,6 +53,7 @@ typedef	struct s_parsing
 }			t_parsing;
 
 ////////exec
+int		ft_exec_all_cmd(t_parsing *params, char **envp);
 void	ft_exec(t_parsing *params, char **envp);
 int open_file(t_parsing *params, char *file);
 

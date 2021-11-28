@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 10:03:50 by bben-yaa          #+#    #+#             */
-/*   Updated: 2021/11/26 17:29:58 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/11/28 16:45:31 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,7 +168,7 @@ int	parsing(char *argv, t_parsing *param)
 	}
 	
 	////////////////////////////////////////
-	/*
+	
 	t_parsing	*tmp2;
 	t_file		*curs;
 	tmp2 = param;
@@ -180,6 +180,7 @@ int	parsing(char *argv, t_parsing *param)
 		curs = tmp2->file;
 		printf("//////maillon %d//////\n", i);
 		printf("enume type %u\n", tmp2->type);
+		printf("valeur de pipe: %i\n", tmp2->pipe);
 		while (tmp2->tabs[l])
 		{
 			printf("tab[%d] %s\n", l, tmp2->tabs[l]);
@@ -199,7 +200,7 @@ int	parsing(char *argv, t_parsing *param)
 		tmp2 = tmp2->next;
 		i++;
 		
-	}*/
+	}
 	///////////////////////////////////////->print tabs tout en lisant la liste chainee	et les files et type
 
 	return (1);

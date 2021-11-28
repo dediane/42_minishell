@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:03:55 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/11/27 17:40:09 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/11/28 17:13:50 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,12 +119,10 @@ char *get_right_path(t_parsing *params, char **envp)
 int open_file(t_parsing *params, char *file)
 {
 	int fd;
-	if (ft_strncmp(params->tabs[0], ">", 2) == 0)
+	if (params->type == OUT)
 		return(fd = open(file, O_RDWR | O_TRUNC | O_CREAT, 0664));
-	if (ft_strncmp(params->tabs[0], ">>", 3) == 0)
+	if (params->type == DOUBLEOUT)
 		return(fd = open(file, O_RDWR | O_CREAT, 0664));
-	if (ft_strncmp(params->tabs[0], "<", 2) == 0)
-		return(fd = open(file, O_RDONLY));
 	else
 		return(fd = open(file, O_RDONLY));
 }
@@ -132,7 +130,7 @@ int open_file(t_parsing *params, char *file)
 void	ft_exec(t_parsing *params, char **envp)
 {
 	char *right_path;
-	
+
 	if (is_built_in(params, params->tabs[0], envp))
 		return;
 	else 
@@ -142,4 +140,33 @@ void	ft_exec(t_parsing *params, char **envp)
 			exec_process(params->tabs, right_path, envp);
 		//printf("right path = %s\n", get_right_path(params, envp));
 	}
+}
+
+int		ft_exec_all_cmd(t_parsing *params, char **envp)
+{
+	int fd;
+
+	fd = 0;
+	while (params->next)
+	{
+		printf("Valeur de type = %d\n", params->type);
+		if (params->type == 2)
+		{
+			fd = open_file(params, params->file->name);
+		}
+		ft_exec(params, envp);
+		if (params->next)
+			params = params->next;
+	}
+	if (params->type == 2)
+	{
+		fd = open_file(params, params->file->name);
+		//dup2(fd, 1);
+		//close(fd);
+		//dup2(fd, STDOUT_FILENO);
+		//close(fd);
+	}
+	//close (STDOUT_FILENO);
+	ft_exec(params, envp);
+	return (0);
 }
