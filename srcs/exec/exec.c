@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:03:55 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/11/28 17:13:50 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/11/28 17:20:27 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,12 +119,13 @@ char *get_right_path(t_parsing *params, char **envp)
 int open_file(t_parsing *params, char *file)
 {
 	int fd;
-	if (params->type == OUT)
-		return(fd = open(file, O_RDWR | O_TRUNC | O_CREAT, 0664));
-	if (params->type == DOUBLEOUT)
-		return(fd = open(file, O_RDWR | O_CREAT, 0664));
-	else
+	if (params->type == 1 || params->type == 4)
 		return(fd = open(file, O_RDONLY));
+	if (params->type == 2)
+		return(fd = open(file, O_RDWR | O_TRUNC | O_CREAT, 0664));
+	if (params->type == 3)
+		return(fd = open(file, O_RDWR | O_CREAT, 0664));	
+	return(fd = 1);
 }
 
 void	ft_exec(t_parsing *params, char **envp)
@@ -149,24 +150,13 @@ int		ft_exec_all_cmd(t_parsing *params, char **envp)
 	fd = 0;
 	while (params->next)
 	{
-		printf("Valeur de type = %d\n", params->type);
-		if (params->type == 2)
-		{
-			fd = open_file(params, params->file->name);
-		}
+		fd = open_file(params, params->file->name);
 		ft_exec(params, envp);
 		if (params->next)
 			params = params->next;
 	}
-	if (params->type == 2)
-	{
-		fd = open_file(params, params->file->name);
-		//dup2(fd, 1);
-		//close(fd);
-		//dup2(fd, STDOUT_FILENO);
-		//close(fd);
-	}
 	//close (STDOUT_FILENO);
+	fd = open_file(params, params->file->name);
 	ft_exec(params, envp);
 	return (0);
 }
