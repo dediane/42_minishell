@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:03:55 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/11/28 21:00:24 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/11/28 22:18:39 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ int open_file(t_parsing *params, char *file)
 	if (params->type == 2)
 		return(fd = open(file, O_RDWR | O_TRUNC | O_CREAT, 0664));
 	if (params->type == 3)
-		return(fd = open(file, O_RDWR | O_CREAT, 0664));	
+		return(fd = open(file, O_RDWR | O_APPEND | O_CREAT, 0664));	
 	else
 		return(0);
 }
@@ -149,32 +149,23 @@ int		ft_exec_all_cmd(t_parsing *params, char **envp)
 	int fd;
 
 	fd = 0;
-	while (params->next)
+	while (params != NULL)
 	{
-		params->fd_stdin = dup(STDIN);
-		params->fd_stdout = dup(STDOUT);
 		if (params->type != 0)
+		{
+			params->fd_stdin = dup(STDIN);
+			params->fd_stdout = dup(STDOUT);
 			fd = open_file(params, params->file->name);
-		dup2(fd, 1);
+			dup2(fd, 1);
+		}
 		ft_exec(params, envp);
-		close(fd);
-		close(params->fd_stdin);
-		dup2(params->fd_stdout, STDOUT);
-		if (params->next)
-			params = params->next;
+		if (params->type != 0)
+		{
+			close(fd);
+			close(params->fd_stdin);
+			dup2(params->fd_stdout, STDOUT);
+		}
+		params = params->next;
 	}
-	if (params->type != 0)
-	{
-		params->fd_stdin = dup(STDIN);
-		params->fd_stdout = dup(STDOUT);
-		fd = open_file(params, params->file->name);
-		dup2(fd, 1);
-		ft_exec(params, envp);
-		close(fd);
-		close(params->fd_stdin);
-		dup2(params->fd_stdout, STDOUT);
-	}
-	else
-		ft_exec(params, envp);
 	return (0);
 }

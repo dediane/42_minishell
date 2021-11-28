@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 19:28:36 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/11/28 15:17:33 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/11/28 22:25:37 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int main(int ac, char **av, char **envp)
 	ft_print_title();
 	while (1)
 	{
-		line = readline("\033[1;35m~Minishell$ \033[0m");
+		line = readline("\033[1;35m~Minishell$\033[0m ");
 		add_history(line);
 		if (ft_strnstr(line, "exit", ft_strlen(line)))
 			ft_exit(line);
