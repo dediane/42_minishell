@@ -116,5 +116,5 @@ int		ft_cd(char **envp, char *path);
 int		ft_env(int fd, char **envp);
 int		ft_pwd(int fd, char **envp);
 void	ft_exit(char *exit_line);
-int	ft_echo(int fd, char **arg);
+int		ft_echo(int fd, char **arg);
 #endif

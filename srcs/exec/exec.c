@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:03:55 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/11/28 17:20:27 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/11/28 17:46:30 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,8 @@ int open_file(t_parsing *params, char *file)
 		return(fd = open(file, O_RDWR | O_TRUNC | O_CREAT, 0664));
 	if (params->type == 3)
 		return(fd = open(file, O_RDWR | O_CREAT, 0664));	
-	return(fd = 1);
+	else
+		return(0);
 }
 
 void	ft_exec(t_parsing *params, char **envp)
@@ -150,13 +151,19 @@ int		ft_exec_all_cmd(t_parsing *params, char **envp)
 	fd = 0;
 	while (params->next)
 	{
-		fd = open_file(params, params->file->name);
+		if (params->type != 0)
+			fd = open_file(params, params->file->name);
+		//dup2(fd, 1);
+		//close(fd);
 		ft_exec(params, envp);
 		if (params->next)
 			params = params->next;
 	}
 	//close (STDOUT_FILENO);
-	fd = open_file(params, params->file->name);
+	if (params->type != 0)
+		fd = open_file(params, params->file->name);
+	//dup2(fd, 1);
+	//close(fd);
 	ft_exec(params, envp);
 	return (0);
 }
