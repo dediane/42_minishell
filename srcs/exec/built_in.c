@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 12:11:42 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/11/26 18:27:47 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/11/28 21:07:04 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	is_built_in(t_parsing *params, char *cmd, char **envp)
 	}
 	else if (ft_strncmp(cmd, "pwd", 4) == 0)
 	{
-		ft_pwd(STDOUT, envp);
+		ft_pwd(STDOUT);
 		return (1);
 	}
 	else if (ft_strncmp(params->tabs[0], "echo", 5) == 0)
