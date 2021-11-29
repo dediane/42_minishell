@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 00:14:45 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/11/28 21:10:59 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/11/29 01:19:51 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,19 +66,20 @@ int	ft_cd(char **envp, char *path)
 	if (path == NULL)
 	{
 		path = ft_get_home(envp);
-		change_env(envp, "OLDPWD", getcwd(buffer, 4096));
-		change_env(envp, "PWD", path);
-		return(0);
+		//printf("path = %s\n", path);
+		//change_env(envp, "OLDPWD", getcwd(buffer, 4096));
+		//change_env(envp, "PWD", path);
+		//return(0);
 	}
-	if (ft_strncmp(path, "-", 2) == 0)
+	if (ft_strncmp(path, "-", 1) == 0)
 	{
 		path = get_path(envp, "OLDPWD", &i);
-		change_env(envp, "OLDPWD", getcwd(buffer, 4096));
-		change_env(envp, "PWD", path);
+		//change_env(envp, "OLDPWD", getcwd(buffer, 4096));
+		//change_env(envp, "PWD", path);
 	}
+	change_env(envp, "OLDPWD", getcwd(buffer, 4096));
 	if (chdir(path) == -1)
 		return(perror(path), 2);
-	change_env(envp, "OLDPWD", getcwd(buffer, 4096));
-	change_env(envp, "PWD", path);
+	change_env(envp, "PWD", getcwd(buffer, 4096));
 	return (0);
 }
