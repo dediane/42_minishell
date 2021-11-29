@@ -35,7 +35,7 @@ int		ft_add_maillon(t_parsing *param)
 	tmp->next = new;
 	new->next = NULL;
 	new->pipe = 0;
-	new->ret = 0;
+	new->index = 0; 
 	new->tabs = NULL;
 	new->type = NONE;
 	new->file = NULL;

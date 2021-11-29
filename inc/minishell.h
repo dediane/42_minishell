@@ -43,10 +43,10 @@ typedef enum	e_filetype
 
 typedef	struct s_parsing
 {
-	int					nb_cmd;
+	int					nb_cmd; //== nombre de maillon
 	char				**tabs; //il y a la commande et les arguments dedans
 	int					pipe;
-	int					ret;
+	int					index;
 	int					fd_stdout;
 	int					fd_stdin;
 	t_filetype			type;

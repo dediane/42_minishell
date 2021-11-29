@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 10:03:50 by bben-yaa          #+#    #+#             */
-/*   Updated: 2021/11/28 17:39:36 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/11/29 11:42:15 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ int	parsing(char *argv, t_parsing *param)
 		{
 			//printf("nouveau maillon a faire car nouvelle commande\n");
 			ft_add_maillon(param);
+			tmp->next->pipe = tmp->pipe + 1;
 			tmp = tmp->next;
 			i++;
 			while(argv[i] && argv[i] == ' ')
@@ -169,7 +170,7 @@ int	parsing(char *argv, t_parsing *param)
 	
 	////////////////////////////////////////
 	
-	/*t_parsing	*tmp2;
+	t_parsing	*tmp2;
 	t_file		*curs;
 	tmp2 = param;
 	i = 0;
@@ -200,7 +201,7 @@ int	parsing(char *argv, t_parsing *param)
 		tmp2 = tmp2->next;
 		i++;
 		
-	}*/
+	}
 	///////////////////////////////////////->print tabs tout en lisant la liste chainee	et les files et type
 
 	return (1);

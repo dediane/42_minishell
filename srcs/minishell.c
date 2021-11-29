@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 19:28:36 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/11/29 01:07:18 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/11/29 11:26:29 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	ft_print_title(void)
 	|_|  |_|_|_| |_|_|___/_| |_|\\___|_|_|\n\033[0m \
 	\t\t\tby Diane & Balkis\n\n");
 }
+
+///Diane la plus forte!!, je t'aime!!
 
 int main(int ac, char **av, char **envp)
 {
