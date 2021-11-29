@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 00:14:45 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/11/29 01:19:51 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/11/29 14:47:57 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ char	*get_path(char **envp, char *to_find, int *i)
 		if (ret_ptr != 0)
 		{
 			path = ft_strjoin(ret_ptr + (size + 1), "\n");
+			free(ret_ptr);
 			return (path);
 		}
 	}
