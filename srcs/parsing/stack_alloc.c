@@ -42,3 +42,20 @@ int		ft_add_maillon(t_parsing *param)
 	new->nb_cmd = 0;
 	return (1);
 }
+
+void    ft_index(t_parsing *param)
+{
+	t_parsing	*tmp;
+	int			i;
+
+    tmp = param;
+    i = 0;
+	while (tmp)
+	{
+		param->nb_cmd = i;
+		i++;
+		printf("param->cmd = %d\n", param->nb_cmd);
+		tmp = tmp->next;
+	}
+}
+ 

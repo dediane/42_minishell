@@ -6,7 +6,7 @@
 /*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 10:03:50 by bben-yaa          #+#    #+#             */
-/*   Updated: 2021/11/29 11:42:15 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2021/11/29 15:47:51 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,6 +167,8 @@ int	parsing(char *argv, t_parsing *param)
 		}
 		free(buf);
 	}
+	ft_index(param); //->fonctionne pas encore
+	
 	
 	////////////////////////////////////////
 	
@@ -182,6 +184,7 @@ int	parsing(char *argv, t_parsing *param)
 		printf("//////maillon %d//////\n", i);
 		printf("enume type %u\n", tmp2->type);
 		printf("valeur de pipe: %i\n", tmp2->pipe);
+		printf("index : %i\n", tmp2->index);
 		while (tmp2->tabs[l])
 		{
 			printf("tab[%d] %s\n", l, tmp2->tabs[l]);

@@ -19,9 +19,19 @@
 # define STDOUT 1
 # define STDERR 2
 
+typedef enum	e_filetype
+{
+	NONE,
+	IN,
+	OUT,
+	DOUBLEOUT,
+	DOUBLEIN,
+}t_filetype;
+
 typedef struct s_file
 {
 	char			*name;
+	t_filetype		f_type;
 	struct s_file	*next;
 }				t_file;
 
@@ -31,15 +41,6 @@ typedef struct s_env
   char          *var_def; //interpretation de la variable
   struct s_env  *next;
 }				t_env;
-
-typedef enum	e_filetype
-{
-	NONE,
-	IN,
-	OUT,
-	DOUBLEOUT,
-	DOUBLEIN,
-}t_filetype;
 
 typedef	struct s_parsing
 {
@@ -99,6 +100,8 @@ int		ft_check_redoc(char *argv, int i);
 //stack_alloc.c
 int		alloue_elem(t_parsing *param);
 int		ft_add_maillon(t_parsing *param);
+void    ft_index(t_parsing *param);
+
 
 //add_file.c
 int		ft_add_file(t_parsing *param, int *i, char *argv, char *line);
