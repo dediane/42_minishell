@@ -124,7 +124,6 @@ int	parsing(char *argv, t_parsing *param)
 		}
 		else if ((argv[i] == '<' || argv[i] == '>'))//&& (argv[i - 1] == ' '|| i == 0))
 		{
-			//printf("creer line jusqu'a trouver un espace et le mettre dans *file\n");
 			if (!ft_check_redoc(argv, i))
 				return (0);
 			if (line)										//->pour gerer les cas d'interpretation si on a a='ls -la'
@@ -135,7 +134,7 @@ int	parsing(char *argv, t_parsing *param)
 			}
 			ft_define_redicretcion(argv, &i, tmp);
 			ft_add_file(tmp, &i, argv, line);		//alloue line (= nom du fichier) pour le mettre dans la stack file
-			while (argv[i] == ' ' || argv[i] == '<' || argv[i] == '>')
+			while (argv[i] == ' ')
 				i++;
 			line = NULL; //line free dans ft_add_file
 		}
@@ -167,6 +166,8 @@ int	parsing(char *argv, t_parsing *param)
 		}
 		free(buf);
 	}
+	ft_index(param); //->fonctionne pas encore
+	
 	
 	////////////////////////////////////////
 	
@@ -182,6 +183,7 @@ int	parsing(char *argv, t_parsing *param)
 		printf("//////maillon %d//////\n", i);
 		printf("enume type %u\n", tmp2->type);
 		printf("valeur de pipe: %i\n", tmp2->pipe);
+		printf("index : %i\n", tmp2->index);
 		while (tmp2->tabs[l])
 		{
 			printf("tab[%d] %s\n", l, tmp2->tabs[l]);
@@ -192,6 +194,7 @@ int	parsing(char *argv, t_parsing *param)
 		while (curs)
 		{
 			printf("name_file %d vaut %s\n", j, curs->name);
+			printf("type_file %d vaut %d\n", j, curs->ftype);
 			j++;
 			curs = curs->next;
 		}

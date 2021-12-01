@@ -42,7 +42,8 @@ int	ft_add_to_fstack(t_parsing *param, char *line)
 	{
 		new->next = NULL;
 		ft_strcpy(new_name, line);
-		new->name = new_name;
+		new->name = new_name;		//here add type for file
+		new->ftype = param->type;
 		param->file = new;
 	}
 	else if (param->file)
@@ -51,7 +52,8 @@ int	ft_add_to_fstack(t_parsing *param, char *line)
 			tmp = tmp->next;
 		new->next = NULL;
 		ft_strcpy(new_name, line);
-		new->name = new_name;
+		new->name = new_name;		//here add type for file
+		new->ftype = param->type;
 		tmp->next  = new;
 	}
 	return (1);

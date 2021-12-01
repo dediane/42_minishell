@@ -19,9 +19,19 @@
 # define STDOUT 1
 # define STDERR 2
 
+typedef enum	e_filetype
+{
+	NONE,
+	IN,
+	OUT,
+	DOUBLEOUT,
+	DOUBLEIN,
+}t_filetype;
+
 typedef struct s_file
 {
 	char			*name;
+	t_filetype		ftype;
 	struct s_file	*next;
 }				t_file;
 
@@ -32,24 +42,15 @@ typedef struct s_env
   struct s_env  *next;
 }				t_env;
 
-typedef enum	e_filetype
-{
-	NONE,
-	IN,
-	OUT,
-	DOUBLEOUT,
-	DOUBLEIN,
-}t_filetype;
-
 typedef	struct s_parsing
 {
-	int					nb_cmd; //== nombre de maillon
-	char				**tabs; //il y a la commande et les arguments dedans
+	int					nb_cmd;		//== nombre de maillon
+	char				**tabs;		//il y a la commande et les arguments dedans
 	int					pipe;
 	int					index;
 	int					fd_stdout;
 	int					fd_stdin;
-	t_filetype			type;
+	t_filetype			type;		//je pense qu'il sert a rien lui quoique je m'en sert dans le parsing
 	t_file				*file;
 	struct s_parsing	*next;
 }			t_parsing;
@@ -102,6 +103,8 @@ int		ft_check_redoc(char *argv, int i);
 //stack_alloc.c
 int		alloue_elem(t_parsing *param);
 int		ft_add_maillon(t_parsing *param);
+void    ft_index(t_parsing *param);
+
 
 //add_file.c
 int		ft_add_file(t_parsing *param, int *i, char *argv, char *line);
