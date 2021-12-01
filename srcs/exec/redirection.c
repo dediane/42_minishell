@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 20:24:05 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/01 23:07:56 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/12/01 23:16:00 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ int	get_nb_files(t_file *file)
 		file = file->next;
 		i++;
 	}
-	printf("Valeur de i dans get nb = %d\n", i);
 	return (i);
 }
 
@@ -63,6 +62,7 @@ void	ft_multiple_redir(int nb, t_file *file, t_parsing *params, char **envp)
 		nb--;
 		if (nb != 0)
 			fd = open(file->name, O_TRUNC);
+		close(fd);
 		file = file->next;
 	}
 	close(params->fd_stdin);
@@ -78,14 +78,9 @@ t_parsing	*ft_exec_redir(t_parsing *params, char **envp)
 	file = params->file;
 	if (params->file)
 		i = get_nb_files(file);
-	printf("Valeur de i = %d\n", i);
 	if (i == 0)
 		ft_redir(params, envp);
 	else
-	{
 		ft_multiple_redir(i, file, params, envp);
-	}
 	return(params->next);
 }
-
-
