@@ -6,12 +6,13 @@
 #    By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/26 19:30:34 by ddecourt          #+#    #+#              #
-#    Updated: 2021/11/29 16:19:11 by ddecourt         ###   ########.fr        #
+#    Updated: 2021/12/01 13:19:19 by ddecourt         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS =	srcs/minishell.c \
 		srcs/exec/exec.c \
+		srcs/exec/exec_utils.c \
 		srcs/exec/built_in.c \
 		srcs/exec/pipe.c \
 		srcs/parsing/parsing.c \

@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:03:55 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/11/29 16:43:09 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/12/01 13:49:14 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,55 +80,6 @@ int	exec_process(char **cmd, char *path, char **envp)
 	return (0);
 }
 
-char	**get_cmd_path(char **envp)
-{
-	int		i;
-	int		j;
-	char	*path;
-
-	i = -1;
-	j = -1;
-	while (envp[++i])
-	{
-		if (ft_strnstr(envp[i], "PATH", 4) != 0)
-			path = ft_strnstr(envp[i], "PATH", 4);
-	}
-	return (ft_split(path + 5, ':'));
-}
-
-char *get_right_path(t_parsing *params, char **envp)
-{
-	char *path;
-	char **path_array;
-	int i;
-
-	i = 0;
-	path_array = get_cmd_path(envp);
-	while (path_array[++i])
-	{
-		path = ft_strjoin(path_array[i], "/");
-		path = ft_strjoin(path, params->tabs[0]);
-		if (access(path, F_OK) == 0)
-			return (path);
-	}
-	ft_putstr_fd(params->tabs[0], 2);
-	ft_putstr_fd(": command not found\n", 2);
-	return (NULL);
-}
-
-int open_file(t_parsing *params, char *file)
-{
-	int fd;
-	if (params->type == 1 || params->type == 4)
-		return(fd = open(file, O_RDONLY));
-	if (params->type == 2)
-		return(fd = open(file, O_RDWR | O_TRUNC | O_CREAT, 0664));
-	if (params->type == 3)
-		return(fd = open(file, O_RDWR | O_APPEND | O_CREAT, 0664));	
-	else
-		return(0);
-}
-
 void	ft_exec(t_parsing *params, char **envp)
 {
 	char *right_path;
@@ -140,16 +91,17 @@ void	ft_exec(t_parsing *params, char **envp)
 		right_path = get_right_path(params, envp);
 		if (right_path != NULL)
 			exec_process(params->tabs, right_path, envp);
-		//printf("right path = %s\n", get_right_path(params, envp));
 	}
 }
 
 int		ft_exec_all_cmd(t_parsing *params, char **envp)
 {
 	int fd;
+	t_parsing *tmp;
 	//int *pipe_fd[2];
 
 	fd = 0;
+	tmp = params;
 	while (params != NULL)
 	{
 		/*if (params->pipe != 0 && params->next->pipe != 0)
@@ -164,8 +116,9 @@ int		ft_exec_all_cmd(t_parsing *params, char **envp)
 			fd = open_file(params, params->file->name);
 			dup2(fd, 1);
 		}
-		ft_exec(params, envp);
-		if (params->type != 0)
+		if (params->tabs)
+			ft_exec(params, envp);
+		if (params->type != 0 && params->pipe == 0)
 		{
 			close(fd);
 			close(params->fd_stdin);
@@ -173,6 +126,6 @@ int		ft_exec_all_cmd(t_parsing *params, char **envp)
 		}
 		params = params->next;
 	}
-	//free(list params)
+	ft_free_params(tmp);
 	return (0);
 }
