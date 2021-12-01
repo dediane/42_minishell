@@ -142,4 +142,12 @@ int		ft_env(int fd, char **envp);
 int		ft_pwd(int fd);
 void	ft_exit(char *exit_line);
 int		ft_echo(int fd, char **arg);
+
+
+////////signal
+
+//signal.c
+void	ft_sigint(int sig);
+void	ft_sigquit(int sig);
+
 #endif
