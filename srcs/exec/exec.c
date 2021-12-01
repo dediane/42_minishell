@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:03:55 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/01 13:49:14 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/12/01 18:42:11 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,22 +98,19 @@ int		ft_exec_all_cmd(t_parsing *params, char **envp)
 {
 	int fd;
 	t_parsing *tmp;
-	//int *pipe_fd[2];
 
 	fd = 0;
 	tmp = params;
 	while (params != NULL)
 	{
-		/*if (params->pipe != 0 && params->next->pipe != 0)
-		{
-
-		}*/
-		//ft_pipe(params, &pipe_fd[2], envp);
+		//if (ft_pipe(params, envp))
+		//	params = params->next;
 		if (params->type != 0)
 		{
 			params->fd_stdin = dup(STDIN);
 			params->fd_stdout = dup(STDOUT);
 			fd = open_file(params, params->file->name);
+			//if (params->file->next->ftype == 0)
 			dup2(fd, 1);
 		}
 		if (params->tabs)
@@ -126,6 +123,6 @@ int		ft_exec_all_cmd(t_parsing *params, char **envp)
 		}
 		params = params->next;
 	}
-	ft_free_params(tmp);
+	//ft_free_params(tmp);
 	return (0);
 }

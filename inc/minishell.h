@@ -70,7 +70,7 @@ void	ft_free_params(t_parsing *params);
 int	is_built_in(t_parsing *params, char *cmd, char **envp);
 
 //pipe.c
-int	ft_pipe(t_parsing *params, int *pipe_fd[2], char **envp);
+int	ft_pipe(t_parsing *params, char **envp);
 
 ////////parsing
 //parsing.c
