@@ -63,6 +63,9 @@ int open_file(t_parsing *params, char *file);
 //build_in.c
 int	is_built_in(t_parsing *params, char *cmd, char **envp);
 
+//pipe.c
+int	ft_pipe(t_parsing *params, int *pipe_fd[2], char **envp);
+
 ////////parsing
 //parsing.c
 int		parsing(char *argv, t_parsing *param);
