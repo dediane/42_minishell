@@ -6,7 +6,7 @@
 /*   By: balkis <balkis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 19:28:36 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/01 19:02:30 by balkis           ###   ########.fr       */
+/*   Updated: 2021/12/01 19:06:38 by balkis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,7 @@ int main(int ac, char **av, char **envp)
 			signal(SIGQUIT, ft_sigquit);
 			(void)param;
 			if (ft_strnstr(line, "exit", ft_strlen(line)))
-				ft_exit(line);
-/*	
+				ft_exit(line);	
 			if (line[0] != '\0')
 			{
 				if (parsing(line, &param)) //return -1 ou 0 si l'allocution echoue ou les quotes ne sont pas fermees ou les > sont plus de deux 
@@ -61,7 +60,6 @@ int main(int ac, char **av, char **envp)
 				}
 				//free here
 			}
-*/
 		}
 	}
 	return (0);
