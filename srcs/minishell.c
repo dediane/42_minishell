@@ -6,7 +6,7 @@
 /*   By: balkis <balkis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 19:28:36 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/01 19:32:02 by balkis           ###   ########.fr       */
+/*   Updated: 2021/12/01 19:41:44 by balkis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ int main(int ac, char **av, char **envp)
 		else
 		{
 			add_history(line);
-			printf("signal vaut %d\n", SIGINT);
 			signal(SIGINT, ft_sigint);
 			signal(SIGQUIT, ft_sigquit);
 			(void)param;
