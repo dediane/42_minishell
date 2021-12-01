@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:03:55 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/01 20:49:00 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/12/01 22:50:51 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,13 +104,7 @@ int		ft_exec_all_cmd(t_parsing *params, char **envp)
 	while (params != NULL)
 	{
 		if (params->type != 0)
-		{
-			//printf("file name 1 = %s\n", params->file->name);
-			//printf("file name 2 = %s\n", params->file->next->name);
-			params = ft_redir(params, envp);
-			if (params->file->next->name)
-				params = ft_redir2(params, envp);
-		}
+			params = ft_exec_redir(params, envp);
 		else
 		{
 			if (params->tabs)

@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 20:24:05 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/01 20:57:05 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/12/01 23:07:56 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,7 @@ t_parsing	*ft_redir(t_parsing *params, char **envp)
 	}
 	if (params->tabs)
 		ft_exec(params, envp);
-	while (params->file->next)
-	{
-		ft_redir2(params, envp, fd);
-		params->file = params->file->next;
-	}
-	if (params->type != 0 && params->file->next->ftype == 0 && params->pipe == 0)
+	if (params->type != 0 && params->pipe == 0)
 	{
 		close(fd);
 		close(params->fd_stdin);
@@ -40,10 +35,57 @@ t_parsing	*ft_redir(t_parsing *params, char **envp)
 	return(params);
 }
 
-t_parsing	*ft_redir2(t_parsing *params, char **envp, int fd)
-{	
-	if (params->type != 0)
+int	get_nb_files(t_file *file)
+{
+	int i;
+
+	i = 0;
+	while(file != NULL)
 	{
-		
+		file = file->next;
+		i++;
 	}
+	printf("Valeur de i dans get nb = %d\n", i);
+	return (i);
 }
+
+void	ft_multiple_redir(int nb, t_file *file, t_parsing *params, char **envp)
+{
+	int fd;
+
+	params->fd_stdin = dup(STDIN);
+	params->fd_stdout = dup(STDOUT);
+	while (nb > 0)
+	{
+		fd = open_file(params, file->name);
+		dup2(fd, 1);
+		ft_exec(params, envp);
+		nb--;
+		if (nb != 0)
+			fd = open(file->name, O_TRUNC);
+		file = file->next;
+	}
+	close(params->fd_stdin);
+	dup2(params->fd_stdout, STDOUT);
+}
+
+t_parsing	*ft_exec_redir(t_parsing *params, char **envp)
+{
+	int i;
+	t_file *file;
+	
+	i = 0;
+	file = params->file;
+	if (params->file)
+		i = get_nb_files(file);
+	printf("Valeur de i = %d\n", i);
+	if (i == 0)
+		ft_redir(params, envp);
+	else
+	{
+		ft_multiple_redir(i, file, params, envp);
+	}
+	return(params->next);
+}
+
+
