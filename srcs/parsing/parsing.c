@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: balkis <balkis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 10:03:50 by bben-yaa          #+#    #+#             */
-/*   Updated: 2021/11/29 14:21:06 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/12/01 19:39:48 by balkis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ int	parsing(char *argv, t_parsing *param)
 		{
 			//printf("nouveau maillon a faire car pipe nouvelle commande\n");
 			ft_add_maillon(param);
+			tmp->next->pipe = tmp->pipe + 1;
 			tmp = tmp->next;
 			i++;
 			while(argv[i] && argv[i] == ' ')
