@@ -48,7 +48,7 @@ int main(int ac, char **av, char **envp)
 		{
 			if (parsing(line, &param)) //return -1 ou 0 si l'allocution echoue ou les quotes ne sont pas fermees ou les > sont plus de deux 
 			{
-				ft_exec_all_cmd(&param, envp);
+				//ft_exec_all_cmd(&param, envp);
 			}
 			//free here
 		}

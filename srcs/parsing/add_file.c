@@ -19,6 +19,7 @@ int	ft_add_file(t_parsing *param, int *i, char *argv, char *line)
 			return (0);
 		(*i)++;
 	}
+	printf("ici i vaut %d pour char -%c-\n", (*i), argv[(*i)]);
 	if (!ft_add_to_fstack(param, line))
 		return (0);
 	free(line);
@@ -42,7 +43,8 @@ int	ft_add_to_fstack(t_parsing *param, char *line)
 	{
 		new->next = NULL;
 		ft_strcpy(new_name, line);
-		new->name = new_name;
+		new->name = new_name;		//here add type for file
+		new->ftype = param->type;
 		param->file = new;
 	}
 	else if (param->file)
@@ -51,7 +53,8 @@ int	ft_add_to_fstack(t_parsing *param, char *line)
 			tmp = tmp->next;
 		new->next = NULL;
 		ft_strcpy(new_name, line);
-		new->name = new_name;
+		new->name = new_name;		//here add type for file
+		new->ftype = param->type;
 		tmp->next  = new;
 	}
 	return (1);

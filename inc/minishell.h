@@ -31,7 +31,7 @@ typedef enum	e_filetype
 typedef struct s_file
 {
 	char			*name;
-	t_filetype		f_type;
+	t_filetype		ftype;
 	struct s_file	*next;
 }				t_file;
 
@@ -44,13 +44,13 @@ typedef struct s_env
 
 typedef	struct s_parsing
 {
-	int					nb_cmd; //== nombre de maillon
-	char				**tabs; //il y a la commande et les arguments dedans
+	int					nb_cmd;		//== nombre de maillon
+	char				**tabs;		//il y a la commande et les arguments dedans
 	int					pipe;
 	int					index;
 	int					fd_stdout;
 	int					fd_stdin;
-	t_filetype			type;
+	t_filetype			type;		//je pense qu'il sert a rien lui quoique je m'en sert dans le parsing
 	t_file				*file;
 	struct s_parsing	*next;
 }			t_parsing;
