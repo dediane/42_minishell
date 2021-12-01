@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 19:28:36 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/01 20:08:30 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/12/01 20:29:50 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ int main(int ac, char **av, char **envp)
 		else
 		{
 			add_history(line);
-			signal(SIGINT, ft_sigint);
-			signal(SIGQUIT, ft_sigquit);
+			//signal(SIGINT, ft_sigint);
+			//signal(SIGQUIT, ft_sigquit);
 			(void)param;
 			if (ft_strnstr(line, "exit", ft_strlen(line)))
 				ft_exit(line);	
