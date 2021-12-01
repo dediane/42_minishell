@@ -54,7 +54,6 @@ void    ft_index(t_parsing *param)
 	{
 		param->nb_cmd = i;
 		i++;
-		printf("param->cmd = %d\n", param->nb_cmd);
 		tmp = tmp->next;
 	}
 }
