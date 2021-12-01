@@ -16,6 +16,8 @@ int	init_param(t_parsing *param)
 	param->fd_stdout = 0;
 	param->type = NONE;
 	param->file = NULL;
+//	param->b_cmd = NONE;
+//	param->a_cmd = NONE;
 	return (1);
 }
 
