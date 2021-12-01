@@ -6,13 +6,13 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 20:24:05 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/01 20:41:10 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/12/01 20:57:05 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-t_parsing    *ft_redir(t_parsing *params, char**envp)
+t_parsing	*ft_redir(t_parsing *params, char **envp)
 {
 	int fd;
 
@@ -25,7 +25,12 @@ t_parsing    *ft_redir(t_parsing *params, char**envp)
 	}
 	if (params->tabs)
 		ft_exec(params, envp);
-	if (params->type != 0 && params->pipe == 0)
+	while (params->file->next)
+	{
+		ft_redir2(params, envp, fd);
+		params->file = params->file->next;
+	}
+	if (params->type != 0 && params->file->next->ftype == 0 && params->pipe == 0)
 	{
 		close(fd);
 		close(params->fd_stdin);
@@ -33,4 +38,12 @@ t_parsing    *ft_redir(t_parsing *params, char**envp)
 	}
 	params = params->next;
 	return(params);
+}
+
+t_parsing	*ft_redir2(t_parsing *params, char **envp, int fd)
+{	
+	if (params->type != 0)
+	{
+		
+	}
 }
