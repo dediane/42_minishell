@@ -66,7 +66,7 @@ void	ft_free_params(t_parsing *params)
 	while (params->next)
 	{
 		ft_free_file(params->file);				//here free file liste
-		free_tabs(params->tabs);		//here free params->tabs
+		free_tabs(params->tabs);				//here free params->tabs
 		free(params);
 		params = params->next;
 	}

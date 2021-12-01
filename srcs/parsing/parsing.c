@@ -114,9 +114,17 @@ int	parsing(char *argv, t_parsing *param)
 		}
 		else if (argv[i] == '|')
 		{
-			//printf("nouveau maillon a faire car nouvelle commande\n");
+			//printf("nouveau maillon a faire car pipe nouvelle commande\n");
 			ft_add_maillon(param);
-			tmp->next->pipe = tmp->pipe + 1;
+			tmp = tmp->next;
+			i++;
+			while(argv[i] && argv[i] == ' ')
+				i++;
+		}
+		else if (argv[i] == ';')
+		{
+			//printf("nouveau maillon a faire car point virgule nouvelle commande\n");
+			ft_add_maillon(param);
 			tmp = tmp->next;
 			i++;
 			while(argv[i] && argv[i] == ' ')
