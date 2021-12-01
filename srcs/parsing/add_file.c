@@ -19,7 +19,6 @@ int	ft_add_file(t_parsing *param, int *i, char *argv, char *line)
 			return (0);
 		(*i)++;
 	}
-	printf("ici i vaut %d pour char -%c-\n", (*i), argv[(*i)]);
 	if (!ft_add_to_fstack(param, line))
 		return (0);
 	free(line);
