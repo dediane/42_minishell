@@ -97,8 +97,6 @@ int	ft_check_quote(char *line, int a)
 	{
 		if (line[i] == c)
 			p++;
-		if (c == 34 && line[i] == 39)
-			p++;
 		i++;
 	}
 	if (p % 2)
