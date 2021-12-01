@@ -65,6 +65,8 @@ int		open_file(t_parsing *params, char *file);
 char	*get_right_path(t_parsing *params, char **envp);
 char	**get_cmd_path(char **envp);
 void	ft_free_params(t_parsing *params);
+void	ft_free_file(t_file *file);
+
 
 //build_in.c
 int	is_built_in(t_parsing *params, char *cmd, char **envp);
