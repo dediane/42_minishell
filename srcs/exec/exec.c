@@ -147,7 +147,7 @@ void	ft_exec(t_parsing *params, char **envp)
 int		ft_exec_all_cmd(t_parsing *params, char **envp)
 {
 	int fd;
-	int *pipe_fd[2];
+	//int *pipe_fd[2];
 
 	fd = 0;
 	while (params != NULL)
