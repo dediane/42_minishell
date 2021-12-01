@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: balkis <balkis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 19:28:36 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/11/29 11:26:29 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2021/12/01 19:02:30 by balkis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,27 @@ int main(int ac, char **av, char **envp)
 	while (1)
 	{
 		line = readline("\033[1;35m~Minishell$\033[0m ");
-		add_history(line);
-		if (ft_strnstr(line, "exit", ft_strlen(line)))
-			ft_exit(line);
-		if (line[0] != '\0')
+		if (!line)
+			printf("\nreadline existe pas signal ctrl D, il faut exit\nJe peux pas exit pck la fonction prend en param line, ici line existe pas\n");
+		else
 		{
-			if (parsing(line, &param)) //return -1 ou 0 si l'allocution echoue ou les quotes ne sont pas fermees ou les > sont plus de deux 
+			add_history(line);
+			printf("signal vaut %d\n", SIGINT);
+			signal(SIGINT, ft_sigint);
+			signal(SIGQUIT, ft_sigquit);
+			(void)param;
+			if (ft_strnstr(line, "exit", ft_strlen(line)))
+				ft_exit(line);
+/*	
+			if (line[0] != '\0')
 			{
-				ft_exec_all_cmd(&param, envp);
+				if (parsing(line, &param)) //return -1 ou 0 si l'allocution echoue ou les quotes ne sont pas fermees ou les > sont plus de deux 
+				
+					ft_exec_all_cmd(&param, envp);
+				}
+				//free here
 			}
-			//free here
+*/
 		}
 	}
 	return (0);

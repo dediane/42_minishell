@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+         #
+#    By: balkis <balkis@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/26 19:30:34 by ddecourt          #+#    #+#              #
-#    Updated: 2021/12/01 13:19:19 by ddecourt         ###   ########.fr        #
+#    Updated: 2021/12/01 16:30:22 by balkis           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ SRCS =	srcs/minishell.c \
 		srcs/built_in/exit.c \
 		srcs/built_in/cd.c \
 		srcs/built_in/echo.c \
+		srcs/signal/signal.c \
 
 OBJS = ${SRCS:.c=.o}
 
