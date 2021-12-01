@@ -43,21 +43,27 @@ typedef enum	e_filetype
 
 typedef	struct s_parsing
 {
-	int					nb_cmd;
+	int					nb_cmd; //== nombre de maillon
 	char				**tabs; //il y a la commande et les arguments dedans
 	int					pipe;
-	int					ret;
+	int					index;
+	int					fd_stdout;
+	int					fd_stdin;
 	t_filetype			type;
 	t_file				*file;
 	struct s_parsing	*next;
 }			t_parsing;
 
 ////////exec
+int		ft_exec_all_cmd(t_parsing *params, char **envp);
 void	ft_exec(t_parsing *params, char **envp);
 int open_file(t_parsing *params, char *file);
 
 //build_in.c
 int	is_built_in(t_parsing *params, char *cmd, char **envp);
+
+//pipe.c
+int	ft_pipe(t_parsing *params, int *pipe_fd[2], char **envp);
 
 ////////parsing
 //parsing.c
@@ -113,7 +119,7 @@ char	*get_path(char **envp, char *to_find, int *i);
 char	*ft_get_home(char **envp);
 int		ft_cd(char **envp, char *path);
 int		ft_env(int fd, char **envp);
-int		ft_pwd(int fd, char **envp);
+int		ft_pwd(int fd);
 void	ft_exit(char *exit_line);
-int	ft_echo(int fd, char **arg);
+int		ft_echo(int fd, char **arg);
 #endif

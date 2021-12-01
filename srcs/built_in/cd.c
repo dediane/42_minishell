@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 00:14:45 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/11/26 22:10:50 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/11/29 14:47:57 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ char	*get_path(char **envp, char *to_find, int *i)
 		if (ret_ptr != 0)
 		{
 			path = ft_strjoin(ret_ptr + (size + 1), "\n");
+			free(ret_ptr);
 			return (path);
 		}
 	}
@@ -63,15 +64,23 @@ int	ft_cd(char **envp, char *path)
 	int i;
 	
 	i = -1;
-	//printf("Enter the function\n");
 	if (path == NULL)
+	{
 		path = ft_get_home(envp);
-	//printf("path = %s\n", path);
+		//printf("path = %s\n", path);
+		//change_env(envp, "OLDPWD", getcwd(buffer, 4096));
+		//change_env(envp, "PWD", path);
+		//return(0);
+	}
+	if (ft_strncmp(path, "-", 1) == 0)
+	{
+		path = get_path(envp, "OLDPWD", &i);
+		//change_env(envp, "OLDPWD", getcwd(buffer, 4096));
+		//change_env(envp, "PWD", path);
+	}
+	change_env(envp, "OLDPWD", getcwd(buffer, 4096));
 	if (chdir(path) == -1)
 		return(perror(path), 2);
-	if (ft_strncmp(path, "-", 2) == 0)
-		path = get_path(envp, "OLDPWD", &i);
-	change_env(envp, "OLDPWD", getcwd(buffer, 4096));
-	change_env(envp, "PWD", path);
+	change_env(envp, "PWD", getcwd(buffer, 4096));
 	return (0);
 }
