@@ -37,7 +37,7 @@ char	*get_path(char **envp, char *to_find, int *i)
 		if (ret_ptr != 0)
 		{
 			path = ft_strjoin(ret_ptr + (size + 1), "\n");
-			free(ret_ptr);
+			//free(ret_ptr);
 			return (path);
 		}
 	}
