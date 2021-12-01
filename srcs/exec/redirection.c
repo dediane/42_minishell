@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 20:24:05 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/01 23:16:00 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/12/01 23:27:09 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,9 @@ t_parsing	*ft_exec_redir(t_parsing *params, char **envp)
 	file = params->file;
 	if (params->file)
 		i = get_nb_files(file);
-	if (i == 0)
+	if (i == 0 || (i != 0 && !params->tabs))
 		ft_redir(params, envp);
-	else
+	if (i != 0 && params->tabs)
 		ft_multiple_redir(i, file, params, envp);
 	return(params->next);
 }
