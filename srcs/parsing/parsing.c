@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: balkis <balkis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 10:03:50 by bben-yaa          #+#    #+#             */
-/*   Updated: 2021/12/02 15:09:00 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2021/12/02 21:36:39 by balkis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@
 /////-> si parsing == 1 -> executer commande
 /////-> si parsing == -1 -> print message "Error" + new prompt
 
-int	parsing(char *argv, t_parsing *param)
+int	parsing(char *argv, t_parsing *param, char **envp)
 {
 	int			i;
 	char		*buf;
@@ -85,6 +85,7 @@ int	parsing(char *argv, t_parsing *param)
 
 	i = 0;
 	line = NULL;
+	(void)envp;
 	if (!ft_init(param))
 		return (0);
 	ft_pass_space(argv, &i);
@@ -128,7 +129,7 @@ int	parsing(char *argv, t_parsing *param)
 				return (0);
 			}
 		}
-		else if (argv[i] == ';')
+		/*else if (argv[i] == ';')
 		{
 			//printf("nouveau maillon a faire car point virgule nouvelle commande\n");
 			ft_add_maillon(param);
@@ -136,13 +137,7 @@ int	parsing(char *argv, t_parsing *param)
 			i++;
 			while(argv[i] && argv[i] == ' ')
 				i++;
-			if (!argv[i])
-			{
-				printf("Pas de commande après le point virgule, cas à gérer, tu veux que je le parse comment?\
-					pck ca va creer un maillon vide -> et du coup segfault quand tu l'utilise,\
-					dans ce cas il faut rien faire vu que pas de commande\n");
-			}
-		}
+		}*/
 		else if ((argv[i] == '<' || argv[i] == '>'))//&& (argv[i - 1] == ' '|| i == 0))
 		{
 			if (!ft_check_redoc(argv, i))
@@ -170,9 +165,19 @@ int	parsing(char *argv, t_parsing *param)
 			while (argv[i] && argv[i] != ' ')
 			{
 				printf("argv[i] dans $ vaut %c\n", argv[i]);
+				line = ft_line(line, argv[i]);
 				printf("line dans $ vaut %s\n\n", line);
 				i++;
 			}
+			printf("okay line fini vaut %s\n", line);
+			printf("ici je regarde si ma variable est dans l'env\n");
+			/*if (ft_check_var(line, envp))
+			{
+				printf("si elle y est je remplace parson expaansion, free line et strdup l'expansion pour apres la mettre dans tabs\n");
+				ft_tabs(tmp, line);
+			}*/
+			//enfaite le if il sert a rien pck dans les deux cas je vais mettre line dans tabs
+			printf("sinon je la laisse telle qu'elle et je l'ajoute dans tabs dans les deux cas\n");
 		}
 		else if (argv[i] == ' ')
 		{
@@ -220,6 +225,7 @@ int	parsing(char *argv, t_parsing *param)
 		printf("enume type %u\n", tmp2->type);
 		printf("valeur de pipe: %i\n", tmp2->pipe);
 		printf("index : %i\n", tmp2->index);
+		printf("nb_cmd : %i\n", tmp2->nb_cmd);
 		while (tmp2->tabs[l])
 		{
 			printf("tab[%d] %s\n", l, tmp2->tabs[l]);
@@ -242,7 +248,7 @@ int	parsing(char *argv, t_parsing *param)
 		
 	}
 	printf("----This is after parsing----\n");
-	///////////////////////////////////////->print tabs tout en lisant la liste chainee	et les files et type
+	//////////////////////////////////////->print tabs tout en lisant la liste chainee	et les files et type
 
 	return (1);
 }

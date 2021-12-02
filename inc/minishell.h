@@ -88,7 +88,7 @@ int	ft_pipe(t_parsing *params, char **envp);
 
 ////////parsing
 //parsing.c
-int		parsing(char *argv, t_parsing *param);
+int		parsing(char *argv, t_parsing *param, char **envp);
 
 //parsing_utils.c
 int 	init_param(t_parsing *param);
@@ -124,6 +124,7 @@ int		ft_check_redoc(char *argv, int i);
 int		alloue_elem(t_parsing *param);
 int		ft_add_maillon(t_parsing *param);
 void    ft_index(t_parsing *param);
+void	ft_nb_cmd(t_parsing *param, int i);
 
 
 //add_file.c
