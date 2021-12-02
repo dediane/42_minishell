@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: balkis <balkis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 10:03:50 by bben-yaa          #+#    #+#             */
-/*   Updated: 2021/12/02 10:29:16 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/12/02 20:23:10 by balkis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ int	parsing(char *argv, t_parsing *param)
 				return (0);
 			}
 		}
-		else if (argv[i] == ';')
+		/*else if (argv[i] == ';')
 		{
 			//printf("nouveau maillon a faire car point virgule nouvelle commande\n");
 			ft_add_maillon(param);
@@ -136,7 +136,7 @@ int	parsing(char *argv, t_parsing *param)
 			i++;
 			while(argv[i] && argv[i] == ' ')
 				i++;
-		}
+		}*/
 		else if ((argv[i] == '<' || argv[i] == '>'))//&& (argv[i - 1] == ' '|| i == 0))
 		{
 			if (!ft_check_redoc(argv, i))
