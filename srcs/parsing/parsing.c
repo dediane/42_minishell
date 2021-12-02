@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 10:03:50 by bben-yaa          #+#    #+#             */
-/*   Updated: 2021/12/02 10:29:16 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/12/02 15:09:00 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,12 @@ int	parsing(char *argv, t_parsing *param)
 			i++;
 			while(argv[i] && argv[i] == ' ')
 				i++;
+			if (!argv[i])
+			{
+				printf("Pas de commande après le point virgule, cas à gérer, tu veux que je le parse comment?\
+					pck ca va creer un maillon vide -> et du coup segfault quand tu l'utilise,\
+					dans ce cas il faut rien faire vu que pas de commande\n");
+			}
 		}
 		else if ((argv[i] == '<' || argv[i] == '>'))//&& (argv[i - 1] == ' '|| i == 0))
 		{
@@ -158,6 +164,16 @@ int	parsing(char *argv, t_parsing *param)
 				i++;
 			line = NULL; //line free dans ft_add_file
 		}
+		else if (argv[i] == '$' && argv[i - 1] == ' ')
+		{
+			printf("C'est peut etre un variable\n");
+			while (argv[i] && argv[i] != ' ')
+			{
+				printf("argv[i] dans $ vaut %c\n", argv[i]);
+				printf("line dans $ vaut %s\n\n", line);
+				i++;
+			}
+		}
 		else if (argv[i] == ' ')
 		{
 			if (argv[i])
@@ -176,7 +192,7 @@ int	parsing(char *argv, t_parsing *param)
 			buf[0] = argv[i];							//on est sur que ici que argv[i] est un char autre que | ' " ou espace
 			buf[1] = '\0';
 			if (!(line = ft_line(line, buf[0])))		//fonction : mettre dans line tout en allouant et free a chaque fois//
-				return (0);							// ->allocation a echoue
+				return (0);								// ->allocation a echoue
 			i++;										//only if (argv[i]) ->condtion a mettre
 			if (!argv[i] && line)
 			{
@@ -191,7 +207,7 @@ int	parsing(char *argv, t_parsing *param)
 	
 	////////////////////////////////////////
 	
-	/*t_parsing	*tmp2;
+	t_parsing	*tmp2;
 	t_file		*curs;
 	tmp2 = param;
 	i = 0;
@@ -224,7 +240,8 @@ int	parsing(char *argv, t_parsing *param)
 		tmp2 = tmp2->next;
 		i++;
 		
-	}*/
+	}
+	printf("----This is after parsing----\n");
 	///////////////////////////////////////->print tabs tout en lisant la liste chainee	et les files et type
 
 	return (1);

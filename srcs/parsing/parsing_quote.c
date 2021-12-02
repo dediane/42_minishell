@@ -99,6 +99,7 @@ int	ft_check_quote(char *line, int a)
 			p++;
 		i++;
 	}
+	printf("p vaut %d\n", p);
 	if (p % 2)
 		return (0);
 	else
