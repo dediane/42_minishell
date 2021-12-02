@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 16:10:22 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/02 21:21:59 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/12/02 21:32:04 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ int ft_pipe_out(t_parsing *params, char **envp, int pipe_r, int pipe_w)
 {
 	printf("Goes in OUT \n");
 	(void)pipe_w;
-	//(void)pipe_r;
-	dup2(pipe_r, STDIN);
+	(void)pipe_r;
+	//up2(pipe_r, STDIN);
 	ft_exec(params, envp);
 	printf("Goes in OUT \n");
 	return (0);
