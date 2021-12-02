@@ -6,7 +6,7 @@
 #    By: balkis <balkis@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/26 19:30:34 by ddecourt          #+#    #+#              #
-#    Updated: 2021/12/02 08:38:50 by balkis           ###   ########.fr        #
+#    Updated: 2021/12/02 22:25:09 by balkis           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ SRCS =	srcs/minishell.c \
 		srcs/parsing/add_file.c \
 		srcs/parsing/stack_alloc.c \
 		srcs/parsing/check_redoc.c \
+		srcs/parsing/variable_env.c \
 		srcs/parsing/env_liste.c \
 		srcs/built_in/env.c \
 		srcs/built_in/pwd.c \

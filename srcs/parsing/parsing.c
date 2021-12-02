@@ -6,7 +6,7 @@
 /*   By: balkis <balkis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 10:03:50 by bben-yaa          #+#    #+#             */
-/*   Updated: 2021/12/02 21:47:45 by balkis           ###   ########.fr       */
+/*   Updated: 2021/12/02 22:52:57 by balkis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,23 +161,23 @@ int	parsing(char *argv, t_parsing *param, char **envp)
 		}
 		else if (argv[i] == '$' && argv[i - 1] == ' ')
 		{
-			printf("C'est peut etre un variable\n");
+			//printf("C'est peut etre un variable\n");
 			while (argv[i] && argv[i] != ' ')
 			{
-				printf("argv[i] dans $ vaut %c\n", argv[i]);
+			//	printf("argv[i] dans $ vaut %c\n", argv[i]);
 				line = ft_line(line, argv[i]);
-				printf("line dans $ vaut %s\n\n", line);
+			//	printf("line dans $ vaut %s\n\n", line);
 				i++;
 			}
-			printf("okay line fini vaut %s\n", line);
-			printf("ici je regarde si ma variable est dans l'env\n");
-			/*if (ft_check_var(line, envp))
+			//printf("okay line fini vaut %s\n", line);
+			//printf("ici je regarde si ma variable est dans l'env\n");
+			if (ft_check_var(line, envp))
 			{
-				printf("si elle y est je remplace parson expaansion, free line et strdup l'expansion pour apres la mettre dans tabs\n");
+			//	printf("si elle y est je remplace parson expaansion, free line et strdup l'expansion pour apres la mettre dans tabs\n");
 				ft_tabs(tmp, line);
-			}*/
+			}
 			//enfaite le if il sert a rien pck dans les deux cas je vais mettre line dans tabs
-			printf("sinon je la laisse telle qu'elle et je l'ajoute dans tabs dans les deux cas\n");
+			//printf("sinon je la laisse telle qu'elle et je l'ajoute dans tabs dans les deux cas\n");
 		}
 		else if (argv[i] == ' ')
 		{

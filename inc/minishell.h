@@ -137,6 +137,10 @@ int		ft_malloc_env(t_env	**env);
 int		ft_find_variable(t_env *env, char *envp);
 void	free_env(t_env **env);
 
+//varaible_env.c
+int		ft_check_var(char *line, char **envp);
+int		find_var(char **envp, char *line);
+
 
 ////////built_in
 char	*get_path(char **envp, char *to_find, int *i);
