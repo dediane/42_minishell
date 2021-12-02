@@ -6,7 +6,7 @@
 /*   By: balkis <balkis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:03:55 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/02 08:27:19 by balkis           ###   ########.fr       */
+/*   Updated: 2021/12/02 08:40:16 by balkis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,33 +98,19 @@ int		ft_exec_all_cmd(t_parsing *params, char **envp)
 {
 	int fd;
 	t_parsing *tmp;
-	//int *pipe_fd[2];
 
 	fd = 0;
 	tmp = params;
 	while (params != NULL)
 	{
-		/*if (params->pipe != 0 && params->next->pipe != 0)
-		{
-
-		}*/
-		//ft_pipe(params, &pipe_fd[2], envp);
 		if (params->type != 0)
+			params = ft_exec_redir(params, envp);
+		else
 		{
-			params->fd_stdin = dup(STDIN);
-			params->fd_stdout = dup(STDOUT);
-			fd = open_file(params, params->file->name);
-			dup2(fd, 1);
-		}
-		if (params->tabs)
+			if (params->tabs)
 			ft_exec(params, envp);
-		if (params->type != 0 && params->pipe == 0)
-		{
-			close(fd);
-			close(params->fd_stdin);
-			dup2(params->fd_stdout, STDOUT);
+			params = params->next;
 		}
-		params = params->next;
 	}
 	//ft_free_params(params);
 	return (0);

@@ -6,7 +6,7 @@
 #    By: balkis <balkis@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/26 19:30:34 by ddecourt          #+#    #+#              #
-#    Updated: 2021/12/02 08:22:11 by balkis           ###   ########.fr        #
+#    Updated: 2021/12/02 08:38:50 by balkis           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ SRCS =	srcs/minishell.c \
 		srcs/exec/exec_utils.c \
 		srcs/exec/built_in.c \
 		srcs/exec/pipe.c \
+		srcs/exec/redirection.c \
 		srcs/parsing/parsing.c \
 		srcs/parsing/parsing_utils.c \
 		srcs/parsing/parsing_tabs.c \

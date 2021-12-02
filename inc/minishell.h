@@ -76,12 +76,15 @@ char	**get_cmd_path(char **envp);
 void	ft_free_params(t_parsing *params);
 void	ft_free_file(t_file *file);
 
+//redirection.c
+t_parsing	*ft_redir(t_parsing *params, char**envp);
+t_parsing	*ft_exec_redir(t_parsing *params, char **envp);
 
 //build_in.c
 int	is_built_in(t_parsing *params, char *cmd, char **envp);
 
 //pipe.c
-int	ft_pipe(t_parsing *params, int *pipe_fd[2], char **envp);
+int	ft_pipe(t_parsing *params, char **envp);
 
 ////////parsing
 //parsing.c
