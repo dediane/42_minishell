@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: balkis <balkis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 13:17:26 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/01 13:50:35 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/12/02 08:24:46 by balkis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,10 @@ void	ft_free_params(t_parsing *params)
 {
 	while (params->next)
 	{
-		ft_free_file(params->file);				//here free file liste
-		free_tabs(params->tabs);				//here free params->tabs
+		if (params->file)
+			ft_free_file(params->file);			//here free file liste
+		if (params->tabs)
+			free_tabs(params->tabs);			//here free params->tabs
 		free(params);
 		params = params->next;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: balkis <balkis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:03:55 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/01 13:49:14 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/12/02 08:27:19 by balkis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,6 @@ int		ft_exec_all_cmd(t_parsing *params, char **envp)
 		}
 		params = params->next;
 	}
-	ft_free_params(tmp);
+	//ft_free_params(params);
 	return (0);
 }

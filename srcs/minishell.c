@@ -6,7 +6,7 @@
 /*   By: balkis <balkis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 19:28:36 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/01 19:41:44 by balkis           ###   ########.fr       */
+/*   Updated: 2021/12/02 08:07:57 by balkis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,9 @@ int main(int ac, char **av, char **envp)
 				ft_exit(line);	
 			if (line[0] != '\0')
 			{
-				if (parsing(line, &param)) //return -1 ou 0 si l'allocution echoue ou les quotes ne sont pas fermees ou les > sont plus de deux 
+				if (parsing(line, &param)) //return -1 ou 0 si l'allocution echoue, les quotes ne sont pas fermees, 
+					// les > sont plus de deux, y'a rien apres les pipes (faut regarder le comportement de bash pck pour lui c'est pas une erreur),
+					// y'a aucun fichier après les redirection 
 				{
 					ft_exec_all_cmd(&param, envp);
 				}
