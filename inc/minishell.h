@@ -84,7 +84,7 @@ t_parsing	*ft_exec_redir(t_parsing *params, char **envp);
 int	is_built_in(t_parsing *params, char *cmd, char **envp);
 
 //pipe.c
-int	ft_pipe(t_parsing *params, char **envp);
+t_parsing	*ft_pipe(t_parsing *params, char **envp);
 
 ////////parsing
 //parsing.c
