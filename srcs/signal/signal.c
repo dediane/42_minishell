@@ -10,6 +10,7 @@ void	ft_sigint(int sig)
 {
 	(void)sig;
 	printf("le signal est ctrl C\n");
+	printf("afficher un nouveau prompt\n");
 	// free all here
 	exit (0);
 }

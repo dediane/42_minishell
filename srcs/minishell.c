@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: balkis <balkis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 19:28:36 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/02 08:38:40 by balkis           ###   ########.fr       */
+/*   Updated: 2021/12/02 15:13:22 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,10 @@ int main(int ac, char **av, char **envp)
 	{
 		line = readline("\033[1;35m~Minishell$\033[0m ");
 		if (!line)
+		{
 			printf("\nreadline existe pas signal ctrl D, il faut exit\nJe peux pas exit pck la fonction prend en param line, ici line existe pas\n");
+			ft_exit(NULL);
+		}
 		else
 		{
 			add_history(line);
