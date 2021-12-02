@@ -6,7 +6,11 @@
 /*   By: balkis <balkis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 10:03:50 by bben-yaa          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2021/12/02 08:38:19 by balkis           ###   ########.fr       */
+=======
+/*   Updated: 2021/12/02 10:23:58 by ddecourt         ###   ########.fr       */
+>>>>>>> pipe
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,11 +152,11 @@ int	parsing(char *argv, t_parsing *param)
 				line = NULL;
 			}
 			ft_define_redicretcion(argv, &i, tmp);
-			if (!tmp->file)
-			{
-				printf("Minishell: syntax error near unexpected token `newline'\n");
-				return (0);
-			}
+			//if (!tmp->file)
+			//{
+			//	printf("Minishell: syntax error near unexpected token `newline'\n");
+			//	return (0);
+			//}
 			ft_add_file(tmp, &i, argv, line);		//alloue line (= nom du fichier) pour le mettre dans la stack file
 			while (argv[i] == ' ')
 				i++;
