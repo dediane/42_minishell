@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 10:03:50 by bben-yaa          #+#    #+#             */
-/*   Updated: 2021/12/01 22:58:22 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/12/02 10:23:58 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,12 @@ int	parsing(char *argv, t_parsing *param)
 			i++;
 			while(argv[i] && argv[i] == ' ')
 				i++;
+			if (!argv[i]) //enfaite c'est pas cas d'erreur 
+			{
+				printf("Pas de commande après le pipe, cas à gérer, tu veux que je le parse comment?\
+					pck ca va creer un maillon vide -> et du coup segfault quand tu l'utilise\n");
+				return (0);
+			}
 		}
 		else if (argv[i] == ';')
 		{
@@ -142,6 +148,11 @@ int	parsing(char *argv, t_parsing *param)
 				line = NULL;
 			}
 			ft_define_redicretcion(argv, &i, tmp);
+			//if (!tmp->file)
+			//{
+			//	printf("Minishell: syntax error near unexpected token `newline'\n");
+			//	return (0);
+			//}
 			ft_add_file(tmp, &i, argv, line);		//alloue line (= nom du fichier) pour le mettre dans la stack file
 			while (argv[i] == ' ')
 				i++;

@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 13:17:26 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/02 10:03:34 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/12/02 10:11:00 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,10 @@ void	ft_free_params(t_parsing *params)
 {
 	while (params->next)
 	{
-		ft_free_file(params->file);
-		free_tabs(params->tabs);
+		if (params->file)
+			ft_free_file(params->file);
+		if (params->tabs)
+			free_tabs(params->tabs);
 		free(params);
 		params = params->next;
 	}
