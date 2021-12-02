@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 13:17:26 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/01 13:50:35 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/12/02 10:03:34 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ char	**get_cmd_path(char **envp)
 	return (ft_split(path + 5, ':'));
 }
 
-char *get_right_path(t_parsing *params, char **envp)
+char	*get_right_path(t_parsing *params, char **envp)
 {
-	char *path;
-	char **path_array;
-	int i;
+	char	*path;
+	char	**path_array;
+	int		i;
 
 	i = 0;
 	path_array = get_cmd_path(envp);
@@ -48,25 +48,26 @@ char *get_right_path(t_parsing *params, char **envp)
 	return (NULL);
 }
 
-int open_file(t_parsing *params, char *file)
+int	open_file(t_parsing *params, char *file)
 {
-	int fd;
+	int	fd;
+
 	if (params->type == 1 || params->type == 4)
-		return(fd = open(file, O_RDONLY));
+		return (fd = open(file, O_RDONLY));
 	if (params->type == 2)
-		return(fd = open(file, O_RDWR | O_TRUNC | O_CREAT, 0664));
+		return (fd = open(file, O_RDWR | O_TRUNC | O_CREAT, 0664));
 	if (params->type == 3)
-		return(fd = open(file, O_RDWR | O_APPEND | O_CREAT, 0664));	
+		return (fd = open(file, O_RDWR | O_APPEND | O_CREAT, 0664));
 	else
-		return(0);
+		return (0);
 }
 
 void	ft_free_params(t_parsing *params)
 {
 	while (params->next)
 	{
-		ft_free_file(params->file);				//here free file liste
-		free_tabs(params->tabs);				//here free params->tabs
+		ft_free_file(params->file);
+		free_tabs(params->tabs);
 		free(params);
 		params = params->next;
 	}

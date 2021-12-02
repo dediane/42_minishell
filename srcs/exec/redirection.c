@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 20:24:05 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/01 23:27:09 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/12/02 10:00:36 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_parsing	*ft_redir(t_parsing *params, char **envp)
 {
-	int fd;
+	int	fd;
 
 	if (params->type != 0)
 	{
@@ -32,15 +32,15 @@ t_parsing	*ft_redir(t_parsing *params, char **envp)
 		dup2(params->fd_stdout, STDOUT);
 	}
 	params = params->next;
-	return(params);
+	return (params);
 }
 
 int	get_nb_files(t_file *file)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while(file != NULL)
+	while (file != NULL)
 	{
 		file = file->next;
 		i++;
@@ -50,7 +50,7 @@ int	get_nb_files(t_file *file)
 
 void	ft_multiple_redir(int nb, t_file *file, t_parsing *params, char **envp)
 {
-	int fd;
+	int	fd;
 
 	params->fd_stdin = dup(STDIN);
 	params->fd_stdout = dup(STDOUT);
@@ -71,9 +71,9 @@ void	ft_multiple_redir(int nb, t_file *file, t_parsing *params, char **envp)
 
 t_parsing	*ft_exec_redir(t_parsing *params, char **envp)
 {
-	int i;
-	t_file *file;
-	
+	int		i;
+	t_file	*file;
+
 	i = 0;
 	file = params->file;
 	if (params->file)
@@ -82,5 +82,5 @@ t_parsing	*ft_exec_redir(t_parsing *params, char **envp)
 		ft_redir(params, envp);
 	if (i != 0 && params->tabs)
 		ft_multiple_redir(i, file, params, envp);
-	return(params->next);
+	return (params->next);
 }
