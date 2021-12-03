@@ -6,7 +6,7 @@
 /*   By: balkis <balkis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 10:03:50 by bben-yaa          #+#    #+#             */
-/*   Updated: 2021/12/02 22:52:57 by balkis           ###   ########.fr       */
+/*   Updated: 2021/12/03 10:32:40 by balkis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,13 +169,12 @@ int	parsing(char *argv, t_parsing *param, char **envp)
 			//	printf("line dans $ vaut %s\n\n", line);
 				i++;
 			}
-			//printf("okay line fini vaut %s\n", line);
+			printf("okay line fini vaut %s\n", line);
 			//printf("ici je regarde si ma variable est dans l'env\n");
-			if (ft_check_var(line, envp))
-			{
+			ft_check_var(line, envp);	//fonction qui va mettre l'expanssion de la variable si elle existe
 			//	printf("si elle y est je remplace parson expaansion, free line et strdup l'expansion pour apres la mettre dans tabs\n");
-				ft_tabs(tmp, line);
-			}
+			printf("line en sortant de checkvar %s\n", line);
+			ft_tabs(tmp, line);
 			//enfaite le if il sert a rien pck dans les deux cas je vais mettre line dans tabs
 			//printf("sinon je la laisse telle qu'elle et je l'ajoute dans tabs dans les deux cas\n");
 		}
@@ -207,10 +206,10 @@ int	parsing(char *argv, t_parsing *param, char **envp)
 		}
 		free(buf);
 	}
-	ft_index(param); //->fonctionne pas encore
+	ft_index(param);
 	
 	
-	/*////////////////////////////////////////
+	////////////////////////////////////////
 	
 	t_parsing	*tmp2;
 	t_file		*curs;
@@ -248,7 +247,7 @@ int	parsing(char *argv, t_parsing *param, char **envp)
 		
 	}
 	printf("----This is after parsing----\n");
-	*///////////////////////////////////////->print tabs tout en lisant la liste chainee	et les files et type
+	//////////////////////////////////////->print tabs tout en lisant la liste chainee	et les files et type
 
 	return (1);
 }

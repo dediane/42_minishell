@@ -138,7 +138,7 @@ int		ft_find_variable(t_env *env, char *envp);
 void	free_env(t_env **env);
 
 //varaible_env.c
-int		ft_check_var(char *line, char **envp);
+void	ft_check_var(char *line, char **envp);
 int		find_var(char **envp, char *line);
 
 
