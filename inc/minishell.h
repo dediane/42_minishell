@@ -105,10 +105,10 @@ int		ft_len_tabs(char **tab);
 int		ft_tabs(t_parsing *parsing, char *line);
 
 //parsing_quote.c
-int		ft_add_double_quote(t_parsing *param, int *i, char *argv, char *line);
+char	*ft_add_double_quote(t_parsing *param, int *i, char *argv, char *line);
 int		ft_add_simple_quote(t_parsing *param, int *i, char *argv, char *line);
 int		ft_check_quote(char *line, int a);
-int 	ft_double_quote(char *line, int *i, char *argv, t_parsing *param);
+char	*ft_double_quote(char *line, int *i, char *argv, t_parsing *param);
 void	ft_pass_dquote(char *argv, int *i);
 
 //parsing_quote2.c
@@ -138,8 +138,8 @@ int		ft_find_variable(t_env *env, char *envp);
 void	free_env(t_env **env);
 
 //varaible_env.c
-void	ft_check_var(char *line, char **envp);
-int		find_var(char **envp, char *line);
+char	*find_var(char **envp, char *line);
+char	*ft_check_dolar(char *line, char **envp);
 
 
 ////////built_in

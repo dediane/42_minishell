@@ -6,15 +6,7 @@
 
 #include "../../inc/minishell.h"
 
-void	ft_check_var(char *line, char **envp)
-{
-	if (find_var(envp, line))
-	{
-		printf("icii line vaut %s\n", line);
-	}
-}
-
-int		find_var(char **envp, char *line)
+char	*find_var(char **envp, char *line)
 {
 	int		i;
 	int		j;
@@ -28,24 +20,33 @@ int		find_var(char **envp, char *line)
 		while (envp[j][i] != '=')
 			i++;
 		var = strndup(envp[j], i);
-		printf("var vaut %s\n", var);
-		printf("line vaut %s\n", &line[1]);
 		if (ft_strncmp(var, &line[1], ft_strlen(var)) == 0)
 		{
-			printf("la variable existe\n");
-			printf("prendre l'expansion de la variable et mettre dans line\noublie pas de free line\n");
-			printf("envp[j] vaut %s\n", envp[j]);
-			//printf("expansion envp[j] %s\n", &envp[j][++i]);
-			//free(line);
+			free(line);
 			line = NULL;
 			line = ft_strdup(&envp[j][++i]);
-			printf("line apres avoir chercher l'expansion %s\n", line);
 			free(var);
-			return (1);
+			return (line);
 		}
 		i = 0;
 		free(var);
 		var = NULL;
 	}
-	return (0);
+	return (line);
+}
+
+char	*ft_check_dolar(char *line, char **envp)
+{
+	int	i;
+
+	i = 0;
+	while(line[i])
+	{
+		if (line[i] == '$')
+		{
+			return (find_var(envp, &line[i]));
+		}
+		i++;
+	}
+	return (line);
 }

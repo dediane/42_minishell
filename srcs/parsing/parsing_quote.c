@@ -8,7 +8,7 @@
 
 
 #include "../../inc/minishell.h"
-int ft_double_quote(char *line, int *i, char *argv, t_parsing *param)
+char	*ft_double_quote(char *line, int *i, char *argv, t_parsing *param)
 {
 	if (line)											//->pour gls erer les cas d'interpretation si on a a="ls -la"
 	{
@@ -16,9 +16,10 @@ int ft_double_quote(char *line, int *i, char *argv, t_parsing *param)
 			return (0);									//->secure malloc
 		line = NULL;
 	}
-	if (!ft_add_double_quote(param, i, argv, line))	//-> pck on malloc
-		return (0);
-	return (1);
+	//if (!ft_add_double_quote(param, i, argv, line))	//-> pck on malloc
+	//	return (0);
+	return (ft_add_double_quote(param, i, argv, line));
+	//return (1);
 	///////tout les cas apres avoir mis les doubles quotes dans le tabs//////
 }
 
@@ -36,8 +37,9 @@ void	ft_pass_dquote(char *argv, int *i)
 		(*i)++;
 }
 
-int	ft_add_double_quote(t_parsing *param, int *i, char *argv, char *line)
+char	*ft_add_double_quote(t_parsing *param, int *i, char *argv, char *line)
 {
+	(void)param;
 	if (!(line = ft_line(line, argv[(*i)])))
 			return (0);
 	(*i)++;
@@ -55,9 +57,12 @@ int	ft_add_double_quote(t_parsing *param, int *i, char *argv, char *line)
 		printf("les doubles quotes ne sont pas fermees\n");
 		return (0);
 	}
+	return (line);
+	/*if (line[0] == '$')
+		line = find_var(envp, line);
 	if (!ft_tabs(param, line))
 		return (0);
-	return (1);
+	return (1);*/
 }
 
 int	ft_add_simple_quote(t_parsing *param, int *i, char *argv, char *line)
@@ -99,7 +104,6 @@ int	ft_check_quote(char *line, int a)
 			p++;
 		i++;
 	}
-	printf("p vaut %d\n", p);
 	if (p % 2)
 		return (0);
 	else

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: balkis <balkis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 10:03:50 by bben-yaa          #+#    #+#             */
-/*   Updated: 2021/12/03 10:32:40 by balkis           ###   ########.fr       */
+/*   Updated: 2021/12/03 14:11:54 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,23 @@ int	parsing(char *argv, t_parsing *param, char **envp)
 		if (argv[i] == 34)
 		{	
 			//printf("faire fonction pour mettre dans tab tout ce qu'il y a dans les doubles quotes\n");
-			if (!ft_double_quote(line, &i, argv, tmp))
+			//if (!ft_double_quote(line, &i, argv, tmp))
+			//	return (0);
+			line = ft_double_quote(line, &i, argv, tmp);
+			/*if (line[curs] == '$')
+			{
+				line = find_var(envp, line);
+			}*/
+			//line = ft_check_dolar(line, envp);
+			//printf("line apres check dolar vaut %s\n", line);
+			///okay donc check dolar c'est nul pour remplacer la variable par son expanssion
+			//il faudrait que je parcours ma line avec maes double quote si je trouve un '$'
+			// et que la variable exite alors je free copie line je rajoute l'expanssion de la variable
+			// et je termine de copier la line jusqu'a la fin
+			// et apres je free l'ancienne line
+			// et apres je met la nouvelle line avec l'expansion a la place du nom de la line
+			// dans tabs 
+			if (!ft_tabs(param, line))
 				return (0);
 			if (argv[i + 1] == '\0')//->si on arrive a la fin de argv
 				break ;
@@ -161,22 +177,13 @@ int	parsing(char *argv, t_parsing *param, char **envp)
 		}
 		else if (argv[i] == '$' && argv[i - 1] == ' ')
 		{
-			//printf("C'est peut etre un variable\n");
 			while (argv[i] && argv[i] != ' ')
 			{
-			//	printf("argv[i] dans $ vaut %c\n", argv[i]);
 				line = ft_line(line, argv[i]);
-			//	printf("line dans $ vaut %s\n\n", line);
 				i++;
 			}
-			printf("okay line fini vaut %s\n", line);
-			//printf("ici je regarde si ma variable est dans l'env\n");
-			ft_check_var(line, envp);	//fonction qui va mettre l'expanssion de la variable si elle existe
-			//	printf("si elle y est je remplace parson expaansion, free line et strdup l'expansion pour apres la mettre dans tabs\n");
-			printf("line en sortant de checkvar %s\n", line);
+			line = find_var(envp, line); //line ne sera modifier que si la variable est trouve dans envp 
 			ft_tabs(tmp, line);
-			//enfaite le if il sert a rien pck dans les deux cas je vais mettre line dans tabs
-			//printf("sinon je la laisse telle qu'elle et je l'ajoute dans tabs dans les deux cas\n");
 		}
 		else if (argv[i] == ' ')
 		{
@@ -209,7 +216,7 @@ int	parsing(char *argv, t_parsing *param, char **envp)
 	ft_index(param);
 	
 	
-	////////////////////////////////////////
+	/*////////////////////////////////////////
 	
 	t_parsing	*tmp2;
 	t_file		*curs;
@@ -247,7 +254,6 @@ int	parsing(char *argv, t_parsing *param, char **envp)
 		
 	}
 	printf("----This is after parsing----\n");
-	//////////////////////////////////////->print tabs tout en lisant la liste chainee	et les files et type
-
+	*//////////////////////////////////////->print tabs tout en lisant la liste chainee	et les files et type
 	return (1);
 }
