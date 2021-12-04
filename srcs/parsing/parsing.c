@@ -6,7 +6,7 @@
 /*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 10:03:50 by bben-yaa          #+#    #+#             */
-/*   Updated: 2021/12/03 14:11:54 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2021/12/04 10:55:47 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,15 +145,6 @@ int	parsing(char *argv, t_parsing *param, char **envp)
 				return (0);
 			}
 		}
-		/*else if (argv[i] == ';')
-		{
-			//printf("nouveau maillon a faire car point virgule nouvelle commande\n");
-			ft_add_maillon(param);
-			tmp = tmp->next;
-			i++;
-			while(argv[i] && argv[i] == ' ')
-				i++;
-		}*/
 		else if ((argv[i] == '<' || argv[i] == '>'))//&& (argv[i - 1] == ' '|| i == 0))
 		{
 			if (!ft_check_redoc(argv, i))
