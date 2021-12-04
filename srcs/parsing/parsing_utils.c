@@ -11,9 +11,13 @@ int	init_param(t_parsing *param)
 	param->nb_cmd = 0;
 	param->tabs = NULL;
 	param->pipe = 0;
-	param->ret = 0;
+	param->index = 0;
+	param->fd_stdin = 0;
+	param->fd_stdout = 0;
 	param->type = NONE;
 	param->file = NULL;
+//	param->b_cmd = NONE;
+//	param->a_cmd = NONE;
 	return (1);
 }
 

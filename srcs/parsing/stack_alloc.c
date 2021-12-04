@@ -34,11 +34,44 @@ int		ft_add_maillon(t_parsing *param)
 		return (0);
 	tmp->next = new;
 	new->next = NULL;
-	new->pipe = 0;
-	new->ret = 0;
+	new->nb_cmd = 0;
 	new->tabs = NULL;
+	new->pipe = 0;
+	new->index = 0;
+	new->fd_stdout = 0; 
+	new->fd_stdin = 0; 
 	new->type = NONE;
 	new->file = NULL;
-	new->nb_cmd = 0;
+	//new->b_cmd = NONE;
+	//new->a_cmd = NONE;
 	return (1);
 }
+
+void    ft_index(t_parsing *param)
+{
+	t_parsing	*tmp;
+	int			i;
+
+    tmp = param;
+    i = 0;
+	while (tmp)
+	{
+		tmp->index = i;
+		i++;
+		tmp = tmp->next;
+	}
+	ft_nb_cmd(param, i);
+}
+
+void	ft_nb_cmd(t_parsing *param, int i)
+{
+	t_parsing	*tmp;
+
+    tmp = param;
+	while (tmp)
+	{
+		tmp->nb_cmd = i;
+		tmp = tmp->next;
+	}
+}
+ 

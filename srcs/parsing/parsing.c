@@ -6,7 +6,7 @@
 /*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 10:03:50 by bben-yaa          #+#    #+#             */
-/*   Updated: 2021/11/25 12:44:25 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2021/12/03 14:11:54 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@
 /////-> si parsing == 1 -> executer commande
 /////-> si parsing == -1 -> print message "Error" + new prompt
 
-int	parsing(char *argv, t_parsing *param)
+int	parsing(char *argv, t_parsing *param, char **envp)
 {
 	int			i;
 	char		*buf;
@@ -85,6 +85,7 @@ int	parsing(char *argv, t_parsing *param)
 
 	i = 0;
 	line = NULL;
+	(void)envp;
 	if (!ft_init(param))
 		return (0);
 	ft_pass_space(argv, &i);
@@ -95,7 +96,23 @@ int	parsing(char *argv, t_parsing *param)
 		if (argv[i] == 34)
 		{	
 			//printf("faire fonction pour mettre dans tab tout ce qu'il y a dans les doubles quotes\n");
-			if (!ft_double_quote(line, &i, argv, tmp))
+			//if (!ft_double_quote(line, &i, argv, tmp))
+			//	return (0);
+			line = ft_double_quote(line, &i, argv, tmp);
+			/*if (line[curs] == '$')
+			{
+				line = find_var(envp, line);
+			}*/
+			//line = ft_check_dolar(line, envp);
+			//printf("line apres check dolar vaut %s\n", line);
+			///okay donc check dolar c'est nul pour remplacer la variable par son expanssion
+			//il faudrait que je parcours ma line avec maes double quote si je trouve un '$'
+			// et que la variable exite alors je free copie line je rajoute l'expanssion de la variable
+			// et je termine de copier la line jusqu'a la fin
+			// et apres je free l'ancienne line
+			// et apres je met la nouvelle line avec l'expansion a la place du nom de la line
+			// dans tabs 
+			if (!ft_tabs(param, line))
 				return (0);
 			if (argv[i + 1] == '\0')//->si on arrive a la fin de argv
 				break ;
@@ -114,16 +131,31 @@ int	parsing(char *argv, t_parsing *param)
 		}
 		else if (argv[i] == '|')
 		{
-			//printf("nouveau maillon a faire car nouvelle commande\n");
+			//printf("nouveau maillon a faire car pipe nouvelle commande\n");
+			ft_add_maillon(param);
+			tmp->next->pipe = tmp->pipe + 1;
+			tmp = tmp->next;
+			i++;
+			while(argv[i] && argv[i] == ' ')
+				i++;
+			if (!argv[i]) //enfaite c'est pas cas d'erreur 
+			{
+				printf("Pas de commande après le pipe, cas à gérer, tu veux que je le parse comment?\
+					pck ca va creer un maillon vide -> et du coup segfault quand tu l'utilise\n");
+				return (0);
+			}
+		}
+		/*else if (argv[i] == ';')
+		{
+			//printf("nouveau maillon a faire car point virgule nouvelle commande\n");
 			ft_add_maillon(param);
 			tmp = tmp->next;
 			i++;
 			while(argv[i] && argv[i] == ' ')
 				i++;
-		}
+		}*/
 		else if ((argv[i] == '<' || argv[i] == '>'))//&& (argv[i - 1] == ' '|| i == 0))
 		{
-			//printf("creer line jusqu'a trouver un espace et le mettre dans *file\n");
 			if (!ft_check_redoc(argv, i))
 				return (0);
 			if (line)										//->pour gerer les cas d'interpretation si on a a='ls -la'
@@ -133,10 +165,25 @@ int	parsing(char *argv, t_parsing *param)
 				line = NULL;
 			}
 			ft_define_redicretcion(argv, &i, tmp);
+			//if (!tmp->file)
+			//{
+			//	printf("Minishell: syntax error near unexpected token `newline'\n");
+			//	return (0);
+			//}
 			ft_add_file(tmp, &i, argv, line);		//alloue line (= nom du fichier) pour le mettre dans la stack file
-			while (argv[i] == ' ' || argv[i] == '<' || argv[i] == '>')
+			while (argv[i] == ' ')
 				i++;
 			line = NULL; //line free dans ft_add_file
+		}
+		else if (argv[i] == '$' && argv[i - 1] == ' ')
+		{
+			while (argv[i] && argv[i] != ' ')
+			{
+				line = ft_line(line, argv[i]);
+				i++;
+			}
+			line = find_var(envp, line); //line ne sera modifier que si la variable est trouve dans envp 
+			ft_tabs(tmp, line);
 		}
 		else if (argv[i] == ' ')
 		{
@@ -156,7 +203,7 @@ int	parsing(char *argv, t_parsing *param)
 			buf[0] = argv[i];							//on est sur que ici que argv[i] est un char autre que | ' " ou espace
 			buf[1] = '\0';
 			if (!(line = ft_line(line, buf[0])))		//fonction : mettre dans line tout en allouant et free a chaque fois//
-				return (0);							// ->allocation a echoue
+				return (0);								// ->allocation a echoue
 			i++;										//only if (argv[i]) ->condtion a mettre
 			if (!argv[i] && line)
 			{
@@ -166,8 +213,10 @@ int	parsing(char *argv, t_parsing *param)
 		}
 		free(buf);
 	}
+	ft_index(param);
 	
-	////////////////////////////////////////
+	
+	/*////////////////////////////////////////
 	
 	t_parsing	*tmp2;
 	t_file		*curs;
@@ -180,6 +229,9 @@ int	parsing(char *argv, t_parsing *param)
 		curs = tmp2->file;
 		printf("//////maillon %d//////\n", i);
 		printf("enume type %u\n", tmp2->type);
+		printf("valeur de pipe: %i\n", tmp2->pipe);
+		printf("index : %i\n", tmp2->index);
+		printf("nb_cmd : %i\n", tmp2->nb_cmd);
 		while (tmp2->tabs[l])
 		{
 			printf("tab[%d] %s\n", l, tmp2->tabs[l]);
@@ -190,6 +242,7 @@ int	parsing(char *argv, t_parsing *param)
 		while (curs)
 		{
 			printf("name_file %d vaut %s\n", j, curs->name);
+			printf("type_file %d vaut %d\n", j, curs->ftype);
 			j++;
 			curs = curs->next;
 		}
@@ -198,8 +251,9 @@ int	parsing(char *argv, t_parsing *param)
 		j = 0;
 		tmp2 = tmp2->next;
 		i++;
+		
 	}
-	///////////////////////////////////////->print tabs tout en lisant la liste chainee	et les files et type
-
+	printf("----This is after parsing----\n");
+	*//////////////////////////////////////->print tabs tout en lisant la liste chainee	et les files et type
 	return (1);
 }
