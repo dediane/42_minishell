@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 00:14:45 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/09 17:23:17 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/12/09 17:27:31 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	ft_cd(char **envp, char *path)
 	}
 	if (ft_strncmp(path, "-", 1) == 0)
 	{
-		printf("I am here\n");
+		//printf("I am here\n");
 		path = get_path(envp, "OLDPWD", &i);
 		return(ft_cd(envp, path));
 		/*printf("%s\n", path);
@@ -87,9 +87,9 @@ int	ft_cd(char **envp, char *path)
 	}
 	else 
 	{
-		printf("I am here 2\n");
+		//printf("I am here 2\n");
 		change_env(envp, "OLDPWD", getcwd(buffer, 4096));
-		printf("path = [%s]\n", path);
+		//printf("path = [%s]\n", path);
 		if (chdir(path) == -1)
 			return(perror(path), 2);
 		change_env(envp, "PWD", getcwd(buffer, 4096));
