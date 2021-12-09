@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 16:10:22 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/03 16:45:53 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/12/09 19:17:21 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,32 @@
 
 int	ft_pipe_in(t_parsing *params, char **envp, int pipe_out, int pipe_in)
 {
+	char	*right_path;
+	int		pid;
+	
+	right_path = get_right_path(params, envp);
 	close(pipe_out);
 	dup2(pipe_in, STDOUT);
-	ft_exec(params, envp);
+	if (is_built_in(params, params->tabs[0], envp))
+	{
+		close(pipe_in);
+		dup2(params->fd_stdout, STDOUT);
+		return (0);
+	}
+	else
+	{
+		pid = fork();
+		if (pid == 0)
+			execve(*params->tabs, &right_path, envp);
+		else
+		{
+			waitpid(pid, 0, 0);
+			//close(pipe_in);
+			//dup2(params->fd_stdout, STDOUT);
+			//return (0);
+		}
+	}
+	//ft_exec(params, envp);
 	close(pipe_in);
 	dup2(params->fd_stdout, STDOUT);
 	return (0);
