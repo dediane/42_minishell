@@ -10,7 +10,7 @@
 #include "../../inc/minishell.h"
 char	*ft_double_quote(char *line, int *i, char *argv, t_parsing *param)
 {
-	if (line)											//->pour gls erer les cas d'interpretation si on a a="ls -la"
+	if (line)											//->pour gérer les cas d'interpretation si on a a="ls -la"
 	{
 		if (!ft_tabs(param, line))
 			return (0);									//->secure malloc
@@ -40,8 +40,11 @@ void	ft_pass_dquote(char *argv, int *i)
 char	*ft_add_double_quote(t_parsing *param, int *i, char *argv, char *line)
 {
 	(void)param;
-	if (!(line = ft_line(line, argv[(*i)])))
-			return (0);
+	if (!ft_check_quote(&argv[*i], 34))
+	{
+		printf("les doubles quotes ne sont pas fermees\n");
+		return (0);
+	}
 	(*i)++;
 	while(argv[(*i)] != 34 && argv[(*i)])
 	{
@@ -67,8 +70,6 @@ char	*ft_add_double_quote(t_parsing *param, int *i, char *argv, char *line)
 
 int	ft_add_simple_quote(t_parsing *param, int *i, char *argv, char *line)
 {
-	if (!(line = ft_line(line, argv[(*i)])))
-			return (0);
 	(*i)++;
 	while(argv[(*i)] != 39 && argv[(*i)])
 	{
@@ -89,7 +90,7 @@ int	ft_add_simple_quote(t_parsing *param, int *i, char *argv, char *line)
 	return (1);
 }
 
-int	ft_check_quote(char *line, int a)
+int	ft_check_quote(char *argv, int a)
 {
 	char c;
 	int i;
@@ -98,9 +99,15 @@ int	ft_check_quote(char *line, int a)
 	i = 0;
 	c = a;
 	p = 0;
-	while (line[i])
+	while (argv[i])
 	{
-		if (line[i] == c)
+		if (i != 0 && argv[i + 1] && argv[i + 1] == c)
+		{
+			printf("la c'est le break special variable\n");
+			p++;
+			break ;
+		}
+		if (argv[i] == c)
 			p++;
 		i++;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: balkis <balkis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 10:03:50 by bben-yaa          #+#    #+#             */
-/*   Updated: 2021/12/04 10:55:47 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2021/12/13 22:22:37 by balkis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,15 +94,36 @@ int	parsing(char *argv, t_parsing *param, char **envp)
 	{
 		buf = malloc(sizeof(char) * 2);
 		if (argv[i] == 34)
-		{	
+		{
 			//printf("faire fonction pour mettre dans tab tout ce qu'il y a dans les doubles quotes\n");
 			//if (!ft_double_quote(line, &i, argv, tmp))
 			//	return (0);
 			line = ft_double_quote(line, &i, argv, tmp);
+			printf("en sortant de add double quote line vaut %s\n", line);
+			line = dolar_quotes(line, envp);
+
+
 			/*if (line[curs] == '$')
 			{
 				line = find_var(envp, line);
 			}*/
+
+
+			/*
+				Alors il faut deja checker que les quotes sont bien ferme en envoyent argv
+				aprés il faut mettre tous dans line sans les quotes 
+				(si y'a quote simple et qu'elles sont pas fermées il faut les ajouter à line)
+				et pendant que j'ajoute a line si je trouve un $ au i avec un char au i++ je check si 
+				la variable existe pour la remplacer par son expansion sinon je la laisse tel qu'elle 
+				(il me faut la len de la variable pour la passe et bien reprendre argv pour ajouter dans line)
+			*/
+
+
+			/*check les dolars apres allouer line pck peut y'avoir des ' a l'interrieur ' des doubles quotes
+			tu free et remplaces l'xpansion si c'esttpas dans '  */
+
+
+			//je prefere mon idéé d'en haut c'est plus clean que en bas
 			//line = ft_check_dolar(line, envp);
 			//printf("line apres check dolar vaut %s\n", line);
 			///okay donc check dolar c'est nul pour remplacer la variable par son expanssion
@@ -191,15 +212,38 @@ int	parsing(char *argv, t_parsing *param, char **envp)
 		{
 			if (!argv[i])
 				break ;
-			buf[0] = argv[i];							//on est sur que ici que argv[i] est un char autre que | ' " ou espace
-			buf[1] = '\0';
-			if (!(line = ft_line(line, buf[0])))		//fonction : mettre dans line tout en allouant et free a chaque fois//
-				return (0);								// ->allocation a echoue
-			i++;										//only if (argv[i]) ->condtion a mettre
+			printf("ici pour argv[%d] %c\n", i, argv[i]);
+			printf("line here is %s\n\n", line);
+			if (argv[i] == '$')
+			{
+				if (line)											//->pour gérer les cas d'interpretation si on a a= "ls -la"
+				{
+					if (!ft_tabs(param, line))
+						return (0);									//->secure malloc
+					line = NULL;
+				}
+				while (argv[i] && argv[i] != ' ')
+				{
+					line = ft_line(line, argv[i]);
+					i++;
+				}
+				printf("line vaut \n");				
+				line = find_var(envp, line); //line ne sera modifier que si la variable est trouve dans envp 
+				ft_tabs(tmp, line);
+				line = NULL;
+			}
+			else
+			{
+				buf[0] = argv[i];							//on est sur que ici que argv[i] est un char autre que | ' " ou espace
+				buf[1] = '\0';
+				if (!(line = ft_line(line, buf[0])))		//fonction : mettre dans line tout en allouant et free a chaque fois//
+					return (0);								// ->allocation a echoue
+				i++;										//only if (argv[i]) ->condtion a mettre
+			}
 			if (!argv[i] && line)
 			{
-			if (!ft_tabs(tmp, line))
-				return (0);
+				if (!ft_tabs(tmp, line))
+					return (0);
 			}
 		}
 		free(buf);
@@ -207,7 +251,7 @@ int	parsing(char *argv, t_parsing *param, char **envp)
 	ft_index(param);
 	
 	
-	/*////////////////////////////////////////
+	/////////////////////////////////////////
 	
 	t_parsing	*tmp2;
 	t_file		*curs;
@@ -245,6 +289,6 @@ int	parsing(char *argv, t_parsing *param, char **envp)
 		
 	}
 	printf("----This is after parsing----\n");
-	*//////////////////////////////////////->print tabs tout en lisant la liste chainee	et les files et type
+	//////////////////////////////////////->print tabs tout en lisant la liste chainee	et les files et type
 	return (1);
 }
