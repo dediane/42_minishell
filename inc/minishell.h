@@ -140,6 +140,7 @@ void	free_env(t_env **env);
 //varaible_env.c
 char	*find_var(char **envp, char *line);
 char	*ft_check_dolar(char *line, char **envp);
+char	*dolar_quotes(char *line, char **envp);
 
 
 ////////built_in
