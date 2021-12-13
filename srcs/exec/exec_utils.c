@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 13:17:26 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/02 10:27:00 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/12/04 13:24:29 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	*get_right_path(t_parsing *params, char **envp)
 	char	**path_array;
 	int		i;
 
-	i = 0;
+	i = 0;	//ici ca devrait etre -1 pck il check pas le premier
 	path_array = get_cmd_path(envp);
 	while (path_array[++i])
 	{
