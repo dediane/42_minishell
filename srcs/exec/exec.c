@@ -6,21 +6,25 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:03:55 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/03 16:47:29 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/12/14 00:23:27 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-int	exec_process(char **cmd, char *path, char **envp)
+int	exec_process(char **cmd, char *path, char **envp) //execute une commande: split mon process en 2 process
 {
 	int	pid;
 
 	pid = fork();
 	if (pid == 0)
+	{
 		execve(path, cmd, envp);
+	}
 	else
-		waitpid(pid, 0, 0);
+	{
+		waitpid(-1, 0, 0);
+	}
 	return (0);
 }
 
