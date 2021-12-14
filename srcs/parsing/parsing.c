@@ -6,7 +6,7 @@
 /*   By: balkis <balkis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 10:03:50 by bben-yaa          #+#    #+#             */
-/*   Updated: 2021/12/14 18:05:40 by balkis           ###   ########.fr       */
+/*   Updated: 2021/12/14 19:31:14 by balkis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,15 +187,27 @@ int	parsing(char *argv, t_parsing *param, char **envp)
 				i++;
 			line = NULL; //line free dans ft_add_file
 		}
-		else if (argv[i] == '$' && argv[i - 1] == ' ')
+		else if (argv[i] == '$' && ft_change(&argv[i])) //&& argv[i - 1] == ' ')
 		{
+			if (line)											//->pour gérer les cas d'interpretation si on a a= "ls -la"
+			{
+				if (!ft_tabs(param, line))
+					return (0);									//->secure malloc
+				line = NULL;
+			}
 			while (argv[i] && argv[i] != ' ')
 			{
 				line = ft_line(line, argv[i]);
 				i++;
 			}
 			line = find_var(envp, line); //line ne sera modifier que si la variable est trouve dans envp 
+			if (argv[i])
+			{
+				while (argv[i] == ' ')
+					i++;
+			}
 			ft_tabs(tmp, line);
+			line = NULL;
 		}
 		else if (argv[i] == ' ')
 		{
@@ -212,38 +224,15 @@ int	parsing(char *argv, t_parsing *param, char **envp)
 		{
 			if (!argv[i])
 				break ;
-			//printf("ici pour argv[%d] %c\n", i, argv[i]);
-			//printf("line here is %s\n\n", line);
-			if (argv[i] == '$')
-			{
-				if (line)											//->pour gérer les cas d'interpretation si on a a= "ls -la"
-				{
-					if (!ft_tabs(param, line))
-						return (0);									//->secure malloc
-					line = NULL;
-				}
-				while (argv[i] && argv[i] != ' ')
-				{
-					line = ft_line(line, argv[i]);
-					i++;
-				}
-				//printf("line vaut \n");				
-				line = find_var(envp, line); //line ne sera modifier que si la variable est trouve dans envp 
-				ft_tabs(tmp, line);
-				line = NULL;
-			}
-			else
-			{
-				buf[0] = argv[i];							//on est sur que ici que argv[i] est un char autre que | ' " ou espace
-				buf[1] = '\0';
-				if (!(line = ft_line(line, buf[0])))		//fonction : mettre dans line tout en allouant et free a chaque fois//
-					return (0);								// ->allocation a echoue
-				i++;										//only if (argv[i]) ->condtion a mettre
-			}
+			buf[0] = argv[i];							//on est sur que ici que argv[i] est un char autre que | ' " ou espace
+			buf[1] = '\0';
+			if (!(line = ft_line(line, buf[0])))		//fonction : mettre dans line tout en allouant et free a chaque fois//
+				return (0);								// ->allocation a echoue
+			i++;										//only if (argv[i]) ->condtion a mettre
 			if (!argv[i] && line)
 			{
-				if (!ft_tabs(tmp, line))
-					return (0);
+			if (!ft_tabs(tmp, line))
+				return (0);
 			}
 		}
 		free(buf);
@@ -251,9 +240,9 @@ int	parsing(char *argv, t_parsing *param, char **envp)
 	ft_index(param);
 	
 	
-	/////////////////////////////////////////
+	/*/////////////////////////////////////////
 	
-	/*t_parsing	*tmp2;
+	t_parsing	*tmp2;
 	t_file		*curs;
 	tmp2 = param;
 	i = 0;
@@ -288,7 +277,7 @@ int	parsing(char *argv, t_parsing *param, char **envp)
 		i++;
 		
 	}
-	printf("----This is after parsing----\n");*/
-	//////////////////////////////////////->print tabs tout en lisant la liste chainee	et les files et type
+	printf("----This is after parsing----\n");
+	*//////////////////////////////////////->print tabs tout en lisant la liste chainee	et les files et type
 	return (1);
 }

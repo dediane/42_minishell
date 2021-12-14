@@ -141,6 +141,7 @@ void	free_env(t_env **env);
 char	*find_var(char **envp, char *line);
 char	*ft_check_dolar(char *line, char **envp);
 char	*dolar_quotes(char *line, char **envp);
+int		ft_change(char *argv);
 
 
 ////////built_in
