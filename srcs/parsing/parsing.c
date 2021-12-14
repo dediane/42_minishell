@@ -6,7 +6,7 @@
 /*   By: balkis <balkis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 10:03:50 by bben-yaa          #+#    #+#             */
-/*   Updated: 2021/12/13 22:20:43 by balkis           ###   ########.fr       */
+/*   Updated: 2021/12/14 18:05:40 by balkis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,8 +212,8 @@ int	parsing(char *argv, t_parsing *param, char **envp)
 		{
 			if (!argv[i])
 				break ;
-			printf("ici pour argv[%d] %c\n", i, argv[i]);
-			printf("line here is %s\n\n", line);
+			//printf("ici pour argv[%d] %c\n", i, argv[i]);
+			//printf("line here is %s\n\n", line);
 			if (argv[i] == '$')
 			{
 				if (line)											//->pour gérer les cas d'interpretation si on a a= "ls -la"
@@ -227,7 +227,7 @@ int	parsing(char *argv, t_parsing *param, char **envp)
 					line = ft_line(line, argv[i]);
 					i++;
 				}
-				printf("line vaut \n");				
+				//printf("line vaut \n");				
 				line = find_var(envp, line); //line ne sera modifier que si la variable est trouve dans envp 
 				ft_tabs(tmp, line);
 				line = NULL;
@@ -253,7 +253,7 @@ int	parsing(char *argv, t_parsing *param, char **envp)
 	
 	/////////////////////////////////////////
 	
-	t_parsing	*tmp2;
+	/*t_parsing	*tmp2;
 	t_file		*curs;
 	tmp2 = param;
 	i = 0;
@@ -288,7 +288,7 @@ int	parsing(char *argv, t_parsing *param, char **envp)
 		i++;
 		
 	}
-	printf("----This is after parsing----\n");
+	printf("----This is after parsing----\n");*/
 	//////////////////////////////////////->print tabs tout en lisant la liste chainee	et les files et type
 	return (1);
 }

@@ -6,21 +6,25 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:03:55 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/03 16:47:29 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/12/14 17:14:28 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-int	exec_process(char **cmd, char *path, char **envp)
+int	exec_process(char **cmd, char *path, char **envp) //execute une commande: split mon process en 2 process
 {
 	int	pid;
 
 	pid = fork();
 	if (pid == 0)
+	{
 		execve(path, cmd, envp);
+	}
 	else
-		waitpid(pid, 0, 0);
+	{
+		waitpid(-1, 0, 0);
+	}
 	return (0);
 }
 
@@ -48,11 +52,18 @@ int	ft_exec_all_cmd(t_parsing *params, char **envp)
 	while (params != NULL)
 	{
 		if (params->next != NULL && params->next->pipe != 0)
+		{
+			//printf("exec 1\n");
 			params = ft_pipe(params, envp);
-		else if (params->type != 0)
+		}
+		else if (params->type != 0 && params->next != NULL && params->next->pipe == 0)
+		{
+			//printf("exec 2\n");
 			params = ft_exec_redir(params, envp);
+		}
 		else
 		{
+			//printf("exec 3\n");
 			if (params->tabs)
 				ft_exec(params, envp);
 			params = params->next;
