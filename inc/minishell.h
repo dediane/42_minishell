@@ -151,6 +151,9 @@ int		ft_env(int fd, char **envp);
 int		ft_pwd(int fd);
 void	ft_exit(char *exit_line);
 int		ft_echo(int fd, char **arg);
+//export
+int		ft_export(int fd, char *tabs);
+int		ft_parse_export(char *tabs);
 
 
 ////////signal
