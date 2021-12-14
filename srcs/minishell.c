@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 19:28:36 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/13 21:28:22 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/12/14 15:08:23 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,18 @@ void	ft_print_title(void)
 }
 
 ///Diane la plus forte!!, je t'aime!!
+
+/*void	ft_add_relative_path(char ***envp)
+{
+	int i;
+	char *path;
+	
+	i = 0;
+	path = get_path(*envp, "PATH", &i);
+	printf("PATH = [%s]\n", path);
+	path = ft_strjoin(path, ":~");
+	printf("PATH = [%s]\n", path);
+}*/
 
 int main(int ac, char **av, char **envp)
 {
