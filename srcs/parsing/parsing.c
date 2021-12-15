@@ -6,7 +6,7 @@
 /*   By: balkis <balkis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 10:03:50 by bben-yaa          #+#    #+#             */
-/*   Updated: 2021/12/14 19:31:14 by balkis           ###   ########.fr       */
+/*   Updated: 2021/12/15 13:58:50 by balkis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,43 +96,11 @@ int	parsing(char *argv, t_parsing *param, char **envp)
 		if (argv[i] == 34)
 		{
 			//printf("faire fonction pour mettre dans tab tout ce qu'il y a dans les doubles quotes\n");
-			//if (!ft_double_quote(line, &i, argv, tmp))
-			//	return (0);
 			line = ft_double_quote(line, &i, argv, tmp);
-			printf("en sortant de add double quote line vaut %s\n", line);
-			line = dolar_quotes(line, envp);
-
-
-			/*if (line[curs] == '$')
-			{
-				line = find_var(envp, line);
-			}*/
-
-
-			/*
-				Alors il faut deja checker que les quotes sont bien ferme en envoyent argv
-				aprés il faut mettre tous dans line sans les quotes 
-				(si y'a quote simple et qu'elles sont pas fermées il faut les ajouter à line)
-				et pendant que j'ajoute a line si je trouve un $ au i avec un char au i++ je check si 
-				la variable existe pour la remplacer par son expansion sinon je la laisse tel qu'elle 
-				(il me faut la len de la variable pour la passe et bien reprendre argv pour ajouter dans line)
-			*/
-
-
-			/*check les dolars apres allouer line pck peut y'avoir des ' a l'interrieur ' des doubles quotes
-			tu free et remplaces l'xpansion si c'esttpas dans '  */
-
-
-			//je prefere mon idéé d'en haut c'est plus clean que en bas
-			//line = ft_check_dolar(line, envp);
-			//printf("line apres check dolar vaut %s\n", line);
-			///okay donc check dolar c'est nul pour remplacer la variable par son expanssion
-			//il faudrait que je parcours ma line avec maes double quote si je trouve un '$'
-			// et que la variable exite alors je free copie line je rajoute l'expanssion de la variable
-			// et je termine de copier la line jusqu'a la fin
-			// et apres je free l'ancienne line
-			// et apres je met la nouvelle line avec l'expansion a la place du nom de la line
-			// dans tabs 
+			if (line == 0)
+				return (0);
+			if (dolar_quotes(line))
+				line = ft_replace_var(line, envp);
 			if (!ft_tabs(param, line))
 				return (0);
 			if (argv[i + 1] == '\0')//->si on arrive a la fin de argv
