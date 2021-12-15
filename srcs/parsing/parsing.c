@@ -6,7 +6,7 @@
 /*   By: balkis <balkis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 10:03:50 by bben-yaa          #+#    #+#             */
-/*   Updated: 2021/12/15 13:58:50 by balkis           ###   ########.fr       */
+/*   Updated: 2021/12/15 14:24:09 by balkis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,10 @@ int	parsing(char *argv, t_parsing *param, char **envp)
 		else if ((argv[i] == '<' || argv[i] == '>'))//&& (argv[i - 1] == ' '|| i == 0))
 		{
 			if (!ft_check_redoc(argv, i))
+			{
+				printf("Minishell: syntax error near unexpected token `newline'\n");
 				return (0);
+			}
 			if (line)										//->pour gerer les cas d'interpretation si on a a='ls -la'
 			{
 				if (!ft_tabs(tmp, line))
@@ -145,12 +148,9 @@ int	parsing(char *argv, t_parsing *param, char **envp)
 				line = NULL;
 			}
 			ft_define_redicretcion(argv, &i, tmp);
-			//if (!tmp->file)
-			//{
-			//	printf("Minishell: syntax error near unexpected token `newline'\n");
-			//	return (0);
-			//}
 			ft_add_file(tmp, &i, argv, line);		//alloue line (= nom du fichier) pour le mettre dans la stack file
+			if (!tmp->file)
+				return (0);
 			while (argv[i] == ' ')
 				i++;
 			line = NULL; //line free dans ft_add_file
