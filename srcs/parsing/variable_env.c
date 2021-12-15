@@ -14,7 +14,6 @@ char	*find_var(char **envp, char *line)
 
 	i = 0;
 	j = -1;
-	printf("line dans find var %s\n", line);
 	while (envp[++j])
 	{
 		while (envp[j][i] != '=')
@@ -70,4 +69,18 @@ char	*dolar_quotes(char *line, char **envp)
 		i++;
 	}
 	return (line);
+}
+
+int	ft_change(char *argv)
+{
+	int	i;
+
+	i = 0;
+	while (argv[i] && argv[i] != ' ')
+	{
+		if (argv[i] == '=')
+			return (0);
+		i++;
+	}
+	return (1);
 }
