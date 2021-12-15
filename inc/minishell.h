@@ -67,7 +67,7 @@ typedef	struct s_parsing
 ////////exec
 int		ft_exec_all_cmd(t_parsing *params, char **envp);
 void	ft_exec(t_parsing *params, char **envp);
-int open_file(t_parsing *params, char *file);
+int 	open_file(t_parsing *params, char *file);
 
 //exec_utils.c
 int		open_file(t_parsing *params, char *file);
@@ -154,7 +154,7 @@ void	ft_exit(char *exit_line);
 int		ft_echo(int fd, char **arg);
 //export
 int		ft_export(int fd, char *tabs);
-int		ft_parse_export(char *tabs);
+int		ft_parse_export(char *tabs, char **key, char **value);
 
 
 ////////signal
