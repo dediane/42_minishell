@@ -16,11 +16,7 @@ char	*ft_double_quote(char *line, int *i, char *argv, t_parsing *param)
 			return (0);									//->secure malloc
 		line = NULL;
 	}
-	//if (!ft_add_double_quote(param, i, argv, line))	//-> pck on malloc
-	//	return (0);
 	return (ft_add_double_quote(param, i, argv, line));
-	//return (1);
-	///////tout les cas apres avoir mis les doubles quotes dans le tabs//////
 }
 
 void	ft_pass_dquote(char *argv, int *i)
@@ -52,24 +48,14 @@ char	*ft_add_double_quote(t_parsing *param, int *i, char *argv, char *line)
 			return (0);
 		(*i)++;
 	}
-	//if (!(line = ft_line(line, argv[(*i)])))	///->il ne faut pas ajouter les quotes dans line
-	//		return (0);
-	/*if (!ft_check_quote(line, 34))				///->du coup le checkquote se fait avant
-	{
-		free (line);
-		printf("les doubles quotes ne sont pas fermees\n");
-		return (0);
-	}*/
 	return (line);								///->et comme ca je peux checker directement pour la variable si elle exite
-	/*if (line[0] == '$')
-		line = find_var(envp, line);
-	if (!ft_tabs(param, line))
-		return (0);
-	return (1);*/
 }
 
 int	ft_add_simple_quote(t_parsing *param, int *i, char *argv, char *line)
 {
+	int	start;
+
+	start = (*i);
 	(*i)++;
 	while(argv[(*i)] != 39 && argv[(*i)])
 	{
@@ -77,9 +63,7 @@ int	ft_add_simple_quote(t_parsing *param, int *i, char *argv, char *line)
 			return (0);
 		(*i)++;
 	}
-	if (!(line = ft_line(line, argv[(*i)])))	///->il ne faut pas ajouter les quotes dans line
-			return (0);
-	if (!ft_check_quote(line, 39))				///->du coup le checkquote se fait avant
+	if (!ft_check_quote(&argv[start], 39))
 	{
 		free (line);
 		printf("les simples quotes ne sont pas fermees\n");
@@ -99,6 +83,7 @@ int	ft_check_quote(char *argv, int a)
 	i = 0;
 	c = a;
 	p = 0;
+	if (argv[0] == c)
 	while (argv[i])
 	{
 		if (i != 0 && argv[i + 1] && argv[i + 1] == c)

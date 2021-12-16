@@ -114,7 +114,8 @@ void	ft_pass_dquote(char *argv, int *i);
 //parsing_quote2.c
 int 	ft_simple_quote(char *line, int *i, char *argv, t_parsing *param);
 void	ft_pass_squote(char *argv, int *i);
-
+int		pos_dolar(char *line);
+char	*ft_copy(char *var, char *line, char *exp, int pos);
 
 //check_redoc.c
 void	ft_define_redicretcion(char *argv, int *i, t_parsing *param);
@@ -143,8 +144,6 @@ int		dolar_quotes(char *line);
 int		ft_change(char *argv);
 char	*ft_replace_var(char *line, char **envp);
 char	*ft_search_var(char *var, char **envp, char *line, int pos);
-int		pos_dolar(char *line);
-char	*ft_copy(char *var, char *line, char *exp, int pos);
 
 
 ////////built_in
