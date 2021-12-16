@@ -139,9 +139,12 @@ void	free_env(t_env **env);
 
 //varaible_env.c
 char	*find_var(char **envp, char *line);
-char	*ft_check_dolar(char *line, char **envp);
-char	*dolar_quotes(char *line, char **envp);
+int		dolar_quotes(char *line);
 int		ft_change(char *argv);
+char	*ft_replace_var(char *line, char **envp);
+char	*ft_search_var(char *var, char **envp, char *line, int pos);
+int		pos_dolar(char *line);
+char	*ft_copy(char *var, char *line, char *exp, int pos);
 
 
 ////////built_in

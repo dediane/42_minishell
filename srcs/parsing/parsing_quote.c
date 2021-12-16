@@ -52,14 +52,14 @@ char	*ft_add_double_quote(t_parsing *param, int *i, char *argv, char *line)
 			return (0);
 		(*i)++;
 	}
-	if (!(line = ft_line(line, argv[(*i)])))	///->il ne faut pas ajouter les quotes dans line
-			return (0);
-	if (!ft_check_quote(line, 34))				///->du coup le checkquote se fait avant
+	//if (!(line = ft_line(line, argv[(*i)])))	///->il ne faut pas ajouter les quotes dans line
+	//		return (0);
+	/*if (!ft_check_quote(line, 34))				///->du coup le checkquote se fait avant
 	{
 		free (line);
 		printf("les doubles quotes ne sont pas fermees\n");
 		return (0);
-	}
+	}*/
 	return (line);								///->et comme ca je peux checker directement pour la variable si elle exite
 	/*if (line[0] == '$')
 		line = find_var(envp, line);
@@ -103,7 +103,6 @@ int	ft_check_quote(char *argv, int a)
 	{
 		if (i != 0 && argv[i + 1] && argv[i + 1] == c)
 		{
-			printf("la c'est le break special variable\n");
 			p++;
 			break ;
 		}
