@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 10:03:50 by bben-yaa          #+#    #+#             */
-/*   Updated: 2021/12/15 12:40:12 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/12/15 18:32:58 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -240,7 +240,7 @@ int	parsing(char *argv, t_parsing *param, char **envp)
 	ft_index(param);
 	
 	
-	/*/////////////////////////////////////////
+	//////////////////////////////////////////
 	
 	t_parsing	*tmp2;
 	t_file		*curs;
@@ -278,6 +278,6 @@ int	parsing(char *argv, t_parsing *param, char **envp)
 		
 	}
 	printf("----This is after parsing----\n");
-	*//////////////////////////////////////->print tabs tout en lisant la liste chainee	et les files et type
+	//////////////////////////////////////->print tabs tout en lisant la liste chainee	et les files et type
 	return (1);
 }

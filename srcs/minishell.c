@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 19:28:36 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/14 18:38:48 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/12/15 18:26:37 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int main(int ac, char **av, char **envp)
 	if (ac != 1)
 		return (ft_putstr("Error: not argument accepted\n"), 1);
 	ft_print_title();
-	ft_export(1, "diane=moi");
+	//ft_export(1, "diane=moi");
 	while (1)
 	{
 		line = readline("\033[1;35m~Minishell$\033[0m ");
