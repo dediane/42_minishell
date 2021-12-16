@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 14:55:05 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/16 01:28:03 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/12/16 17:46:36 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,20 +71,20 @@ char	**set_in_env(char *line, char **env)
 		size++;
 	printf("size = %d\n", size);
 	//env[size] = ft_strlcat(env[size], line, )
-	tmp = malloc(sizeof(char *) * (size + 20));
+	tmp = malloc(sizeof(char *) * (size + 2));
 	i = -1;
 	while (++i < size)
 	{
-		tmp[i] = ft_strdup(env[i]);
+		tmp[i] = env[i];
 		tmp[i] = ft_strjoin(tmp[i], "\n");
 		//free(env[i]);
 	}
-	tmp[++i] = ft_strdup(line);
+	tmp[i] = ft_strdup(line);
+	tmp[i] = ft_strjoin(tmp[i], "\n");
+	printf("valeur de i = [%i]\n", i);
+	printf("line in tmp = [%s]\n", tmp[i]);
 	tmp[++i] = NULL;
 	ft_print_tab(tmp);
-	//*env = tmp;
-	//ft_print_tab(env);
-
 	return (tmp);
 }
 
@@ -92,6 +92,7 @@ int ft_export(int fd, char **tabs, char **env)
 {
 	char	*key;
 	char	*value;
+	char	**tmp;
 	int		is_in_env;
 	
 	key = NULL;
@@ -106,7 +107,9 @@ int ft_export(int fd, char **tabs, char **env)
 	//printf("is_in_key value : %d\n", is_in_env);
 	//printf("line value : %s\n", tabs[1]);
 	if (!ft_is_in_env(key, env))
-		env = set_in_env(tabs[1], env);
+	{
+		tmp = set_in_env(tabs[1], &env);
+	}
 	else
 		return (0);
 	
