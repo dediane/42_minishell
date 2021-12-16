@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 14:55:05 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/16 17:46:36 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/12/16 22:32:18 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,23 +92,24 @@ int ft_export(int fd, char **tabs, char **env)
 {
 	char	*key;
 	char	*value;
-	char	**tmp;
+	char 	**tmp;
+	int		i;
 	int		is_in_env;
 	
 	key = NULL;
 	value = NULL;
 	is_in_env = 0;
+	i = -1;
 	if (tabs[2])
 		return (0);
 	ft_parse_export(tabs[1], &key, &value);
-	//printf("%s\n", key);
-	//printf("%s\n", value);
 	is_in_env = ft_is_in_env(key, env);
-	//printf("is_in_key value : %d\n", is_in_env);
-	//printf("line value : %s\n", tabs[1]);
 	if (!ft_is_in_env(key, env))
 	{
-		tmp = set_in_env(tabs[1], &env);
+		tmp = set_in_env(tabs[1], env);
+		env = ft_copy_tab(tmp);
+		ft_print_tab(env);
+		free(tmp);
 	}
 	else
 		return (0);

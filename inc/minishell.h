@@ -64,6 +64,9 @@ typedef	struct s_parsing
 	struct s_parsing	*next;
 }			t_parsing;
 
+////////main
+char	**ft_copy_tab(char **envp);
+
 ////////exec
 int		ft_exec_all_cmd(t_parsing *params, char **envp);
 void	ft_exec(t_parsing *params, char **envp);
