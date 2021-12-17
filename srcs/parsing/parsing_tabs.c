@@ -67,7 +67,7 @@ char	**ft_malloc_tab(t_parsing *param, int len_tab, char *line)
 			return (0);
 		if (!(new[0] = malloc(sizeof(char) * (ft_strlen(line) + 1))))
 			return (0);
-		ft_strcpy(new[0], line); //copy line dans new[0]  
+		ft_strcpy(new[0], line); //copy line dans new[0]
 		new[1] = NULL;
 		free(line);
 		return (new);

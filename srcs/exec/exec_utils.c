@@ -6,13 +6,13 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 13:17:26 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/02 10:27:00 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/12/13 23:56:26 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-char	**get_cmd_path(char **envp)
+char	**get_cmd_path(char **envp) // Je récupère mon tableau de paths vers les commandes -> usr/bin etc...
 {
 	int		i;
 	int		j;
@@ -28,13 +28,13 @@ char	**get_cmd_path(char **envp)
 	return (ft_split(path + 5, ':'));
 }
 
-char	*get_right_path(t_parsing *params, char **envp)
+char	*get_right_path(t_parsing *params, char **envp) // Je checke tous les paths pour trouver le bon et je retourne le bon path
 {
 	char	*path;
 	char	**path_array;
 	int		i;
 
-	i = 0;
+	i = -1;
 	path_array = get_cmd_path(envp);
 	while (path_array[++i])
 	{

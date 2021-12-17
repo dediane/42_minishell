@@ -19,8 +19,11 @@ int	ft_add_file(t_parsing *param, int *i, char *argv, char *line)
 			return (0);
 		(*i)++;
 	}
-	if (!ft_add_to_fstack(param, line))
+	if (!line || !ft_add_to_fstack(param, line))
+	{
+		printf("Minishell: syntax error near unexpected token `newline'\n");
 		return (0);
+	}
 	free(line);
 	return (1);
 }

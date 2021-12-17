@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: balkis <balkis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 19:28:36 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/02 15:13:22 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2021/12/17 14:56:44 by balkis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,18 @@ void	ft_print_title(void)
 }
 
 ///Diane la plus forte!!, je t'aime!!
+
+/*void	ft_add_relative_path(char ***envp)
+{
+	int i;
+	char *path;
+	
+	i = 0;
+	path = get_path(*envp, "PATH", &i);
+	printf("PATH = [%s]\n", path);
+	path = ft_strjoin(path, ":~");
+	printf("PATH = [%s]\n", path);
+}*/
 
 int main(int ac, char **av, char **envp)
 {
@@ -56,7 +68,7 @@ int main(int ac, char **av, char **envp)
 				ft_exit(line);	
 			if (line[0] != '\0')
 			{
-				if (parsing(line, &param)) //return -1 ou 0 si l'allocution echoue, les quotes ne sont pas fermees, 
+				if (parsing(line, &param, envp)) //return -1 ou 0 si l'allocution echoue, les quotes ne sont pas fermees, 
 					// les > sont plus de deux, y'a rien apres les pipes (faut regarder le comportement de bash pck pour lui c'est pas une erreur),
 					// y'a aucun fichier après les redirection 
 				{

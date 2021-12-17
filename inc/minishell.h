@@ -84,11 +84,11 @@ t_parsing	*ft_exec_redir(t_parsing *params, char **envp);
 int	is_built_in(t_parsing *params, char *cmd, char **envp);
 
 //pipe.c
-int	ft_pipe(t_parsing *params, char **envp);
+t_parsing	*ft_pipe(t_parsing *params, char **envp);
 
 ////////parsing
 //parsing.c
-int		parsing(char *argv, t_parsing *param);
+int		parsing(char *argv, t_parsing *param, char **envp);
 
 //parsing_utils.c
 int 	init_param(t_parsing *param);
@@ -105,16 +105,17 @@ int		ft_len_tabs(char **tab);
 int		ft_tabs(t_parsing *parsing, char *line);
 
 //parsing_quote.c
-int		ft_add_double_quote(t_parsing *param, int *i, char *argv, char *line);
+char	*ft_add_double_quote(t_parsing *param, int *i, char *argv, char *line);
 int		ft_add_simple_quote(t_parsing *param, int *i, char *argv, char *line);
 int		ft_check_quote(char *line, int a);
-int 	ft_double_quote(char *line, int *i, char *argv, t_parsing *param);
+char	*ft_double_quote(char *line, int *i, char *argv, t_parsing *param);
 void	ft_pass_dquote(char *argv, int *i);
 
 //parsing_quote2.c
 int 	ft_simple_quote(char *line, int *i, char *argv, t_parsing *param);
 void	ft_pass_squote(char *argv, int *i);
-
+int		pos_dolar(char *line);
+char	*ft_copy(char *var, char *line, char *exp, int pos);
 
 //check_redoc.c
 void	ft_define_redicretcion(char *argv, int *i, t_parsing *param);
@@ -124,6 +125,7 @@ int		ft_check_redoc(char *argv, int i);
 int		alloue_elem(t_parsing *param);
 int		ft_add_maillon(t_parsing *param);
 void    ft_index(t_parsing *param);
+void	ft_nb_cmd(t_parsing *param, int i);
 
 
 //add_file.c
@@ -135,6 +137,13 @@ int		env_list(t_env  **env, char **envp);
 int		ft_malloc_env(t_env	**env);
 int		ft_find_variable(t_env *env, char *envp);
 void	free_env(t_env **env);
+
+//varaible_env.c
+char	*find_var(char **envp, char *line);
+int		dolar_quotes(char *line);
+int		ft_change(char *argv);
+char	*ft_replace_var(char *line, char **envp);
+char	*ft_search_var(char *var, char **envp, char *line, int pos);
 
 
 ////////built_in

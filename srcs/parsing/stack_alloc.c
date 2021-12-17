@@ -56,8 +56,21 @@ void    ft_index(t_parsing *param)
     i = 0;
 	while (tmp)
 	{
-		param->nb_cmd = i;
+		tmp->index = i;
 		i++;
+		tmp = tmp->next;
+	}
+	ft_nb_cmd(param, i);
+}
+
+void	ft_nb_cmd(t_parsing *param, int i)
+{
+	t_parsing	*tmp;
+
+    tmp = param;
+	while (tmp)
+	{
+		tmp->nb_cmd = i;
 		tmp = tmp->next;
 	}
 }
