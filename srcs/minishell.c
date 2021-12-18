@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 19:28:36 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/14 15:08:23 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/12/16 22:38:58 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,19 +37,42 @@ void	ft_print_title(void)
 	printf("PATH = [%s]\n", path);
 }*/
 
+char	**ft_copy_tab(char **envp)
+{
+	int i;
+	int size;
+	char **env;
+	
+	size = 0;
+	i = -1;
+	while (envp[++i])
+		size++;
+	env = malloc(sizeof(char *) * (size + 1));
+	i = -1;
+	while (++i < size)
+	{
+		env[i] = envp[i];
+		//env[i] = ft_strjoin(env[i], "\n");
+	}
+	env[i] = NULL;
+	return (env);
+}
+
 int main(int ac, char **av, char **envp)
 {
 	char *line = NULL;
+	char **env;
 	t_parsing	param;	
 	//t_env		*env; pour envp en liste 
 
 	(void)av;
-	(void)envp;
+	env = ft_copy_tab(envp);
 	//(void *)param = NULL;
 	//env = NULL;
 	if (ac != 1)
 		return (ft_putstr("Error: not argument accepted\n"), 1);
 	ft_print_title();
+	//ft_export(1, "diane=moi");
 	while (1)
 	{
 		line = readline("\033[1;35m~Minishell$\033[0m ");
@@ -65,11 +88,11 @@ int main(int ac, char **av, char **envp)
 				ft_exit(line);	
 			if (line[0] != '\0')
 			{
-				if (parsing(line, &param, envp)) //return -1 ou 0 si l'allocution echoue, les quotes ne sont pas fermees, 
+				if (parsing(line, &param, env)) //return -1 ou 0 si l'allocution echoue, les quotes ne sont pas fermees, 
 					// les > sont plus de deux, y'a rien apres les pipes (faut regarder le comportement de bash pck pour lui c'est pas une erreur),
 					// y'a aucun fichier après les redirection 
 				{
-					ft_exec_all_cmd(&param, envp);
+					ft_exec_all_cmd(&param, env);
 				}
 				//free here
 			}
