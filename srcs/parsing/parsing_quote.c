@@ -21,15 +21,17 @@ char	*ft_double_quote(char *line, int *i, char *argv, t_parsing *param)
 
 void	ft_pass_dquote(char *argv, int *i)
 {
-	if (argv[(*i) + 1] == 34 || argv[(*i) + 1] == 39)			//pour gerer le cas de "bonjour"'cava'"comment"
+	if (argv[(*i) + 1] && (argv[(*i) + 1] == 34 || argv[(*i) + 1] == 39))			//pour gerer le cas de "bonjour"'cava'"comment"
 		(*i)++;
-	else if (argv[(*i) + 1] == ' ')						//->on pass tout les espaces
+	else if (argv[(*i) + 1] && argv[(*i) + 1] == ' ')						//->on pass tout les espaces
 	{
 		(*i)++;
 		while (argv[(*i)] == ' ')
 			(*i)++;
 	}
-	if (argv[(*i) + 1] == '<' || argv[(*i) + 1] == '>')	//c'est si la cmd = echo "hello">map.txt
+	else if (argv[(*i) + 1] && (argv[(*i) + 1] == '<' || argv[(*i) + 1] == '>'))	//c'est si la cmd = echo "hello">map.txt
+		(*i)++;
+	else if (argv[(*i)] == 34 && argv[(*i) + 1] && argv[(*i) + 1] != ' ')
 		(*i)++;
 }
 
