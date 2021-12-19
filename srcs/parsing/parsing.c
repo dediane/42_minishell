@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: balkis <balkis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 10:03:50 by bben-yaa          #+#    #+#             */
-/*   Updated: 2021/12/15 14:24:09 by balkis           ###   ########.fr       */
+/*   Updated: 2021/12/18 15:48:10 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,9 +208,9 @@ int	parsing(char *argv, t_parsing *param, char **envp)
 	ft_index(param);
 	
 	
-	/*/////////////////////////////////////////
+	//////////////////////////////////////////
 	
-	t_parsing	*tmp2;
+	/*t_parsing	*tmp2;
 	t_file		*curs;
 	tmp2 = param;
 	i = 0;
@@ -245,7 +245,7 @@ int	parsing(char *argv, t_parsing *param, char **envp)
 		i++;
 		
 	}
-	printf("----This is after parsing----\n");
-	*//////////////////////////////////////->print tabs tout en lisant la liste chainee	et les files et type
+	printf("----This is after parsing----\n");*/
+	//////////////////////////////////////->print tabs tout en lisant la liste chainee	et les files et type
 	return (1);
 }
