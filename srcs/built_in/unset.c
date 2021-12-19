@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 14:55:03 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/19 17:33:09 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/12/19 17:47:30 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,21 @@ char	**unset_in_env(char *line, char **env)
 	}
 	tmp[i] = NULL;
 	return (tmp);
+}
+
+char	*ft_strtrim_first_letter(char *line)
+{
+	char	*new;
+	int		i;
+	
+	i = 0;
+	new = malloc(sizeof(char) * ft_strlen(line));
+	while (line[++i])
+	{
+		new[i - 1]  =line[i];
+	}
+	new[i - 1] = '\0';
+	return (new);
 }
 
 char **ft_unset(int fd, char **tabs, char **env)
