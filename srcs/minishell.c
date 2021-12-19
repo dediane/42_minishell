@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 19:28:36 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/16 22:38:58 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/12/19 16:17:56 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int main(int ac, char **av, char **envp)
 					// les > sont plus de deux, y'a rien apres les pipes (faut regarder le comportement de bash pck pour lui c'est pas une erreur),
 					// y'a aucun fichier après les redirection 
 				{
-					ft_exec_all_cmd(&param, env);
+					env = ft_exec_all_cmd(&param, env);
 				}
 				//free here
 			}

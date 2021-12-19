@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 14:55:05 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/16 22:32:18 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/12/19 16:25:35 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	ft_print_tab(char **tab)
 	}
 }
 
+
 char	**set_in_env(char *line, char **env)
 {
 	
@@ -75,20 +76,19 @@ char	**set_in_env(char *line, char **env)
 	i = -1;
 	while (++i < size)
 	{
-		tmp[i] = env[i];
-		tmp[i] = ft_strjoin(tmp[i], "\n");
+		tmp[i] = ft_strdup(env[i]);
+		//tmp[i] = ft_strjoin(tmp[i], "\n");
 		//free(env[i]);
 	}
 	tmp[i] = ft_strdup(line);
-	tmp[i] = ft_strjoin(tmp[i], "\n");
-	printf("valeur de i = [%i]\n", i);
-	printf("line in tmp = [%s]\n", tmp[i]);
+	//tmp[i] = ft_strjoin(tmp[i], "\n");
 	tmp[++i] = NULL;
-	ft_print_tab(tmp);
+	//ft_print_tab(tmp);
+	//free_tabs(env);
 	return (tmp);
 }
 
-int ft_export(int fd, char **tabs, char **env)
+char **ft_export(int fd, char **tabs, char **env)
 {
 	char	*key;
 	char	*value;
@@ -96,8 +96,10 @@ int ft_export(int fd, char **tabs, char **env)
 	int		i;
 	int		is_in_env;
 	
+	(void)fd;
 	key = NULL;
 	value = NULL;
+	tmp = NULL;
 	is_in_env = 0;
 	i = -1;
 	if (tabs[2])
@@ -106,27 +108,12 @@ int ft_export(int fd, char **tabs, char **env)
 	is_in_env = ft_is_in_env(key, env);
 	if (!ft_is_in_env(key, env))
 	{
-		tmp = set_in_env(tabs[1], env);
-		env = ft_copy_tab(tmp);
-		ft_print_tab(env);
-		free(tmp);
+		//ft_paste_tab2(env, tmp, tabs[1]);
+		env = set_in_env(tabs[1], env);
+		//ft_print_tab(env);
+		//free(tmp);
 	}
 	else
 		return (0);
-	
-	
-	(void) fd;
-	/*int i;
-	int j;
-	int size;
-
-	i = 1;
-	j = -1;
-	size = ft_strlen(tabs[i]);
-	if (tabs[i][++j] == '$')
-		return(0);
-	while (tabs[i][j] != '=')
-		j++;
-	if ()*/
-	return (0);
+	return (env);
 }

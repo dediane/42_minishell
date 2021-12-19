@@ -6,13 +6,13 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 12:11:42 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/16 22:37:29 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/12/19 16:25:54 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-int	is_built_in(t_parsing *params, char *cmd, char **envp)
+int	is_built_in(t_parsing *params, char *cmd, char ***envp)
 {
     int fd;
 
@@ -20,9 +20,9 @@ int	is_built_in(t_parsing *params, char *cmd, char **envp)
 	if (ft_strncmp(cmd, "cd", 3) == 0)
 	{
 		if (!(params->tabs[1]))
-			ft_cd(envp, NULL);
+			ft_cd(*envp, NULL);
 		else
-			ft_cd(envp, params->tabs[1]);
+			ft_cd(*envp, params->tabs[1]);
 		return (1);
 	}
 	else if (ft_strncmp(cmd, "pwd", 4) == 0)
@@ -37,12 +37,13 @@ int	is_built_in(t_parsing *params, char *cmd, char **envp)
 	}
 	else if (ft_strncmp(cmd, "env", 4) == 0)
 	{
-		ft_env(1, envp);
+		ft_env(1, *envp);
 		return (1);
 	}
 	else if (ft_strncmp(cmd, "export", 7) == 0)
 	{
-		ft_export(1, params->tabs, envp);
+		*envp = ft_export(1, params->tabs, *envp);
+		//ft_print_tab(*envp);
 		return (1);
 	}
 	//else if (ft_strncmp(cdm, "unset", 6) == 0)

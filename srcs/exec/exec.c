@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:03:55 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/16 23:23:12 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/12/19 16:18:46 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,21 +28,26 @@ int	exec_process(char **cmd, char *path, char **envp) //execute une commande: sp
 	return (0);
 }
 
-void	ft_exec(t_parsing *params, char **envp)
+char	**ft_exec(t_parsing *params, char **envp)
 {
 	char	*right_path;
 
-	if (is_built_in(params, params->tabs[0], envp))
-		return ;
+	if (is_built_in(params, params->tabs[0], &envp))
+	{
+		ft_env(1, envp);
+		return (envp);
+	}
 	else
 	{
 		right_path = get_right_path(params, envp);
 		if (right_path != NULL)
 			exec_process(params->tabs, right_path, envp);
+		return (envp);			
 	}
+	return (envp);	
 }
 
-int	ft_exec_all_cmd(t_parsing *params, char **envp)
+char	**ft_exec_all_cmd(t_parsing *params, char **envp)
 {
 	int			fd;
 	t_parsing	*tmp;
@@ -66,10 +71,10 @@ int	ft_exec_all_cmd(t_parsing *params, char **envp)
 		{
 			//printf("exec 3\n");
 			if (params->tabs)
-				ft_exec(params, envp);
+				envp = ft_exec(params, envp);
 			params = params->next;
 		}
 	}
 	//ft_free_params(tmp);
-	return (0);
+	return (envp);
 }
