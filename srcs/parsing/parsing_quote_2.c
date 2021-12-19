@@ -31,6 +31,8 @@ void	ft_pass_squote(char *argv, int *i)
 		while (argv[(*i)] == ' ')
 			(*i)++;
 	}
+	else if (argv[(*i)] == 39 && argv[(*i) + 1] && argv[(*i) + 1] != ' ')
+		(*i)++;
 }
 
 int		pos_dolar(char *line)

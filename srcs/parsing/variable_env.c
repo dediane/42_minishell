@@ -19,7 +19,7 @@ char	*find_var(char **envp, char *line)
 		while (envp[j][i] != '=')
 			i++;
 		var = strndup(envp[j], i);
-		if (ft_strncmp(var, &line[1], ft_strlen(var)) == 0)
+		if (ft_strncmp(var, &line[1], ft_strlen(line)) == 0)
 		{
 			free(line);
 			line = NULL;
@@ -60,6 +60,8 @@ int	ft_change(char *argv)
 	int	i;
 
 	i = 0;
+	if (argv[i] == '$' && ((argv[i + 1] && argv[i + 1] == ' ' ) || (!argv[i + 1])))
+		return (0);
 	while (argv[i] && argv[i] != ' ')
 	{
 		if (argv[i] == '=')
