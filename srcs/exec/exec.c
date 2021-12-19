@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:03:55 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/19 16:34:50 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/12/19 18:49:46 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ char	**ft_exec(t_parsing *params, char **envp)
 	else
 	{
 		right_path = get_right_path(params, envp);
+		printf("I am here \n");
 		if (right_path != NULL)
 			exec_process(params->tabs, right_path, envp);
 		return (envp);			
@@ -54,6 +55,7 @@ char	**ft_exec_all_cmd(t_parsing *params, char **envp)
 
 	fd = 0;
 	tmp = params;
+	printf("I can exec\n");
 	while (params != NULL)
 	{
 		if (params->next != NULL && params->next->pipe != 0)
