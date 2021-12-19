@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 14:55:05 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/19 17:47:24 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/12/19 22:18:03 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ int	ft_parse_env(char *tab, char **key, char **value)
 
 int	ft_is_in_env(char *key, char **envp)
 {
-	int i;
-	int size;
-	
+	int	i;
+	int	size;
+
 	i = -1;
 	size = ft_strlen(key);
 	while (envp[++i])
@@ -47,9 +47,11 @@ int	ft_is_in_env(char *key, char **envp)
 
 void	ft_print_tab(char **tab)
 {
-	int i = -1;
-	int j = -1;
+	int	i;
+	int	j;
 
+	i = -1;
+	j = -1;
 	while (tab[++i])
 	{
 		j = -1;
@@ -58,14 +60,12 @@ void	ft_print_tab(char **tab)
 	}
 }
 
-
 char	**set_in_env(char *line, char **env)
 {
-	
-	int i;
-	int size;
-	char **tmp;
-	
+	int		i;
+	int		size;
+	char	**tmp;
+
 	size = 0;
 	i = -1;
 	while (env[++i])
@@ -81,14 +81,14 @@ char	**set_in_env(char *line, char **env)
 	return (tmp);
 }
 
-char **ft_export(int fd, char **tabs, char **env)
+char	**ft_export(int fd, char **tabs, char **env)
 {
 	char	*key;
 	char	*value;
-	char 	**tmp;
+	char	**tmp;
 	int		i;
 	int		is_in_env;
-	
+
 	(void)fd;
 	key = NULL;
 	value = NULL;

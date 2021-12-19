@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 14:55:03 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/19 22:08:35 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/12/19 22:12:39 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ char	*ft_strtrim_first_letter(char *line)
 {
 	char	*new;
 	int		i;
-	
+
 	i = 0;
 	new = malloc(sizeof(char) * ft_strlen(line));
 	while (line[++i])
 	{
-		new[i - 1]  =line[i];
+		new[i - 1] = line[i];
 	}
 	new[i - 1] = '\0';
 	return (new);
@@ -29,13 +29,12 @@ char	*ft_strtrim_first_letter(char *line)
 
 char	**unset_in_env(char *line, char **env)
 {
-	
-	int i;
-	int j;
-	int size;
-	int size_line;
-	char **tmp;
-	
+	int		i;
+	int		j;
+	int		size;
+	int		size_line;
+	char	**tmp;
+
 	size = 0;
 	i = -1;
 	j = 0;
@@ -43,7 +42,6 @@ char	**unset_in_env(char *line, char **env)
 		size++;
 	tmp = malloc(sizeof(char *) * (size));
 	i = -1;
-	//printf("Line = %s\n", line);
 	while (++i < (size - 1))
 	{
 		size_line = ft_strlen(line);
@@ -54,14 +52,14 @@ char	**unset_in_env(char *line, char **env)
 	return (tmp);
 }
 
-char **ft_unset(int fd, char **tabs, char **env)
+char	**ft_unset(int fd, char **tabs, char **env)
 {
 	char	*key;
 	char	*value;
 	char	**tmp;
 	int		i;
 	int		is_in_env;
-	
+
 	(void)fd;
 	key = NULL;
 	value = NULL;
