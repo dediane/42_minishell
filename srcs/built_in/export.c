@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 14:55:05 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/19 22:18:03 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/12/19 23:22:42 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_parse_env(char *tab, char **key, char **value)
 	dollar = 0;
 	if (tab[i] == '$')
 		dollar = 1;
-	while (tab[i] != '=')
+	while (tab[i] && tab[i] != '=')
 		i++;
 	if (dollar == 1)
 		i -= 1;
@@ -40,7 +40,10 @@ int	ft_is_in_env(char *key, char **envp)
 	while (envp[++i])
 	{
 		if (ft_strncmp(key, envp[i], size) == 0)
-			return (1);
+		{
+			if (envp[i][size + 1] == '=')
+				return (1);
+		}
 	}
 	return (0);
 }
@@ -103,8 +106,11 @@ char	**ft_export(int fd, char **tabs, char **env)
 		env = set_in_env(tabs[1], env);
 	else
 	{
-		value = ft_strtrim_first_letter(value);
-		change_env(env, key, value);
+		if (value)
+		{
+			value = ft_strtrim_first_letter(value);
+			change_env(env, key, value);
+		}
 	}
 	return (env);
 }
