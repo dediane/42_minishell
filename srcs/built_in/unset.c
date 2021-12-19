@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 14:55:03 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/19 23:22:38 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/12/19 23:25:57 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,11 +88,11 @@ char	**ft_unset(int fd, char **tabs, char **env)
 	is_in_env = 0;
 	i = -1;
 	if (!tabs[1] || tabs[2])
-		return (0);
+		return (env);
 	is_in_env = ft_is_in_env2(tabs[1], env);
 	if (ft_is_in_env2(tabs[1], env))
 		env = unset_in_env(tabs[1], env);
 	else
-		return (0);
+		return (env);
 	return (env);
 }
