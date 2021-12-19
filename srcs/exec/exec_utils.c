@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 13:17:26 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/19 18:38:42 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/12/19 19:47:13 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	**get_cmd_path(char **envp) // Je récupère mon tableau de paths vers les 
 	int		i;
 	int		j;
 	char	*path;
-
+	char	**tmp;
 	i = -1;
 	j = -1;
 	while (envp[++i])
@@ -27,7 +27,8 @@ char	**get_cmd_path(char **envp) // Je récupère mon tableau de paths vers les 
 	}
 	if (path == NULL)
 		return (NULL);
-	return (ft_split(path + 5, ':'));
+	tmp = ft_split(path + 5, ':');
+	return (tmp);
 }
 
 char	*get_right_path(t_parsing *params, char **envp) // Je checke tous les paths pour trouver le bon et je retourne le bon path
