@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 14:55:03 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/19 22:06:03 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/12/19 22:08:35 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,7 @@ char **ft_unset(int fd, char **tabs, char **env)
 		return (0);
 	is_in_env = ft_is_in_env(tabs[1], env);
 	if (ft_is_in_env(tabs[1], env))
-	{
 		env = unset_in_env(tabs[1], env);
-		printf("I am here\n");
-		ft_print_tab(env);
-	}
 	else
 		return (0);
 	return (env);
