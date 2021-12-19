@@ -161,7 +161,9 @@ int		ft_echo(int fd, char **arg);
 char	**ft_export(int fd, char **tabs, char **env);
 void	ft_print_tab(char **tab);
 int		ft_parse_export(char *tabs, char **key, char **value);
-
+int		ft_is_in_env(char *key, char **envp);
+//unset
+char	**ft_unset(int fd, char **tabs, char **env);
 
 ////////signal
 

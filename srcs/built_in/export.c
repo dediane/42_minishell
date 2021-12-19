@@ -6,13 +6,13 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 14:55:05 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/19 16:35:43 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/12/19 17:10:55 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-int	ft_parse_export(char *tab, char **key, char **value)
+int	ft_parse_env(char *tab, char **key, char **value)
 {
 	int		dollar;
 	int		i;
@@ -104,7 +104,7 @@ char **ft_export(int fd, char **tabs, char **env)
 	i = -1;
 	if (tabs[2])
 		return (0);
-	ft_parse_export(tabs[1], &key, &value);
+	ft_parse_env(tabs[1], &key, &value);
 	is_in_env = ft_is_in_env(key, env);
 	if (!ft_is_in_env(key, env))
 	{
