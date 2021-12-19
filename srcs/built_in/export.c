@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 14:55:05 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/19 16:25:35 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/12/19 16:35:43 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ char	**set_in_env(char *line, char **env)
 	i = -1;
 	while (env[++i])
 		size++;
-	printf("size = %d\n", size);
+	//printf("size = %d\n", size);
 	//env[size] = ft_strlcat(env[size], line, )
 	tmp = malloc(sizeof(char *) * (size + 2));
 	i = -1;

@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:03:55 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/19 16:18:46 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/12/19 16:34:50 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	**ft_exec(t_parsing *params, char **envp)
 
 	if (is_built_in(params, params->tabs[0], &envp))
 	{
-		ft_env(1, envp);
+		//ft_env(1, envp);
 		return (envp);
 	}
 	else
