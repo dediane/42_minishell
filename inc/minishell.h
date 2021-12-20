@@ -57,6 +57,7 @@ typedef	struct s_parsing
 	int					index;
 	int					fd_stdout;
 	int					fd_stdin;
+	int					ret_value;
 	t_filetype			type;		//je pense qu'il sert a rien lui quoique je m'en sert dans le parsing
 	t_file				*file;
 //	t_cmdtype			a_cmd;		//commande after maillon (le dernier maillon sera forcement NONE/0)
@@ -152,13 +153,13 @@ char	*ft_search_var(char *var, char **envp, char *line, int pos);
 char	*get_path(char **envp, char *to_find, int *i);
 char	*ft_get_home(char **envp);
 //cd
-int		ft_cd(char **envp, char *path);
+int		ft_cd(char **envp, char *path, t_parsing *params);
 int		change_env(char **envp, char *path, char *new_path);
 
 int		ft_env(int fd, char **envp);
 int		ft_pwd(int fd);
 void	ft_exit(char *exit_line);
-int		ft_echo(int fd, char **arg);
+int		ft_echo(int fd, t_parsing *params);
 //export
 char	**ft_export(int fd, char **tabs, char **env);
 void	ft_print_tab(char **tab);

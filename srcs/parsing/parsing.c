@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 10:03:50 by bben-yaa          #+#    #+#             */
-/*   Updated: 2021/12/19 22:59:12 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/12/20 18:33:43 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,7 +155,7 @@ int	parsing(char *argv, t_parsing *param, char **envp)
 				i++;
 			line = NULL; //line free dans ft_add_file
 		}
-		else if (argv[i] == '$' && ft_change(&argv[i])) //&& argv[i - 1] == ' ')
+		else if (argv[i] == '$' && argv[i + 1] && argv[i + 1] != '?' && ft_change(&argv[i])) //&& argv[i - 1] == ' ')
 		{
 			if (line)											//->pour gérer les cas d'interpretation si on a a= "ls -la"
 			{

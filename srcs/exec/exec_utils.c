@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 13:17:26 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/19 19:47:13 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/12/20 18:36:48 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ char	*get_right_path(t_parsing *params, char **envp) // Je checke tous les paths
 	}
 	ft_putstr_fd(params->tabs[0], 2);
 	ft_putstr_fd(": command not found\n", 2);
+	params->ret_value = 127;
 	return (NULL);
 }
 
