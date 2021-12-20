@@ -6,7 +6,7 @@
 #    By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/26 19:30:34 by ddecourt          #+#    #+#              #
-#    Updated: 2021/12/14 18:29:52 by ddecourt         ###   ########.fr        #
+#    Updated: 2021/12/19 17:22:20 by ddecourt         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ SRCS =	srcs/minishell.c \
 		srcs/built_in/cd.c \
 		srcs/built_in/echo.c \
 		srcs/built_in/export.c \
+		srcs/built_in/unset.c \
 		srcs/signal/signal.c \
 
 OBJS = ${SRCS:.c=.o}

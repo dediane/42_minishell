@@ -67,8 +67,8 @@ typedef	struct s_parsing
 char	**ft_copy_tab(char **envp);
 
 ////////exec
-int		ft_exec_all_cmd(t_parsing *params, char **envp);
-void	ft_exec(t_parsing *params, char **envp);
+char	**ft_exec_all_cmd(t_parsing *params, char **envp);
+char	**ft_exec(t_parsing *params, char **envp);
 int 	open_file(t_parsing *params, char *file);
 
 //exec_utils.c
@@ -83,7 +83,7 @@ t_parsing	*ft_redir(t_parsing *params, char**envp);
 t_parsing	*ft_exec_redir(t_parsing *params, char **envp);
 
 //build_in.c
-int	is_built_in(t_parsing *params, char *cmd, char **envp);
+int	is_built_in(t_parsing *params, char *cmd, char ***envp);
 
 //pipe.c
 t_parsing	*ft_pipe(t_parsing *params, char **envp);
@@ -151,15 +151,22 @@ char	*ft_search_var(char *var, char **envp, char *line, int pos);
 ////////built_in
 char	*get_path(char **envp, char *to_find, int *i);
 char	*ft_get_home(char **envp);
+//cd
 int		ft_cd(char **envp, char *path);
+int		change_env(char **envp, char *path, char *new_path);
+
 int		ft_env(int fd, char **envp);
 int		ft_pwd(int fd);
 void	ft_exit(char *exit_line);
 int		ft_echo(int fd, char **arg);
 //export
-int		ft_export(int fd, char **tabs, char **env);
+char	**ft_export(int fd, char **tabs, char **env);
+void	ft_print_tab(char **tab);
 int		ft_parse_export(char *tabs, char **key, char **value);
-
+int		ft_is_in_env(char *key, char **envp);
+//unset
+char	**ft_unset(int fd, char **tabs, char **env);
+char	*ft_strtrim_first_letter(char *line);
 
 ////////signal
 

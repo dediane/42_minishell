@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 00:47:40 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/16 22:58:55 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/12/19 22:13:05 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	ft_echo(int fd, char **arg)
 	size = 0;
 	i = 1;
 	n = 1;
-	if(!check_size(0, fd, arg))
+	if (!check_size(0, fd, arg))
 		return (0);
 	while (arg[i] && arg[i][0] == '-')
 	{

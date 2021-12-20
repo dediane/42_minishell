@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 19:48:02 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/11/28 21:07:33 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/12/19 22:18:33 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	ft_pwd(int fd)
 {
-	char buffer[4096];
-	size_t size;
+	char	buffer[4096];
+	size_t	size;
 
 	size = 4096;
 	ft_putstr_fd(getcwd(buffer, 4096), fd);
