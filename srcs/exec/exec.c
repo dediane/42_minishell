@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:03:55 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/20 22:05:57 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/12/20 22:51:15 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,30 @@ int	exec_process(char **cmd, char *path, char **envp) //execute une commande: sp
 char	**ft_exec(t_parsing *params, char **envp)
 {
 	char	*right_path;
+	int		relative;
 
+	relative = 0;
 	if (is_built_in(params, params->tabs[0], &envp))
-	{
 		return (envp);
-	}
 	else
 	{
-		right_path = get_right_path(params, envp);
+		if (access(params->tabs[0], F_OK) == 0)
+		{
+			relative = 1;
+			right_path = ft_strdup(params->tabs[0]);
+		}
+		if (relative == 0)
+			right_path = get_right_path(params, envp);
+		if (!right_path)
+		{
+			right_path = ft_get_home(envp);
+			right_path = ft_strjoin(right_path, "/");
+			right_path = ft_strjoin(right_path, params->tabs[0]);
+			printf("Valeur de right path = %s\n", right_path);
+		}
 		if (right_path != NULL)
 			params->ret_value = exec_process(params->tabs, right_path, envp);
-		return (envp);			
+		return (envp);
 	}
 	return (envp);	
 }

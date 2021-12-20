@@ -154,6 +154,7 @@ char	*get_path(char **envp, char *to_find, int *i);
 char	*ft_get_home(char **envp);
 //cd
 int		ft_cd(char **envp, char *path, t_parsing *params);
+char	*ft_get_home(char **envp);
 int		change_env(char **envp, char *path, char *new_path);
 
 int		ft_env(int fd, char **envp);
