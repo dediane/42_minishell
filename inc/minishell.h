@@ -14,7 +14,6 @@
 # include <string.h>
 # include "../libft/libft.h"
 
-
 # define STDIN 0
 # define STDOUT 1
 # define STDERR 2
