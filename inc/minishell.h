@@ -173,5 +173,8 @@ char	*ft_strtrim_first_letter(char *line);
 //signal.c
 void	ft_sigint(int sig);
 void	ft_sigquit(int sig);
+void	ft_ignore(int sig);
+void	ft_disable(int pid);
+void	ft_lanch_signal(void);
 
 #endif

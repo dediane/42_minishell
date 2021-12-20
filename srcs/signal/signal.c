@@ -22,19 +22,27 @@ void	ft_sigquit(int sig)
 }
 // controle backslash ne fait rien
 
-void	ft_ignore(int pid)
+void	ft_ignore(int sig)
+{
+	if (sig == SIGINT)
+		write(1, "\n", 1);
+}
+void	ft_disable(int pid)
 {
 	if (pid == 0)
-		printf("diseable\n");//diseable
+	{
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
+	}
 	else
-		printf("ignore\n");//ignore
-
+	{
+		signal(SIGINT, ignore);
+		signal(SIGQUIT, ignore);
+	}
 }
 
-void	ft_relaunch(int pid)
+void	ft_launch_signal(void);
 {
-	if (pid > 0)
-		printf("relaunche signal\n");
-	//signal(SIGINT, ft_sigint);
-	//signal(SIGQUIT, ft_sigquit);
+	signal(SIGINT, ft_sigint);
+	signal(SIGQUIT, ft_sigquit);
 }

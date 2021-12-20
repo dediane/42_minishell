@@ -6,7 +6,7 @@
 /*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 19:28:36 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/20 15:33:48 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2021/12/20 16:34:53 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,7 @@ int main(int ac, char **av, char **envp)
 	//ft_export(1, "diane=moi");
 	while (1)
 	{
-		signal(SIGINT, ft_sigint);
-		signal(SIGQUIT, ft_sigquit);
+		ft_launch_signal();
 		line = readline("\033[1;35m~Minishell$\033[0m ");
 		if (!line)
 			ft_exit(NULL); //gere le controle D
