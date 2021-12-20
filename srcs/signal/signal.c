@@ -21,3 +21,20 @@ void	ft_sigquit(int sig)
 	(void)sig;
 }
 // controle backslash ne fait rien
+
+void	ft_ignore(int pid)
+{
+	if (pid == 0)
+		printf("diseable\n");//diseable
+	else
+		printf("ignore\n");//ignore
+
+}
+
+void	ft_relaunch(int pid)
+{
+	if (pid > 0)
+		printf("relaunche signal\n");
+	//signal(SIGINT, ft_sigint);
+	//signal(SIGQUIT, ft_sigquit);
+}
