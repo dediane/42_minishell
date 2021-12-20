@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:03:55 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/20 18:21:58 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/12/20 22:05:57 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ char	**ft_exec_all_cmd(t_parsing *params, char **envp)// , int &ret)
 		|| (params->type != 0 && params->next == NULL))
 		{
 			//printf("exec 2\n");
-			params = ft_exec_redir(params, envp);
+			params = ft_exec_redir(params, envp);;
 		}
 		else
 		{

@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 13:17:26 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/20 18:36:48 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/12/20 22:10:46 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,18 @@ int	open_file(t_parsing *params, char *file)
 	int	fd;
 
 	if (params->type == 1 || params->type == 4)
-		return (fd = open(file, O_RDONLY));
+		fd = open(file, O_RDONLY);
 	if (params->type == 2)
-		return (fd = open(file, O_RDWR | O_TRUNC | O_CREAT, 0664));
+		fd = open(file, O_RDWR | O_TRUNC | O_CREAT, 0664);
 	if (params->type == 3)
-		return (fd = open(file, O_RDWR | O_APPEND | O_CREAT, 0664));
-	else
-		return (0);
+		fd = open(file, O_RDWR | O_APPEND | O_CREAT, 0664);
+	if (fd <= 0)
+	{
+		params->ret_value = 1;
+		ft_putstr("minishell: ");
+		return(perror(file), -1);
+	}
+	return (fd);
 }
 
 void	ft_free_params(t_parsing *params)
