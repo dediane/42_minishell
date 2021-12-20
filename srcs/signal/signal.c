@@ -9,13 +9,15 @@
 void	ft_sigint(int sig)
 {
 	(void)sig;
-	printf("le signal est ctrl C\n");
-	printf("afficher un nouveau prompt\n");
-	// free all here
-	exit (0);
+	rl_redisplay();
+	ft_putstr_fd("  \b \b", 0);
+	write(1, "\n", 1);
+	rl_replace_line("", 0);
+	rl_on_new_line();
+	rl_redisplay();
 }
 void	ft_sigquit(int sig)
 {
 	(void)sig;
-	printf("le signal est Ctrl \\\n");
 }
+// controle backslash ne fait rien

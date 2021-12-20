@@ -6,7 +6,7 @@
 /*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 19:28:36 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/19 15:17:45 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2021/12/20 14:59:51 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,17 +75,14 @@ int main(int ac, char **av, char **envp)
 	//ft_export(1, "diane=moi");
 	while (1)
 	{
+		signal(SIGINT, ft_sigint);
+		signal(SIGQUIT, ft_sigquit);
 		line = readline("\033[1;35m~Minishell$\033[0m ");
 		if (!line)
-		{
-			printf("\nreadline existe pas signal ctrl D, il faut exit\nJe peux pas exit pck la fonction prend en param line, ici line existe pas\n");
-			ft_exit(NULL);
-		}
+			ft_exit(NULL); //gere le controle D
 		else
 		{
 			add_history(line);
-			//signal(SIGINT, ft_sigint);
-			//signal(SIGQUIT, ft_sigquit);
 			(void)param;
 			if (ft_strnstr(line, "exit", ft_strlen(line)))
 				ft_exit(line);	
