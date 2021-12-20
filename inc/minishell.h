@@ -170,6 +170,9 @@ int		ft_is_in_env(char *key, char **envp);
 char	**ft_unset(int fd, char **tabs, char **env);
 char	*ft_strtrim_first_letter(char *line);
 
+//heredoc
+int		ft_heredoc(char *eof);
+
 ////////signal
 
 //signal.c
