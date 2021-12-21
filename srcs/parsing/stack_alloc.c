@@ -39,6 +39,7 @@ int		ft_add_maillon(t_parsing *param)
 	new->pipe = 0;
 	new->index = 0;
 	new->ret_value = 0;
+	new->heredoc = 0;
 	new->fd_stdout = 0; 
 	new->fd_stdin = 0; 
 	new->type = NONE;

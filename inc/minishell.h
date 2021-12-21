@@ -58,6 +58,7 @@ typedef	struct s_parsing
 	int					fd_stdout;
 	int					fd_stdin;
 	int					ret_value;
+	int					heredoc;
 	t_filetype			type;		//je pense qu'il sert a rien lui quoique je m'en sert dans le parsing
 	t_file				*file;
 //	t_cmdtype			a_cmd;		//commande after maillon (le dernier maillon sera forcement NONE/0)
@@ -171,7 +172,7 @@ char	**ft_unset(int fd, char **tabs, char **env);
 char	*ft_strtrim_first_letter(char *line);
 
 //heredoc
-int		ft_heredoc(char *eof);
+int		ft_heredoc(char *eof, t_parsing *params);
 
 ////////signal
 
