@@ -1,8 +1,14 @@
-
-
-
-        ////HEADER///
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   variable_env.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: balkis <balkis@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/21 21:18:28 by balkis            #+#    #+#             */
+/*   Updated: 2021/12/21 22:07:19 by balkis           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
@@ -21,11 +27,8 @@ char	*find_var(char **envp, char *line)
 		var = strndup(envp[j], i);
 		if (ft_strncmp(var, &line[1], ft_strlen(line)) == 0)
 		{
-			free(line);
-			line = NULL;
-			line = ft_strdup(&envp[j][++i]);
 			free(var);
-			return (line);
+			return (ft_copy_line(line, envp, i, j));
 		}
 		i = 0;
 		free(var);
@@ -60,7 +63,8 @@ int	ft_change(char *argv)
 	int	i;
 
 	i = 0;
-	if (argv[i] == '$' && ((argv[i + 1] && argv[i + 1] == ' ' ) || (!argv[i + 1])))
+	if (argv[i] == '$' && ((argv[i + 1] && argv[i + 1] == ' ' ) \
+		|| (!argv[i + 1])))
 		return (0);
 	while (argv[i] && argv[i] != ' ')
 	{
@@ -93,7 +97,8 @@ char	*ft_replace_var(char *line, char **envp)
 	}
 	var = strndup(&line[pos], len);
 	exp = ft_search_var(var, envp, exp, pos);
-	var = malloc(sizeof(char) * (pos + ft_strlen(exp) + ft_strlen(&line[pos + len]) + 1));
+	var = malloc(sizeof(char) * \
+		(pos + ft_strlen(exp) + ft_strlen(&line[pos + len]) + 1));
 	return (ft_copy(var, line, exp, pos));
 }
 
@@ -114,14 +119,7 @@ char	*ft_search_var(char *var, char **envp, char *line, int pos)
 			i++;
 		name = strndup(envp[j], i);
 		if (ft_strncmp(name, var, ft_strlen(var)) == 0)
-		{
-			free(var);
-			var = NULL;
-			var = ft_strdup(&envp[j][++i]);
-			free(name);
-			name = NULL;
-			return (var);
-		}
+			return (ft_copy_var(var, envp, j, i));
 		i = 0;
 		free(name);
 		name = NULL;

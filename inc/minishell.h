@@ -120,6 +120,7 @@ int 	ft_simple_quote(char *line, int *i, char *argv, t_parsing *param);
 void	ft_pass_squote(char *argv, int *i);
 int		pos_dolar(char *line);
 char	*ft_copy(char *var, char *line, char *exp, int pos);
+void	ft_copy2(char *line, int pos, char *var, int i);
 
 //check_redoc.c
 void	ft_define_redicretcion(char *argv, int *i, t_parsing *param);
@@ -149,6 +150,9 @@ int		ft_change(char *argv);
 char	*ft_replace_var(char *line, char **envp);
 char	*ft_search_var(char *var, char **envp, char *line, int pos);
 
+//variable_env2.c
+char	*ft_copy_line(char *line, char **envp, int i, int j);
+char	*ft_copy_var(char *var, char **envp, int j, int i);
 
 ////////built_in
 char	*get_path(char **envp, char *to_find, int *i);

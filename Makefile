@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+         #
+#    By: balkis <balkis@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/26 19:30:34 by ddecourt          #+#    #+#              #
-#    Updated: 2021/12/20 23:36:20 by ddecourt         ###   ########.fr        #
+#    Updated: 2021/12/21 21:22:25 by balkis           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ SRCS =	srcs/minishell.c \
 		srcs/parsing/stack_alloc.c \
 		srcs/parsing/check_redoc.c \
 		srcs/parsing/variable_env.c \
+		srcs/parsing/variable_env2.c \
 		srcs/parsing/env_liste.c \
 		srcs/built_in/env.c \
 		srcs/built_in/pwd.c \
