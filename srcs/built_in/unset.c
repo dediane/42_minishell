@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 14:55:03 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/19 23:25:57 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/12/21 15:05:46 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,7 @@ char	**unset_in_env(char *line, char **env)
 	{
 		size_line = ft_strlen(line);
 		if (!(ft_strncmp(env[i], line, size_line) == 0))
-		{
 			tmp[j++] = ft_strdup(env[i]);
-			printf("Valeur de j = %i\n", (j - 1));
-			printf("Valeur de i = %i\n", i);
-			printf("Valeur tmp[j] = %s\n", tmp[j - 1]);
-			printf("Valeur env[i] = %s\n", env[i]);
-		}
 	}
 	tmp[j] = NULL;
 	return (tmp);

@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 14:55:05 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/19 23:22:42 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/12/21 15:07:22 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ char	**ft_export(int fd, char **tabs, char **env)
 	char	*key;
 	char	*value;
 	char	**tmp;
-	int		i;
 	int		is_in_env;
 
 	(void)fd;
@@ -97,7 +96,6 @@ char	**ft_export(int fd, char **tabs, char **env)
 	value = NULL;
 	tmp = NULL;
 	is_in_env = 0;
-	i = -1;
 	if (tabs[2])
 		return (0);
 	ft_parse_env(tabs[1], &key, &value);

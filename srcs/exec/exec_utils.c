@@ -6,18 +6,20 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 13:17:26 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/20 23:44:41 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/12/21 15:32:08 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-char	**get_cmd_path(char **envp) // Je récupère mon tableau de paths vers les commandes -> usr/bin etc...
+// Je récupère mon tableau de paths vers les commandes -> usr/bin etc...
+char	**get_cmd_path(char **envp)
 {
 	int		i;
 	int		j;
 	char	*path;
 	char	**tmp;
+
 	i = -1;
 	j = -1;
 	while (envp[++i])
@@ -31,7 +33,8 @@ char	**get_cmd_path(char **envp) // Je récupère mon tableau de paths vers les 
 	return (tmp);
 }
 
-char	*get_right_path(t_parsing *params, char **envp) // Je checke tous les paths pour trouver le bon et je retourne le bon path
+// Je checke tous les paths pour trouver le bon et je retourne le bon path
+char	*get_right_path(t_parsing *params, char **envp)
 {
 	char	*path;
 	char	**path_array;
@@ -71,7 +74,7 @@ int	open_file(t_parsing *params, char *file)
 	{
 		params->ret_value = 1;
 		ft_putstr("minishell: ");
-		return(perror(file), -1);
+		return (perror(file), -1);
 	}
 	return (fd);
 }

@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 12:11:42 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/20 18:48:35 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/12/21 15:17:49 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	is_built_in(t_parsing *params, char *cmd, char ***envp)
 {
-    int fd;
+	int	fd;
 
-    fd = 0;
+	fd = 0;
 	if (ft_strncmp(cmd, "cd", 3) == 0)
 	{
 		if (!(params->tabs[1]))
@@ -43,7 +43,6 @@ int	is_built_in(t_parsing *params, char *cmd, char ***envp)
 	else if (ft_strncmp(cmd, "export", 7) == 0)
 	{
 		*envp = ft_export(1, params->tabs, *envp);
-		//ft_print_tab(*envp);
 		return (1);
 	}
 	else if (ft_strncmp(cmd, "unset", 6) == 0)

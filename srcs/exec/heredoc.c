@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 23:11:44 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/20 23:37:34 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/12/21 15:23:06 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	check_eof(char *line, char *eof)
 {
-	int size;
+	int	size;
 
 	size = ft_strlen(line);
 	if (ft_strncmp(eof, line, size) == 0)
@@ -24,17 +24,16 @@ int	check_eof(char *line, char *eof)
 
 int	ft_heredoc(char *eof)
 {
-	char *line;
+	char	*line;
 
 	while (1)
 	{
 		line = readline("> ");
-		//ft_putstr_fd(line, 1);
-		/*if(!line)
+		if (line)
 		{
-		}*/
-		if (check_eof(line, eof))
-			break;
+			if (check_eof(line, eof))
+				break ;
+		}
 	}
 	return (0);
 }
