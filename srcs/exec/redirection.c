@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 20:24:05 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/21 15:30:58 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/12/21 18:25:05 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ int	ft_multiple_redir(int nb, t_file *file, t_parsing *params, char **envp)
 		nb--;
 		if (nb != 0)
 		{
+			printf("Je suis la\n");
 			fd = open(file->name, O_TRUNC);
 			if (fd < 0)
 				return (1);
@@ -75,6 +76,8 @@ int	ft_multiple_redir(int nb, t_file *file, t_parsing *params, char **envp)
 		close(fd);
 		file = file->next;
 	}
+	//if (params->heredoc == 1)
+	//	dup2(params->fd_stdin, STDIN);
 	close(params->fd_stdin);
 	dup2(params->fd_stdout, STDOUT);
 	return (0);

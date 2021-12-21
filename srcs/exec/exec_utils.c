@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 13:17:26 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/21 15:32:08 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/12/21 18:11:13 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ int	open_file(t_parsing *params, char *file)
 	if (params->type == 3)
 		fd = open(file, O_RDWR | O_APPEND | O_CREAT, 0664);
 	if (params->type == 4)
-		ft_heredoc(file);
-	if (fd <= 0)
+		fd = ft_heredoc(file);
+	if (fd < 0)
 	{
 		params->ret_value = 1;
 		ft_putstr("minishell: ");
