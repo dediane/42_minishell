@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: balkis <balkis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 20:11:36 by balkis            #+#    #+#             */
-/*   Updated: 2021/12/22 14:08:50 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2021/12/22 19:31:50 by balkis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_sigint(int sig)
 {
 	(void)sig;
 	rl_redisplay();
-	ft_putstr_fd("  \b\b", 0);
+	ft_putstr_fd("  \b\b", 1);
 	write(1, "\n", 1);
 	#if __LINUX__
 		rl_replace_line("", 0);
@@ -45,7 +45,6 @@ void	ft_disable(int pid)
 	{
 		signal(SIGINT, SIG_DFL);
 		signal(SIGQUIT, SIG_DFL);
-		printf("QUIT: 3\n");
 	}
 	else
 	{
