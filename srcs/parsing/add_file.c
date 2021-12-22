@@ -1,10 +1,14 @@
-
-
-
-
-                //////HEADER/////////
-
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   add_file.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/22 14:12:45 by bben-yaa          #+#    #+#             */
+/*   Updated: 2021/12/22 14:20:11 by bben-yaa         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
@@ -33,7 +37,7 @@ int	ft_add_to_fstack(t_parsing *param, char *line)
 	t_file		*tmp;
 	t_file		*new;
 	t_parsing	*prm;
-	char	*new_name;
+	char		*new_name;
 
 	tmp = param->file;
 	prm = param;
@@ -45,19 +49,32 @@ int	ft_add_to_fstack(t_parsing *param, char *line)
 	{
 		new->next = NULL;
 		ft_strcpy(new_name, line);
-		new->name = new_name;		//here add type for file
+		new->name = new_name;
 		new->ftype = param->type;
 		param->file = new;
 	}
 	else if (param->file)
 	{
+		//ft_add_to_fstack2(tmp, );
 		while (tmp->next)
 			tmp = tmp->next;
 		new->next = NULL;
 		ft_strcpy(new_name, line);
-		new->name = new_name;		//here add type for file
+		new->name = new_name;
 		new->ftype = param->type;
-		tmp->next  = new;
+		tmp->next = new;
 	}
 	return (1);
 }
+
+/*void	ft_add_to_fstack2(t_parsing *param, char *line, char *new_name, )
+{
+	while (tmp->next)
+	tmp = tmp->next;
+	new->next = NULL;
+	ft_strcpy(new_name, line);
+	new->name = new_name;
+	new->ftype = param->type;
+	tmp->next = new;
+}
+*/

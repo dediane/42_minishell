@@ -6,7 +6,7 @@
 /*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 20:11:36 by balkis            #+#    #+#             */
-/*   Updated: 2021/12/22 12:31:47 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2021/12/22 14:08:50 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	ft_sigint(int sig)
 {
 	(void)sig;
 	rl_redisplay();
+	ft_putstr_fd("  \b\b", 0);
 	write(1, "\n", 1);
 	#if __LINUX__
 		rl_replace_line("", 0);
@@ -32,18 +33,29 @@ void	ft_sigquit(int sig)
 	(void)sig;
 }
 
-void	ft_ignore(int pid)
+void	ft_ignore(int sig)
 {
-	if (pid == 0)
-		printf("diseable\n");//diseable
-	else
-		printf("ignore\n");//ignore
+	if (sig == SIGINT)
+		write(1, "\n", 1);
 }
 
-void	ft_relaunch(int pid)
+void	ft_disable(int pid)
 {
-	if (pid > 0)
-		printf("relaunche signal\n");
-	//signal(SIGINT, ft_sigint);
-	//signal(SIGQUIT, ft_sigquit);
+	if (pid == 0)
+	{
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
+		printf("QUIT: 3\n");
+	}
+	else
+	{
+		signal(SIGINT, ft_ignore);
+		signal(SIGQUIT, ft_ignore);
+	}	
+}
+
+void	ft_launch_signal(void)
+{
+	signal(SIGINT, ft_sigint);
+	signal(SIGQUIT, ft_sigquit);
 }
