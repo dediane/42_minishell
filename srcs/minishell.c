@@ -6,7 +6,7 @@
 /*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 19:28:36 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/20 16:34:53 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2021/12/22 13:27:29 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,6 @@ void	ft_print_title(void)
 	|_|  |_|_|_| |_|_|___/_| |_|\\___|_|_|\n\033[0m \
 	\t\t\tby Diane & Balkis\n\n");
 }
-
-///Diane la plus forte!!, je t'aime!!
-
-/*void	ft_add_relative_path(char ***envp)
-{
-	int i;
-	char *path;
-	
-	i = 0;
-	path = get_path(*envp, "PATH", &i);
-	printf("PATH = [%s]\n", path);
-	path = ft_strjoin(path, ":~");
-	printf("PATH = [%s]\n", path);
-}*/
 
 char	**ft_copy_tab(char **envp)
 {
@@ -57,18 +43,6 @@ char	**ft_copy_tab(char **envp)
 	env[i] = NULL;
 	return (env);
 }
-
-/*char	**set_ret_value(char **env)
-{
-	char **tmp;
-	
-	tmp = malloc(sizeof(char *) * 3);
-	tmp[0] = ft_strdup("export");
-	tmp[1] = ft_strdup("RETURN=0");
-	tmp[2] = NULL;
-	env = ft_export(1, tmp, env);
-	return (env);
-}*/
 
 int main(int ac, char **av, char **envp)
 {

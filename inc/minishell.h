@@ -57,6 +57,8 @@ typedef	struct s_parsing
 	int					index;
 	int					fd_stdout;
 	int					fd_stdin;
+	int					ret_value;
+	int					heredoc;
 	t_filetype			type;		//je pense qu'il sert a rien lui quoique je m'en sert dans le parsing
 	t_file				*file;
 //	t_cmdtype			a_cmd;		//commande after maillon (le dernier maillon sera forcement NONE/0)
@@ -118,6 +120,7 @@ int 	ft_simple_quote(char *line, int *i, char *argv, t_parsing *param);
 void	ft_pass_squote(char *argv, int *i);
 int		pos_dolar(char *line);
 char	*ft_copy(char *var, char *line, char *exp, int pos);
+void	ft_copy2(char *line, int pos, char *var, int i);
 
 //check_redoc.c
 void	ft_define_redicretcion(char *argv, int *i, t_parsing *param);
@@ -147,18 +150,22 @@ int		ft_change(char *argv);
 char	*ft_replace_var(char *line, char **envp);
 char	*ft_search_var(char *var, char **envp, char *line, int pos);
 
+//variable_env2.c
+char	*ft_copy_line(char *line, char **envp, int i, int j);
+char	*ft_copy_var(char *var, char **envp, int j, int i);
 
 ////////built_in
 char	*get_path(char **envp, char *to_find, int *i);
 char	*ft_get_home(char **envp);
 //cd
-int		ft_cd(char **envp, char *path);
+int		ft_cd(char **envp, char *path, t_parsing *params);
+char	*ft_get_home(char **envp);
 int		change_env(char **envp, char *path, char *new_path);
 
 int		ft_env(int fd, char **envp);
 int		ft_pwd(int fd);
 void	ft_exit(char *exit_line);
-int		ft_echo(int fd, char **arg);
+int		ft_echo(int fd, t_parsing *params);
 //export
 char	**ft_export(int fd, char **tabs, char **env);
 void	ft_print_tab(char **tab);
@@ -167,6 +174,9 @@ int		ft_is_in_env(char *key, char **envp);
 //unset
 char	**ft_unset(int fd, char **tabs, char **env);
 char	*ft_strtrim_first_letter(char *line);
+
+//heredoc
+int		ft_heredoc(char *eof, t_parsing *params);
 
 ////////signal
 

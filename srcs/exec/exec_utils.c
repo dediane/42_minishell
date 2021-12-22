@@ -6,18 +6,20 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 13:17:26 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/19 19:47:13 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/12/21 18:29:26 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-char	**get_cmd_path(char **envp) // Je récupère mon tableau de paths vers les commandes -> usr/bin etc...
+// Je récupère mon tableau de paths vers les commandes -> usr/bin etc...
+char	**get_cmd_path(char **envp)
 {
 	int		i;
 	int		j;
 	char	*path;
 	char	**tmp;
+
 	i = -1;
 	j = -1;
 	while (envp[++i])
@@ -31,7 +33,8 @@ char	**get_cmd_path(char **envp) // Je récupère mon tableau de paths vers les 
 	return (tmp);
 }
 
-char	*get_right_path(t_parsing *params, char **envp) // Je checke tous les paths pour trouver le bon et je retourne le bon path
+// Je checke tous les paths pour trouver le bon et je retourne le bon path
+char	*get_right_path(t_parsing *params, char **envp)
 {
 	char	*path;
 	char	**path_array;
@@ -51,6 +54,7 @@ char	*get_right_path(t_parsing *params, char **envp) // Je checke tous les paths
 	}
 	ft_putstr_fd(params->tabs[0], 2);
 	ft_putstr_fd(": command not found\n", 2);
+	params->ret_value = 127;
 	return (NULL);
 }
 
@@ -58,14 +62,21 @@ int	open_file(t_parsing *params, char *file)
 {
 	int	fd;
 
-	if (params->type == 1 || params->type == 4)
-		return (fd = open(file, O_RDONLY));
+	if (params->type == 1)
+		fd = open(file, O_RDONLY);
 	if (params->type == 2)
-		return (fd = open(file, O_RDWR | O_TRUNC | O_CREAT, 0664));
+		fd = open(file, O_RDWR | O_TRUNC | O_CREAT, 0664);
 	if (params->type == 3)
-		return (fd = open(file, O_RDWR | O_APPEND | O_CREAT, 0664));
-	else
-		return (0);
+		fd = open(file, O_RDWR | O_APPEND | O_CREAT, 0664);
+	if (params->type == 4)
+		fd = ft_heredoc(file, params);
+	if (fd < 0)
+	{
+		params->ret_value = 1;
+		ft_putstr("minishell: ");
+		return (perror(file), -1);
+	}
+	return (fd);
 }
 
 void	ft_free_params(t_parsing *params)

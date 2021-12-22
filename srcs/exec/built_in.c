@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 12:11:42 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/19 21:21:15 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/12/21 15:17:49 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 int	is_built_in(t_parsing *params, char *cmd, char ***envp)
 {
-    int fd;
+	int	fd;
 
-    fd = 0;
+	fd = 0;
 	if (ft_strncmp(cmd, "cd", 3) == 0)
 	{
 		if (!(params->tabs[1]))
-			ft_cd(*envp, NULL);
+			ft_cd(*envp, NULL, params);
 		else
-			ft_cd(*envp, params->tabs[1]);
+			ft_cd(*envp, params->tabs[1], params);
 		return (1);
 	}
 	else if (ft_strncmp(cmd, "pwd", 4) == 0)
@@ -32,7 +32,7 @@ int	is_built_in(t_parsing *params, char *cmd, char ***envp)
 	}
 	else if (ft_strncmp(params->tabs[0], "echo", 5) == 0)
 	{
-		ft_echo(1, params->tabs);
+		ft_echo(1, params);
 		return (1);
 	}
 	else if (ft_strncmp(cmd, "env", 4) == 0)
@@ -43,7 +43,6 @@ int	is_built_in(t_parsing *params, char *cmd, char ***envp)
 	else if (ft_strncmp(cmd, "export", 7) == 0)
 	{
 		*envp = ft_export(1, params->tabs, *envp);
-		//ft_print_tab(*envp);
 		return (1);
 	}
 	else if (ft_strncmp(cmd, "unset", 6) == 0)

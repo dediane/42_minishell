@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 00:47:40 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/19 22:13:05 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/12/20 18:44:29 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ int	check_n(char *arg)
 	return (1);
 }
 
-int	check_size(int size, int fd, char **arg)
+int	check_size(int size, int fd, char **tabs)
 {
-	while (arg[size])
+	while (tabs[size])
 		size++;
 	if (size == 1)
 	{
@@ -41,7 +41,7 @@ int	check_size(int size, int fd, char **arg)
 	return (1);
 }
 
-int	ft_echo(int fd, char **arg)
+int	ft_echo(int fd, t_parsing *params)
 {
 	int	size;
 	int	n;
@@ -50,11 +50,11 @@ int	ft_echo(int fd, char **arg)
 	size = 0;
 	i = 1;
 	n = 1;
-	if (!check_size(0, fd, arg))
+	if (!check_size(0, fd, params->tabs))
 		return (0);
-	while (arg[i] && arg[i][0] == '-')
+	while (params->tabs[i] && params->tabs[i][0] == '-')
 	{
-		n = check_n(arg[i]);
+		n = check_n(params->tabs[i]);
 		if (n == 0)
 		{
 			size++;
@@ -63,13 +63,17 @@ int	ft_echo(int fd, char **arg)
 		else
 			break ;
 	}
-	while (arg[i])
+
+	while (params->tabs[i] && params->tabs[i][0] != '$')
 	{
-		ft_putstr_fd(arg[i++], fd);
-		if (arg[i])
+		ft_putstr_fd(params->tabs[i++], fd);
+		if (params->tabs[i])
 			ft_putchar_fd(' ', fd);
 	}
+	if (params->tabs[i] && params->tabs[i][0] == '$')
+		ft_putnbr_fd(params->ret_value, fd);
 	if (n == 1 && size == 0)
 		ft_putchar_fd('\n', fd);
+	params->ret_value = 0;
 	return (0);
 }
