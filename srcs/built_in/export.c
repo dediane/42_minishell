@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 14:55:05 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/21 21:15:11 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/12/22 17:59:37 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,21 @@ void	ft_print_export(char **env)
 	}
 }
 
+int		ft_check_arg(char	*arg)
+{
+	int i;
+
+	i = 0;
+	while (arg[i] && ft_isalpha(arg[i]))
+		i++;
+	if (i == ft_strlen(arg) || (arg[i + 1] && arg[i + 1] == '='))
+		return (1);
+	ft_putstr_fd("minishell: export: `", 1);
+	ft_putstr_fd(arg, 1);
+	ft_putstr_fd("': not a valid identifier\n" , 1);
+	return (0);
+}
+
 char	**ft_export(int fd, char **tabs, char **env)
 {
 	char	*key;
@@ -135,6 +150,8 @@ char	**ft_export(int fd, char **tabs, char **env)
 	if (!tabs[1])
 		ft_print_export(env);
 	else if (tabs[2])
+		return (0);
+	if (!ft_check_arg(tabs[1]))
 		return (0);
 	ft_parse_env(tabs[1], &key, &value);
 	is_in_env = ft_is_in_env(key, env);
