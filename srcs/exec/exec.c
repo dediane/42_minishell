@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:03:55 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/21 17:13:11 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/12/22 14:30:18 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	exec_process(char **cmd, char *path, char **envp)
 	int	pid;
 
 	pid = fork();
+	ft_disable(pid);
 	if (pid == 0)
 	{
 		execve(path, cmd, envp);
@@ -26,6 +27,7 @@ int	exec_process(char **cmd, char *path, char **envp)
 	{
 		waitpid(-1, 0, 0);
 	}
+	ft_launch_signal();
 	return (0);
 }
 

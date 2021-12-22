@@ -183,5 +183,8 @@ int		ft_heredoc(char *eof, t_parsing *params);
 //signal.c
 void	ft_sigint(int sig);
 void	ft_sigquit(int sig);
+void	ft_ignore(int sig);
+void	ft_disable(int pid);
+void	ft_launch_signal(void);
 
 #endif
