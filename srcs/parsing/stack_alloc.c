@@ -6,7 +6,7 @@
 /*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 11:37:17 by bben-yaa          #+#    #+#             */
-/*   Updated: 2021/12/22 11:40:06 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2021/12/22 12:08:30 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,16 +65,15 @@ void	ft_index(t_parsing *param)
 	}
 	ft_nb_cmd(param, i);
 }
-/*
+
 void	ft_nb_cmd(t_parsing *param, int i)
 {
 	t_parsing	*tmp;
 
-    tmp = param;
+	tmp = param;
 	while (tmp)
 	{
 		tmp->nb_cmd = i;
 		tmp = tmp->next;
 	}
 }
-*/
