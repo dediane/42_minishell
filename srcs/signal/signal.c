@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: balkis <balkis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 20:11:36 by balkis            #+#    #+#             */
-/*   Updated: 2021/12/21 20:56:00 by balkis           ###   ########.fr       */
+/*   Updated: 2021/12/22 12:31:47 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,13 @@ void	ft_sigint(int sig)
 {
 	(void)sig;
 	rl_redisplay();
-	ft_putstr_fd("  \b \b", 0);
 	write(1, "\n", 1);
-	//rl_replace_line("", 0);
+	#if __LINUX__
+		rl_replace_line("", 0);
+	#endif
+	#if __APPLE__
+		ft_putstr_fd("\033[1;35m~Minishell$\033[0m ", 0);
+	#endif
 	rl_on_new_line();
 	rl_redisplay();
 }
@@ -27,7 +31,6 @@ void	ft_sigquit(int sig)
 {
 	(void)sig;
 }
-// controle backslash ne fait rien
 
 void	ft_ignore(int pid)
 {
