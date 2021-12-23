@@ -6,7 +6,7 @@
 /*   By: balkis <balkis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 21:18:28 by balkis            #+#    #+#             */
-/*   Updated: 2021/12/21 22:07:19 by balkis           ###   ########.fr       */
+/*   Updated: 2021/12/23 19:45:50 by balkis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ char	*ft_replace_var(char *line, char **envp)
 		}
 		len++;
 	}
+	if (!len)
+		return (line);
 	var = strndup(&line[pos], len);
 	exp = ft_search_var(var, envp, exp, pos);
 	var = malloc(sizeof(char) * \
@@ -118,7 +120,7 @@ char	*ft_search_var(char *var, char **envp, char *line, int pos)
 		while (envp[j][i] != '=')
 			i++;
 		name = strndup(envp[j], i);
-		if (ft_strncmp(name, var, ft_strlen(var)) == 0)
+		if (ft_strncmp(name, var, ft_strlen(name)) == 0 && ft_strncmp(name, var, ft_strlen(var)) == 0)
 			return (ft_copy_var(var, envp, j, i));
 		i = 0;
 		free(name);
