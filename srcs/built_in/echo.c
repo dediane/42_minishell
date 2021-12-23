@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: balkis <balkis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 00:47:40 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/20 18:44:29 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/12/23 13:30:49 by balkis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,15 +63,17 @@ int	ft_echo(int fd, t_parsing *params)
 		else
 			break ;
 	}
-
-	while (params->tabs[i] && params->tabs[i][0] != '$')
+	while (params->tabs[i])// && params->tabs[i][0] != '$')
 	{
-		ft_putstr_fd(params->tabs[i++], fd);
-		if (params->tabs[i])
+		if (ft_strncmp(params->tabs[i], "$?", 3) == 0)
+			ft_putnbr_fd(params->ret_value, fd);
+		else
+			ft_putstr_fd(params->tabs[i], fd);
+		if (params->tabs[i++])
 			ft_putchar_fd(' ', fd);
 	}
-	if (params->tabs[i] && params->tabs[i][0] == '$')
-		ft_putnbr_fd(params->ret_value, fd);
+//	if (params->tabs[i] && params->tabs[i][0] == '$')
+//		ft_putnbr_fd(params->ret_value, fd);
 	if (n == 1 && size == 0)
 		ft_putchar_fd('\n', fd);
 	params->ret_value = 0;

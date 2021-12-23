@@ -1,8 +1,14 @@
-
-
-//////////HEADER///////////
-
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing_utils.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: balkis <balkis@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/22 21:04:33 by balkis            #+#    #+#             */
+/*   Updated: 2021/12/22 21:04:35 by balkis           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
@@ -14,10 +20,11 @@ int	init_param(t_parsing *param)
 	param->index = 0;
 	param->fd_stdin = 0;
 	param->fd_stdout = 0;
+	param->ret_value = 0;
+	param->heredoc = 0;
 	param->type = NONE;
 	param->file = NULL;
-//	param->b_cmd = NONE;
-//	param->a_cmd = NONE;
+	param->next = NULL;
 	return (1);
 }
 
