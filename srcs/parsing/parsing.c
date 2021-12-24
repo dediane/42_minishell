@@ -6,7 +6,7 @@
 /*   By: balkis <balkis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 10:03:50 by bben-yaa          #+#    #+#             */
-/*   Updated: 2021/12/23 12:31:20 by balkis           ###   ########.fr       */
+/*   Updated: 2021/12/24 13:20:47 by balkis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,10 @@ int	parsing(char *argv, t_parsing *param, char **envp)
 		if (argv[i] == 34)
 		{
 			line = ft_double_quote(line, &i, argv, tmp);
-			if (line == 0)
+			if (tmp->stop == 1)
 				return (0);
+			if (line == 0)
+				break ;
 			if (dolar_quotes(line))
 				line = ft_replace_var(line, envp);
 			if (!ft_tabs(param, line))

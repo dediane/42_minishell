@@ -6,7 +6,7 @@
 /*   By: balkis <balkis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 21:04:33 by balkis            #+#    #+#             */
-/*   Updated: 2021/12/22 21:04:35 by balkis           ###   ########.fr       */
+/*   Updated: 2021/12/24 13:01:12 by balkis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	init_param(t_parsing *param)
 	param->fd_stdout = 0;
 	param->ret_value = 0;
 	param->heredoc = 0;
+	param->stop = 0;
 	param->type = NONE;
 	param->file = NULL;
 	param->next = NULL;

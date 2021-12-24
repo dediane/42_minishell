@@ -52,16 +52,15 @@ typedef	struct s_parsing
 {
 	int					nb_cmd;		//== nombre de maillon
 	char				**tabs;		//il y a la commande et les arguments dedans
-//	t_cmdtype			b_cmd;		//commande before maillon (le premier maillon sera forcement NONE/0)
 	int					pipe;
 	int					index;
 	int					fd_stdout;
 	int					fd_stdin;
 	int					ret_value;
 	int					heredoc;
+	int					stop;
 	t_filetype			type;		//je pense qu'il sert a rien lui quoique je m'en sert dans le parsing
 	t_file				*file;
-//	t_cmdtype			a_cmd;		//commande after maillon (le dernier maillon sera forcement NONE/0)
 	struct s_parsing	*next;
 }			t_parsing;
 

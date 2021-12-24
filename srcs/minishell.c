@@ -6,7 +6,7 @@
 /*   By: balkis <balkis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 19:28:36 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/22 19:45:22 by balkis           ###   ########.fr       */
+/*   Updated: 2021/12/24 12:20:58 by balkis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,12 @@ int main(int ac, char **av, char **envp)
 		{
 			if (line)
 				add_history(line);
-			(void)param;
-			//if (ft_strnstr(line, "exit", ft_strlen(line)))
-			if (ft_strncmp(line, "exit", ft_strlen(line)) == 0)
+			if (ft_strnstr(line, "exit", ft_strlen(line)))
+			//if (ft_strncmp(line, "exit", ft_strlen(line)) == 0)
 				ft_exit(line);
 			if (line[0] != '\0')
 			{
+				//printf("line[0] vaut %c\n", line[0]);
 				if (parsing(line, &param, env)) //return -1 ou 0 si l'allocution echoue, les quotes ne sont pas fermees, 
 					// les > sont plus de deux, y'a rien apres les pipes (faut regarder le comportement de bash pck pour lui c'est pas une erreur),
 					// y'a aucun fichier après les redirection 
