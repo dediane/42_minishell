@@ -6,7 +6,7 @@
 /*   By: balkis <balkis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 11:37:17 by bben-yaa          #+#    #+#             */
-/*   Updated: 2021/12/24 13:01:28 by balkis           ###   ########.fr       */
+/*   Updated: 2021/12/25 15:42:45 by balkis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	ft_add_maillon(t_parsing *param)
 	new->tabs = NULL;
 	new->pipe = 0;
 	new->index = 0;
-	new->ret_value = 0;
+	//new->ret_value = 0;
 	new->heredoc = 0;
 	new->stop = 0;
 	new->fd_stdout = 0;

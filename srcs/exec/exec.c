@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: balkis <balkis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:03:55 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/22 14:30:18 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2021/12/25 16:01:43 by balkis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ char	**ft_exec(t_parsing *params, char **envp)
 		return (envp);
 	else
 	{
+		printf("is not built-in\n");
 		if (access(params->tabs[0], F_OK) == 0)
 		{
 			relative = 1;
@@ -61,7 +62,8 @@ char	**ft_exec(t_parsing *params, char **envp)
 		else if (!right_path)
 			right_path = look_for_relative_path(params, envp);
 		if (right_path != NULL)
-			params->ret_value = exec_process(params->tabs, right_path, envp);
+			exit_value = exec_process(params->tabs, right_path, envp);
+			//params->ret_value = exec_process(params->tabs, right_path, envp);
 		return (envp);
 	}
 	return (envp);

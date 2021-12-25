@@ -6,7 +6,7 @@
 /*   By: balkis <balkis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 00:47:40 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/23 13:30:49 by balkis           ###   ########.fr       */
+/*   Updated: 2021/12/25 15:42:22 by balkis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,8 @@ int	ft_echo(int fd, t_parsing *params)
 	while (params->tabs[i])// && params->tabs[i][0] != '$')
 	{
 		if (ft_strncmp(params->tabs[i], "$?", 3) == 0)
-			ft_putnbr_fd(params->ret_value, fd);
+			ft_putnbr_fd(exit_value, fd);
+			//ft_putnbr_fd(params->ret_value, fd);
 		else
 			ft_putstr_fd(params->tabs[i], fd);
 		if (params->tabs[i++])
@@ -76,6 +77,7 @@ int	ft_echo(int fd, t_parsing *params)
 //		ft_putnbr_fd(params->ret_value, fd);
 	if (n == 1 && size == 0)
 		ft_putchar_fd('\n', fd);
-	params->ret_value = 0;
+	exit_value = 0;
+	//params->ret_value = 0;
 	return (0);
 }

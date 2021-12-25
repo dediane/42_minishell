@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: balkis <balkis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 00:14:45 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/20 18:51:19 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/12/25 15:39:56 by balkis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ int	ft_cd(char **envp, char *path, t_parsing *params)
 		change_env(envp, "OLDPWD", getcwd(buffer, 4096));
 		if (chdir(path) == -1)
 		{
-			params->ret_value = 1;
+			exit_value = 1;
+			//params->ret_value = 1;
 			return (perror(path), 2);
 		}
 		change_env(envp, "PWD", getcwd(buffer, 4096));

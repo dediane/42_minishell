@@ -6,7 +6,7 @@
 /*   By: balkis <balkis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 20:11:36 by balkis            #+#    #+#             */
-/*   Updated: 2021/12/22 19:31:50 by balkis           ###   ########.fr       */
+/*   Updated: 2021/12/25 16:03:16 by balkis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	ft_sigint(int sig)
 	#endif
 	rl_on_new_line();
 	rl_redisplay();
+	exit_value = 130;
 }
 
 void	ft_sigquit(int sig)

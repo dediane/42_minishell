@@ -56,13 +56,16 @@ typedef	struct s_parsing
 	int					index;
 	int					fd_stdout;
 	int					fd_stdin;
-	int					ret_value;
+	//int					ret_value;
 	int					heredoc;
 	int					stop;
 	t_filetype			type;		//je pense qu'il sert a rien lui quoique je m'en sert dans le parsing
 	t_file				*file;
 	struct s_parsing	*next;
 }			t_parsing;
+
+int	exit_value;
+
 
 ////////main
 char	**ft_copy_tab(char **envp);

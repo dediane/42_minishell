@@ -6,11 +6,13 @@
 /*   By: balkis <balkis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 19:28:36 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/24 12:20:58 by balkis           ###   ########.fr       */
+/*   Updated: 2021/12/25 15:50:37 by balkis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+//int	exit_value;
 
 void	ft_print_title(void)
 {
@@ -52,6 +54,7 @@ int main(int ac, char **av, char **envp)
 	//t_env		*env; pour envp en liste 
 
 	(void)av;
+	exit_value = 0;
 	env = ft_copy_tab(envp);
 	//env = set_ret_value(env);
 	//(void *)param = NULL;
@@ -59,7 +62,6 @@ int main(int ac, char **av, char **envp)
 	if (ac != 1)
 		return (ft_putstr("Error: not argument accepted\n"), 1);
 	ft_print_title();
-	//ft_export(1, "diane=moi");
 	while (1)
 	{
 		signal(SIGINT, ft_sigint);
