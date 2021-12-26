@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: balkis <balkis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:03:55 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/25 16:01:43 by balkis           ###   ########.fr       */
+/*   Updated: 2021/12/26 12:48:26 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,9 @@ int	exec_process(char **cmd, char *path, char **envp)
 	pid = fork();
 	ft_disable(pid);
 	if (pid == 0)
-	{
 		execve(path, cmd, envp);
-	}
 	else
-	{
 		waitpid(-1, 0, 0);
-	}
 	ft_launch_signal();
 	return (0);
 }
@@ -51,7 +47,7 @@ char	**ft_exec(t_parsing *params, char **envp)
 		return (envp);
 	else
 	{
-		printf("is not built-in\n");
+		//printf("is not built-in\n");
 		if (access(params->tabs[0], F_OK) == 0)
 		{
 			relative = 1;
