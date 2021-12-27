@@ -6,7 +6,7 @@
 /*   By: balkis <balkis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 20:11:36 by balkis            #+#    #+#             */
-/*   Updated: 2021/12/25 16:03:16 by balkis           ###   ########.fr       */
+/*   Updated: 2021/12/27 13:53:31 by balkis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,7 @@ void	ft_sigint(int sig)
 	rl_redisplay();
 	ft_putstr_fd("  \b\b", 1);
 	write(1, "\n", 1);
-	#if __LINUX__
-		rl_replace_line("", 0);
-	#endif
-	#if __APPLE__
-		ft_putstr_fd("\033[1;35m~Minishell$\033[0m ", 0);
-	#endif
+	ft_putstr_fd("\033[1;35m~Minishell$\033[0m ", 0);
 	rl_on_new_line();
 	rl_redisplay();
 	exit_value = 130;

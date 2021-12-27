@@ -6,7 +6,7 @@
 /*   By: balkis <balkis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 10:03:50 by bben-yaa          #+#    #+#             */
-/*   Updated: 2021/12/24 13:20:47 by balkis           ###   ########.fr       */
+/*   Updated: 2021/12/27 19:17:36 by balkis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,64 +40,62 @@ int	parsing(char *argv, t_parsing *param, char **envp)
 				line = ft_replace_var(line, envp);
 			if (!ft_tabs(param, line))
 				return (0);
-			if (argv[i + 1] == '\0')//->si on arrive a la fin de argv
+			if (argv[i + 1] == '\0')
 				break ;
 			ft_pass_dquote(argv, &i);
 			line = NULL;
 		}
-		else if (argv[i] == 39)								//c'est l'ascii du char ' simple quote
+		else if (argv[i] == 39)
 		{
-			//printf("faire fonction pour mettre dans tab tout ce qu'il y a dans les simple quote\n");
 			if (!ft_simple_quote(line, &i, argv, tmp))
 				return (0);
-			if (argv[i + 1] == '\0')//->si on arrive a la fin de argv
+			if (argv[i + 1] == '\0')
 				break ;
 			ft_pass_squote(argv, &i);
 			line = NULL;
 		}
 		else if (argv[i] == '|')
 		{
-			//printf("nouveau maillon a faire car pipe nouvelle commande\n");
 			ft_add_maillon(param);
 			tmp->next->pipe = tmp->pipe + 1;
 			tmp = tmp->next;
 			i++;
 			while(argv[i] && argv[i] == ' ')
 				i++;
-			if (!argv[i]) //enfaite c'est pas cas d'erreur 
+			if (!argv[i]) 
 			{
 				printf("Pas de commande après le pipe, cas à gérer, tu veux que je le parse comment?\
 					pck ca va creer un maillon vide -> et du coup segfault quand tu l'utilise\n");
 				return (0);
 			}
 		}
-		else if ((argv[i] == '<' || argv[i] == '>'))//&& (argv[i - 1] == ' '|| i == 0))
+		else if ((argv[i] == '<' || argv[i] == '>'))
 		{
 			if (!ft_check_redoc(argv, i))
 			{
 				printf("Minishell: syntax error near unexpected token `newline'\n");
 				return (0);
 			}
-			if (line)										//->pour gerer les cas d'interpretation si on a a='ls -la'
+			if (line)
 			{
 				if (!ft_tabs(tmp, line))
-					return (0);								//->secure malloc
+					return (0);
 				line = NULL;
 			}
 			ft_define_redicretcion(argv, &i, tmp);
-			ft_add_file(tmp, &i, argv, line);		//alloue line (= nom du fichier) pour le mettre dans la stack file
+			ft_add_file(tmp, &i, argv, line);
 			if (!tmp->file)
 				return (0);
 			while (argv[i] == ' ')
 				i++;
-			line = NULL; //line free dans ft_add_file
+			line = NULL;
 		}
-		else if (argv[i] == '$' && argv[i + 1] && argv[i + 1] != '?' && ft_change(&argv[i])) //&& argv[i - 1] == ' ')
+		else if (argv[i] == '$' && argv[i + 1] && argv[i + 1] != '?' && ft_change(&argv[i]))
 		{
-			if (line)											//->pour gérer les cas d'interpretation si on a a= "ls -la"
+			if (line)
 			{
 				if (!ft_tabs(param, line))
-					return (0);									//->secure malloc
+					return (0);
 				line = NULL;
 			}
 			while (argv[i] && argv[i] != ' ')
@@ -105,7 +103,7 @@ int	parsing(char *argv, t_parsing *param, char **envp)
 				line = ft_line(line, argv[i]);
 				i++;
 			}
-			line = find_var(envp, line); //line ne sera modifier que si la variable est trouve dans envp 
+			line = find_var(envp, line); 
 			if (argv[i])
 			{
 				while (argv[i] == ' ')
@@ -129,11 +127,11 @@ int	parsing(char *argv, t_parsing *param, char **envp)
 		{
 			if (!argv[i])
 				break ;
-			buf[0] = argv[i];							//on est sur que ici que argv[i] est un char autre que | ' " ou espace
+			buf[0] = argv[i];
 			buf[1] = '\0';
-			if (!(line = ft_line(line, buf[0])))		//fonction : mettre dans line tout en allouant et free a chaque fois//
-				return (0);								// ->allocation a echoue
-			i++;										//only if (argv[i]) ->condtion a mettre
+			if (!(line = ft_line(line, buf[0])))
+				return (0);
+			i++;
 			if (!argv[i] && line)
 			{
 			if (!ft_tabs(tmp, line))
@@ -145,7 +143,7 @@ int	parsing(char *argv, t_parsing *param, char **envp)
 	ft_index(param);
 	
 	
-	/*//////////////////////////////////////////
+	//////////////////////////////////////////
 	
 	t_parsing	*tmp2;
 	t_file		*curs;
@@ -161,19 +159,27 @@ int	parsing(char *argv, t_parsing *param, char **envp)
 		printf("valeur de pipe: %i\n", tmp2->pipe);
 		printf("index : %i\n", tmp2->index);
 		printf("nb_cmd : %i\n", tmp2->nb_cmd);
-		while (tmp2->tabs[l])
+		if (tmp2->tabs)
 		{
+			printf("il y'a des arguments\n");
+			while (tmp2->tabs[l])
+			{
+				printf("tab[%d] %s\n", l, tmp2->tabs[l]);
+				l++;
+			}
 			printf("tab[%d] %s\n", l, tmp2->tabs[l]);
-			l++;
 		}
-		printf("tab[%d] %s\n", l, tmp2->tabs[l]);
 		printf("curs before = %p\n", curs);
-		while (curs)
+		if (curs)
 		{
-			printf("name_file %d vaut %s\n", j, curs->name);
-			printf("type_file %d vaut %d\n", j, curs->ftype);
-			j++;
-			curs = curs->next;
+			printf("file existe\n");
+			while (curs)
+			{
+				printf("name_file %d vaut %s\n", j, curs->name);
+				printf("type_file %d vaut %d\n", j, curs->ftype);
+				j++;
+				curs = curs->next;
+			}
 		}
 		printf("on est d'accord que le next %p\n", tmp2->next);
 		l = 0;
@@ -182,7 +188,7 @@ int	parsing(char *argv, t_parsing *param, char **envp)
 		i++;
 		
 	}
-	printf("----This is after parsing----\n");*/
+	printf("----This is after parsing----\n");
 	//////////////////////////////////////->print tabs tout en lisant la liste chainee	et les files et type
 	return (1);
 }

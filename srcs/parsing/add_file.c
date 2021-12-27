@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   add_file.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: balkis <balkis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 14:12:45 by bben-yaa          #+#    #+#             */
-/*   Updated: 2021/12/22 14:20:11 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2021/12/27 18:45:09 by balkis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,26 +55,19 @@ int	ft_add_to_fstack(t_parsing *param, char *line)
 	}
 	else if (param->file)
 	{
-		//ft_add_to_fstack2(tmp, );
-		while (tmp->next)
-			tmp = tmp->next;
-		new->next = NULL;
 		ft_strcpy(new_name, line);
-		new->name = new_name;
-		new->ftype = param->type;
-		tmp->next = new;
+		ft_add_to_fstack2(tmp, new_name, new, param);
 	}
 	return (1);
 }
 
-/*void	ft_add_to_fstack2(t_parsing *param, char *line, char *new_name, )
+void	ft_add_to_fstack2(t_file *tmp, char *new_name, t_file *new, \
+	t_parsing *param)
 {
 	while (tmp->next)
-	tmp = tmp->next;
+		tmp = tmp->next;
 	new->next = NULL;
-	ft_strcpy(new_name, line);
 	new->name = new_name;
 	new->ftype = param->type;
 	tmp->next = new;
 }
-*/

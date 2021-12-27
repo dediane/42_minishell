@@ -1,19 +1,23 @@
-
-
-
-
-            ////////HEADER/////////
-
-
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing_quote.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: balkis <balkis@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/27 18:49:21 by balkis            #+#    #+#             */
+/*   Updated: 2021/12/27 18:56:56 by balkis           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../inc/minishell.h"
+
 char	*ft_double_quote(char *line, int *i, char *argv, t_parsing *param)
 {
-	if (line)											//->pour gérer les cas d'interpretation si on a a="ls -la"
+	if (line)
 	{
 		if (!ft_tabs(param, line))
-			return (0);									//->secure malloc
+			return (0);
 		line = NULL;
 	}
 	return (ft_add_double_quote(param, i, argv, line));
@@ -21,15 +25,15 @@ char	*ft_double_quote(char *line, int *i, char *argv, t_parsing *param)
 
 void	ft_pass_dquote(char *argv, int *i)
 {
-	if (argv[(*i) + 1] && (argv[(*i) + 1] == 34 || argv[(*i) + 1] == 39))			//pour gerer le cas de "bonjour"'cava'"comment"
+	if (argv[(*i) + 1] && (argv[(*i) + 1] == 34 || argv[(*i) + 1] == 39))
 		(*i)++;
-	else if (argv[(*i) + 1] && argv[(*i) + 1] == ' ')						//->on pass tout les espaces
+	else if (argv[(*i) + 1] && argv[(*i) + 1] == ' ')
 	{
 		(*i)++;
 		while (argv[(*i)] == ' ')
 			(*i)++;
 	}
-	else if (argv[(*i) + 1] && (argv[(*i) + 1] == '<' || argv[(*i) + 1] == '>'))	//c'est si la cmd = echo "hello">map.txt
+	else if (argv[(*i) + 1] && (argv[(*i) + 1] == '<' || argv[(*i) + 1] == '>'))
 		(*i)++;
 	else if (argv[(*i)] == 34 && argv[(*i) + 1] && argv[(*i) + 1] != ' ')
 		(*i)++;
@@ -46,13 +50,12 @@ char	*ft_add_double_quote(t_parsing *param, int *i, char *argv, char *line)
 		return (0);
 	}
 	(*i)++;
-	while(argv[(*i)] != 34 && argv[(*i)])
+	while (argv[(*i)] != 34 && argv[(*i)])
 	{
-		if (!(line = ft_line(line, argv[(*i)])))
-			return (0);
+		line = ft_line(line, argv[(*i)]);
 		(*i)++;
 	}
-	return (line);								///->et comme ca je peux checker directement pour la variable si elle exite
+	return (line);
 }
 
 int	ft_add_simple_quote(t_parsing *param, int *i, char *argv, char *line)
@@ -61,10 +64,9 @@ int	ft_add_simple_quote(t_parsing *param, int *i, char *argv, char *line)
 
 	start = (*i);
 	(*i)++;
-	while(argv[(*i)] != 39 && argv[(*i)])
+	while (argv[(*i)] != 39 && argv[(*i)])
 	{
-		if (!(line = ft_line(line, argv[(*i)])))
-			return (0);
+		line = ft_line(line, argv[(*i)]);
 		(*i)++;
 	}
 	if (!ft_check_quote(&argv[start], 39))
@@ -81,14 +83,13 @@ int	ft_add_simple_quote(t_parsing *param, int *i, char *argv, char *line)
 
 int	ft_check_quote(char *argv, int a)
 {
-	char c;
-	int i;
-	int p;
+	char	c;
+	int		i;
+	int		p;
 
 	i = 0;
 	c = a;
 	p = 0;
-	if (argv[0] == c)
 	while (argv[i])
 	{
 		if (i != 0 && argv[i + 1] && argv[i + 1] == c)

@@ -27,13 +27,6 @@ typedef enum	e_filetype
 	DOUBLEIN,
 }t_filetype;
 
-/*typedef enum	e_cmdtype
-{
-	NOTHING,
-	PIPE,
-	REDIREC,
-}				t_cmdtype;*/
-
 typedef struct s_file
 {
 	char			*name;
@@ -56,7 +49,6 @@ typedef	struct s_parsing
 	int					index;
 	int					fd_stdout;
 	int					fd_stdin;
-	//int					ret_value;
 	int					heredoc;
 	int					stop;
 	t_filetype			type;		//je pense qu'il sert a rien lui quoique je m'en sert dans le parsing
@@ -138,6 +130,7 @@ void	ft_nb_cmd(t_parsing *param, int i);
 //add_file.c
 int		ft_add_file(t_parsing *param, int *i, char *argv, char *line);
 int		ft_add_to_fstack(t_parsing *param, char *line);
+void	ft_add_to_fstack2(t_file *tmp, char *new_name, t_file *new, t_parsing *param);
 
 //env_liste.c
 int		env_list(t_env  **env, char **envp);
