@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 14:55:05 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/22 17:59:37 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/12/27 16:18:32 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	ft_print_tab(char **tab)
 		j = -1;
 		while (tab[i][++j])
 			ft_putchar(tab[i][j]);
+		ft_putchar('\n');
 	}
 }
 
@@ -94,8 +95,54 @@ char	**set_in_env(char *line, char **env)
 	  }
 	}
   }*/
+char	**ft_copy_env(char **env)
+{
+	char	**tmp;
+	int		size;
+	int		i;
+	
+	size = 0;
+	while (env[size])
+		size++;
+	tmp = (char **)malloc(sizeof(char *) * size);
+	if (!tmp)
+		return (NULL);
+	i = -1;
+	while (env[++i] && i < size)
+		tmp[i] = ft_strdup(env[i]);
+	ft_print_tab(tmp);
+	return (tmp);
+}
 
-void	ft_print_export(char **env)
+void		ft_print_export(char** env)
+{
+	char	**copy;
+	char	*tmp;
+	int		i;
+	int		j;
+
+	copy = ft_copy_env(env);
+	i = 0;
+	while (copy[i])
+	{
+		j = i + 1;
+		while (copy[j])
+		{
+			if (ft_strncmp(copy[i], copy[j], ft_strlen(copy[i])) > 0)
+			{
+				tmp = copy[i];
+				copy[i] = copy[j];
+				copy[j] = tmp;
+			}
+			j++;
+		}
+		i++;
+	}
+	ft_print_tab(copy);
+	free_tabs(copy);
+}
+
+/*void	ft_print_export(char **env)
 {
 	int i;
 	int j;
@@ -109,16 +156,16 @@ void	ft_print_export(char **env)
 		{
 			if ( env[j + 1] && ft_strncmp(env[j], env[j+ 1], ft_strlen(env[j])))
 			{
-				tmp = ft_strdup(env[j]);
-				env[j] = ft_strdup(env[j + 1]);
+				tmp = ft_strcopy(env[j]);
+				env[j] = ft_strcopy(env[j + 1]);
 				printf("ENV[J] = [%s]\n", env[j]);
-				env[j + 1] = ft_strdup(tmp);
+				env[j + 1] = ft_strcopy(tmp);
 				printf("ENV[J + 1] = [%s]\n", env[j + 1]);
 			}
 		}
 		ft_print_tab(env);
 	}
-}
+}*/
 
 int		ft_check_arg(char	*arg)
 {
