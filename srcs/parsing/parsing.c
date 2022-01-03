@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: balkis <balkis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 10:03:50 by bben-yaa          #+#    #+#             */
-/*   Updated: 2021/12/27 19:17:36 by balkis           ###   ########.fr       */
+/*   Updated: 2022/01/03 15:27:21 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,16 @@ int	parsing(char *argv, t_parsing *param, char **envp)
 
 	i = 0;
 	line = NULL;
-	(void)envp;
 	if (!ft_init(param))
 		return (0);
 	ft_pass_space(argv, &i);
 	tmp = param;
-	while(argv[i])
+	while (argv[i])
 	{
 		buf = malloc(sizeof(char) * 2);
 		if (argv[i] == 34)
+		
+		//fonction break and return(0) car checkquotes
 		{
 			line = ft_double_quote(line, &i, argv, tmp);
 			if (tmp->stop == 1)
@@ -38,13 +39,14 @@ int	parsing(char *argv, t_parsing *param, char **envp)
 				break ;
 			if (dolar_quotes(line))
 				line = ft_replace_var(line, envp);
-			if (!ft_tabs(param, line))
-				return (0);
+			ft_tabs(param, line);
 			if (argv[i + 1] == '\0')
 				break ;
 			ft_pass_dquote(argv, &i);
 			line = NULL;
 		}
+		
+		//fonction break and return (0) car checkquotes
 		else if (argv[i] == 39)
 		{
 			if (!ft_simple_quote(line, &i, argv, tmp))
@@ -54,32 +56,38 @@ int	parsing(char *argv, t_parsing *param, char **envp)
 			ft_pass_squote(argv, &i);
 			line = NULL;
 		}
+
+		//fonction  no break here
 		else if (argv[i] == '|')
 		{
 			ft_add_maillon(param);
 			tmp->next->pipe = tmp->pipe + 1;
 			tmp = tmp->next;
 			i++;
-			while(argv[i] && argv[i] == ' ')
+			while (argv[i] && argv[i] == ' ')
 				i++;
-			if (!argv[i]) 
+			if (!argv[i])
 			{
-				printf("Pas de commande après le pipe, cas à gérer, tu veux que je le parse comment?\
-					pck ca va creer un maillon vide -> et du coup segfault quand tu l'utilise\n");
+				printf("Pas de commande après le pipe, cas à gérer, \
+					tu veux que je le parse comment?\
+					pck ca va creer un maillon vide -> \
+					et du coup segfault quand tu l'utilise\n");
 				return (0);
 			}
 		}
+
+		//fonction   no break here
 		else if ((argv[i] == '<' || argv[i] == '>'))
 		{
 			if (!ft_check_redoc(argv, i))
 			{
-				printf("Minishell: syntax error near unexpected token `newline'\n");
+				printf("Minishell: syntax error near \
+				unexpected token `newline'\n");
 				return (0);
 			}
 			if (line)
 			{
-				if (!ft_tabs(tmp, line))
-					return (0);
+				ft_tabs(tmp, line);
 				line = NULL;
 			}
 			ft_define_redicretcion(argv, &i, tmp);
@@ -90,12 +98,14 @@ int	parsing(char *argv, t_parsing *param, char **envp)
 				i++;
 			line = NULL;
 		}
-		else if (argv[i] == '$' && argv[i + 1] && argv[i + 1] != '?' && ft_change(&argv[i]))
+
+		//fonction  no break here
+		else if (argv[i] == '$' && argv[i + 1] && \
+			argv[i + 1] != '?' && ft_change(&argv[i]))
 		{
 			if (line)
 			{
-				if (!ft_tabs(param, line))
-					return (0);
+				ft_tabs(param, line);
 				line = NULL;
 			}
 			while (argv[i] && argv[i] != ' ')
@@ -103,7 +113,7 @@ int	parsing(char *argv, t_parsing *param, char **envp)
 				line = ft_line(line, argv[i]);
 				i++;
 			}
-			line = find_var(envp, line); 
+			line = find_var(envp, line);
 			if (argv[i])
 			{
 				while (argv[i] == ' ')
@@ -112,38 +122,43 @@ int	parsing(char *argv, t_parsing *param, char **envp)
 			ft_tabs(tmp, line);
 			line = NULL;
 		}
+
+		//fonction 		no break here 
 		else if (argv[i] == ' ')
 		{
 			if (argv[i])
 			{
 				while (argv[i] == ' ')
-				i++;
-			}	
-			if (!ft_tabs(tmp, line))
-				return (0);			
+					i++;
+			}
+			ft_tabs(tmp, line);
 			line = NULL;
 		}
+		
+		//fonction
 		else
 		{
 			if (!argv[i])
 				break ;
 			buf[0] = argv[i];
 			buf[1] = '\0';
-			if (!(line = ft_line(line, buf[0])))
-				return (0);
+			line = ft_line(line, buf[0]);
 			i++;
 			if (!argv[i] && line)
 			{
-			if (!ft_tabs(tmp, line))
-				return (0);
+				ft_tabs(tmp, line);
 			}
 		}
 		free(buf);
 	}
 	ft_index(param);
-	
-	
-	//////////////////////////////////////////
+	return (1);
+}
+
+
+//////////------------->>>>>>>>>> 6 fonction A faire pour la norme si elles return 0 break;
+
+/*
 	
 	t_parsing	*tmp2;
 	t_file		*curs;
@@ -189,6 +204,5 @@ int	parsing(char *argv, t_parsing *param, char **envp)
 		
 	}
 	printf("----This is after parsing----\n");
-	//////////////////////////////////////->print tabs tout en lisant la liste chainee	et les files et type
-	return (1);
-}
+//////////////////////////////////////->print tabs tout en lisant la liste chainee	et les files et type
+*/

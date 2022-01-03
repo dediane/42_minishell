@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: balkis <balkis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 21:04:33 by balkis            #+#    #+#             */
-/*   Updated: 2021/12/27 19:01:04 by balkis           ###   ########.fr       */
+/*   Updated: 2022/01/03 15:18:59 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	*ft_line(char *line, char buf)
 
 	if (line == NULL)
 	{
-		new = malloc(sizeof(char) * 2)));
+		new = malloc(sizeof(char) * 2);
 		new[0] = buf;
 		new[1] = '\0';
 		return (new);

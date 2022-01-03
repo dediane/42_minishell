@@ -87,6 +87,7 @@ t_parsing	*ft_pipe(t_parsing *params, char **envp);
 ////////parsing
 //parsing.c
 int		parsing(char *argv, t_parsing *param, char **envp);
+void	init_main(t_parsing *param, char *argv, int *i, t_parsing *tmp);
 
 //parsing_utils.c
 int 	init_param(t_parsing *param);

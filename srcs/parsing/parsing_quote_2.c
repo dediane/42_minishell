@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_quote_2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: balkis <balkis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 20:14:21 by balkis            #+#    #+#             */
-/*   Updated: 2021/12/24 13:20:42 by balkis           ###   ########.fr       */
+/*   Updated: 2022/01/03 15:09:36 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@ int	ft_simple_quote(char *line, int *i, char *argv, t_parsing *param)
 {
 	if (line)
 	{
-		if (!ft_tabs(param, line))
-			return (0);
+		ft_tabs(param, line);
 		line = NULL;
 	}
 	if (!ft_add_simple_quote(param, i, argv, line))

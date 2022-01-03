@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_quote.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: balkis <balkis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/27 18:49:21 by balkis            #+#    #+#             */
-/*   Updated: 2021/12/27 18:56:56 by balkis           ###   ########.fr       */
+/*   Updated: 2022/01/03 15:09:51 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@ char	*ft_double_quote(char *line, int *i, char *argv, t_parsing *param)
 {
 	if (line)
 	{
-		if (!ft_tabs(param, line))
-			return (0);
+		ft_tabs(param, line);
 		line = NULL;
 	}
 	return (ft_add_double_quote(param, i, argv, line));
