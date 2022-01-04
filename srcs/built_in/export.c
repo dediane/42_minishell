@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 14:55:05 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/27 16:18:32 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/04 21:00:54 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ char	**ft_copy_env(char **env)
 	if (!tmp)
 		return (NULL);
 	i = -1;
-	while (env[++i] && i < size)
+	while (&env[++i] && i < size)
 		tmp[i] = ft_strdup(env[i]);
 	ft_print_tab(tmp);
 	return (tmp);
@@ -130,16 +130,15 @@ void		ft_print_export(char** env)
 		{
 			if (ft_strncmp(copy[i], copy[j], ft_strlen(copy[i])) > 0)
 			{
-				tmp = copy[i];
-				copy[i] = copy[j];
-				copy[j] = tmp;
+				tmp = ft_strdup(copy[i]);
+				copy[i] = ft_strdup(copy[j]);
+				copy[j] = ft_strdup(tmp);
 			}
 			j++;
 		}
 		i++;
 	}
-	ft_print_tab(copy);
-	free_tabs(copy);
+	//free_tabs(copy);
 }
 
 /*void	ft_print_export(char **env)

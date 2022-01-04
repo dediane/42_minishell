@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 16:10:22 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/22 14:30:10 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2021/12/27 21:22:47 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_parsing	*ft_pipe(t_parsing *params, char **envp)
 	waitpid(-1, 0, 0);
 	if (pid != 0)
 	{
-		close(pipe_fd[0]);
+		//close(pipe_fd[0]);
 		close(pipe_fd[1]);
 		dup2(params->fd_stdout, STDOUT);
 	}
