@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 14:55:05 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/05 19:21:54 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/05 19:32:55 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,18 +86,7 @@ char	**set_in_env(char *line, char **env)
 	return (tmp);
 }
 
-/* for(int i=0; i<size_of_array; i++){
-	for(int j=0; j<size_of_array-1-i; j++){
-	if(strcmp(array[j], array[j+1]) > 0){
-		//swap array[j] and array[j+1]
-		strcpy(temp, array[j]);
-		strcpy(array[j], array[j+1]);
-		strcpy(array[j+1], temp);
-	  }
-	}
-  }*/
-
-void		ft_print_export(char** env)
+void	ft_print_export(char **env)
 {
 	char	**copy;
 	char	*tmp;
@@ -122,39 +111,11 @@ void		ft_print_export(char** env)
 		i++;
 	}
 	ft_print_tab(copy);
-	//free_tabs(copy);
+	free_tabs(copy);
+	free(tmp);
 }
 
-/*void	ft_print_export(char **env)
-{
-	int i;
-	int j;
-	int size;
-	char *tmp;
-	char **ret;
-
-	i = -1;
-	ret = NULL;
-	ret = ft_copy_tab(env);
-	size = ft_len_tabs(env);
-	while (env[++i])
-	{
-		j = -1;
-		while (ret[++j] && (j < size - 1 - i))
-		{
-			if ( ret[j + 1] && ft_strncmp(ret[j], ret[j+ 1], ft_strlen(ret[j]) > 0))
-			{
-				tmp = ft_strcopy(env[j]);
-				env[j] = ft_strcopy(env[j + 1]);
-				printf("ENV[J] = [%s]\n", env[j]);
-				env[j + 1] = ft_strcopy(tmp);
-				printf("ENV[J + 1] = [%s]\n", env[j + 1]);
-			}
-		}
-	}
-}*/
-
-int		ft_check_arg(char	*arg)
+int	ft_check_arg(char	*arg)
 {
 	int i;
 
@@ -165,7 +126,7 @@ int		ft_check_arg(char	*arg)
 		return (1);
 	ft_putstr_fd("minishell: export: `", 1);
 	ft_putstr_fd(arg, 1);
-	ft_putstr_fd("': not a valid identifier\n" , 1);
+	ft_putstr_fd("': not a valid identifier\n", 1);
 	return (0);
 }
 
