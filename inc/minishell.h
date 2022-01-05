@@ -27,13 +27,6 @@ typedef enum	e_filetype
 	DOUBLEIN,
 }t_filetype;
 
-/*typedef enum	e_cmdtype
-{
-	NOTHING,
-	PIPE,
-	REDIREC,
-}				t_cmdtype;*/
-
 typedef struct s_file
 {
 	char			*name;
@@ -52,18 +45,20 @@ typedef	struct s_parsing
 {
 	int					nb_cmd;		//== nombre de maillon
 	char				**tabs;		//il y a la commande et les arguments dedans
-//	t_cmdtype			b_cmd;		//commande before maillon (le premier maillon sera forcement NONE/0)
 	int					pipe;
 	int					index;
 	int					fd_stdout;
 	int					fd_stdin;
-	int					ret_value;
 	int					heredoc;
+	int					stop;
+	int					pipe_fd[2];
 	t_filetype			type;		//je pense qu'il sert a rien lui quoique je m'en sert dans le parsing
 	t_file				*file;
-//	t_cmdtype			a_cmd;		//commande after maillon (le dernier maillon sera forcement NONE/0)
 	struct s_parsing	*next;
 }			t_parsing;
+
+extern int exit_value;
+
 
 ////////main
 char	**ft_copy_tab(char **envp);
@@ -120,6 +115,7 @@ int 	ft_simple_quote(char *line, int *i, char *argv, t_parsing *param);
 void	ft_pass_squote(char *argv, int *i);
 int		pos_dolar(char *line);
 char	*ft_copy(char *var, char *line, char *exp, int pos);
+void	ft_copy2(char *line, int pos, char *var, int i);
 
 //check_redoc.c
 void	ft_define_redicretcion(char *argv, int *i, t_parsing *param);
@@ -135,6 +131,7 @@ void	ft_nb_cmd(t_parsing *param, int i);
 //add_file.c
 int		ft_add_file(t_parsing *param, int *i, char *argv, char *line);
 int		ft_add_to_fstack(t_parsing *param, char *line);
+void	ft_add_to_fstack2(t_file *tmp, char *new_name, t_file *new, t_parsing *param);
 
 //env_liste.c
 int		env_list(t_env  **env, char **envp);
@@ -149,6 +146,9 @@ int		ft_change(char *argv);
 char	*ft_replace_var(char *line, char **envp);
 char	*ft_search_var(char *var, char **envp, char *line, int pos);
 
+//variable_env2.c
+char	*ft_copy_line(char *line, char **envp, int i, int j);
+char	*ft_copy_var(char *var, char **envp, int j, int i);
 
 ////////built_in
 char	*get_path(char **envp, char *to_find, int *i);
@@ -179,5 +179,8 @@ int		ft_heredoc(char *eof, t_parsing *params);
 //signal.c
 void	ft_sigint(int sig);
 void	ft_sigquit(int sig);
+void	ft_ignore(int sig);
+void	ft_disable(int pid);
+void	ft_launch_signal(void);
 
 #endif

@@ -1,8 +1,14 @@
-
-
-//////////HEADER///////////
-
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing_utils.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/22 21:04:33 by balkis            #+#    #+#             */
+/*   Updated: 2022/01/05 16:09:36 by ddecourt         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
@@ -14,10 +20,11 @@ int	init_param(t_parsing *param)
 	param->index = 0;
 	param->fd_stdin = 0;
 	param->fd_stdout = 0;
+	param->heredoc = 0;
+	param->stop = 0;
 	param->type = NONE;
 	param->file = NULL;
-//	param->b_cmd = NONE;
-//	param->a_cmd = NONE;
+	param->next = NULL;
 	return (1);
 }
 
@@ -28,17 +35,15 @@ char	*ft_line(char *line, char buf)
 
 	if (line == NULL)
 	{
-		if(!(new = malloc(sizeof(char) * 2))) // buf + '\0'
-			return (0);
+		new = malloc(sizeof(char) * 2);
 		new[0] = buf;
 		new[1] = '\0';
 		return (new);
 	}
 	i = ft_strlen(line);
-	if (!(new = malloc(sizeof(char) * (i + 2)))) //line + buf + '\0'
-		return (0);
+	new = malloc(sizeof(char) * (i + 2));
 	i = 0;
-	while(line[i])
+	while (line[i])
 	{
 		new[i] = line[i];
 		i++;
@@ -51,7 +56,7 @@ char	*ft_line(char *line, char buf)
 
 char	ft_strcpy(char *dest, char *src)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (src[i])
@@ -68,14 +73,14 @@ int	ft_init(t_parsing *param)
 {
 	if (!alloue_elem(param))
 		return (0);
-	if (!init_param(param)) 		//->fonction pour init la structure; **bien checker**
-		return (0); 				//protection si l'allocution echoue//*/
+	if (!init_param(param))
+		return (0);
 	param->next = NULL;
 	return (1);
 }
 
 void	ft_pass_space(char *argv, int *i)
 {
-	while(argv[(*i)] == ' ' || argv[(*i)] == '\t')
-		(*i)++;						//on a passer tout les spaces et tabs du debut **checker**
+	while (argv[(*i)] == ' ' || argv[(*i)] == '\t')
+		(*i)++;
 }

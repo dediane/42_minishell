@@ -1,19 +1,23 @@
-
-
-
-                //////HEADER////////
-
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing_quote_2.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: balkis <balkis@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/21 20:14:21 by balkis            #+#    #+#             */
+/*   Updated: 2021/12/24 13:20:42 by balkis           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-int ft_simple_quote(char *line, int *i, char *argv, t_parsing *param)
+int	ft_simple_quote(char *line, int *i, char *argv, t_parsing *param)
 {
-	if (line)										//->pour gerer les cas d'interpretation si on a a='ls -la'
+	if (line)
 	{
-		if (!
-		ft_tabs(param, line))
-			return (0);								//->secure malloc
+		if (!ft_tabs(param, line))
+			return (0);
 		line = NULL;
 	}
 	if (!ft_add_simple_quote(param, i, argv, line))
@@ -23,9 +27,9 @@ int ft_simple_quote(char *line, int *i, char *argv, t_parsing *param)
 
 void	ft_pass_squote(char *argv, int *i)
 {
-	if (argv[(*i) + 1] == 34)							//pour gerer le cas de "bonjour"'cava'"comment"
+	if (argv[(*i) + 1] == 34)
 		(*i)++;
-	else if (argv[(*i) + 1] == ' ')					//->on pass tout les espaces
+	else if (argv[(*i) + 1] == ' ')
 	{
 		(*i)++;
 		while (argv[(*i)] == ' ')
@@ -35,10 +39,10 @@ void	ft_pass_squote(char *argv, int *i)
 		(*i)++;
 }
 
-int		pos_dolar(char *line)
+int	pos_dolar(char *line)
 {
-	int i;
-	int len;
+	int	i;
+	int	len;
 
 	i = 0;
 	len = 0;
@@ -79,6 +83,16 @@ char	*ft_copy(char *var, char *line, char *exp, int pos)
 		j++;
 		i++;
 	}
+	ft_copy2(line, pos, var, i);
+	free(line);
+	return (var);
+}
+
+void	ft_copy2(char *line, int pos, char *var, int i)
+{
+	int	len;
+
+	len = pos_dolar(line);
 	if (line[pos + len])
 	{
 		while (line[pos + len])
@@ -89,6 +103,4 @@ char	*ft_copy(char *var, char *line, char *exp, int pos)
 		}
 	}
 	var[i] = '\0';
-	free(line);
-	return (var);
 }

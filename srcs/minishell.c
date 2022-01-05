@@ -6,11 +6,13 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 19:28:36 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/21 15:35:36 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/05 16:12:02 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+int	exit_value;
 
 void	ft_print_title(void)
 {
@@ -52,6 +54,7 @@ int main(int ac, char **av, char **envp)
 	//t_env		*env; pour envp en liste 
 
 	(void)av;
+	exit_value = 0;
 	env = ft_copy_tab(envp);
 	//env = set_ret_value(env);
 	//(void *)param = NULL;
@@ -59,7 +62,6 @@ int main(int ac, char **av, char **envp)
 	if (ac != 1)
 		return (ft_putstr("Error: not argument accepted\n"), 1);
 	ft_print_title();
-	//ft_export(1, "diane=moi");
 	while (1)
 	{
 		signal(SIGINT, ft_sigint);
@@ -69,12 +71,14 @@ int main(int ac, char **av, char **envp)
 			ft_exit(NULL); //gere le controle D
 		else
 		{
-			add_history(line);
-			(void)param;
+			if (line)
+				add_history(line);
 			if (ft_strnstr(line, "exit", ft_strlen(line)))
-				ft_exit(line);	
+			//if (ft_strncmp(line, "exit", ft_strlen(line)) == 0)
+				ft_exit(line);
 			if (line[0] != '\0')
 			{
+				//printf("line[0] vaut %c\n", line[0]);
 				if (parsing(line, &param, env)) //return -1 ou 0 si l'allocution echoue, les quotes ne sont pas fermees, 
 					// les > sont plus de deux, y'a rien apres les pipes (faut regarder le comportement de bash pck pour lui c'est pas une erreur),
 					// y'a aucun fichier après les redirection 

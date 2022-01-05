@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:03:55 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/21 17:13:11 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/05 18:22:12 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,7 @@
 //execute une commande: split mon process en 2 process
 int	exec_process(char **cmd, char *path, char **envp)
 {
-	int	pid;
-
-	pid = fork();
-	if (pid == 0)
-	{
-		execve(path, cmd, envp);
-	}
-	else
-	{
-		waitpid(-1, 0, 0);
-	}
+	execve(path, cmd, envp);
 	return (0);
 }
 
@@ -59,7 +49,7 @@ char	**ft_exec(t_parsing *params, char **envp)
 		else if (!right_path)
 			right_path = look_for_relative_path(params, envp);
 		if (right_path != NULL)
-			params->ret_value = exec_process(params->tabs, right_path, envp);
+			exit_value = exec_process(params->tabs, right_path, envp);
 		return (envp);
 	}
 	return (envp);
@@ -68,23 +58,42 @@ char	**ft_exec(t_parsing *params, char **envp)
 char	**ft_exec_all_cmd(t_parsing *params, char **envp)
 {
 	int			fd;
-	t_parsing	*tmp;
+	int			pid;
+	t_parsing	*prev;
 
 	fd = 0;
-	tmp = params;
+	prev = NULL;
 	while (params != NULL)
 	{
-		if (params->next != NULL && params->next->pipe != 0)
-			params = ft_pipe(params, envp);
-		else if ((params->type != 0 && params->next != NULL && \
-		params->next->pipe == 0) || (params->type != 0 && params->next == NULL))
-			params = ft_exec_redir(params, envp);
+		if (params->next != NULL && params->next->pipe)
+			pipe(params->pipe_fd);
+		pid = fork();
+		if (pid == 0)
+		{
+			if (params->pipe)
+				dup2(prev->pipe_fd[0], 0);
+			if (params->next != NULL && params->next->pipe != 0)
+				dup2(params->pipe_fd[1], 1);
+			ft_disable(pid);
+			if (params->file)
+				ft_exec_redir(params, envp);
+			else
+				ft_exec(params, envp);
+			ft_launch_signal();
+			exit(0);
+		}
 		else
 		{
-			if (params->tabs)
-				envp = ft_exec(params, envp);
-			params = params->next;
+			waitpid(-1, 0, 0);
+			if (prev && prev->pipe)
+				close(prev->pipe_fd[0]);
+			if (params->next != NULL && params->next->pipe != 0)
+				close(params->pipe_fd[1]);
+			if (params->pipe && params->next == NULL)
+				close(params->pipe_fd[0]);
 		}
+		prev = params;
+		params = params->next;
 	}
 	return (envp);
 }

@@ -1,8 +1,14 @@
-
-
-        ////HEADER////
-
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   signal.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: balkis <balkis@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/21 20:11:36 by balkis            #+#    #+#             */
+/*   Updated: 2021/12/27 13:53:31 by balkis           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
@@ -10,31 +16,41 @@ void	ft_sigint(int sig)
 {
 	(void)sig;
 	rl_redisplay();
-	ft_putstr_fd("  \b \b", 0);
+	ft_putstr_fd("  \b\b", 1);
 	write(1, "\n", 1);
-	rl_replace_line("", 0);
+	ft_putstr_fd("\033[1;35m~Minishell$\033[0m ", 0);
 	rl_on_new_line();
 	rl_redisplay();
+	exit_value = 130;
 }
+
 void	ft_sigquit(int sig)
 {
 	(void)sig;
 }
-// controle backslash ne fait rien
 
-void	ft_ignore(int pid)
+void	ft_ignore(int sig)
 {
-	if (pid == 0)
-		printf("diseable\n");//diseable
-	else
-		printf("ignore\n");//ignore
-
+	if (sig == SIGINT)
+		write(1, "\n", 1);
 }
 
-void	ft_relaunch(int pid)
+void	ft_disable(int pid)
 {
-	if (pid > 0)
-		printf("relaunche signal\n");
-	//signal(SIGINT, ft_sigint);
-	//signal(SIGQUIT, ft_sigquit);
+	if (pid == 0)
+	{
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
+	}
+	else
+	{
+		signal(SIGINT, ft_ignore);
+		signal(SIGQUIT, ft_ignore);
+	}	
+}
+
+void	ft_launch_signal(void)
+{
+	signal(SIGINT, ft_sigint);
+	signal(SIGQUIT, ft_sigquit);
 }

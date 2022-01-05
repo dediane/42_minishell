@@ -1,10 +1,14 @@
-
-
-
-/////////HEADER///////
-
-
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing_tabs.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: balkis <balkis@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/21 21:08:21 by balkis            #+#    #+#             */
+/*   Updated: 2021/12/21 21:42:43 by balkis           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
@@ -17,8 +21,8 @@ int	ft_paste_tab(t_parsing *param, char **new, char *line)
 	y = 0;
 	while (param->tabs[y])
 	{
-		new[y] = malloc(sizeof(char) * (ft_strlen(param->tabs[y]) + 1)); //aloue chaque ligne du tabs
-		if (!new[y])	
+		new[y] = malloc(sizeof(char) * (ft_strlen(param->tabs[y]) + 1));
+		if (!new[y])
 			return (0);
 		while (param->tabs[y][i])
 		{	
@@ -29,7 +33,8 @@ int	ft_paste_tab(t_parsing *param, char **new, char *line)
 		i = 0;
 		y++;
 	}
-	if (!(new[y] = malloc(sizeof(char) * (ft_strlen(line) + 1))))
+	new[y] = malloc(sizeof(char) * (ft_strlen(line) + 1));
+	if (!new[y])
 		return (0);
 	ft_strcpy(new[y], line);
 	new[++y] = NULL;
@@ -63,19 +68,21 @@ char	**ft_malloc_tab(t_parsing *param, int len_tab, char *line)
 
 	if (len_tab == 0)
 	{
-		if (!(new = malloc(sizeof(char *) * 2))) //line + NULL
+		new = malloc(sizeof(char *) * 2);
+		if (!new)
 			return (0);
-		if (!(new[0] = malloc(sizeof(char) * (ft_strlen(line) + 1))))
+		new[0] = malloc(sizeof(char) * (ft_strlen(line) + 1));
+		if (!new[0])
 			return (0);
-		ft_strcpy(new[0], line); //copy line dans new[0]
+		ft_strcpy(new[0], line);
 		new[1] = NULL;
 		free(line);
 		return (new);
 	}
-	if (!(new = malloc(sizeof(char *) * (len_tab + 2)))) //line + NULL
+	new = malloc(sizeof(char *) * (len_tab + 2));
+	if (!new)
 		return (0);
 	ft_paste_tab(param, new, line);
-			//copier old tabs in new + mettre line dans le dernier tab[i] et tab[++i] = NULL 
 	free(line);
 	free_tabs(param->tabs);
 	return (new);
@@ -83,25 +90,23 @@ char	**ft_malloc_tab(t_parsing *param, int len_tab, char *line)
 
 int	ft_tabs(t_parsing *param, char *line)
 {
-	(void)line;
 	int	len_tab;
 
-	len_tab = ft_len_tabs(param->tabs);								//len de tabs
-	if (!(param->tabs = ft_malloc_tab(param, len_tab, line)))		//aloue tab + 1
+	len_tab = ft_len_tabs(param->tabs);
+	param->tabs = ft_malloc_tab(param, len_tab, line);
+	if (!param->tabs)
 		return (0);
-	//copier old tabs in new + mettre line dans le dernier tab[i] et tab[++i] = NULL
-	//->je copie dans ft_malloc_tab
 	return (1);
 }
 
 int	ft_len_tabs(char **tab)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!tab)
 		return (0);
-	while(tab[i])
+	while (tab[i])
 		i++;
 	return (i);
 }

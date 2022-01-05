@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 13:17:26 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/21 18:29:26 by ddecourt         ###   ########.fr       */
+/*   Updated: 2021/12/26 12:43:15 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char	*get_right_path(t_parsing *params, char **envp)
 	}
 	ft_putstr_fd(params->tabs[0], 2);
 	ft_putstr_fd(": command not found\n", 2);
-	params->ret_value = 127;
+	exit_value = 127;
 	return (NULL);
 }
 
@@ -72,7 +72,7 @@ int	open_file(t_parsing *params, char *file)
 		fd = ft_heredoc(file, params);
 	if (fd < 0)
 	{
-		params->ret_value = 1;
+		exit_value = 1;
 		ft_putstr("minishell: ");
 		return (perror(file), -1);
 	}
