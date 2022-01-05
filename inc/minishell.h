@@ -51,12 +51,13 @@ typedef	struct s_parsing
 	int					fd_stdin;
 	int					heredoc;
 	int					stop;
+	int					pipe_fd[2];
 	t_filetype			type;		//je pense qu'il sert a rien lui quoique je m'en sert dans le parsing
 	t_file				*file;
 	struct s_parsing	*next;
 }			t_parsing;
 
-int	exit_value;
+extern int exit_value;
 
 
 ////////main
