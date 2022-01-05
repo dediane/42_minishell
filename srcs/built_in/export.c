@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 14:55:05 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/21 21:15:11 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/05 19:01:23 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	ft_print_tab(char **tab)
 		j = -1;
 		while (tab[i][++j])
 			ft_putchar(tab[i][j]);
+		ft_putchar('\n');
 	}
 }
 
@@ -99,25 +100,30 @@ void	ft_print_export(char **env)
 {
 	int i;
 	int j;
+	int size;
 	char *tmp;
+	char **ret;
 
 	i = -1;
+	ret = NULL;
+	ret = ft_copy_tab(env);
+	size = ft_len_tabs(env);
 	while (env[++i])
 	{
 		j = -1;
-		while (env[++j])
+		while (ret[++j] && (j < size - 1 - i))
 		{
-			if ( env[j + 1] && ft_strncmp(env[j], env[j+ 1], ft_strlen(env[j])))
+			if ( ret[j + 1] && ft_strncmp(ret[j], ret[j+ 1], ft_strlen(ret[j]) > 0))
 			{
-				tmp = ft_strdup(env[j]);
-				env[j] = ft_strdup(env[j + 1]);
-				printf("ENV[J] = [%s]\n", env[j]);
-				env[j + 1] = ft_strdup(tmp);
-				printf("ENV[J + 1] = [%s]\n", env[j + 1]);
+				tmp = ret[j];
+				ret[j] = ret[j + 1];
+				//printf("ENV[J] = [%s]\n", ret[j]);
+				ret[j + 1] = tmp;
+				//printf("ENV[J + 1] = [%s]\n", ret[j + 1]);
 			}
 		}
-		ft_print_tab(env);
 	}
+	ft_print_tab(ret);
 }
 
 char	**ft_export(int fd, char **tabs, char **env)
@@ -133,7 +139,10 @@ char	**ft_export(int fd, char **tabs, char **env)
 	tmp = NULL;
 	is_in_env = 0;
 	if (!tabs[1])
+	{
 		ft_print_export(env);
+		return (NULL);
+	}
 	else if (tabs[2])
 		return (0);
 	ft_parse_env(tabs[1], &key, &value);
