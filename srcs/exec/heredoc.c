@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 23:11:44 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/21 18:29:39 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/05 18:19:55 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ int	ft_heredoc(char *eof, t_parsing *params)
 
 	tmp_stdin = dup(STDIN);
 	tmp_stdout = dup(STDOUT);
-	if(pipe(pipe_fd))
-		return (1); // ERREUR
+	if (pipe(pipe_fd))
+		return (1);
 	while (1)
 	{
 		line = readline("> ");
@@ -41,7 +41,7 @@ int	ft_heredoc(char *eof, t_parsing *params)
 			if (check_eof(line, eof))
 				break ;
 		}
-		write(pipe_fd[1] , line ,ft_strlen(line));
+		write(pipe_fd[1], line, ft_strlen(line));
 		write(pipe_fd[1], "\n", 1);
 	}
 	dup2(pipe_fd[0], STDIN);
@@ -50,9 +50,3 @@ int	ft_heredoc(char *eof, t_parsing *params)
 	params->heredoc = 1;
 	return (tmp_stdout);
 }
-
-/*int	handle_heredoc(char *eof, t_parsing *params)
-{
-	ft_heredoc(eof);
-}
-*/

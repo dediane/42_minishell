@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:03:55 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/05 18:12:03 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/05 18:22:12 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,7 @@
 //execute une commande: split mon process en 2 process
 int	exec_process(char **cmd, char *path, char **envp)
 {
-	//int	pid;
-
-	//if (pid == 0)
-		execve(path, cmd, envp);
-	//else
-	//	waitpid(-1, 0, 0);
+	execve(path, cmd, envp);
 	return (0);
 }
 
@@ -44,7 +39,6 @@ char	**ft_exec(t_parsing *params, char **envp)
 		return (envp);
 	else
 	{
-		//printf("is not built-in\n");
 		if (access(params->tabs[0], F_OK) == 0)
 		{
 			relative = 1;
@@ -56,7 +50,6 @@ char	**ft_exec(t_parsing *params, char **envp)
 			right_path = look_for_relative_path(params, envp);
 		if (right_path != NULL)
 			exit_value = exec_process(params->tabs, right_path, envp);
-			//params->ret_value = exec_process(params->tabs, right_path, envp);
 		return (envp);
 	}
 	return (envp);
@@ -73,7 +66,7 @@ char	**ft_exec_all_cmd(t_parsing *params, char **envp)
 	while (params != NULL)
 	{
 		if (params->next != NULL && params->next->pipe)
-			pipe(params->pipe_fd );
+			pipe(params->pipe_fd);
 		pid = fork();
 		if (pid == 0)
 		{

@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 13:50:59 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/22 14:25:06 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2022/01/05 18:25:24 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-void ft_exit(char *exit_line)
+void	ft_exit(char *exit_line)
 {
-	int size;
-	int flag;
-	int i;
+	int	size;
+	int	flag;
+	int	i;
 
 	flag = 0;
 	i = 0;
@@ -49,5 +49,5 @@ void ft_exit(char *exit_line)
 			ft_putstr_fd(": command not found\n", 2);
 		}
 	}
-	return;
+	return ;
 }
