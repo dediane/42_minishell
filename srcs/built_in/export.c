@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 14:55:05 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/21 15:07:22 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/05 19:32:55 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,10 @@ void	ft_print_tab(char **tab)
 	while (tab[++i])
 	{
 		j = -1;
+		ft_putstr("declare -x ");
 		while (tab[i][++j])
 			ft_putchar(tab[i][j]);
+		ft_putchar('\n');
 	}
 }
 
@@ -84,6 +86,50 @@ char	**set_in_env(char *line, char **env)
 	return (tmp);
 }
 
+void	ft_print_export(char **env)
+{
+	char	**copy;
+	char	*tmp;
+	int		i;
+	int		j;
+
+	copy = ft_copy_tab(env);
+	i = 0;
+	while (copy[i])
+	{
+		j = i + 1;
+		while (copy[j])
+		{
+			if (ft_strncmp(copy[i], copy[j], ft_strlen(copy[i])) > 0)
+			{
+				tmp = ft_strdup(copy[i]);
+				copy[i] = ft_strdup(copy[j]);
+				copy[j] = ft_strdup(tmp);
+			}
+			j++;
+		}
+		i++;
+	}
+	ft_print_tab(copy);
+	free_tabs(copy);
+	free(tmp);
+}
+
+int	ft_check_arg(char	*arg)
+{
+	int i;
+
+	i = 0;
+	while (arg[i] && ft_isalpha(arg[i]))
+		i++;
+	if (i == ft_strlen(arg) || (arg[i + 1] && arg[i + 1] == '='))
+		return (1);
+	ft_putstr_fd("minishell: export: `", 1);
+	ft_putstr_fd(arg, 1);
+	ft_putstr_fd("': not a valid identifier\n", 1);
+	return (0);
+}
+
 char	**ft_export(int fd, char **tabs, char **env)
 {
 	char	*key;
@@ -96,7 +142,14 @@ char	**ft_export(int fd, char **tabs, char **env)
 	value = NULL;
 	tmp = NULL;
 	is_in_env = 0;
-	if (tabs[2])
+	if (!tabs[1])
+	{
+		ft_print_export(env);
+		return (NULL);
+	}
+	else if (tabs[2])
+		return (0);
+	if (!ft_check_arg(tabs[1]))
 		return (0);
 	ft_parse_env(tabs[1], &key, &value);
 	is_in_env = ft_is_in_env(key, env);
