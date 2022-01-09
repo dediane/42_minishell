@@ -6,7 +6,7 @@
 /*   By: balkis <balkis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 10:03:50 by bben-yaa          #+#    #+#             */
-/*   Updated: 2022/01/06 07:54:44 by balkis           ###   ########.fr       */
+/*   Updated: 2022/01/06 09:37:20 by balkis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,69 +56,22 @@ int	parsing(char *argv, t_parsing *param, char **envp)
 			ft_pass_squote(argv, &i);
 			line = NULL;
 		}
-
-		//fonction  no break here
 		else if (argv[i] == '|')
 		{
-			ft_add_maillon(param);
-			tmp->next->pipe = tmp->pipe + 1;
-			tmp = tmp->next;
-			i++;
-			while (argv[i] && argv[i] == ' ')
-				i++;
-			if (!argv[i])
-			{
-				printf("Pas de commande après le pipe, cas à gérer, \
-					tu veux que je le parse comment?\
-					pck ca va creer un maillon vide -> \
-					et du coup segfault quand tu l'utilise\n");
+			if (!ft_mpipe(argv, &i, tmp, param))
 				return (0);
-			}
+			tmp = tmp->next;
 		}
-
-		//fonction   no break here
 		else if ((argv[i] == '<' || argv[i] == '>'))
 		{
-			if (!ft_check_redoc(argv, i))
-			{
-				printf("Minishell: syntax error near \
-				unexpected token `newline'\n");
+			if (!ft_mredoc(line, &i, argv, tmp))
 				return (0);
-			}
-			if (line)
-			{
-				ft_tabs(tmp, line);
-				line = NULL;
-			}
-			ft_define_redicretcion(argv, &i, tmp);
-			ft_add_file(tmp, &i, argv, line);
-			if (!tmp->file)
-				return (0);
-			while (argv[i] == ' ')
-				i++;
-			line = NULL;
 		}
-
-		//fonction  no break here
 		else if (argv[i] == '$' && argv[i + 1] && \
 			argv[i + 1] != '?' && ft_change(&argv[i]))
 		{
-			if (line)
-			{
-				ft_tabs(param, line);
-				line = NULL;
-			}
-			while (argv[i] && argv[i] != ' ')
-			{
-				line = ft_line(line, argv[i]);
-				i++;
-			}
-			line = find_var(envp, line);
-			if (argv[i])
-			{
-				while (argv[i] == ' ')
-					i++;
-			}
+			line = ft_mdolar(argv, &i, line, param);
+			line = ft_mdolar2(argv, &i, line, envp);
 			ft_tabs(tmp, line);
 			line = NULL;
 		}
@@ -152,15 +105,15 @@ int	parsing(char *argv, t_parsing *param, char **envp)
 		free(buf);
 	}
 	ft_index(param);
-	return (1);
-}
+//	return (1);
+
 
 
 //////////------------->>>>>>>>>> 6 fonction A faire pour la norme si elles return 0 break;
 
-/*
+
 	
-	/*t_parsing	*tmp2;
+	t_parsing	*tmp2;
 	t_file		*curs;
 	tmp2 = param;
 	i = 0;
@@ -203,7 +156,7 @@ int	parsing(char *argv, t_parsing *param, char **envp)
 		i++;
 		
 	}
-	printf("----This is after parsing----\n");*/
+	printf("----This is after parsing----\n");
 	//////////////////////////////////////->print tabs tout en lisant la liste chainee	et les files et type
 	return (1);
 }

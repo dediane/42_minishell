@@ -90,6 +90,13 @@ t_parsing	*ft_pipe(t_parsing *params, char **envp);
 int		parsing(char *argv, t_parsing *param, char **envp);
 void	init_main(t_parsing *param, char *argv, int *i, t_parsing *tmp);
 
+
+//parsing2.c
+int		ft_mredoc(char *line, int *i, char *argv, t_parsing *tmp);
+char	*ft_mdolar(char *argv, int *i, char *line, t_parsing *param);
+char	*ft_mdolar2(char *argv, int *i, char *line, char **envp);
+int		ft_mpipe(char *argv, int *i, t_parsing *tmp, t_parsing *param);
+
 //parsing_utils.c
 int 	init_param(t_parsing *param);
 char	*ft_line(char *line, char buf);

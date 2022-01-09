@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+         #
+#    By: balkis <balkis@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/26 19:30:34 by ddecourt          #+#    #+#              #
-#    Updated: 2022/01/05 17:22:34 by ddecourt         ###   ########.fr        #
+#    Updated: 2022/01/06 08:11:40 by balkis           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ SRCS =	srcs/minishell.c \
 		srcs/exec/redirection.c \
 		srcs/exec/heredoc.c \
 		srcs/parsing/parsing.c \
+		srcs/parsing/parsing2.c \
 		srcs/parsing/parsing_utils.c \
 		srcs/parsing/parsing_tabs.c \
 		srcs/parsing/parsing_quote.c \
