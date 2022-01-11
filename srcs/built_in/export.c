@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 14:55:05 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/11 23:22:00 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/11 23:39:42 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ char	**ft_export(int fd, char **tabs, char **env)
 	key = NULL;
 	value = NULL;
 	tmp = NULL;
-	//is_in_env = 0;
+	is_in_env = 0;
 	if (!tabs[1])
 	{
 		ft_print_export(env);

@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 20:24:05 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/11 21:38:38 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/12 00:00:20 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,31 @@
 
 t_parsing	*ft_redir(t_parsing *params, char **envp)
 {
-	int	fd;
+	int			fd;
+	t_parsing	*tmp;
 
 	if (params->type != 0)
 	{
 		fd = open_file(params, params->file->name);
 		if (fd < 0)
 			return (NULL);
-		//params->fd_stdin = dup(STDIN);
-		//params->fd_stdout = dup(STDOUT);
+		params->fd_stdin = dup(STDIN);
+		params->fd_stdout = dup(STDOUT);
 		dup2(fd, 1);
 	}
 	if (params->tabs)
 	{
 		ft_exec(params, envp);
 	}
-	//if (params->type != 0 && params->pipe == 0)
-	//{
-		//close(fd);
-		//close(params->fd_stdin);
-		//dup2(params->fd_stdout, STDOUT);
-	//}
-	//params = params->next;
+	if (params->type != 0 && params->pipe == 0)
+	{
+		close(fd);
+		close(params->fd_stdin);
+		dup2(params->fd_stdout, STDOUT);
+	}
+	tmp = params;
+	params = params->next;
+	ft_free_params(tmp);
 	return (params);
 }
 
@@ -84,9 +87,9 @@ int	ft_multiple_redir(int nb, t_file *file, t_parsing *params, char **envp)
 
 t_parsing	*ft_exec_redir(t_parsing *params, char **envp)
 {
-	int		i;
-	int		ret;
-	t_file	*file;
+	int			i;
+	int			ret;
+	t_file		*file;
 
 	i = 0;
 	file = params->file;

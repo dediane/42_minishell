@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 13:17:26 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/11 22:35:19 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/11 23:55:55 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,14 @@ char	**get_cmd_path(char **envp)
 		return (NULL);
 	tmp = ft_split(path + 5, ':');
 	return (tmp);
+}
+
+void	ft_command_not_found(char **path_array, char *title)
+{
+	free_tabs(path_array);
+	ft_putstr_fd(title, 2);
+	ft_putstr_fd(": command not found\n", 2);
+	g_exit_value = 127;
 }
 
 // Je checke tous les paths pour trouver le bon et je retourne le bon path
@@ -59,10 +67,7 @@ char	*get_right_path(t_parsing *params, char **envp)
 				free(path);
 		}
 	}
-	free_tabs(path_array);
-	ft_putstr_fd(params->tabs[0], 2);
-	ft_putstr_fd(": command not found\n", 2);
-	g_exit_value = 127;
+	ft_command_not_found(path_array, params->tabs[0]);
 	return (NULL);
 }
 
@@ -97,15 +102,5 @@ void	ft_free_params(t_parsing *params)
 			free_tabs(params->tabs);
 		free(params);
 		params = params->next;
-	}
-}
-
-void	ft_free_file(t_file *file)
-{
-	while (file->next)
-	{
-		free(file->name);
-		free(file);
-		file = file->next;
 	}
 }
