@@ -90,6 +90,9 @@ t_parsing	*ft_pipe(t_parsing *params, char **envp);
 int		parsing(char *argv, t_parsing *param, char **envp);
 void	ft_fill2(char *argv, char *line, t_parsing *tmp, int *i);
 int		ft_fill(char *argv, int *i, char *buf, char *line);
+int		mdquote(char *argv, char *line, int *i, t_parsing *tmp);
+void	mdquote2(char *line, char **envp, t_parsing *param);
+int		mdquote3(char *argv, int *i);
 
 
 //parsing2.c

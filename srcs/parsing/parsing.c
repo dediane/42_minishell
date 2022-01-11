@@ -6,7 +6,7 @@
 /*   By: balkis <balkis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 10:03:50 by bben-yaa          #+#    #+#             */
-/*   Updated: 2022/01/11 12:04:48 by balkis           ###   ########.fr       */
+/*   Updated: 2022/01/11 15:33:15 by balkis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,22 +27,17 @@ int	parsing(char *argv, t_parsing *param, char **envp)
 	{
 		buf = malloc(sizeof(char) * 2);
 		if (argv[i] == 34)
-		//fonction break and return(0) car checkquotes
 		{
 			line = ft_double_quote(line, &i, argv, tmp);
 			if (tmp->stop == 1)
 				return (0);
 			if (line == 0)
 				break ;
-			if (dolar_quotes(line))
-				line = ft_replace_var(line, envp);
-			ft_tabs(param, line);
-			if (argv[i + 1] == '\0')
+			mdquote2(line, envp, param);
+			if (!mdquote3(argv, &i))
 				break ;
-			ft_pass_dquote(argv, &i);
 			line = NULL;
 		}
-		//fonction break and return (0) car checkquotes
 		else if (argv[i] == 39)
 		{
 			if (!ft_simple_quote(line, &i, argv, tmp))
@@ -71,30 +66,24 @@ int	parsing(char *argv, t_parsing *param, char **envp)
 			ft_tabs(tmp, line);
 			line = NULL;
 		}
-		//fonction 		no break here 
 		else if (argv[i] == ' ')
 		{
 			ft_mspace(argv, &i, tmp, line);
 			line = NULL;
 		}
-		//fonction
 		else
 		{
-			if (!argv[i])
-				break ;
-			buf[0] = argv[i];
-			buf[1] = '\0';
+			ft_fill(argv, &i, buf, line);
 			line = ft_line(line, buf[0]);
-			i++;
 			if (!argv[i] && line)
 				ft_tabs(tmp, line);
 		}
 		free(buf);
 	}
-	return (1);
-}
+//	return (1);
+//}
 
-/*//-->>>>> 6 fonction A faire pour la norme si elles return 0 break;
+//-->>>>> 6 fonction A faire pour la norme si elles return 0 break;
 
 
 	
@@ -144,7 +133,7 @@ int	parsing(char *argv, t_parsing *param, char **envp)
 	printf("----This is after parsing----\n");
 	////->print tabs tout en lisant la liste chainee	et les files et type
 	return (1);
-}*/
+}
 
 int	ft_fill(char *argv, int *i, char *buf, char *line)
 {
@@ -152,7 +141,7 @@ int	ft_fill(char *argv, int *i, char *buf, char *line)
 		return (0);
 	buf[0] = argv[(*i)];
 	buf[1] = '\0';
-	line = ft_line(line, buf[0]);
+	(void)line;
 	(*i)++;
 	return (1);
 }
@@ -161,4 +150,19 @@ void	ft_fill2(char *argv, char *line, t_parsing *tmp, int *i)
 {
 	if (!argv[(*i)] && line)
 		ft_tabs(tmp, line);
+}
+
+void	mdquote2(char *line, char **envp, t_parsing *param)
+{
+	if (dolar_quotes(line))
+		line = ft_replace_var(line, envp);
+	ft_tabs(param, line);
+}
+
+int		mdquote3(char *argv, int *i)
+{
+	if (argv[(*i) + 1] == '\0')
+		return (0);
+	ft_pass_dquote(argv, i);
+	return (1);
 }
