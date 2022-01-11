@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 19:28:36 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/11 22:33:15 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/11 22:41:53 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ void	ft_print_title(void)
 
 char	**ft_copy_tab(char **envp)
 {
-	int i;
-	int size;
-	char **env;
-	
+	int		i;
+	int		size;
+	char	**env;
+
 	size = 0;
 	i = -1;
 	while (envp[++i])
@@ -46,15 +46,16 @@ char	**ft_copy_tab(char **envp)
 	return (env);
 }
 
-int main(int ac, char **av, char **envp)
+int	main(int ac, char **av, char **envp)
 {
-	char *line = NULL;
-	char **env;
-	t_parsing	param;	
+	char		*line;
+	char		**env;
+	t_parsing	param;
 	//t_env		*env; pour envp en liste 
 
 	(void)av;
 	g_exit_value = 0;
+	line = NULL;
 	env = ft_copy_tab(envp);
 	//env = set_ret_value(env);
 	//(void *)param = NULL;

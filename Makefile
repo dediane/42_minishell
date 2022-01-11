@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: balkis <balkis@student.42.fr>              +#+  +:+       +#+         #
+#    By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/26 19:30:34 by ddecourt          #+#    #+#              #
-#    Updated: 2022/01/06 08:11:40 by balkis           ###   ########.fr        #
+#    Updated: 2022/01/11 22:47:11 by ddecourt         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ SRCS =	srcs/minishell.c \
 		srcs/built_in/cd.c \
 		srcs/built_in/echo.c \
 		srcs/built_in/export.c \
+		srcs/built_in/export2.c \
 		srcs/built_in/unset.c \
 		srcs/signal/signal.c \
 

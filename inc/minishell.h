@@ -176,10 +176,17 @@ int		ft_pwd(int fd);
 void	ft_exit(char *exit_line);
 int		ft_echo(int fd, t_parsing *params);
 //export
+char	**set_in_env(char *line, char **env);
+void	ft_print_export(char **env);
+int		ft_check_arg(char	*arg);
 char	**ft_export(int fd, char **tabs, char **env);
-void	ft_print_tab(char **tab);
-int		ft_parse_export(char *tabs, char **key, char **value);
+
+//export2
+int		ft_parse_env(char *tab, char **key, char **value);
 int		ft_is_in_env(char *key, char **envp);
+void	ft_print_tab(char **tab);
+
+
 //unset
 char	**ft_unset(int fd, char **tabs, char **env);
 char	*ft_strtrim_first_letter(char *line);
