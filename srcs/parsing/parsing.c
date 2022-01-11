@@ -6,7 +6,7 @@
 /*   By: balkis <balkis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 10:03:50 by bben-yaa          #+#    #+#             */
-/*   Updated: 2022/01/11 15:33:15 by balkis           ###   ########.fr       */
+/*   Updated: 2022/01/11 15:39:06 by balkis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,10 @@ int	parsing(char *argv, t_parsing *param, char **envp)
 		}
 		free(buf);
 	}
-//	return (1);
-//}
+	return (1);
+}
 
-//-->>>>> 6 fonction A faire pour la norme si elles return 0 break;
+/*//-->>>>> 6 fonction A faire pour la norme si elles return 0 break;
 
 
 	
@@ -133,7 +133,7 @@ int	parsing(char *argv, t_parsing *param, char **envp)
 	printf("----This is after parsing----\n");
 	////->print tabs tout en lisant la liste chainee	et les files et type
 	return (1);
-}
+}*/
 
 int	ft_fill(char *argv, int *i, char *buf, char *line)
 {
@@ -159,7 +159,7 @@ void	mdquote2(char *line, char **envp, t_parsing *param)
 	ft_tabs(param, line);
 }
 
-int		mdquote3(char *argv, int *i)
+int	mdquote3(char *argv, int *i)
 {
 	if (argv[(*i) + 1] == '\0')
 		return (0);
