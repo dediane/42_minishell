@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 13:17:26 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/26 12:43:15 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/11 22:28:20 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ char	**get_cmd_path(char **envp)
 char	*get_right_path(t_parsing *params, char **envp)
 {
 	char	*path;
+	char	*tmp;
 	char	**path_array;
 	int		i;
 
@@ -46,12 +47,19 @@ char	*get_right_path(t_parsing *params, char **envp)
 	{
 		while (path_array[++i])
 		{
-			path = ft_strjoin(path_array[i], "/");
-			path = ft_strjoin(path, params->tabs[0]);
+			tmp = ft_strjoin(path_array[i], "/");
+			path = ft_strjoin(tmp, params->tabs[0]);
+			free (tmp);
 			if (access(path, F_OK) == 0)
+			{
+				free_tabs(path_array);
 				return (path);
+			}
+			else
+				free(path);
 		}
 	}
+	free_tabs(path_array);
 	ft_putstr_fd(params->tabs[0], 2);
 	ft_putstr_fd(": command not found\n", 2);
 	exit_value = 127;
