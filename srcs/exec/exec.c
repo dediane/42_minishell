@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:03:55 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/11 22:16:11 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/11 22:34:30 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char	**ft_exec(t_parsing *params, char **envp)
 			right_path = look_for_relative_path(params, envp);
 		if (right_path != NULL)
 		{
-			exit_value = exec_process(params->tabs, right_path, envp);
+			g_exit_value = exec_process(params->tabs, right_path, envp);
 		}
 		free(right_path);
 		return (envp);
@@ -107,7 +107,7 @@ char	**ft_exec_all_cmd(t_parsing *params, char **envp)
 		params = params->next;
 		waitpid(-1, &status, 0);//WUNTRACED | WEXITED | WNOHANG);
 		if (WIFEXITED(status))
-			exit_value = WEXITSTATUS(status);
+			g_exit_value = WEXITSTATUS(status);
 	}
 	return (envp);
 }

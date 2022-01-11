@@ -57,7 +57,7 @@ typedef	struct s_parsing
 	struct s_parsing	*next;
 }			t_parsing;
 
-extern int exit_value;
+extern int g_exit_value;
 
 
 ////////main

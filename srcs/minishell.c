@@ -6,13 +6,13 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 19:28:36 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/11 19:10:58 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/11 22:33:15 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-int	exit_value;
+int	g_exit_value;
 
 void	ft_print_title(void)
 {
@@ -54,7 +54,7 @@ int main(int ac, char **av, char **envp)
 	//t_env		*env; pour envp en liste 
 
 	(void)av;
-	exit_value = 0;
+	g_exit_value = 0;
 	env = ft_copy_tab(envp);
 	//env = set_ret_value(env);
 	//(void *)param = NULL;
