@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:03:55 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/11 23:43:05 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/12 00:51:47 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,17 @@ char	**ft_exec(t_parsing *params, char **envp)
 {
 	char	*right_path;
 	int		relative;
+	int		built_in;
 
 	relative = 0;
-	if (is_built_in(params, params->tabs[0], &envp))
+	printf("HERE 1\n");
+	built_in = is_built_in(params, params->tabs[0]);
+	if (built_in != 0)
+	{
+		printf("HERE 2\n");
+		exec_built_in(params, &envp, built_in);
 		return (envp);
+	}
 	else
 	{
 		if (access(params->tabs[0], F_OK) == 0)
@@ -77,6 +84,7 @@ char	**ft_exec_all_cmd(t_parsing *params, char **envp)
 	head = params;
 	while (params != NULL)
 	{
+		printf("HERE 3\n");
 		if (params->next != NULL && params->next->pipe)
 			pipe(params->pipe_fd);
 		pid = fork();
@@ -97,17 +105,21 @@ char	**ft_exec_all_cmd(t_parsing *params, char **envp)
 		else
 		{
 			if (prev && prev->pipe)
+			{
 				close(prev->pipe_fd[0]);
+				ft_free_params(prev);
+			}
 			if (params->next != NULL && params->next->pipe != 0)
 				close(params->pipe_fd[1]);
 			if (params->pipe && params->next == NULL)
 				close(params->pipe_fd[0]);
 		}
+		printf("HERE 4\n");
 		prev = params;
 		params = params->next;
 		waitpid(-1, &status, 0);//WUNTRACED | WEXITED | WNOHANG);
-		if (WIFEXITED(status))
-			g_exit_value = WEXITSTATUS(status);
+			if (WIFEXITED(status))
+		g_exit_value = WEXITSTATUS(status);
 	}
 	return (envp);
 }
