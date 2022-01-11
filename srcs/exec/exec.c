@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:03:55 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/11 19:36:17 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/11 21:32:41 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,13 @@
 //execute une commande: split mon process en 2 process
 int	exec_process(char **cmd, char *path, char **envp)
 {
-	execve(path, cmd, envp);
+	int pid;
+	
+	pid = fork();
+	if (pid == 0)
+		execve(path, cmd, envp);
+	else
+		waitpid(-1, 0, 0);
 	return (0);
 }
 
