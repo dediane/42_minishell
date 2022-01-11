@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 20:24:05 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/27 21:16:39 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/11 19:45:31 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,21 +21,21 @@ t_parsing	*ft_redir(t_parsing *params, char **envp)
 		fd = open_file(params, params->file->name);
 		if (fd < 0)
 			return (NULL);
-		params->fd_stdin = dup(STDIN);
-		params->fd_stdout = dup(STDOUT);
+		//params->fd_stdin = dup(STDIN);
+		//params->fd_stdout = dup(STDOUT);
 		dup2(fd, 1);
 	}
 	if (params->tabs)
 	{
 		ft_exec(params, envp);
 	}
-	if (params->type != 0 && params->pipe == 0)
-	{
-		close(fd);
-		close(params->fd_stdin);
-		dup2(params->fd_stdout, STDOUT);
-	}
-	params = params->next;
+	//if (params->type != 0 && params->pipe == 0)
+	//{
+		//close(fd);
+		//close(params->fd_stdin);
+		//dup2(params->fd_stdout, STDOUT);
+	//}
+	//params = params->next;
 	return (params);
 }
 
@@ -56,8 +56,8 @@ int	ft_multiple_redir(int nb, t_file *file, t_parsing *params, char **envp)
 {
 	int	fd;
 
-	params->fd_stdin = dup(STDIN);
-	params->fd_stdout = dup(STDOUT);
+	//params->fd_stdin = dup(STDIN);
+	//params->fd_stdout = dup(STDOUT);
 	while (nb > 0)
 	{
 		fd = open_file(params, file->name);
@@ -77,8 +77,8 @@ int	ft_multiple_redir(int nb, t_file *file, t_parsing *params, char **envp)
 	}
 	if (params->heredoc == 1)
 		dup2(params->fd_stdin, STDIN);
-	close(params->fd_stdin);
-	dup2(params->fd_stdout, STDOUT);
+	//close(params->fd_stdin);
+	//dup2(params->fd_stdout, STDOUT);
 	return (0);
 }
 

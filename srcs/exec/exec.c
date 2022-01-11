@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:03:55 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/09 14:56:42 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/11 19:36:17 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,11 @@ char	**ft_exec_all_cmd(t_parsing *params, char **envp)
 	int			pid;
 	int			status;
 	t_parsing	*prev;
+	t_parsing	*head;
 
 	fd = 0;
 	prev = NULL;
+	head = params;
 	while (params != NULL)
 	{
 		if (params->next != NULL && params->next->pipe)
@@ -94,9 +96,9 @@ char	**ft_exec_all_cmd(t_parsing *params, char **envp)
 		}
 		prev = params;
 		params = params->next;
+		waitpid(-1, &status, 0);//WUNTRACED | WEXITED | WNOHANG);
+		if (WIFEXITED(status))
+			exit_value = WEXITSTATUS(status);
 	}
-	waitpid(-1, &status, 0);
-	if (WIFEXITED(status))
-		exit_value = WEXITSTATUS(status);
 	return (envp);
 }
