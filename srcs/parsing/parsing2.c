@@ -6,7 +6,7 @@
 /*   By: balkis <balkis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 08:01:08 by balkis            #+#    #+#             */
-/*   Updated: 2022/01/06 09:36:06 by balkis           ###   ########.fr       */
+/*   Updated: 2022/01/11 10:31:06 by balkis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_mredoc(char *line, int *i, char *argv, t_parsing *tmp)
 {
-    if (!ft_check_redoc(argv, (*i)))
+	if (!ft_check_redoc(argv, (*i)))
 	{
 		printf("Minishell: syntax error near \
 		unexpected token `newline'\n");
@@ -47,7 +47,7 @@ char	*ft_mdolar(char *argv, int *i, char *line, t_parsing *param)
 		line = ft_line(line, argv[(*i)]);
 		(*i)++;
 	}
-	return(line);
+	return (line);
 }
 
 char	*ft_mdolar2(char *argv, int *i, char *line, char **envp)
@@ -71,4 +71,14 @@ int	ft_mpipe(char *argv, int *i, t_parsing *tmp, t_parsing *param)
 	if (!argv[(*i)])
 		return (0);
 	return (1);
+}
+
+void	ft_mspace(char *argv, int *i, t_parsing *tmp, char *line)
+{
+	if (argv[(*i)])
+	{
+		while (argv[(*i)] == ' ')
+			(*i)++;
+	}
+	ft_tabs(tmp, line);
 }

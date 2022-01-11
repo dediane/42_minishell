@@ -6,7 +6,7 @@
 /*   By: balkis <balkis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 21:04:33 by balkis            #+#    #+#             */
-/*   Updated: 2022/01/06 07:54:50 by balkis           ###   ########.fr       */
+/*   Updated: 2022/01/11 11:25:01 by balkis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,15 @@ char	ft_strcpy(char *dest, char *src)
 	return (*dest);
 }
 
-int	ft_init(t_parsing *param)
+int	ft_init(t_parsing *param, int *i, char *argv)
 {
 	if (!alloue_elem(param))
 		return (0);
 	if (!init_param(param))
 		return (0);
 	param->next = NULL;
+	(*i) = 0;
+	ft_pass_space(argv, i);
 	return (1);
 }
 

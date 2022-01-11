@@ -6,7 +6,7 @@
 /*   By: balkis <balkis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 10:03:50 by bben-yaa          #+#    #+#             */
-/*   Updated: 2022/01/06 09:37:20 by balkis           ###   ########.fr       */
+/*   Updated: 2022/01/11 12:04:48 by balkis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,14 @@ int	parsing(char *argv, t_parsing *param, char **envp)
 	char		*line;
 	t_parsing	*tmp;
 
-	i = 0;
 	line = NULL;
-	if (!ft_init(param))
+	if (!ft_init(param, &i, argv))
 		return (0);
-	ft_pass_space(argv, &i);
 	tmp = param;
 	while (argv[i])
 	{
 		buf = malloc(sizeof(char) * 2);
 		if (argv[i] == 34)
-		
 		//fonction break and return(0) car checkquotes
 		{
 			line = ft_double_quote(line, &i, argv, tmp);
@@ -45,7 +42,6 @@ int	parsing(char *argv, t_parsing *param, char **envp)
 			ft_pass_dquote(argv, &i);
 			line = NULL;
 		}
-		
 		//fonction break and return (0) car checkquotes
 		else if (argv[i] == 39)
 		{
@@ -75,19 +71,12 @@ int	parsing(char *argv, t_parsing *param, char **envp)
 			ft_tabs(tmp, line);
 			line = NULL;
 		}
-
 		//fonction 		no break here 
 		else if (argv[i] == ' ')
 		{
-			if (argv[i])
-			{
-				while (argv[i] == ' ')
-					i++;
-			}
-			ft_tabs(tmp, line);
+			ft_mspace(argv, &i, tmp, line);
 			line = NULL;
 		}
-		
 		//fonction
 		else
 		{
@@ -98,18 +87,14 @@ int	parsing(char *argv, t_parsing *param, char **envp)
 			line = ft_line(line, buf[0]);
 			i++;
 			if (!argv[i] && line)
-			{
 				ft_tabs(tmp, line);
-			}
 		}
 		free(buf);
 	}
-	ft_index(param);
-//	return (1);
+	return (1);
+}
 
-
-
-//////////------------->>>>>>>>>> 6 fonction A faire pour la norme si elles return 0 break;
+/*//-->>>>> 6 fonction A faire pour la norme si elles return 0 break;
 
 
 	
@@ -157,6 +142,23 @@ int	parsing(char *argv, t_parsing *param, char **envp)
 		
 	}
 	printf("----This is after parsing----\n");
-	//////////////////////////////////////->print tabs tout en lisant la liste chainee	et les files et type
+	////->print tabs tout en lisant la liste chainee	et les files et type
 	return (1);
+}*/
+
+int	ft_fill(char *argv, int *i, char *buf, char *line)
+{
+	if (!argv[(*i)])
+		return (0);
+	buf[0] = argv[(*i)];
+	buf[1] = '\0';
+	line = ft_line(line, buf[0]);
+	(*i)++;
+	return (1);
+}
+
+void	ft_fill2(char *argv, char *line, t_parsing *tmp, int *i)
+{
+	if (!argv[(*i)] && line)
+		ft_tabs(tmp, line);
 }

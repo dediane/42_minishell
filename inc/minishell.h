@@ -88,7 +88,8 @@ t_parsing	*ft_pipe(t_parsing *params, char **envp);
 ////////parsing
 //parsing.c
 int		parsing(char *argv, t_parsing *param, char **envp);
-void	init_main(t_parsing *param, char *argv, int *i, t_parsing *tmp);
+void	ft_fill2(char *argv, char *line, t_parsing *tmp, int *i);
+int		ft_fill(char *argv, int *i, char *buf, char *line);
 
 
 //parsing2.c
@@ -96,12 +97,13 @@ int		ft_mredoc(char *line, int *i, char *argv, t_parsing *tmp);
 char	*ft_mdolar(char *argv, int *i, char *line, t_parsing *param);
 char	*ft_mdolar2(char *argv, int *i, char *line, char **envp);
 int		ft_mpipe(char *argv, int *i, t_parsing *tmp, t_parsing *param);
+void	ft_mspace(char *argv, int *i, t_parsing *tmp, char *line);
 
 //parsing_utils.c
 int 	init_param(t_parsing *param);
 char	*ft_line(char *line, char buf);
 char	ft_strcpy(char *dest, char *src);
-int		ft_init(t_parsing *param);
+int		ft_init(t_parsing *param, int *i, char *argv);
 void	ft_pass_space(char *argv, int *i);
 
 //parsing_tabs.c
