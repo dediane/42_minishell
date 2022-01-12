@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:03:55 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/12 00:51:47 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/13 00:56:48 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 //execute une commande: split mon process en 2 process
 int	exec_process(char **cmd, char *path, char **envp)
 {
-	int	pid;
+	//int	pid;
 
-	pid = fork();
-	if (pid == 0)
+	//pid = fork();
+	//if (pid == 0)
 		execve(path, cmd, envp);
-	else
-		waitpid(-1, 0, 0);
+	//else
+	//	waitpid(-1, 0, 0);
 	return (0);
 }
 
@@ -42,12 +42,12 @@ char	**ft_exec(t_parsing *params, char **envp)
 	int		built_in;
 
 	relative = 0;
-	printf("HERE 1\n");
 	built_in = is_built_in(params, params->tabs[0]);
 	if (built_in != 0)
 	{
-		printf("HERE 2\n");
 		exec_built_in(params, &envp, built_in);
+		puts("ft_exec builtin");
+		params = params->next;
 		return (envp);
 	}
 	else
@@ -62,9 +62,7 @@ char	**ft_exec(t_parsing *params, char **envp)
 		else if (!right_path)
 			right_path = look_for_relative_path(params, envp);
 		if (right_path != NULL)
-		{
 			g_exit_value = exec_process(params->tabs, right_path, envp);
-		}
 		free(right_path);
 		return (envp);
 	}
@@ -74,21 +72,20 @@ char	**ft_exec(t_parsing *params, char **envp)
 char	**ft_exec_all_cmd(t_parsing *params, char **envp)
 {
 	int			fd;
-	int			pid;
+	int			pid = -1;
 	int			status;
 	t_parsing	*prev;
-	t_parsing	*head;
 
 	fd = 0;
+	status = 0;
 	prev = NULL;
-	head = params;
 	while (params != NULL)
 	{
-		printf("HERE 3\n");
 		if (params->next != NULL && params->next->pipe)
-			pipe(params->pipe_fd);
-		pid = fork();
-		if (pid == 0)
+			pipe(params->pipe_fd );
+		if (!is_built_in(params, params->tabs[0]))
+			pid = fork();
+		if (pid == 0 || is_built_in(params, params->tabs[0]))
 		{
 			if (params->pipe)
 				dup2(prev->pipe_fd[0], 0);
@@ -99,27 +96,27 @@ char	**ft_exec_all_cmd(t_parsing *params, char **envp)
 				ft_exec_redir(params, envp);
 			else
 				ft_exec(params, envp);
-			ft_launch_signal();
-			exit(0);
+			
+			//exit(0);
 		}
 		else
 		{
-			if (prev && prev->pipe)
+			if (!is_built_in(params, params->tabs[0]))
 			{
-				close(prev->pipe_fd[0]);
-				ft_free_params(prev);
+				ft_launch_signal();
+				waitpid(-1, &status, 0);//WUNTRACED | WEXITED | WNOHANG);
+				//if (WIFEXITED(status))
+				//	g_exit_value = WEXITSTATUS(status);
 			}
+			if (prev && prev->pipe)
+				close(prev->pipe_fd[0]);
 			if (params->next != NULL && params->next->pipe != 0)
 				close(params->pipe_fd[1]);
 			if (params->pipe && params->next == NULL)
 				close(params->pipe_fd[0]);
 		}
-		printf("HERE 4\n");
 		prev = params;
 		params = params->next;
-		waitpid(-1, &status, 0);//WUNTRACED | WEXITED | WNOHANG);
-			if (WIFEXITED(status))
-		g_exit_value = WEXITSTATUS(status);
 	}
 	return (envp);
 }

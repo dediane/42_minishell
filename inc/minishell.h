@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 23:26:15 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/12 00:40:47 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/12 23:11:45 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,10 @@ char			**ft_copy_tab(char	**envp);
 char			**ft_exec_all_cmd(t_parsing *params, char **envp);
 char			**ft_exec(t_parsing *params, char **envp);
 int				open_file(t_parsing *params, char *file);
+//char			**exec_shell(t_parsing *params, char **env);
+
+//fd.c
+void			save_fd(t_parsing *params);
 
 //exec_utils.c
 int				open_file(t_parsing *params, char *file);
@@ -85,6 +89,7 @@ char			*get_right_path(t_parsing *params, char **envp);
 char			**get_cmd_path(char **envp);
 void			ft_free_params(t_parsing *params);
 void			ft_free_file(t_file *file);
+void			ft_command_not_found(char **path_array, char *title);
 
 //redirection.c
 t_parsing		*ft_redir(t_parsing *params, char**envp);
@@ -92,7 +97,7 @@ t_parsing		*ft_exec_redir(t_parsing *params, char **envp);
 
 //build_in.c
 int				is_built_in(t_parsing *params, char *cmd);
-int				exec_built_in(t_parsing *params, \
+char			**exec_built_in(t_parsing *params, \
 char ***envp, int value);
 
 //pipe.c

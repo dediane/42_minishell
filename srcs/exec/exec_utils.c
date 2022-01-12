@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 13:17:26 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/11 23:55:55 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/12 22:21:55 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,11 @@ char	*get_right_path(t_parsing *params, char **envp)
 	int		i;
 
 	i = -1;
+	if (access(params->tabs[0], F_OK) == 0)
+	{
+		path = ft_strdup(params->tabs[0]);
+		return (path);
+	}
 	path_array = get_cmd_path(envp);
 	if (path_array != NULL)
 	{
@@ -71,6 +76,7 @@ char	*get_right_path(t_parsing *params, char **envp)
 	return (NULL);
 }
 
+//open fichier de redirection et retourne le fd.
 int	open_file(t_parsing *params, char *file)
 {
 	int	fd;

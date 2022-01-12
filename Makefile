@@ -6,7 +6,7 @@
 #    By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/26 19:30:34 by ddecourt          #+#    #+#              #
-#    Updated: 2022/01/11 22:47:11 by ddecourt         ###   ########.fr        #
+#    Updated: 2022/01/13 00:19:11 by ddecourt         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,8 +14,9 @@ SRCS =	srcs/minishell.c \
 		srcs/exec/exec.c \
 		srcs/exec/exec_utils.c \
 		srcs/exec/built_in.c \
-		srcs/exec/redirection.c \
 		srcs/exec/heredoc.c \
+		srcs/exec/fd.c \
+		srcs/exec/redirection.c \
 		srcs/parsing/parsing.c \
 		srcs/parsing/parsing2.c \
 		srcs/parsing/parsing_utils.c \
@@ -46,7 +47,7 @@ HEADER = inc/minishell.h
 
 CC = clang
 
-CFLAGS = -Wall -Werror -Wextra -g3 -fsanitize=address 
+CFLAGS = -Wall -Werror -Wextra -g3 #-fsanitize=address 
 RM = rm -f
 
 .c.o:

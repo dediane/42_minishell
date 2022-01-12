@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 12:11:42 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/12 00:41:51 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/12 21:43:16 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	is_built_in(t_parsing *params, char *cmd)
 	return (0);
 }
 
-int	exec_built_in(t_parsing *params, char ***envp, int value)
+char	**exec_built_in(t_parsing *params, char ***envp, int value)
 {
 	if (value == 1)
 	{
@@ -51,5 +51,5 @@ int	exec_built_in(t_parsing *params, char ***envp, int value)
 		*envp = ft_export(1, params->tabs, *envp);
 	else if (value == 6)
 		*envp = ft_unset(1, params->tabs, *envp);
-	return (0);
+	return (*envp);
 }

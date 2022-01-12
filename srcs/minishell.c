@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 19:28:36 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/12 00:14:20 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/13 00:51:12 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,23 +69,20 @@ int	main(int ac, char **av, char **envp)
 		signal(SIGQUIT, ft_sigquit);
 		line = readline("\033[1;35m~Minishell$\033[0m ");
 		if (!line)
+		{
+			puts("HERE I EXIT");
 			ft_exit(NULL); //gere le controle D
+		}
 		else
 		{
 			if (line)
 				add_history(line);
-			if (ft_strnstr(line, "exit", ft_strlen(line)))
-			//if (ft_strncmp(line, "exit", ft_strlen(line)) == 0)
+			if (line && ft_strnstr(line, "exit", ft_strlen(line)))
 				ft_exit(line);
-			if (line[0] != '\0')
+			if (line && line[0] != '\0')
 			{
-				//printf("line[0] vaut %c\n", line[0]);
-				if (parsing(line, &param, env)) //return -1 ou 0 si l'allocution echoue, les quotes ne sont pas fermees, 
-					// les > sont plus de deux, y'a rien apres les pipes (faut regarder le comportement de bash pck pour lui c'est pas une erreur),
-					// y'a aucun fichier après les redirection 
-				{
+				if (parsing(line, &param, env)) 
 					env = ft_exec_all_cmd(&param, env);
-				}
 				//free here
 			}
 		}
