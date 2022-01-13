@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:03:55 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/11 23:43:05 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/13 19:30:11 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,11 +97,18 @@ char	**ft_exec_all_cmd(t_parsing *params, char **envp)
 		else
 		{
 			if (prev && prev->pipe)
+			{
 				close(prev->pipe_fd[0]);
+			}
 			if (params->next != NULL && params->next->pipe != 0)
+			{
 				close(params->pipe_fd[1]);
+			}
 			if (params->pipe && params->next == NULL)
-				close(params->pipe_fd[0]);
+			{
+				if (params->pipe_fd[0] != 0)
+					close(params->pipe_fd[0]);				
+			}
 		}
 		prev = params;
 		params = params->next;

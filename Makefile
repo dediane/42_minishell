@@ -6,7 +6,7 @@
 #    By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/26 19:30:34 by ddecourt          #+#    #+#              #
-#    Updated: 2022/01/11 22:47:11 by ddecourt         ###   ########.fr        #
+#    Updated: 2022/01/13 19:27:18 by ddecourt         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ HEADER = inc/minishell.h
 
 CC = clang
 
-CFLAGS = -Wall -Werror -Wextra -g3 -fsanitize=address 
+CFLAGS = -Wall -Werror -Wextra -g3 #-fsanitize=address 
 RM = rm -f
 
 .c.o:
