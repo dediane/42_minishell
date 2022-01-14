@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 13:17:26 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/11 23:55:55 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/14 14:51:57 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ void	ft_command_not_found(char **path_array, char *title)
 	free_tabs(path_array);
 	ft_putstr_fd(title, 2);
 	ft_putstr_fd(": command not found\n", 2);
-	g_exit_value = 127;
+	//g_exit_value = 127;
+	exit (127);
 }
 
 // Je checke tous les paths pour trouver le bon et je retourne le bon path
