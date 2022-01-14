@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_liste.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: balkis <balkis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/27 19:08:24 by balkis            #+#    #+#             */
-/*   Updated: 2021/12/27 19:13:51 by balkis           ###   ########.fr       */
+/*   Updated: 2022/01/14 10:15:55 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,15 +61,16 @@ int	ft_malloc_env(t_env	**env)
 	else
 	{
 		tmp = *env;
-		while (tmp->next)
+		ft_def_env(tmp);
+	}
+	return (1);
+}
+	/*while (tmp->next)
 			tmp = tmp->next;
 		tmp->next = new;
 		new->next = NULL;
 		new->variable = NULL;
-		new->var_def = NULL;
-	}
-	return (1);
-}
+		new->var_def = NULL;   a mettre si def_tmp marche pas*/
 
 int	ft_find_variable(t_env *env, char *envp)
 {
@@ -96,4 +97,14 @@ void	free_env(t_env **env)
 		free(tmp->var_def);
 		free(tmp);
 	}
+}
+
+void	ft_def_env(t_env *tmp)
+{
+	while (tmp->next)
+		tmp = tmp->next;
+	tmp->next = new;
+	new->next = NULL;
+	new->variable = NULL;
+	new->var_def = NULL;
 }

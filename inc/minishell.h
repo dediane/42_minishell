@@ -151,6 +151,7 @@ int		env_list(t_env  **env, char **envp);
 int		ft_malloc_env(t_env	**env);
 int		ft_find_variable(t_env *env, char *envp);
 void	free_env(t_env **env);
+void	ft_def_env(t_env *tmp);
 
 //varaible_env.c
 char	*find_var(char **envp, char *line);
