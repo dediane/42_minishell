@@ -1,10 +1,14 @@
-
-
-
-
-                //////HEADER/////////
-
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   add_file.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: balkis <balkis@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/22 14:12:45 by bben-yaa          #+#    #+#             */
+/*   Updated: 2021/12/27 18:45:09 by balkis           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
@@ -19,8 +23,11 @@ int	ft_add_file(t_parsing *param, int *i, char *argv, char *line)
 			return (0);
 		(*i)++;
 	}
-	if (!ft_add_to_fstack(param, line))
+	if (!line || !ft_add_to_fstack(param, line))
+	{
+		printf("Minishell: syntax error near unexpected token `newline'\n");
 		return (0);
+	}
 	free(line);
 	return (1);
 }
@@ -30,7 +37,7 @@ int	ft_add_to_fstack(t_parsing *param, char *line)
 	t_file		*tmp;
 	t_file		*new;
 	t_parsing	*prm;
-	char	*new_name;
+	char		*new_name;
 
 	tmp = param->file;
 	prm = param;
@@ -42,19 +49,25 @@ int	ft_add_to_fstack(t_parsing *param, char *line)
 	{
 		new->next = NULL;
 		ft_strcpy(new_name, line);
-		new->name = new_name;		//here add type for file
+		new->name = new_name;
 		new->ftype = param->type;
 		param->file = new;
 	}
 	else if (param->file)
 	{
-		while (tmp->next)
-			tmp = tmp->next;
-		new->next = NULL;
 		ft_strcpy(new_name, line);
-		new->name = new_name;		//here add type for file
-		new->ftype = param->type;
-		tmp->next  = new;
+		ft_add_to_fstack2(tmp, new_name, new, param);
 	}
 	return (1);
+}
+
+void	ft_add_to_fstack2(t_file *tmp, char *new_name, t_file *new, \
+	t_parsing *param)
+{
+	while (tmp->next)
+		tmp = tmp->next;
+	new->next = NULL;
+	new->name = new_name;
+	new->ftype = param->type;
+	tmp->next = new;
 }

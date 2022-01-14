@@ -1,106 +1,102 @@
-
-
-
-
-            ////////HEADER/////////
-
-
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing_quote.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/27 18:49:21 by balkis            #+#    #+#             */
+/*   Updated: 2022/01/11 22:35:48 by ddecourt         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../inc/minishell.h"
+
 char	*ft_double_quote(char *line, int *i, char *argv, t_parsing *param)
 {
-	if (line)											//->pour gls erer les cas d'interpretation si on a a="ls -la"
+	if (line)
 	{
-		if (!ft_tabs(param, line))
-			return (0);									//->secure malloc
+		ft_tabs(param, line);
 		line = NULL;
 	}
-	//if (!ft_add_double_quote(param, i, argv, line))	//-> pck on malloc
-	//	return (0);
 	return (ft_add_double_quote(param, i, argv, line));
-	//return (1);
-	///////tout les cas apres avoir mis les doubles quotes dans le tabs//////
 }
 
 void	ft_pass_dquote(char *argv, int *i)
 {
-	if (argv[(*i) + 1] == 34 || argv[(*i) + 1] == 39)			//pour gerer le cas de "bonjour"'cava'"comment"
+	if (argv[(*i) + 1] && (argv[(*i) + 1] == 34 || argv[(*i) + 1] == 39))
 		(*i)++;
-	else if (argv[(*i) + 1] == ' ')						//->on pass tout les espaces
+	else if (argv[(*i) + 1] && argv[(*i) + 1] == ' ')
 	{
 		(*i)++;
 		while (argv[(*i)] == ' ')
 			(*i)++;
 	}
-	if (argv[(*i) + 1] == '<' || argv[(*i) + 1] == '>')	//c'est si la cmd = echo "hello">map.txt
+	else if (argv[(*i) + 1] && (argv[(*i) + 1] == '<' || argv[(*i) + 1] == '>'))
+		(*i)++;
+	else if (argv[(*i)] == 34 && argv[(*i) + 1] && argv[(*i) + 1] != ' ')
 		(*i)++;
 }
 
 char	*ft_add_double_quote(t_parsing *param, int *i, char *argv, char *line)
 {
 	(void)param;
-	if (!(line = ft_line(line, argv[(*i)])))
-			return (0);
-	(*i)++;
-	while(argv[(*i)] != 34 && argv[(*i)])
+	if (!ft_check_quote(&argv[*i], 34))
 	{
-		if (!(line = ft_line(line, argv[(*i)])))
-			return (0);
+		printf("les doubles quotes ne sont pas fermees\n");
+		param->stop = 1;
+		g_exit_value = 1;
+		return (0);
+	}
+	(*i)++;
+	while (argv[(*i)] != 34 && argv[(*i)])
+	{
+		line = ft_line(line, argv[(*i)]);
 		(*i)++;
 	}
-	if (!(line = ft_line(line, argv[(*i)])))
-			return (0);
-	if (!ft_check_quote(line, 34))
-	{
-		free (line);
-		printf("les doubles quotes ne sont pas fermees\n");
-		return (0);
-	}
 	return (line);
-	/*if (line[0] == '$')
-		line = find_var(envp, line);
-	if (!ft_tabs(param, line))
-		return (0);
-	return (1);*/
 }
 
 int	ft_add_simple_quote(t_parsing *param, int *i, char *argv, char *line)
 {
-	if (!(line = ft_line(line, argv[(*i)])))
-			return (0);
+	int	start;
+
+	start = (*i);
 	(*i)++;
-	while(argv[(*i)] != 39 && argv[(*i)])
+	while (argv[(*i)] != 39 && argv[(*i)])
 	{
-		if (!(line = ft_line(line, argv[(*i)])))
-			return (0);
+		line = ft_line(line, argv[(*i)]);
 		(*i)++;
 	}
-	if (!(line = ft_line(line, argv[(*i)])))
-			return (0);
-	if (!ft_check_quote(line, 39))
+	if (!ft_check_quote(&argv[start], 39))
 	{
 		free (line);
 		printf("les simples quotes ne sont pas fermees\n");
+		g_exit_value = 1;
 		return (0);
 	}
-	if (!ft_tabs(param, line))
-		return (0);
+	if (line)
+		ft_tabs(param, line);
 	return (1);
 }
 
-int	ft_check_quote(char *line, int a)
+int	ft_check_quote(char *argv, int a)
 {
-	char c;
-	int i;
-	int p;
+	char	c;
+	int		i;
+	int		p;
 
 	i = 0;
 	c = a;
 	p = 0;
-	while (line[i])
+	while (argv[i])
 	{
-		if (line[i] == c)
+		if (i != 0 && argv[i + 1] && argv[i + 1] == c)
+		{
+			p++;
+			break ;
+		}
+		if (argv[i] == c)
 			p++;
 		i++;
 	}

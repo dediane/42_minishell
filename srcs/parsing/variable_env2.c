@@ -1,24 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   variable_env2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: balkis <balkis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/09 19:48:02 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/19 22:18:33 by ddecourt         ###   ########.fr       */
+/*   Created: 2021/12/21 21:21:35 by balkis            #+#    #+#             */
+/*   Updated: 2021/12/21 22:07:42 by balkis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-int	ft_pwd(int fd)
+char	*ft_copy_line(char *line, char **envp, int i, int j)
 {
-	char	buffer[4096];
-	size_t	size;
+	free(line);
+	line = NULL;
+	line = ft_strdup(&envp[j][++i]);
+	return (line);
+}
 
-	size = 4096;
-	ft_putstr_fd(getcwd(buffer, 4096), fd);
-	ft_putchar_fd('\n', fd);
-	return (0);
+char	*ft_copy_var(char *var, char **envp, int j, int i)
+{
+	free(var);
+	var = NULL;
+	var = ft_strdup(&envp[j][++i]);
+	return (var);
 }

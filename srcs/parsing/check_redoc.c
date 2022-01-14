@@ -1,10 +1,14 @@
-
-
-
-
-        ///////HEADER//////
-
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_redoc.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: balkis <balkis@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/21 21:07:03 by balkis            #+#    #+#             */
+/*   Updated: 2021/12/21 21:23:29 by balkis           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
@@ -20,15 +24,14 @@ void	ft_define_redicretcion(char *argv, int *i, t_parsing *param)
 		param->type = OUT;
 }
 
-
 int	ft_check_redoc(char *argv, int i)
 {
-	int p;
-	int j;
+	int	p;
+	int	j;
 
 	p = 0;
 	j = i;
-	while(argv[i] == '>' || argv[i] == '<')
+	while (argv[i] == '>' || argv[i] == '<')
 	{
 		p++;
 		i++;

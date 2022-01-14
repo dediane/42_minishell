@@ -1,50 +1,41 @@
-
-
-
-                ////HEADER////
-
-
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   env_liste.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/27 19:08:24 by balkis            #+#    #+#             */
+/*   Updated: 2022/01/14 10:21:37 by bben-yaa         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-
-///////// A voir //////
-
-int	env_list(t_env  **env, char **envp)
+int	env_list(t_env **env, char **envp)
 {
+	t_env	*tmp2;
 	t_env	*tmp;
 	int		y;
+	int		i;
 
 	y = 0;
-	(void)envp;
-	printf("hello env = %p\n", &env);
-    while (envp[y])
-    {
+	i = 0;
+	tmp2 = *env;
+	while (envp[y])
+	{
 		if (!ft_malloc_env(env))
 			return (0);
 		tmp = *env;
 		while (tmp->next)
 			tmp = tmp->next;
 		ft_find_variable(tmp, envp[y]);
-		printf("envp variable vaut %s\n", tmp->variable);
-		printf("envp var_def vaut %s\n", tmp->var_def);
-		printf("\nenvp[%d] %s\n", y, envp[y]);
-    	/*--> malloc un maillon ft_malloc_env(env);
-        --> malloc name et interpretation_name, puis dans le maillon mettre dans name touut ce qui a avant le '='
-			et mettre dans interpretation_name touut ce qui a apres '='*/
-        y++;
-    }
-	int i = 0;
-	t_env *tmp2;
-	tmp2 = *env;
-
-	while(tmp2)
+		y++;
+	}
+	while (tmp2)
 	{
-		printf("variable %s\n", tmp2->variable);
-		printf("var_def %s\n", tmp2->var_def);
-		printf("boucle %d\n", i);
 		i++;
-		tmp2 = tmp2->next;		
+		tmp2 = tmp2->next;
 	}
 	return (1);
 }
@@ -58,7 +49,7 @@ int	ft_malloc_env(t_env	**env)
 	if (new == NULL)
 	{
 		free_env(env);
-		return (0);		//il faut aussi free toute la liste 
+		return (0);
 	}
 	if (*env == NULL)
 	{
@@ -70,25 +61,26 @@ int	ft_malloc_env(t_env	**env)
 	else
 	{
 		tmp = *env;
-		while (tmp->next)
+		ft_def_env(tmp, new);
+	}
+	return (1);
+}
+	/*while (tmp->next)
 			tmp = tmp->next;
 		tmp->next = new;
 		new->next = NULL;
 		new->variable = NULL;
-		new->var_def = NULL;
-	}
-	return (1);
-}
+		new->var_def = NULL;   a mettre si def_tmp marche pas*/
 
 int	ft_find_variable(t_env *env, char *envp)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while(envp[i] != '=')
+	while (envp[i] != '=')
 		i++;
 	env->variable = ft_strndup(envp, i);
-	i++;		//on se situe juste apres le '='
+	i++;
 	env->var_def = ft_strdup(&(envp[i]));
 	return (1);
 }
@@ -105,4 +97,14 @@ void	free_env(t_env **env)
 		free(tmp->var_def);
 		free(tmp);
 	}
+}
+
+void	ft_def_env(t_env *tmp, t_env *new)
+{
+	while (tmp->next)
+		tmp = tmp->next;
+	tmp->next = new;
+	new->next = NULL;
+	new->variable = NULL;
+	new->var_def = NULL;
 }
