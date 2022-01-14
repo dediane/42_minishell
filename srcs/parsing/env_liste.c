@@ -6,7 +6,7 @@
 /*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/27 19:08:24 by balkis            #+#    #+#             */
-/*   Updated: 2022/01/14 10:15:55 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2022/01/14 10:21:37 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	ft_malloc_env(t_env	**env)
 	else
 	{
 		tmp = *env;
-		ft_def_env(tmp);
+		ft_def_env(tmp, new);
 	}
 	return (1);
 }
@@ -99,7 +99,7 @@ void	free_env(t_env **env)
 	}
 }
 
-void	ft_def_env(t_env *tmp)
+void	ft_def_env(t_env *tmp, t_env *new)
 {
 	while (tmp->next)
 		tmp = tmp->next;

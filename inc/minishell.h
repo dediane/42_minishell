@@ -6,7 +6,7 @@
 /*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 23:26:15 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/14 10:18:00 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2022/01/14 10:21:51 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,7 +165,7 @@ int		env_list(t_env  **env, char **envp);
 int		ft_malloc_env(t_env	**env);
 int		ft_find_variable(t_env *env, char *envp);
 void	free_env(t_env **env);
-void	ft_def_env(t_env *tmp);
+void	ft_def_env(t_env *tmp, t_env *new);
 
 //varaible_env.c
 char			*find_var(char **envp, char *line);

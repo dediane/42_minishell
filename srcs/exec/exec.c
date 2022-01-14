@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:03:55 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/13 19:30:11 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/14 10:22:50 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,5 +116,6 @@ char	**ft_exec_all_cmd(t_parsing *params, char **envp)
 		if (WIFEXITED(status))
 			g_exit_value = WEXITSTATUS(status);
 	}
+	//printf("here free a la fin de chaque commande\n");
 	return (envp);
 }
