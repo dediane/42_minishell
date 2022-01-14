@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:03:55 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/14 15:07:34 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/14 16:19:26 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ char	**ft_exec_all_cmd(t_parsing *params, char **envp)
 		{
 			if (params->pipe)
 				dup2(prev->pipe_fd[0], 0);
-			if (params->next != NULL && params->next->pipe != 0)
+			if (params->next != NULL && params->next->pipe != 0 )
 				dup2(params->pipe_fd[1], 1);
 			ft_disable(pid);
 			if (params->file)

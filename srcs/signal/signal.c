@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 20:11:36 by balkis            #+#    #+#             */
-/*   Updated: 2022/01/14 15:48:26 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2022/01/14 16:16:01 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@ void	ft_sigint(int sig)
 	rl_redisplay();
 	ft_putstr_fd("  \b\b", 1);
 	write(1, "\n", 1);
-	//ft_putstr_fd("\033[1;35m~Minishell$\033[0m ", 0);
-	rl_on_new_line();
+	ft_putstr_fd("\033[1;35m~Minishell$\033[0m ", 0);
 	rl_redisplay();
 	g_exit_value = 130;
 }
