@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: balkis <balkis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 20:11:36 by balkis            #+#    #+#             */
-/*   Updated: 2021/12/27 13:53:31 by balkis           ###   ########.fr       */
+/*   Updated: 2022/01/11 22:36:41 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_sigint(int sig)
 	ft_putstr_fd("\033[1;35m~Minishell$\033[0m ", 0);
 	rl_on_new_line();
 	rl_redisplay();
-	exit_value = 130;
+	g_exit_value = 130;
 }
 
 void	ft_sigquit(int sig)

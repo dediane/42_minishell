@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 00:47:40 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/05 18:23:20 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/11 22:36:25 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	ft_echo(int fd, t_parsing *params)
 	while (params->tabs[i])
 	{
 		if (ft_strncmp(params->tabs[i], "$?", 3) == 0)
-			ft_putnbr_fd(exit_value, fd);
+			ft_putnbr_fd(g_exit_value, fd);
 		else
 			ft_putstr_fd(params->tabs[i], fd);
 		if (params->tabs[i++])
@@ -74,6 +74,6 @@ int	ft_echo(int fd, t_parsing *params)
 	}
 	if (n == 1 && size == 0)
 		ft_putchar_fd('\n', fd);
-	exit_value = 0;
+	g_exit_value = 0;
 	return (0);
 }

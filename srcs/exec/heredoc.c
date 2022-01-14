@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 23:11:44 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/05 18:19:55 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/11 23:42:39 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,14 @@ int	ft_heredoc(char *eof, t_parsing *params)
 	close(pipe_fd[0]);
 	params->heredoc = 1;
 	return (tmp_stdout);
+}
+
+void	ft_free_file(t_file *file)
+{
+	while (file->next)
+	{
+		free(file->name);
+		free(file);
+		file = file->next;
+	}
 }

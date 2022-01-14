@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_quote.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/27 18:49:21 by balkis            #+#    #+#             */
-/*   Updated: 2022/01/03 15:09:51 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2022/01/11 22:35:48 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char	*ft_add_double_quote(t_parsing *param, int *i, char *argv, char *line)
 	{
 		printf("les doubles quotes ne sont pas fermees\n");
 		param->stop = 1;
-		exit_value = 1;
+		g_exit_value = 1;
 		return (0);
 	}
 	(*i)++;
@@ -72,7 +72,7 @@ int	ft_add_simple_quote(t_parsing *param, int *i, char *argv, char *line)
 	{
 		free (line);
 		printf("les simples quotes ne sont pas fermees\n");
-		exit_value = 1;
+		g_exit_value = 1;
 		return (0);
 	}
 	if (line)

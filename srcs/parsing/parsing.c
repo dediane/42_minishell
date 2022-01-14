@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: balkis <balkis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 10:03:50 by bben-yaa          #+#    #+#             */
-/*   Updated: 2022/01/11 15:39:06 by balkis           ###   ########.fr       */
+/*   Updated: 2022/01/11 19:31:45 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,11 +83,11 @@ int	parsing(char *argv, t_parsing *param, char **envp)
 	return (1);
 }
 
-/*//-->>>>> 6 fonction A faire pour la norme si elles return 0 break;
+//-->>>>> 6 fonction A faire pour la norme si elles return 0 break;
 
 
 	
-	t_parsing	*tmp2;
+/*	t_parsing	*tmp2;
 	t_file		*curs;
 	tmp2 = param;
 	i = 0;
