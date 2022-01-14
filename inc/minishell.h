@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 23:26:15 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/14 10:21:51 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2022/01/14 17:36:59 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct s_parsing
 	int					fd_stdin;
 	int					heredoc;
 	int					stop;
+	int					is_built_in;
 	int					pipe_fd[2];
 	t_filetype			type;
 	t_file				*file;
@@ -91,7 +92,8 @@ t_parsing		*ft_redir(t_parsing *params, char**envp);
 t_parsing		*ft_exec_redir(t_parsing *params, char **envp);
 
 //build_in.c
-int				is_built_in(t_parsing *params, char *cmd, char ***envp);
+int				exec_built_in(t_parsing *params, char *cmd, char ***envp);
+void			is_built_in(t_parsing * params);
 
 //pipe.c
 t_parsing		*ft_pipe(t_parsing *params, char **envp);

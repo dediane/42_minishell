@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:03:55 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/14 16:19:26 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/14 17:38:17 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	exec_process(char **cmd, char *path, char **envp, t_parsing *params)
 	pid = -1;
 	if (params->type != NONE)
 	{
-			pid = fork();
+		pid = fork();
 		if (pid == 0)
 			execve(path, cmd, envp);
 		else
@@ -47,7 +47,7 @@ char	**ft_exec(t_parsing *params, char **envp)
 	int		relative;
 
 	relative = 0;
-	if (is_built_in(params, params->tabs[0], &envp))
+	if (exec_built_in(params, params->tabs[0], &envp))
 		return (envp);
 	else
 	{
@@ -82,11 +82,12 @@ char	**ft_exec_all_cmd(t_parsing *params, char **envp)
 	prev = NULL;
 	while (params != NULL)
 	{
+		is_built_in(params);
 		if (params->next) //!= NULL && params->next->pipe)
 			pipe(params->pipe_fd);
-		if (is_built_in(params, params->tabs[0], &envp) == 0) //|| ((is_built_in(params, params->tabs[0], &envp)) && (params->next->pipe != 0)))
+		if (!(params->is_built_in)) //|| ((is_built_in(params, params->tabs[0], &envp)) && (params->next->pipe != 0)))
 			pid = fork();
-		if (pid == 0 || (params->next && pid != 0))
+		if (pid == 0 || (params->is_built_in))
 		{
 			if (params->pipe)
 				dup2(prev->pipe_fd[0], 0);

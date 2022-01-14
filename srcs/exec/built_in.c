@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 12:11:42 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/14 01:36:57 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/14 17:37:19 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,25 @@ int		exec_built_in(t_parsing *params, char ***envp, int value)
 	return (0);
 }*/
 
+void	is_built_in(t_parsing * params)
+{
+	if (ft_strncmp(params->tabs[0], "cd", 3) == 0)
+		params->is_built_in = 1;
+	else if (ft_strncmp(params->tabs[0], "pwd", 4) == 0)
+		params->is_built_in = 1;
+	else if (ft_strncmp(params->tabs[0], "echo", 5) == 0)
+		params->is_built_in = 1;
+	else if (ft_strncmp(params->tabs[0], "env", 4) == 0)
+		params->is_built_in = 1;
+	else if (ft_strncmp(params->tabs[0], "export", 7) == 0)
+		params->is_built_in = 1;
+	else if (ft_strncmp(params->tabs[0], "unset", 6) == 0)
+		params->is_built_in = 1;
+	params->is_built_in = 0;
+}
 
-int	is_built_in(t_parsing *params, char *cmd, char ***envp)
+
+int	exec_built_in(t_parsing *params, char *cmd, char ***envp)
 {
 	int	fd;
 
