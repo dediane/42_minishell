@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 23:11:44 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/11 23:42:39 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/15 13:46:45 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,13 @@ int	ft_heredoc(char *eof, t_parsing *params)
 
 void	ft_free_file(t_file *file)
 {
-	while (file->next)
+	t_file	*tmp;
+
+	while (file)
 	{
+		tmp = file;
 		free(file->name);
-		free(file);
 		file = file->next;
+		free(tmp);
 	}
 }

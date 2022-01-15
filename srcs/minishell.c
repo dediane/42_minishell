@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 19:28:36 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/11 22:41:53 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/15 14:06:01 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,9 @@ int	main(int ac, char **av, char **envp)
 				{
 					env = ft_exec_all_cmd(&param, env);
 				}
-				//free here
+				else
+					ft_free_params(&param);
+				//free here quand parsing echoue
 			}
 		}
 	}

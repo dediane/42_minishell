@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack_alloc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 11:37:17 by bben-yaa          #+#    #+#             */
-/*   Updated: 2022/01/14 17:28:39 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/15 14:08:59 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int	alloue_elem(t_parsing *param)
 		return (0);
 	if (!param)
 		param = new;
+	else
+		free(new);
 	return (1);
 }
 

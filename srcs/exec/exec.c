@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:03:55 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/14 17:38:17 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/15 13:27:46 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,12 @@ char	**ft_exec_all_cmd(t_parsing *params, char **envp)
 	int			pid;
 	int			status;
 	t_parsing	*prev;
+	t_parsing	*head;
 
 	fd = 0;
 	pid = -1;
 	prev = NULL;
+	head = params;
 	while (params != NULL)
 	{
 		is_built_in(params);
@@ -124,6 +126,7 @@ char	**ft_exec_all_cmd(t_parsing *params, char **envp)
 		if (WIFEXITED(status))
 			g_exit_value = WEXITSTATUS(status);
 	}
-	//printf("here free a la fin de chaque commande\n");
+	printf("here free a la fin de chaque commande\n");
+	ft_free_params(head);
 	return (envp);
 }
