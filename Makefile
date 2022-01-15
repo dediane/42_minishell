@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+         #
+#    By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/26 19:30:34 by ddecourt          #+#    #+#              #
-#    Updated: 2022/01/13 19:27:18 by ddecourt         ###   ########.fr        #
+#    Updated: 2022/01/15 16:26:48 by bben-yaa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRCS =	srcs/minishell.c \
 		srcs/parsing/variable_env.c \
 		srcs/parsing/variable_env2.c \
 		srcs/parsing/env_liste.c \
+		srcs/parsing/ft_free.c \
 		srcs/built_in/env.c \
 		srcs/built_in/pwd.c \
 		srcs/built_in/exit.c \
@@ -46,7 +47,7 @@ HEADER = inc/minishell.h
 
 CC = clang
 
-CFLAGS = -Wall -Werror -Wextra -g3 #-fsanitize=address 
+CFLAGS = -Wall -Werror -Wextra #-g3 -fsanitize=address 
 RM = rm -f
 
 .c.o:

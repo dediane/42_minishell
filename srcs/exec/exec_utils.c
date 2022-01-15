@@ -6,7 +6,7 @@
 /*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 13:17:26 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/15 13:53:24 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2022/01/15 16:24:26 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,36 +91,4 @@ int	open_file(t_parsing *params, char *file)
 		return (perror(file), -1);
 	}
 	return (fd);
-}
-
-void	ft_free_params(t_parsing *params)
-{
-	t_parsing	*tmp;
-
-	if (params->next)
-	{
-		if (params->tabs)
-			free_tabs(params->tabs);
-		if (params->file)
-			ft_free_file(params->file);
-		params = params->next;
-		while (params)
-		{
-			tmp = params;
-			if (params->file)
-				ft_free_file(params->file);
-			if (params->tabs)
-				free_tabs(params->tabs);
-			params = params->next;
-			free(tmp);
-		}
-	}
-	else
-	{
-		if (params->file)
-			ft_free_file(params->file);
-		if (params->tabs)
-			free_tabs(params->tabs);
-	}
-
 }

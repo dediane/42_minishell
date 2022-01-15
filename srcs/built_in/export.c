@@ -6,7 +6,7 @@
 /*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 14:55:05 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/15 14:31:22 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2022/01/15 16:07:25 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,19 @@ char	**set_in_env(char *line, char **env)
 	i = -1;
 	while (env[++i])
 		size++;
-	tmp = malloc(sizeof(char *) * (size + 2));	//LEAK->HAVE TO FREE
+	tmp = malloc(sizeof(char *) * (size + 2));
 	i = -1;
 	while (++i < size)
 	{
-		tmp[i] = ft_strdup(env[i]);				//LEAK->HAVE TO FREE
+		tmp[i] = ft_strdup(env[i]);
 	}
-	tmp[i] = ft_strdup(line);					//LEAK->HAVE TO FREE
+	tmp[i] = ft_strdup(line);
 	tmp[++i] = NULL;
 	return (tmp);
 }
+//LEAK->HAVE TO FREE l.25
+//LEAK->HAVE TO FREE l.29
+//LEAK->HAVE TO FREE l.31
 
 void	ft_print_export(char **env)
 {
@@ -64,7 +67,7 @@ void	ft_print_export(char **env)
 
 int	ft_check_arg(char	*arg)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (arg[i] && ft_isalpha(arg[i]))

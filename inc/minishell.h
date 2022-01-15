@@ -6,7 +6,7 @@
 /*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 23:26:15 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/15 14:19:44 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2022/01/15 16:24:47 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ char			*get_right_path(t_parsing *params, char **envp);
 char			**get_cmd_path(char **envp);
 void			ft_free_params(t_parsing *params);
 void			ft_free_file(t_file *file);
+void			free_first_maillon(t_parsing *params);
+
 
 //redirection.c
 t_parsing		*ft_redir(t_parsing *params, char**envp);

@@ -6,7 +6,7 @@
 /*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:03:55 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/15 13:27:46 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2022/01/15 16:26:27 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	exec_process(char **cmd, char *path, char **envp, t_parsing *params)
 		else
 			waitpid(-1, 0, 0);
 	}
-	else 
+	else
 		execve(path, cmd, envp);
 	return (0);
 }
@@ -93,16 +93,14 @@ char	**ft_exec_all_cmd(t_parsing *params, char **envp)
 		{
 			if (params->pipe)
 				dup2(prev->pipe_fd[0], 0);
-			if (params->next != NULL && params->next->pipe != 0 )
+			if (params->next != NULL && params->next->pipe != 0)
 				dup2(params->pipe_fd[1], 1);
 			ft_disable(pid);
 			if (params->file)
 				ft_exec_redir(params, envp);
 			else
 				ft_exec(params, envp);
-			//printf("exit_value = %i\n", g_exit_value);
-			ft_launch_signal();
-			
+			ft_launch_signal();		
 			//if ((is_built_in(params, params->tabs[0], &envp)) && (params->next->pipe != 0))
 			//	exit(0);
 			//else
@@ -126,7 +124,6 @@ char	**ft_exec_all_cmd(t_parsing *params, char **envp)
 		if (WIFEXITED(status))
 			g_exit_value = WEXITSTATUS(status);
 	}
-	printf("here free a la fin de chaque commande\n");
 	ft_free_params(head);
 	return (envp);
 }

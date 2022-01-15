@@ -6,7 +6,7 @@
 /*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 22:43:27 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/15 14:30:34 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2022/01/15 15:59:57 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,11 @@ int	ft_parse_env(char *tab, char **key, char **value)
 		i++;
 	if (dollar == 1)
 		i -= 1;
-	*key = ft_strndup(tab, i);	//LEAK->HAVE TO FREE
+	*key = ft_strndup(tab, i);
 	*value = ft_strchr(tab, '=');
 	return (0);
 }
+//LEAK->HAVE TO FREE l.28
 
 int	ft_is_in_env(char *key, char **envp)
 {
