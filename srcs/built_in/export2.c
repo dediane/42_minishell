@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 22:43:27 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/11 23:18:10 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/15 14:30:34 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	ft_parse_env(char *tab, char **key, char **value)
 		i++;
 	if (dollar == 1)
 		i -= 1;
-	*key = ft_strndup(tab, i);
+	*key = ft_strndup(tab, i);	//LEAK->HAVE TO FREE
 	*value = ft_strchr(tab, '=');
 	return (0);
 }

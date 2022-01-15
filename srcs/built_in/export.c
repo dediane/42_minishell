@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 14:55:05 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/11 23:39:42 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/15 14:31:22 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ char	**set_in_env(char *line, char **env)
 	i = -1;
 	while (env[++i])
 		size++;
-	tmp = malloc(sizeof(char *) * (size + 2));
+	tmp = malloc(sizeof(char *) * (size + 2));	//LEAK->HAVE TO FREE
 	i = -1;
 	while (++i < size)
 	{
-		tmp[i] = ft_strdup(env[i]);
+		tmp[i] = ft_strdup(env[i]);				//LEAK->HAVE TO FREE
 	}
-	tmp[i] = ft_strdup(line);
+	tmp[i] = ft_strdup(line);					//LEAK->HAVE TO FREE
 	tmp[++i] = NULL;
 	return (tmp);
 }
