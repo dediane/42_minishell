@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 23:26:15 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/14 17:36:59 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/15 14:19:44 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ t_parsing		*ft_exec_redir(t_parsing *params, char **envp);
 
 //build_in.c
 int				exec_built_in(t_parsing *params, char *cmd, char ***envp);
-void			is_built_in(t_parsing * params);
+void			is_built_in(t_parsing *params);
 
 //pipe.c
 t_parsing		*ft_pipe(t_parsing *params, char **envp);
@@ -163,11 +163,11 @@ void			ft_add_to_fstack2(t_file *tmp, char *new_name, t_file *new, \
 t_parsing *param);
 
 //env_liste.c
-int		env_list(t_env  **env, char **envp);
-int		ft_malloc_env(t_env	**env);
-int		ft_find_variable(t_env *env, char *envp);
-void	free_env(t_env **env);
-void	ft_def_env(t_env *tmp, t_env *new);
+int				env_list(t_env  **env, char **envp);
+int				ft_malloc_env(t_env	**env);
+int				ft_find_variable(t_env *env, char *envp);
+void			free_env(t_env **env);
+void			ft_def_env(t_env *tmp, t_env *new);
 
 //varaible_env.c
 char			*find_var(char **envp, char *line);
