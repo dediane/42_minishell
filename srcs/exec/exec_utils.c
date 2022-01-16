@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 13:17:26 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/16 22:21:14 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/16 22:51:52 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int	open_file(t_parsing *params, char *file, char **env)
 	if (fd < 0)
 	{
 		g_exit_value = 1;
-		ft_putstr("minishell: ");
+		ft_putstr_fd("minishell: ", 2);
 		return (perror(file), -1);
 	}
 	return (fd);
