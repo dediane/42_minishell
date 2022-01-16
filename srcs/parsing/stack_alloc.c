@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack_alloc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 11:37:17 by bben-yaa          #+#    #+#             */
-/*   Updated: 2022/01/15 14:08:59 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2022/01/16 13:56:00 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int	ft_add_maillon(t_parsing *param)
 	new->heredoc = 0;
 	new->stop = 0;
 	new->is_built_in = 0;
+	new->fork = 0;
 	new->fd_stdout = 0;
 	new->fd_stdin = 0;
 	new->type = NONE;
