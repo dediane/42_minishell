@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 23:26:15 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/14 17:36:59 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/16 14:16:51 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef struct s_parsing
 	int					heredoc;
 	int					stop;
 	int					is_built_in;
+	int					fork;
 	int					pipe_fd[2];
 	t_filetype			type;
 	t_file				*file;

@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 11:37:17 by bben-yaa          #+#    #+#             */
-/*   Updated: 2022/01/14 17:28:39 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/16 14:17:07 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	ft_add_maillon(t_parsing *param)
 	new->heredoc = 0;
 	new->stop = 0;
 	new->is_built_in = 0;
+	new->fork = 0;
 	new->fd_stdout = 0;
 	new->fd_stdin = 0;
 	new->type = NONE;
