@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:03:55 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/16 14:45:25 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/16 15:35:57 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,7 @@ char	**ft_exec(t_parsing *params, char **envp)
 		else if (!right_path)
 			right_path = look_for_relative_path(params, envp);
 		if (right_path != NULL)
-		{
 			g_exit_value = exec_process(params->tabs, right_path, envp, params);
-		}
 		free(right_path);
 		return (envp);
 	}
