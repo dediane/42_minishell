@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:03:55 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/15 16:26:27 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2022/01/16 15:35:57 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,15 @@
 int	exec_process(char **cmd, char *path, char **envp, t_parsing *params)
 {
 	int	pid;
+	(void)pid;
+	(void)params;
 
-	pid = -1;
-	if (params->type != NONE)
-	{
-		pid = fork();
-		if (pid == 0)
-			execve(path, cmd, envp);
-		else
-			waitpid(-1, 0, 0);
-	}
-	else
+	//pid = -1;
+	//if (params->type != NONE)
+	//{
+	//	pid = fork();
+	//	if (pid == 0)
+
 		execve(path, cmd, envp);
 	return (0);
 }
@@ -61,9 +59,7 @@ char	**ft_exec(t_parsing *params, char **envp)
 		else if (!right_path)
 			right_path = look_for_relative_path(params, envp);
 		if (right_path != NULL)
-		{
 			g_exit_value = exec_process(params->tabs, right_path, envp, params);
-		}
 		free(right_path);
 		return (envp);
 	}
@@ -88,7 +84,10 @@ char	**ft_exec_all_cmd(t_parsing *params, char **envp)
 		if (params->next) //!= NULL && params->next->pipe)
 			pipe(params->pipe_fd);
 		if (!(params->is_built_in)) //|| ((is_built_in(params, params->tabs[0], &envp)) && (params->next->pipe != 0)))
+		{
 			pid = fork();
+			params->fork = 1;
+		}
 		if (pid == 0 || (params->is_built_in))
 		{
 			if (params->pipe)
@@ -99,12 +98,12 @@ char	**ft_exec_all_cmd(t_parsing *params, char **envp)
 			if (params->file)
 				ft_exec_redir(params, envp);
 			else
-				ft_exec(params, envp);
+				envp = ft_exec(params, envp);
 			ft_launch_signal();		
-			//if ((is_built_in(params, params->tabs[0], &envp)) && (params->next->pipe != 0))
-			//	exit(0);
+			//if (params->is_built_in)
+			return (envp);
+			exit(0);
 			//else
-			//return (envp);
 		}
 		else
 		{

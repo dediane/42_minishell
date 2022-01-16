@@ -3,14 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 13:17:26 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/16 13:18:43 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2022/01/16 15:42:20 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
+
+void	ft_command_not_found(char **path_array, char *title)
+{
+	if (path_array)
+		free_tabs(path_array);
+	ft_putstr_fd(title, 2);
+	ft_putstr_fd(": command not found\n", 2);
+	exit (127);
+}
 
 // Je récupère mon tableau de paths vers les commandes -> usr/bin etc...
 char	**get_cmd_path(char **envp)
@@ -22,6 +31,7 @@ char	**get_cmd_path(char **envp)
 
 	i = -1;
 	j = -1;
+	path = NULL;
 	while (envp[++i])
 	{
 		if (ft_strnstr(envp[i], "PATH", 4) != 0)
@@ -31,14 +41,6 @@ char	**get_cmd_path(char **envp)
 		return (NULL);
 	tmp = ft_split(path + 5, ':');
 	return (tmp);
-}
-
-void	ft_command_not_found(char **path_array, char *title)
-{
-	free_tabs(path_array);
-	ft_putstr_fd(title, 2);
-	ft_putstr_fd(": command not found\n", 2);
-	exit (127);
 }
 
 // Je checke tous les paths pour trouver le bon et je retourne le bon path

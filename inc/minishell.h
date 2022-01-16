@@ -6,7 +6,7 @@
 /*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 23:26:15 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/16 13:44:41 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2022/01/16 16:49:52 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ typedef struct s_parsing
 	int					heredoc;
 	int					stop;
 	int					is_built_in;
+	int					fork;
 	int					pipe_fd[2];
 	t_filetype			type;
 	t_file				*file;
