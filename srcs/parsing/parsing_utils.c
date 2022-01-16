@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 21:04:33 by balkis            #+#    #+#             */
-/*   Updated: 2022/01/12 00:06:17 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/16 14:26:11 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int	init_param(t_parsing *param)
 	param->fd_stdin = 0;
 	param->fd_stdout = 0;
 	param->heredoc = 0;
+	param->is_built_in = 0;
+	param->fork = 0;
 	param->stop = 0;
 	param->type = NONE;
 	param->file = NULL;
