@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 12:11:42 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/15 16:14:38 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2022/01/16 14:42:02 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,8 @@ void	is_built_in(t_parsing *params)
 		params->is_built_in = 1;
 	else if (ft_strncmp(params->tabs[0], "unset", 6) == 0)
 		params->is_built_in = 1;
-	params->is_built_in = 0;
+	else
+		params->is_built_in = 0;
 }
 
 int	exec_built_in(t_parsing *params, char *cmd, char ***envp)

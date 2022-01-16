@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:03:55 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/16 14:30:55 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/16 14:45:25 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,12 +100,12 @@ char	**ft_exec_all_cmd(t_parsing *params, char **envp)
 			if (params->file)
 				ft_exec_redir(params, envp);
 			else
-				ft_exec(params, envp);
+				envp = ft_exec(params, envp);
 			ft_launch_signal();		
-			//if ((is_built_in(params, params->tabs[0], &envp)) && (params->next->pipe != 0))
+			//if (params->is_built_in)
+			return (envp);
 			exit(0);
 			//else
-			//return (envp);
 		}
 		else
 		{
