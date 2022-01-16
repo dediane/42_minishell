@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 13:50:59 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/16 17:33:09 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/16 23:07:40 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	ft_exit(t_parsing *params)
 {
 	if (params == NULL)
 		ft_exit_mess();
-	if (params->tabs[2])
+	if (params->tabs[0] && params->tabs[1] && params->tabs[2])
 	{
 		ft_putstr_fd("exit\nminishell: exit: too many argument\n", 2);
 		g_exit_value = 1;

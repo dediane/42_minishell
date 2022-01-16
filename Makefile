@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+         #
+#    By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/26 19:30:34 by ddecourt          #+#    #+#              #
-#    Updated: 2022/01/15 16:26:48 by bben-yaa         ###   ########.fr        #
+#    Updated: 2022/01/16 23:11:04 by ddecourt         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,15 +47,15 @@ HEADER = inc/minishell.h
 
 CC = clang
 
-CFLAGS = -Wall -Werror -Wextra #-g3 -fsanitize=address 
+CFLAGS = -Wall -Werror -Wextra -g3 -fsanitize=address 
 RM = rm -f
 
 .c.o:
 	${CC} -c ${CFLAGS} -I -L./libft/ -o $@ $<
 
 $(NAME):    ${OBJS}
-		make -C libft
-		${CC} ${CFLAGS} ${OBJS} -I -L./libft/ -lreadline -lm ./libft/libft.a -o ${NAME}
+		make -j -C libft
+		${CC} ${CFLAGS} ${OBJS} -I -L./libft/ -lreadline -lm ./libft/libft.a -o${NAME}
 
 all:	${NAME}
 
