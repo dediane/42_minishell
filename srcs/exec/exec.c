@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:03:55 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/16 15:35:57 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/16 17:39:56 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ char	**ft_exec_all_cmd(t_parsing *params, char **envp)
 		is_built_in(params);
 		if (params->next) //!= NULL && params->next->pipe)
 			pipe(params->pipe_fd);
-		if (!(params->is_built_in)) //|| ((is_built_in(params, params->tabs[0], &envp)) && (params->next->pipe != 0)))
+		if (!(params->is_built_in)) //|| (params->next && params->next->pipe)) //|| ((is_built_in(params, params->tabs[0], &envp)) && (params->next->pipe != 0)))
 		{
 			pid = fork();
 			params->fork = 1;

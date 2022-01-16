@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 23:26:15 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/16 15:42:29 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/16 17:06:40 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,7 +193,9 @@ int				change_env(char **envp, char *path, char *new_path);
 
 int				ft_env(int fd, char **envp);
 int				ft_pwd(int fd);
-void			ft_exit(char *exit_line);
+void	ft_exit(t_parsing *params);
+
+//void			ft_exit(char *exit_line);
 int				ft_echo(int fd, t_parsing *params);
 //export
 char			**set_in_env(char *line, char **env);
