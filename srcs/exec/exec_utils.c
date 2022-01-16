@@ -6,7 +6,7 @@
 /*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 13:17:26 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/15 16:24:26 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2022/01/16 13:18:43 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	ft_command_not_found(char **path_array, char *title)
 	free_tabs(path_array);
 	ft_putstr_fd(title, 2);
 	ft_putstr_fd(": command not found\n", 2);
-	//g_exit_value = 127;
 	exit (127);
 }
 

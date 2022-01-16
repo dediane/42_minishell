@@ -6,7 +6,7 @@
 /*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 23:11:44 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/15 16:24:01 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2022/01/16 13:18:59 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,3 @@ int	ft_heredoc(char *eof, t_parsing *params)
 	params->heredoc = 1;
 	return (tmp_stdout);
 }
-

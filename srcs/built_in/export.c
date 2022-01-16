@@ -6,7 +6,7 @@
 /*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 14:55:05 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/15 16:42:59 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2022/01/16 13:20:25 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ void	ft_print_export(char **env)
 			if (ft_strncmp(copy[i], copy[j], ft_strlen(copy[i])) > 0)
 			{
 				tmp = ft_strdup(copy[i]);
-				copy[i] = ft_strdup(copy[j]);	//LEAK->HAVE TO FREE
-				copy[j] = ft_strdup(tmp);		//LEAK->HAVE TO FREE
+				copy[i] = ft_strdup(copy[j]);
+				copy[j] = ft_strdup(tmp);
 			}
 			j++;
 		}
@@ -64,6 +64,8 @@ void	ft_print_export(char **env)
 	free_tabs(copy);
 	free(tmp);
 }
+//LEAK->HAVE TO FREE l.56
+//LEAK->HAVE TO FREE l.57
 
 int	ft_check_arg(char	*arg)
 {

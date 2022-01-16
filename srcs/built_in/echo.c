@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 00:47:40 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/11 22:36:25 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/16 13:29:37 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,22 @@ int	check_size(int size, int fd, char **tabs)
 	return (1);
 }
 
+void	ft_write(int fd, t_parsing *params, int *i)
+{
+	if (ft_strncmp(params->tabs[(*i)], "$?", 3) == 0)
+		ft_putnbr_fd(g_exit_value, fd);
+	else
+		ft_putstr_fd(params->tabs[(*i)], fd);
+	if (params->tabs[(*i)++])
+		ft_putchar_fd(' ', fd);
+}
+
+void	ft_plus(int *i, int *size)
+{
+	(*size)++;
+	(*i)++;
+}
+
 int	ft_echo(int fd, t_parsing *params)
 {
 	int	size;
@@ -56,24 +72,21 @@ int	ft_echo(int fd, t_parsing *params)
 	{
 		n = check_n(params->tabs[i]);
 		if (n == 0)
-		{
-			size++;
-			i++;
-		}
+			ft_plus(&i, &size);
 		else
 			break ;
 	}
 	while (params->tabs[i])
-	{
-		if (ft_strncmp(params->tabs[i], "$?", 3) == 0)
-			ft_putnbr_fd(g_exit_value, fd);
-		else
-			ft_putstr_fd(params->tabs[i], fd);
-		if (params->tabs[i++])
-			ft_putchar_fd(' ', fd);
-	}
+		ft_write(fd, params, &i);
 	if (n == 1 && size == 0)
 		ft_putchar_fd('\n', fd);
 	g_exit_value = 0;
 	return (0);
 }
+/*	if (ft_strncmp(params->tabs[i], "$?", 3) == 0)
+		ft_putnbr_fd(g_exit_value, fd);
+	else
+		ft_putstr_fd(params->tabs[i], fd);
+	if (params->tabs[i++])
+		ft_putchar_fd(' ', fd); ->a la place de ft_write
+*/
