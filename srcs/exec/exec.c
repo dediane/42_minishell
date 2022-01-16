@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:03:55 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/16 18:19:11 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/16 18:21:24 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,11 +84,10 @@ char	**ft_exec_all_cmd(t_parsing *params, char **envp)
 	while (params != NULL)
 	{
 		is_built_in(params);
-		//int shouldFakeFork = params->next && params->next->pipe;
 		
-		if (params->next || (params->next && params->next->pipe)) //!= NULL && params->next->pipe)
+		if (params->next || (params->next && params->next->pipe))
 			pipe(params->pipe_fd);
-		if (!(params->is_built_in) || (params->pipe || (params->next && params->next->pipe))) //|| ((is_built_in(params, params->tabs[0], &envp)) && (params->next->pipe != 0)))
+		if (!(params->is_built_in) || (params->pipe || (params->next && params->next->pipe)))
 		{
 			params->fork = 1;
 			pid = fork();
@@ -108,7 +107,6 @@ char	**ft_exec_all_cmd(t_parsing *params, char **envp)
 			if (params->fork)
 				exit(0);
 			return (envp);
-			//else
 		}
 		else
 		{
