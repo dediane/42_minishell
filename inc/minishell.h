@@ -6,7 +6,7 @@
 /*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 23:26:15 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/15 16:24:47 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2022/01/16 13:44:41 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,15 @@ typedef struct s_env
 	char			*var_def;
 	struct s_env	*next;
 }				t_env;
+
+typedef struct s_param
+{
+	char	*argc;
+	int		i;
+	char	*line;
+	char	**envp;
+	char	*buf;
+}				t_param;
 
 typedef struct s_parsing
 {
