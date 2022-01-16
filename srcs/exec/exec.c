@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:03:55 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/16 18:13:55 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/16 18:19:11 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,18 +84,14 @@ char	**ft_exec_all_cmd(t_parsing *params, char **envp)
 	while (params != NULL)
 	{
 		is_built_in(params);
-		int shouldFakeFork = params->next && params->next->pipe;
+		//int shouldFakeFork = params->next && params->next->pipe;
 		
-		if (params->next || (shouldFakeFork)) //!= NULL && params->next->pipe)
+		if (params->next || (params->next && params->next->pipe)) //!= NULL && params->next->pipe)
 			pipe(params->pipe_fd);
-		if (!(params->is_built_in) || (params->pipe || shouldFakeFork)) //|| ((is_built_in(params, params->tabs[0], &envp)) && (params->next->pipe != 0)))
+		if (!(params->is_built_in) || (params->pipe || (params->next && params->next->pipe))) //|| ((is_built_in(params, params->tabs[0], &envp)) && (params->next->pipe != 0)))
 		{
 			params->fork = 1;
-			printf("Je fork\n");
-			//if (params->next)
-			//	close(prev->pipe_fd[1]);
 			pid = fork();
-
 		}
 		if (pid == 0 || (params->is_built_in && params->fork == 0))
 		{
@@ -116,7 +112,6 @@ char	**ft_exec_all_cmd(t_parsing *params, char **envp)
 		}
 		else
 		{
-			printf("Je passe la\n");
 			if (prev && prev->pipe)
 				close(prev->pipe_fd[0]);
 			if (params->next != NULL && params->next->pipe != 0)
