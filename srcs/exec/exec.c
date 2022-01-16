@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:03:55 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/16 18:21:24 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/16 18:37:42 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int	exec_process(char **cmd, char *path, char **envp, t_parsing *params)
 	if (params->type != NONE)
 	{
 		pid = fork();
-		fprintf(stderr, "Je re fork");
 		if (pid == 0)
 			execve(path, cmd, envp);
 		else
@@ -122,9 +121,14 @@ char	**ft_exec_all_cmd(t_parsing *params, char **envp)
 		}
 		prev = params;
 		params = params->next;
+	}
+	params = head;
+	while (params)
+	{
 		waitpid(-1, &status, 0);//WUNTRACED | WEXITED | WNOHANG);
 		if (WIFEXITED(status))
 			g_exit_value = WEXITSTATUS(status);
+		params = params->next;
 	}
 	ft_free_params(head);
 	return (envp);
