@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 20:24:05 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/16 14:44:31 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/16 22:21:54 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_parsing	*ft_redir(t_parsing *params, char **envp)
 
 	if (params->type != 0)
 	{
-		fd = open_file(params, params->file->name);
+		fd = open_file(params, params->file->name, envp);
 		if (fd < 0)
 			return (NULL);
 		params->fd_stdin = dup(STDIN);
@@ -66,7 +66,7 @@ int	ft_multiple_redir(int nb, t_file *file, t_parsing *params, char **envp)
 	params->fd_stdout = dup(STDOUT);
 	while (nb > 0)
 	{
-		fd = open_file(params, file->name);
+		fd = open_file(params, file->name, envp);
 		if (fd < 0)
 			return (1);
 		dup2(fd, 1);
@@ -77,7 +77,7 @@ int	ft_multiple_redir(int nb, t_file *file, t_parsing *params, char **envp)
 		nb--;
 		if (nb != 0)
 		{
-			fd = open(file->name, O_TRUNC);
+			fd = open(file->name, O_TRUNC, envp);
 			if (fd < 0)
 				return (1);
 		}

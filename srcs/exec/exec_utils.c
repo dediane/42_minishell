@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 13:17:26 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/16 15:42:20 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/16 22:21:14 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ char	*get_right_path(t_parsing *params, char **envp)
 	return (NULL);
 }
 
-int	open_file(t_parsing *params, char *file)
+int	open_file(t_parsing *params, char *file, char **env)
 {
 	int	fd;
 
@@ -84,7 +84,7 @@ int	open_file(t_parsing *params, char *file)
 	if (params->type == 3)
 		fd = open(file, O_RDWR | O_APPEND | O_CREAT, 0664);
 	if (params->type == 4)
-		fd = ft_heredoc(file, params);
+		fd = ft_heredoc(file, params, env);
 	if (fd < 0)
 	{
 		g_exit_value = 1;
