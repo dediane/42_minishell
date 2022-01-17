@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: balkis <balkis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 23:26:15 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/17 14:57:13 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/17 23:36:18 by balkis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ typedef struct s_env
 
 typedef struct s_param
 {
-	char	*argc;
+	char	*argv;
 	int		i;
 	char	*line;
 	char	**envp;
@@ -119,6 +119,21 @@ int				mdquote(char *argv, char *line, int *i, t_parsing *tmp);
 void			mdquote2(char *line, char **envp, t_parsing *param);
 int				mdquote3(char *argv, int *i);
 
+
+
+
+
+////
+
+int			ft_first_if(t_parsing *param, t_parsing *tmp, t_param *arg);
+int			ft_second_if(t_param *arg, t_parsing *param, t_parsing *tmp);
+void		ft_third_if(t_param *arg, t_parsing *tmp);
+void		ft_init_param(char*argv, char **envp, t_param *arg);
+
+
+
+
+
 //parsing2.c
 int				ft_mredoc(char *line, int *i, char *argv, t_parsing *tmp);
 char			*ft_mdolar(char *argv, int *i, char *line, t_parsing *param);
@@ -133,7 +148,10 @@ int				check_heredoc(t_parsing *params, char **env);
 int				init_param(t_parsing *param);
 char			*ft_line(char *line, char buf);
 char			ft_strcpy(char *dest, char *src);
-int				ft_init(t_parsing *param, int *i, char *argv);
+//int				ft_init(t_parsing *param, int *i, char *argv);
+int				ft_init(t_parsing *param, t_param *arg, char *argv, char **envp);
+
+
 int				ft_pass_space(char *argv, int *i);
 
 //parsing_tabs.c

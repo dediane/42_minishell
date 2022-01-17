@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: balkis <balkis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:03:55 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/17 18:58:04 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/17 21:43:33 by balkis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ char	**ft_exec(t_parsing *params, char **envp)
 	int		relative;
 
 	relative = 0;
+	//if (envp)
+	//	printf("no env\n");
 	if (exec_built_in(params, params->tabs[0], &envp))
 		return (envp);
 	else

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: balkis <balkis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 21:04:33 by balkis            #+#    #+#             */
-/*   Updated: 2022/01/17 13:01:19 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2022/01/17 23:36:55 by balkis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,15 +72,17 @@ char	ft_strcpy(char *dest, char *src)
 	return (*dest);
 }
 
-int	ft_init(t_parsing *param, int *i, char *argv)
+int	ft_init(t_parsing *param, t_param *arg, char *argv, char **envp)
 {
+	ft_init_param(argv, envp, arg);
+	init_param(param);
 	if (!alloue_elem(param))
 		return (0);
 	if (!init_param(param))
 		return (0);
 	param->next = NULL;
-	(*i) = 0;
-	if (!ft_pass_space(argv, i))
+	arg->i = 0;
+	if (!ft_pass_space(argv, &(arg->i)))
 		return (0);
 	return (1);
 }

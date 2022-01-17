@@ -3,92 +3,127 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: balkis <balkis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 10:03:50 by bben-yaa          #+#    #+#             */
-/*   Updated: 2022/01/17 13:46:29 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2022/01/17 23:26:24 by balkis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
+void	ft_init_param(char*argv, char **envp, t_param *arg)
+{
+	arg->argv = argv;
+	arg->i = 0;
+	arg->line = NULL;
+	arg->envp = envp;
+	arg->buf = NULL;
+}
+
 int	parsing(char *argv, t_parsing *param, char **envp)
 {
-	int			i;
-	char		*buf;
-	char		*line;
+	t_param		arg;
 	t_parsing	*tmp;
+	int			ret;
 
-	line = NULL;
-	buf = NULL;
-	if (!ft_init(param, &i, argv))
+	//ft_init_param(argv, envp, &arg);
+	if (!ft_init(param, &arg, argv, envp))
 		return (0);
 	tmp = param;
-	while (argv[i])
+	while (arg.argv[arg.i])
 	{
-		if (argv[i] == 34)
+		ret = ft_first_if(param, tmp, &arg);
+		if (ret == 1)
+			return (1);
+		else if (ret == 0)
+			return (1);
+		else if (ret == -1)
+			break ;
+		else if (arg.argv[arg.i] == '|')
 		{
-			line = ft_double_quote(line, &i, argv, tmp);
-			if (tmp->stop == 1)
-				return (1);
-			if (line == 0)
-				break ;
-			mdquote2(line, envp, param);
-			if (!mdquote3(argv, &i))
-				break ;
-			line = NULL;
-		}
-		else if (argv[i] == 39)
-		{
-			if (!ft_simple_quote(line, &i, argv, tmp))
-				return (1);
-			if (argv[i + 1] == '\0')
-				break ;
-			ft_pass_squote(argv, &i);
-			line = NULL;
-		}
-		else if (argv[i] == '|')
-		{
-			if (!ft_mpipe(argv, &i, tmp, param))
+			if (!ft_mpipe(arg.argv, &(arg.i), tmp, param))
 				return (0);
 			tmp = tmp->next;
 		}
-		else if ((argv[i] == '<' || argv[i] == '>'))
+		else if (ret == 2)
 		{
-			if (!ft_mredoc(line, &i, argv, tmp))
+			ret = ft_second_if(&arg, param, tmp);
+			if (ret == 0)
 				return (0);
-			line = NULL;
-		}
-		else if (argv[i] == '$' && argv[i + 1] && \
-			argv[i + 1] != '?' && ft_change(&argv[i]))
-		{
-			line = ft_mdolar(argv, &i, line, param);
-			line = ft_mdolar2(argv, &i, line, envp);
-			ft_tabs(tmp, line);
-			line = NULL;
-		}
-		else if (argv[i] == ' ')
-		{
-			ft_mspace(argv, &i, tmp, line);
-			line = NULL;
-		}
-		else
-		{
-			buf = malloc(sizeof(char) * 2);
-			ft_fill(argv, &i, buf, line);
-			line = ft_line(line, buf[0]);
-			if (!argv[i] && line)
-				ft_tabs(tmp, line);
-			free(buf);
+			else if (ret == 3)
+				ft_third_if(&arg, tmp);
 		}
 	}
 	return (1);
 }
 
-//-->>>>> 6 fonction A faire pour la norme si elles return 0 break;
+int	ft_first_if(t_parsing *param, t_parsing *tmp, t_param *arg)
+{
+	if (arg->argv[arg->i] == 34)
+	{
+		arg->line = ft_double_quote(arg->line, &(arg->i), arg->argv, tmp);
+		if (tmp->stop == 1)
+			return (1);
+		if (arg->line == 0)
+			return (-1);
+		mdquote2(arg->line, arg->envp, param);
+		if (!mdquote3(arg->argv, &(arg->i)))
+			return (-1);
+		arg->line = NULL;
+	}
+	else if (arg->argv[arg->i] == 39)
+	{
+		if (!ft_simple_quote(arg->line, &(arg->i), arg->argv, tmp))
+			return (1);
+		if (arg->argv[arg->i + 1] == '\0')
+			return (-1);
+		ft_pass_squote(arg->argv, &(arg->i));
+		arg->line = NULL;
+	}
+	else
+		return (2);
+	return (3);
 
+}
 
-	
+int	ft_second_if(t_param *arg, t_parsing *param, t_parsing *tmp)
+{
+	if ((arg->argv[arg->i] == '<' || arg->argv[arg->i] == '>'))
+	{
+		if (!ft_mredoc(arg->line, &(arg->i), arg->argv, tmp))
+			return (0);
+		arg->line = NULL;
+	}
+	else if (arg->argv[arg->i] == '$' && arg->argv[arg->i + 1] && \
+		arg->argv[arg->i + 1] != '?' && ft_change(&(arg->argv[arg->i])))
+	{
+		arg->line = ft_mdolar(arg->argv, &(arg->i), arg->line, param);
+		arg->line = ft_mdolar2(arg->argv, &(arg->i), arg->line, arg->envp);
+		ft_tabs(tmp, arg->line);
+		arg->line = NULL;
+	}
+	else if (arg->argv[arg->i] == ' ')
+	{
+		ft_mspace(arg->argv, &(arg->i), tmp, arg->line);
+		arg->line = NULL;
+	}
+	else
+		return (3);
+	return (1);
+}
+
+void	ft_third_if(t_param *arg, t_parsing *tmp)
+{
+	arg->buf = malloc(sizeof(char) * 2);
+	ft_fill(arg->argv, &(arg->i), arg->buf, arg->line);
+	arg->line = ft_line(arg->line, arg->buf[0]);
+	if (!arg->argv[arg->i] && arg->line)
+		ft_tabs(tmp, arg->line);
+	free(arg->buf);
+}
+
+//-->>>>> 6 fonction A faire pour la norme si elles return 0 break;	
 /*	t_parsing	*tmp2;
 	t_file		*curs;
 	tmp2 = param;
