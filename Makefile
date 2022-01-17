@@ -6,7 +6,7 @@
 #    By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/26 19:30:34 by ddecourt          #+#    #+#              #
-#    Updated: 2022/01/17 17:39:28 by ddecourt         ###   ########.fr        #
+#    Updated: 2022/01/17 20:18:44 by ddecourt         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ SRCS =	srcs/minishell.c \
 		srcs/exec/built_in.c \
 		srcs/exec/redirection.c \
 		srcs/exec/heredoc.c \
+		srcs/exec/fd.c \
 		srcs/parsing/parsing.c \
 		srcs/parsing/parsing2.c \
 		srcs/parsing/parsing3.c \

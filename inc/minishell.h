@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 23:26:15 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/17 14:57:13 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/17 20:18:06 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,10 +98,13 @@ void			ft_free_params(t_parsing *params);
 void			ft_free_file(t_file *file);
 void			free_first_maillon(t_parsing *params);
 
-
 //redirection.c
 t_parsing		*ft_redir(t_parsing *params, char**envp);
 t_parsing		*ft_exec_redir(t_parsing *params, char **envp);
+
+//fd.c
+void	save_in_out(t_parsing *params);
+void	set_fd(t_parsing *params, int fd);
 
 //build_in.c
 int				exec_built_in(t_parsing *params, char *cmd, char ***envp);
@@ -178,7 +181,7 @@ void			ft_add_to_fstack2(t_file *tmp, char *new_name, t_file *new, \
 t_parsing *param);
 
 //env_liste.c
-int				env_list(t_env  **env, char **envp);
+int				env_list(t_env **env, char **envp);
 int				ft_malloc_env(t_env	**env);
 int				ft_find_variable(t_env *env, char *envp);
 void			free_env(t_env **env);
