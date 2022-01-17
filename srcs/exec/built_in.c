@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 12:11:42 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/16 14:42:02 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/16 17:14:17 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,15 +65,14 @@ void	is_built_in(t_parsing *params)
 		params->is_built_in = 1;
 	else if (ft_strncmp(params->tabs[0], "unset", 6) == 0)
 		params->is_built_in = 1;
+	else if (ft_strncmp(params->tabs[0], "exit", 6) == 0)
+		params->is_built_in = 1;
 	else
 		params->is_built_in = 0;
 }
 
 int	exec_built_in(t_parsing *params, char *cmd, char ***envp)
 {
-	int	fd;
-
-	fd = 0;
 	if (ft_strncmp(cmd, "cd", 3) == 0)
 	{
 		if (!(params->tabs[1]))
@@ -105,6 +104,11 @@ int	exec_built_in(t_parsing *params, char *cmd, char ***envp)
 	else if (ft_strncmp(cmd, "unset", 6) == 0)
 	{
 		*envp = ft_unset(1, params->tabs, *envp);
+		return (1);
+	}
+	else if (ft_strncmp(params->tabs[0], "exit", 6) == 0)
+	{
+		ft_exit(params);
 		return (1);
 	}
 	return (0);

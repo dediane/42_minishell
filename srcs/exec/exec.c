@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:03:55 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/16 15:35:57 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/16 18:37:42 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,18 @@
 //execute une commande: split mon process en 2 process
 int	exec_process(char **cmd, char *path, char **envp, t_parsing *params)
 {
-	int	pid;
-	(void)pid;
-	(void)params;
-
-	//pid = -1;
-	//if (params->type != NONE)
-	//{
-	//	pid = fork();
-	//	if (pid == 0)
-
+	int pid;
+	
+	pid = -1;
+	if (params->type != NONE)
+	{
+		pid = fork();
+		if (pid == 0)
+			execve(path, cmd, envp);
+		else
+			waitpid(-1, 0, 0);
+	}
+	else 
 		execve(path, cmd, envp);
 	return (0);
 }
@@ -81,14 +83,15 @@ char	**ft_exec_all_cmd(t_parsing *params, char **envp)
 	while (params != NULL)
 	{
 		is_built_in(params);
-		if (params->next) //!= NULL && params->next->pipe)
+		
+		if (params->next || (params->next && params->next->pipe))
 			pipe(params->pipe_fd);
-		if (!(params->is_built_in)) //|| ((is_built_in(params, params->tabs[0], &envp)) && (params->next->pipe != 0)))
+		if (!(params->is_built_in) || (params->pipe || (params->next && params->next->pipe)))
 		{
-			pid = fork();
 			params->fork = 1;
+			pid = fork();
 		}
-		if (pid == 0 || (params->is_built_in))
+		if (pid == 0 || (params->is_built_in && params->fork == 0))
 		{
 			if (params->pipe)
 				dup2(prev->pipe_fd[0], 0);
@@ -100,10 +103,9 @@ char	**ft_exec_all_cmd(t_parsing *params, char **envp)
 			else
 				envp = ft_exec(params, envp);
 			ft_launch_signal();		
-			//if (params->is_built_in)
+			if (params->fork)
+				exit(0);
 			return (envp);
-			exit(0);
-			//else
 		}
 		else
 		{
@@ -119,9 +121,14 @@ char	**ft_exec_all_cmd(t_parsing *params, char **envp)
 		}
 		prev = params;
 		params = params->next;
+	}
+	params = head;
+	while (params)
+	{
 		waitpid(-1, &status, 0);//WUNTRACED | WEXITED | WNOHANG);
 		if (WIFEXITED(status))
 			g_exit_value = WEXITSTATUS(status);
+		params = params->next;
 	}
 	ft_free_params(head);
 	return (envp);

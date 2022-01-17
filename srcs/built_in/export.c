@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 14:55:05 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/16 13:20:25 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2022/01/16 23:29:20 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ char	**set_in_env(char *line, char **env)
 	}
 	tmp[i] = ft_strdup(line);
 	tmp[++i] = NULL;
+	free(env);
 	return (tmp);
 }
 //LEAK->HAVE TO FREE l.25

@@ -6,7 +6,7 @@
 /*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 23:26:15 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/16 16:49:52 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2022/01/17 11:29:05 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,10 +88,9 @@ char			**ft_copy_tab(char	**envp);
 ////////exec
 char			**ft_exec_all_cmd(t_parsing *params, char **envp);
 char			**ft_exec(t_parsing *params, char **envp);
-int				open_file(t_parsing *params, char *file);
 
 //exec_utils.c
-int				open_file(t_parsing *params, char *file);
+int				open_file(t_parsing *params, char *file, char **envp);
 char			*get_right_path(t_parsing *params, char **envp);
 char			**get_cmd_path(char **envp);
 void			ft_free_params(t_parsing *params);
@@ -202,7 +201,9 @@ int				change_env(char **envp, char *path, char *new_path);
 
 int				ft_env(int fd, char **envp);
 int				ft_pwd(int fd);
-void			ft_exit(char *exit_line);
+void			ft_exit(t_parsing *params);
+
+//void			ft_exit(char *exit_line);
 int				ft_echo(int fd, t_parsing *params);
 //export
 char			**set_in_env(char *line, char **env);
@@ -220,7 +221,7 @@ char			**ft_unset(int fd, char **tabs, char **env);
 char			*ft_strtrim_first_letter(char *line);
 
 //heredoc
-int				ft_heredoc(char *eof, t_parsing *params);
+int				ft_heredoc(char *eof, t_parsing *params, char **env);
 
 ////////signal
 
