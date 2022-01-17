@@ -6,7 +6,7 @@
 /*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 10:03:50 by bben-yaa          #+#    #+#             */
-/*   Updated: 2022/01/17 13:34:12 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2022/01/17 13:46:29 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	parsing(char *argv, t_parsing *param, char **envp)
 		{
 			line = ft_double_quote(line, &i, argv, tmp);
 			if (tmp->stop == 1)
-				return (0);
+				return (1);
 			if (line == 0)
 				break ;
 			mdquote2(line, envp, param);
@@ -41,7 +41,7 @@ int	parsing(char *argv, t_parsing *param, char **envp)
 		else if (argv[i] == 39)
 		{
 			if (!ft_simple_quote(line, &i, argv, tmp))
-				return (0);
+				return (1);
 			if (argv[i + 1] == '\0')
 				break ;
 			ft_pass_squote(argv, &i);

@@ -6,7 +6,7 @@
 /*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:03:55 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/17 12:26:13 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2022/01/17 13:57:06 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ char	**ft_exec_all_cmd(t_parsing *params, char **envp)
 			ft_launch_signal();		
 			if (params->fork)
 				exit(0);
+			ft_free_params(head);
 			return (envp);
 		}
 		else
