@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 23:26:15 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/17 13:06:20 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2022/01/17 14:57:13 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ int				ft_mpipe(char *argv, int *i, t_parsing *tmp, t_parsing *param);
 void			ft_mspace(char *argv, int *i, t_parsing *tmp, char *line);
 
 //parsing3.c
-int				check_heredoc(t_parsing *params);
+int				check_heredoc(t_parsing *params, char **env);
 
 //parsing_utils.c
 int				init_param(t_parsing *param);
