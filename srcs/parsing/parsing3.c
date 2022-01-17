@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parsing3.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 12:42:22 by bben-yaa          #+#    #+#             */
-/*   Updated: 2022/01/17 13:20:27 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2022/01/17 15:01:37 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-int	check_heredoc(t_parsing *params)
+int	check_heredoc(t_parsing *params, char **env)
 {
 	t_parsing   *tmp;
 
@@ -22,7 +22,7 @@ int	check_heredoc(t_parsing *params)
 		if (tmp->calldoc)
 		{
 			printf("calllll heredocs\n");
-			return (0);
+			ft_heredoc(params->file->name, params, env);
 		}
 		tmp = tmp->next;
 	}
