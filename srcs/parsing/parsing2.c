@@ -6,7 +6,7 @@
 /*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 08:01:08 by balkis            #+#    #+#             */
-/*   Updated: 2022/01/17 14:20:55 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2022/01/17 15:45:24 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@ int	ft_mredoc(char *line, int *i, char *argv, t_parsing *tmp)
 {
 	if (!ft_check_redoc(argv, (*i)))
 	{
-		printf("Minishell: syntax error near \
-		unexpected token `newline'\n");
+		printf("Minishell: syntax error near unexpected token `newline'\n");
 		return (0);
 	}
 	if (line)
