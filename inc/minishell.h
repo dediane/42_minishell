@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 23:26:15 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/17 20:18:06 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/17 23:37:35 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,9 @@ t_parsing		*ft_redir(t_parsing *params, char**envp);
 t_parsing		*ft_exec_redir(t_parsing *params, char **envp);
 
 //fd.c
-void	save_in_out(t_parsing *params);
-void	set_fd(t_parsing *params, int fd);
+void			save_in_out(t_parsing *params);
+void			set_fd(t_parsing *params, int fd);
+void			close_fd(t_parsing *params);
 
 //build_in.c
 int				exec_built_in(t_parsing *params, char *cmd, char ***envp);
