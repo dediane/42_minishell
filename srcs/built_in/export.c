@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 14:55:05 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/16 23:29:20 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/17 18:16:34 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,17 +53,16 @@ void	ft_print_export(char **env)
 		{
 			if (ft_strncmp(copy[i], copy[j], ft_strlen(copy[i])) > 0)
 			{
-				tmp = ft_strdup(copy[i]);
-				copy[i] = ft_strdup(copy[j]);
-				copy[j] = ft_strdup(tmp);
+				tmp = copy[i];
+				copy[i] = copy[j];
+				copy[j] = tmp;
 			}
 			j++;
 		}
 		i++;
 	}
 	ft_print_tab(copy);
-	free_tabs(copy);
-	free(tmp);
+	free(copy);
 }
 //LEAK->HAVE TO FREE l.56
 //LEAK->HAVE TO FREE l.57
@@ -116,5 +115,6 @@ char	**ft_export(int fd, char **tabs, char **env)
 			change_env(env, key, value);
 		}
 	}
+	free(key);
 	return (env);
 }

@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 00:14:45 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/11 22:36:03 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/17 17:57:54 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,14 @@ int	change_env(char **envp, char *path, char *new_path)
 {
 	int		i;
 	char	*ret_ptr;
+	char	*tmp;
 
 	i = -1;
 	ret_ptr = get_path(envp, path, &i);
-	envp[i] = ft_substr(envp[i], 0, ft_strlen(path) + 1);
-	envp[i] = ft_strjoin(envp[i], new_path);
+	tmp = ft_substr(envp[i], 0, ft_strlen(path) + 1);
+	envp[i] = ft_strjoin(tmp, new_path);
+	free(ret_ptr);
+	free(tmp);
 	return (0);
 }
 
@@ -77,7 +80,9 @@ int	ft_cd(char **envp, char *path, t_parsing *params)
 			g_exit_value = 1;
 			return (perror(path), 2);
 		}
+		//free(path);
 		change_env(envp, "PWD", getcwd(buffer, 4096));
+		//free(path);
 		return (0);
 	}
 }
