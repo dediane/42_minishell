@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 23:11:44 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/16 22:27:54 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/17 17:02:39 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,12 @@ int	check_eof(char *line, char *eof)
 {
 	int	size;
 
-	size = ft_strlen(line);
-	if (ft_strncmp(eof, line, size) == 0)
-		return (1);
+	if (line != NULL)
+	{
+		size = ft_strlen(line);
+		if (size != 0 && ft_strncmp(eof, line, size) == 0)
+			return (1);
+	}
 	return (0);
 }
 
@@ -41,9 +44,7 @@ int	ft_heredoc(char *eof, t_parsing *params, char **env)
 			if (check_eof(line, eof))
 				break ;
 			if (line[0] == '$')
-			{
 				line = ft_replace_var(line, env);
-			}
 		}
 		write(pipe_fd[1], line, ft_strlen(line));
 		write(pipe_fd[1], "\n", 1);
