@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 10:03:50 by bben-yaa          #+#    #+#             */
-/*   Updated: 2022/01/11 19:31:45 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/17 13:34:12 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ int	parsing(char *argv, t_parsing *param, char **envp)
 	t_parsing	*tmp;
 
 	line = NULL;
+	buf = NULL;
 	if (!ft_init(param, &i, argv))
 		return (0);
 	tmp = param;
 	while (argv[i])
 	{
-		buf = malloc(sizeof(char) * 2);
 		if (argv[i] == 34)
 		{
 			line = ft_double_quote(line, &i, argv, tmp);
@@ -57,6 +57,7 @@ int	parsing(char *argv, t_parsing *param, char **envp)
 		{
 			if (!ft_mredoc(line, &i, argv, tmp))
 				return (0);
+			line = NULL;
 		}
 		else if (argv[i] == '$' && argv[i + 1] && \
 			argv[i + 1] != '?' && ft_change(&argv[i]))
@@ -73,12 +74,13 @@ int	parsing(char *argv, t_parsing *param, char **envp)
 		}
 		else
 		{
+			buf = malloc(sizeof(char) * 2);
 			ft_fill(argv, &i, buf, line);
 			line = ft_line(line, buf[0]);
 			if (!argv[i] && line)
 				ft_tabs(tmp, line);
+			free(buf);
 		}
-		free(buf);
 	}
 	return (1);
 }

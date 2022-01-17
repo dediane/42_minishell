@@ -6,7 +6,7 @@
 /*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 23:26:15 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/17 11:29:05 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2022/01/17 13:06:20 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ typedef struct s_parsing
 	int					stop;
 	int					is_built_in;
 	int					fork;
+	int					calldoc;
 	int					pipe_fd[2];
 	t_filetype			type;
 	t_file				*file;
@@ -125,12 +126,15 @@ char			*ft_mdolar2(char *argv, int *i, char *line, char **envp);
 int				ft_mpipe(char *argv, int *i, t_parsing *tmp, t_parsing *param);
 void			ft_mspace(char *argv, int *i, t_parsing *tmp, char *line);
 
+//parsing3.c
+int				check_heredoc(t_parsing *params);
+
 //parsing_utils.c
 int				init_param(t_parsing *param);
 char			*ft_line(char *line, char buf);
 char			ft_strcpy(char *dest, char *src);
 int				ft_init(t_parsing *param, int *i, char *argv);
-void			ft_pass_space(char *argv, int *i);
+int				ft_pass_space(char *argv, int *i);
 
 //parsing_tabs.c
 int				ft_paste_tab(t_parsing *param, char **new, char *line);
