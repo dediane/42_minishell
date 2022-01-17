@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 14:55:05 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/17 18:16:34 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/17 19:25:35 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,6 @@ char	**set_in_env(char *line, char **env)
 	free(env);
 	return (tmp);
 }
-//LEAK->HAVE TO FREE l.25
-//LEAK->HAVE TO FREE l.29
-//LEAK->HAVE TO FREE l.31
 
 void	ft_print_export(char **env)
 {
@@ -64,8 +61,6 @@ void	ft_print_export(char **env)
 	ft_print_tab(copy);
 	free(copy);
 }
-//LEAK->HAVE TO FREE l.56
-//LEAK->HAVE TO FREE l.57
 
 int	ft_check_arg(char	*arg)
 {
@@ -101,10 +96,7 @@ char	**ft_export(int fd, char **tabs, char **env)
 	}
 	else if (tabs[2])
 		return (0);
-	//if (!ft_check_arg(tabs[1]))
-	//	return (0);
 	ft_parse_env(tabs[1], &key, &value);
-	//is_in_env = ft_is_in_env(key, env);
 	if (!ft_is_in_env(key, env))
 		env = set_in_env(tabs[1], env);
 	else

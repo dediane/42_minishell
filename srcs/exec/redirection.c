@@ -6,11 +6,25 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 20:24:05 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/17 19:15:18 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/17 19:56:17 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
+
+void	save_in_out(t_parsing *params)
+{
+	params->fd_stdin = dup(STDIN);
+	params->fd_stdout = dup(STDOUT);
+}
+
+void	set_fd(t_parsing *params, int fd)
+{
+	if (params->file->ftype == 2 || params->file->ftype == 3)
+		dup2(fd, 1);
+	if (params->file->ftype == 1)
+		dup2(fd, 0);
+}
 
 t_parsing	*ft_redir(t_parsing *params, char **envp)
 {
@@ -19,15 +33,9 @@ t_parsing	*ft_redir(t_parsing *params, char **envp)
 
 	if (params->type != 0)
 	{
+		save_in_out(params);
 		fd = open_file(params, params->file->name, envp);
-		if (fd < 0)
-			return (NULL);
-		params->fd_stdin = dup(STDIN);
-		params->fd_stdout = dup(STDOUT);
-		if (params->file->ftype == 2 || params->file->ftype == 3)
-			dup2(fd, 1);
-		if (params->file->ftype == 1)
-			dup2(fd, 0);
+		set_fd(params, fd);
 	}
 	if (params->tabs)
 	{
@@ -61,21 +69,16 @@ int	get_nb_files(t_file *file)
 	return (i);
 }
 
+
 int	ft_multiple_redir(int nb, t_file *file, t_parsing *params, char **envp)
 {
 	int	fd;
 
-	params->fd_stdin = dup(STDIN);
-	params->fd_stdout = dup(STDOUT);
+	save_in_out(params);
 	while (nb > 0)
 	{
 		fd = open_file(params, file->name, envp);
-		if (fd < 0)
-			return (1);
-		if (params->file->ftype == 2 || params->file->ftype == 3)
-			dup2(fd, 1);
-		if (params->file->ftype == 1)
-			dup2(fd, 0);
+		set_fd(params, fd);
 		if (!(params->is_built_in))
 			ft_exec(params, envp);
 		else

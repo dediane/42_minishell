@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 00:14:45 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/17 17:57:54 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/17 19:25:15 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,7 @@ int	ft_cd(char **envp, char *path, t_parsing *params)
 			g_exit_value = 1;
 			return (perror(path), 2);
 		}
-		//free(path);
 		change_env(envp, "PWD", getcwd(buffer, 4096));
-		//free(path);
 		return (0);
 	}
 }

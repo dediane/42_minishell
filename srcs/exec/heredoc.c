@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 23:11:44 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/17 17:02:39 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/17 19:40:23 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,8 @@ int	ft_heredoc(char *eof, t_parsing *params, char **env)
 {
 	char	*line;
 	int		pipe_fd[2];
-	int		tmp_stdin;
 	int		tmp_stdout;
 
-	tmp_stdin = dup(STDIN);
 	tmp_stdout = dup(STDOUT);
 	if (pipe(pipe_fd))
 		return (1);
