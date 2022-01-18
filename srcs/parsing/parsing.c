@@ -6,7 +6,7 @@
 /*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 10:03:50 by bben-yaa          #+#    #+#             */
-/*   Updated: 2022/01/18 09:48:48 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2022/01/18 15:09:25 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	parsing(char *argv, t_parsing *param, char **envp)
 		if (ret == 1)
 			return (1);
 		else if (ret == 0)
-			return (1);
+			return (0);
 		else if (ret == -1)
 			break ;
 		else if (ret == 2)
@@ -59,7 +59,7 @@ int	ft_first_if(t_parsing *param, t_parsing *tmp, t_param *arg)
 	{
 		arg->line = ft_double_quote(arg->line, &(arg->i), arg->argv, tmp);
 		if (tmp->stop == 1)
-			return (1);
+			return (0);
 		if (arg->line == 0)
 			return (-1);
 		mdquote2(arg->line, arg->envp, param);
@@ -70,7 +70,7 @@ int	ft_first_if(t_parsing *param, t_parsing *tmp, t_param *arg)
 	else if (arg->argv[arg->i] == 39)
 	{
 		if (!ft_simple_quote(arg->line, &(arg->i), arg->argv, tmp))
-			return (1);
+			return (0);
 		if (arg->argv[arg->i + 1] == '\0')
 			return (-1);
 		ft_pass_squote(arg->argv, &(arg->i));
