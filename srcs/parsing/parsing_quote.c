@@ -6,7 +6,7 @@
 /*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/27 18:49:21 by balkis            #+#    #+#             */
-/*   Updated: 2022/01/17 13:55:31 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2022/01/18 14:49:04 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char	*ft_add_double_quote(t_parsing *param, int *i, char *argv, char *line)
 	(void)param;
 	if (!ft_check_quote(&argv[*i], 34))
 	{
-		//printf("les doubles quotes ne sont pas fermées\n");
+		ft_putstr_fd("minishell: syntax error near unexpected token \"\n", 2);
 		param->calldoc = 1;
 		param->stop = 1;
 		g_exit_value = 1;
@@ -72,8 +72,9 @@ int	ft_add_simple_quote(t_parsing *param, int *i, char *argv, char *line)
 	if (!ft_check_quote(&argv[start], 39))
 	{
 		free (line);
-		//printf("les simples quotes ne sont pas fermées\n");
+		ft_putstr_fd("minishell: syntax error near unexpected token '\n", 2);
 		param->calldoc = 1;
+		param->stop = 1;
 		g_exit_value = 1;
 		return (0);
 	}
