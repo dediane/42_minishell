@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: balkis <balkis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 21:04:33 by balkis            #+#    #+#             */
-/*   Updated: 2022/01/17 23:36:55 by balkis           ###   ########.fr       */
+/*   Updated: 2022/01/18 08:56:10 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-int	init_param(t_parsing *param)
+int	init_parsing(t_parsing *param)
 {
 	param->nb_cmd = 0;
 	param->tabs = NULL;
@@ -75,10 +75,10 @@ char	ft_strcpy(char *dest, char *src)
 int	ft_init(t_parsing *param, t_param *arg, char *argv, char **envp)
 {
 	ft_init_param(argv, envp, arg);
-	init_param(param);
+	init_parsing(param);
 	if (!alloue_elem(param))
 		return (0);
-	if (!init_param(param))
+	if (!init_parsing(param))
 		return (0);
 	param->next = NULL;
 	arg->i = 0;

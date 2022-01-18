@@ -6,7 +6,7 @@
 /*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 08:01:08 by balkis            #+#    #+#             */
-/*   Updated: 2022/01/17 15:45:24 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2022/01/18 09:20:50 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ int	ft_mredoc(char *line, int *i, char *argv, t_parsing *tmp)
 		return (0);
 	while (argv[(*i)] == ' ')
 		(*i)++;
-	if (!tmp->tabs &&tmp->type == 4)
-		tmp->calldoc = 1;
 	return (1);
 }
 

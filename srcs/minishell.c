@@ -6,7 +6,7 @@
 /*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 19:28:36 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/17 17:10:43 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2022/01/18 09:21:36 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,6 @@ char	**ft_copy_tab(char **envp)
 	env[i] = NULL;
 	return (env);
 }
-/* for env_liste
-	//t_env		*env; pour envp en liste 
-
-	//env = set_ret_value(env);
-	//(void *)param = NULL;
-	//env = NULL;
-*/
 
 char	*ft_readline_signal(char *line)
 {
@@ -90,10 +83,7 @@ int	main(int ac, char **av, char **envp)
 			if (parsing(line, &param, env))// && check_heredoc(&param, env))
 				env = ft_exec_all_cmd(&param, env);
 			else
-			{
-				//printf("on free dans le main\n");
 				ft_free_params(&param);
-			}
 		}
 	}
 	return (0);

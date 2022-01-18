@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: balkis <balkis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 23:26:15 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/17 23:36:18 by balkis           ###   ########.fr       */
+/*   Updated: 2022/01/18 08:39:21 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,7 @@ void			ft_mspace(char *argv, int *i, t_parsing *tmp, char *line);
 int				check_heredoc(t_parsing *params, char **env);
 
 //parsing_utils.c
-int				init_param(t_parsing *param);
+int				init_parsing(t_parsing *param);
 char			*ft_line(char *line, char buf);
 char			ft_strcpy(char *dest, char *src);
 //int				ft_init(t_parsing *param, int *i, char *argv);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: balkis <balkis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 10:03:50 by bben-yaa          #+#    #+#             */
-/*   Updated: 2022/01/17 23:26:24 by balkis           ###   ########.fr       */
+/*   Updated: 2022/01/18 09:48:48 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	parsing(char *argv, t_parsing *param, char **envp)
 	t_parsing	*tmp;
 	int			ret;
 
-	//ft_init_param(argv, envp, &arg);
 	if (!ft_init(param, &arg, argv, envp))
 		return (0);
 	tmp = param;
@@ -40,14 +39,10 @@ int	parsing(char *argv, t_parsing *param, char **envp)
 			return (1);
 		else if (ret == -1)
 			break ;
-		else if (arg.argv[arg.i] == '|')
-		{
-			if (!ft_mpipe(arg.argv, &(arg.i), tmp, param))
-				return (0);
-			tmp = tmp->next;
-		}
 		else if (ret == 2)
 		{
+			if (tmp->next)
+				tmp = tmp->next;
 			ret = ft_second_if(&arg, param, tmp);
 			if (ret == 0)
 				return (0);
@@ -81,10 +76,14 @@ int	ft_first_if(t_parsing *param, t_parsing *tmp, t_param *arg)
 		ft_pass_squote(arg->argv, &(arg->i));
 		arg->line = NULL;
 	}
+	else if (arg->argv[arg->i] == '|')
+	{
+		if (!ft_mpipe(arg->argv, &(arg->i), tmp, param))
+			return (0);
+	}
 	else
 		return (2);
 	return (3);
-
 }
 
 int	ft_second_if(t_param *arg, t_parsing *param, t_parsing *tmp)
@@ -171,35 +170,3 @@ void	ft_third_if(t_param *arg, t_parsing *tmp)
 	////->print tabs tout en lisant la liste chainee	et les files et type
 	return (1);
 }*/
-
-int	ft_fill(char *argv, int *i, char *buf, char *line)
-{
-	if (!argv[(*i)])
-		return (0);
-	buf[0] = argv[(*i)];
-	buf[1] = '\0';
-	(void)line;
-	(*i)++;
-	return (1);
-}
-
-void	ft_fill2(char *argv, char *line, t_parsing *tmp, int *i)
-{
-	if (!argv[(*i)] && line)
-		ft_tabs(tmp, line);
-}
-
-void	mdquote2(char *line, char **envp, t_parsing *param)
-{
-	if (dolar_quotes(line))
-		line = ft_replace_var(line, envp);
-	ft_tabs(param, line);
-}
-
-int	mdquote3(char *argv, int *i)
-{
-	if (argv[(*i) + 1] == '\0')
-		return (0);
-	ft_pass_dquote(argv, i);
-	return (1);
-}
