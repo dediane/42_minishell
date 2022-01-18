@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 14:55:05 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/18 13:02:53 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/18 13:51:04 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,15 +65,26 @@ void	ft_print_export(char **env)
 int	ft_check_arg(char	*arg)
 {
 	int	i;
-
+	int flag;
+	
+	flag = 0;
 	i = 0;
-	while (arg[i] && ft_isalpha(arg[i]))
+	if (arg[i] && (arg[i] >= '0' && arg[i] <= '9'))
+	{
+		ft_putstr_fd("minishell: export: `", 1);
+		ft_putstr_fd(arg, 1);
+		ft_putstr_fd("': not a valid identifier\n", 1);
+		g_exit_value = 1;
+		return (0);
+	}
+	while (arg[i] && (ft_isalnum(arg[i]) || arg[i] == '='))
+	{
+		if (arg[i] == '=')
+			flag = 1;
 		i++;
-	if (i == ft_strlen(arg) || (arg[i + 1] && arg[i + 1] == '='))
+	}
+	if (i == ft_strlen(arg) && flag)
 		return (1);
-	ft_putstr_fd("minishell: export: `", 1);
-	ft_putstr_fd(arg, 1);
-	ft_putstr_fd("': not a valid identifier\n", 1);
 	return (0);
 }
 
@@ -96,6 +107,8 @@ char	**ft_export(int fd, char **tabs, char **env)
 	}
 	else if (tabs[2])
 		return (0);
+	if (!ft_check_arg(tabs[1]))
+		return (env);
 	ft_parse_env(tabs[1], &key, &value);
 	if (!ft_is_in_env(key, env))
 		env = set_in_env(tabs[1], env);

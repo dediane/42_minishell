@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 14:55:03 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/21 15:05:46 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/18 14:02:26 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,28 @@ char	*ft_strtrim_first_letter(char *line)
 	return (new);
 }
 
+char	*ft_get_key(char *arg)
+{
+	int		i;
+	char	*key;
+
+	i = 0;
+	while (arg[i] && (ft_isalnum(arg[i]) || arg[i] == '='))
+	{
+		if (arg[i] == '=')
+			break ;
+		i++;
+	}
+	key = ft_strndup(arg, i);
+	return (key);
+}
+
 char	**unset_in_env(char *line, char **env)
 {
 	int		i;
 	int		j;
 	int		size;
-	int		size_line;
+	char	*key;
 	char	**tmp;
 
 	size = 0;
@@ -44,9 +60,11 @@ char	**unset_in_env(char *line, char **env)
 	i = -1;
 	while (++i < (size))
 	{
-		size_line = ft_strlen(line);
-		if (!(ft_strncmp(env[i], line, size_line) == 0))
+		key = ft_get_key(env[i]);
+		if (!(ft_strncmp(env[i], line, ft_strlen(line)) == 0 \
+		&& ft_strlen(line) == ft_strlen(key)))
 			tmp[j++] = ft_strdup(env[i]);
+		free(key);
 	}
 	tmp[j] = NULL;
 	return (tmp);
