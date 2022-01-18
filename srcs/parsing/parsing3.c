@@ -6,7 +6,7 @@
 /*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 12:42:22 by bben-yaa          #+#    #+#             */
-/*   Updated: 2022/01/18 08:57:37 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2022/01/18 11:46:23 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,26 @@ int	check_heredoc(t_parsing *params, char **env)
 	t_parsing	*tmp;
 
 	tmp = params;
+	(void)env;
 	while (tmp)
 	{
-		if (tmp->calldoc)
+		/*if (tmp->calldoc)
 		{
 			printf("calllll heredocs\n");
 			ft_heredoc(params->file->name, params, env);
+		}*/
+		if (tmp->tabs)
+		{
+			if (ft_strncmp(tmp->tabs[0], "export", 7) == 0 && tmp->tabs[1] && tmp->tabs[1][0] =='$')
+			{
+				//printf("faux export on annule la commande go free lololololll\n");
+				return (0);
+			}
 		}
 		tmp = tmp->next;
 	}
 	return (1);
+	
 }
 
 int	ft_fill(char *argv, int *i, char *buf, char *line)

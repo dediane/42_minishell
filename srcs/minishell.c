@@ -6,7 +6,7 @@
 /*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 19:28:36 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/18 09:21:36 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2022/01/18 11:42:54 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	main(int ac, char **av, char **envp)
 		line_hyst(line);
 		if (line[0] != '\0')
 		{
-			if (parsing(line, &param, env))// && check_heredoc(&param, env))
+			if (parsing(line, &param, env) && check_heredoc(&param, env))
 				env = ft_exec_all_cmd(&param, env);
 			else
 				ft_free_params(&param);
