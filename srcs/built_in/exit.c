@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 13:50:59 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/16 23:07:40 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/17 19:25:02 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,10 @@ void	ft_exit_mess(void)
 	exit(0);
 }
 
-
 int	ft_num(char *s)
 {
-	int i;
-	int flag;
+	int	i;
+	int	flag;
 
 	i = 0;
 	flag = ft_strlen(s);

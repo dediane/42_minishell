@@ -6,16 +6,18 @@
 #    By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/26 19:30:34 by ddecourt          #+#    #+#              #
-#    Updated: 2022/01/18 08:53:38 by bben-yaa         ###   ########.fr        #
+#    Updated: 2022/01/18 09:53:15 by bben-yaa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS =	srcs/minishell.c \
 		srcs/exec/exec.c \
+		srcs/exec/exec2.c \
 		srcs/exec/exec_utils.c \
 		srcs/exec/built_in.c \
 		srcs/exec/redirection.c \
 		srcs/exec/heredoc.c \
+		srcs/exec/fd.c \
 		srcs/parsing/parsing.c \
 		srcs/parsing/parsing2.c \
 		srcs/parsing/parsing3.c \

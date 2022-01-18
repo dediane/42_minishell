@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 13:17:26 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/17 19:13:44 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/18 00:33:45 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,9 @@ int	open_file(t_parsing *params, char *file, char **env)
 	if (params->type == 1)
 		fd = open(file, O_RDONLY);
 	if (params->type == 2)
-		fd = open(file, O_RDWR | O_TRUNC | O_CREAT, 0664);
+		fd = open(file, O_WRONLY | O_TRUNC | O_CREAT, 0664);
 	if (params->type == 3)
-		fd = open(file, O_RDWR | O_APPEND | O_CREAT, 0664);
+		fd = open(file, O_WRONLY | O_APPEND | O_CREAT, 0664);
 	if (params->type == 4)
 		fd = ft_heredoc(file, params, env);
 	if (fd < 0)
