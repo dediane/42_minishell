@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:03:55 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/18 17:50:21 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/18 21:22:14 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,12 @@ char	**ft_exec(t_parsing *params, char **envp)
 	return (envp);
 }
 
-char	**ft_exec_1(t_parsing *params, t_parsing *prev, char **envp, int pid)
+char	**ft_exec_1(t_parsing *params, t_parsing *prev, char **envp)
 {
 	if (params->pipe)
 		dup2(prev->pipe_fd[0], 0);
 	if (params->next != NULL && params->next->pipe != 0)
 		dup2(params->pipe_fd[1], 1);
-	ft_disable(pid);
 	if (params->file)
 		ft_exec_redir(params, envp);
 	else
@@ -98,9 +97,10 @@ char	**ft_exec_all_cmd(t_parsing *params, char **envp)
 	while (params != NULL)
 	{
 		pid = check_pipe_built(params, pid);
+		ft_disable(pid);
 		if (pid == 0 || (params->is_built_in && params->fork == 0))
 		{
-			envp = ft_exec_1(params, prev, envp, pid);
+			envp = ft_exec_1(params, prev, envp);
 			ft_continue(params, head);
 			return (envp);
 		}
