@@ -6,12 +6,13 @@
 #    By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/26 19:30:34 by ddecourt          #+#    #+#              #
-#    Updated: 2022/01/17 23:25:06 by ddecourt         ###   ########.fr        #
+#    Updated: 2022/01/18 00:56:13 by ddecourt         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS =	srcs/minishell.c \
 		srcs/exec/exec.c \
+		srcs/exec/exec2.c \
 		srcs/exec/exec_utils.c \
 		srcs/exec/built_in.c \
 		srcs/exec/redirection.c \

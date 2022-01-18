@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:03:55 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/18 00:00:35 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/18 01:07:27 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,6 @@ int	exec_process(char **cmd, char *path, char **envp, t_parsing *params)
 	else
 		execve(path, cmd, envp);
 	return (0);
-}
-
-char	*look_for_relative_path(t_parsing *params, char **envp)
-{
-	char	*right_path;
-
-	right_path = ft_get_home(envp);
-	right_path = ft_strjoin(right_path, "/");
-	right_path = ft_strjoin(right_path, params->tabs[0]);
-	return (right_path);
 }
 
 char	**ft_exec(t_parsing *params, char **envp)
@@ -66,20 +56,6 @@ char	**ft_exec(t_parsing *params, char **envp)
 		return (envp);
 	}
 	return (envp);
-}
-
-int	check_pipe_built(t_parsing *params, int pid)
-{
-	is_built_in(params);
-	if (params->next || (params->next && params->next->pipe))
-		pipe(params->pipe_fd);
-	if (!(params->is_built_in) || (params->pipe || (params->next \
-	&& params->next->pipe)))
-	{
-		params->fork = 1;
-		pid = fork();
-	}
-	return (pid);
 }
 
 void	ft_exec_1(t_parsing *params, t_parsing *prev, char **envp, int pid)

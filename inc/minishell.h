@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 23:26:15 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/17 23:37:35 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/18 01:01:02 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,10 @@ char			**ft_copy_tab(char	**envp);
 ////////exec
 char			**ft_exec_all_cmd(t_parsing *params, char **envp);
 char			**ft_exec(t_parsing *params, char **envp);
+
+//exec2.c
+int				check_pipe_built(t_parsing *params, int pid);
+char			*look_for_relative_path(t_parsing *params, char **envp);
 
 //exec_utils.c
 int				open_file(t_parsing *params, char *file, char **envp);

@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 20:24:05 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/17 23:51:48 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/18 00:51:48 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,10 @@ t_parsing	*ft_redir(t_parsing *params, char **envp)
 	if (params->type != 0)
 	{
 		fd = open_file(params, params->file->name, envp);
-		//save_in_out(params);
+		save_in_out(params);
 		if (fd == 0)
 			return (NULL);
-		params->fd_stdin = dup(STDIN);
-		params->fd_stdout = dup(STDOUT);
-		//set_fd(params, fd);
-		if (params->file->ftype == 2 || params->file->ftype == 3)
-			dup2(fd, 1);
-		if (params->file->ftype == 1)
-			dup2(fd, 0);
+		set_fd(params, fd);
 	}
 	if (params->tabs)
 	{
@@ -42,9 +36,7 @@ t_parsing	*ft_redir(t_parsing *params, char **envp)
 	if (params->type != 0 && params->pipe == 0)
 	{
 		close(fd);
-		//close_fd(params);
-		close(params->fd_stdin);
-		dup2(params->fd_stdout, STDOUT);
+		close_fd(params);
 	}
 	tmp = params;
 	params = params->next;
@@ -70,38 +62,27 @@ int	ft_multiple_redir(int nb, t_file *file, t_parsing *params, char **envp)
 	int	fd;
 
 	fd = -1;
-	//save_in_out(params);
-	params->fd_stdin = dup(STDIN);
-	params->fd_stdout = dup(STDOUT);
+	save_in_out(params);
 	while (nb > 0)
 	{
 		fd = open_file(params, file->name, envp);
-		//set_fd(params, fd);
 		if (fd == 0)
 			return (0);
-		if (params->file->ftype == 2 || params->file->ftype == 3)
-			dup2(fd, 1);
-		if (params->file->ftype == 1)
-			dup2(fd, 0);
-		if (!(params->is_built_in))
-			ft_exec(params, envp);
-		else
-			exec_built_in(params, params->tabs[0], &envp);
-		nb--;
-		if (nb != 0)
+		if (nb == 1)
 		{
-			fd = open(file->name, O_TRUNC, envp);
-			if (fd < 0)
-				return (1);
+			set_fd(params, fd);
+			if (!(params->is_built_in) && nb == 1)
+				ft_exec(params, envp);
+			else
+				exec_built_in(params, params->tabs[0], &envp);
 		}
+		nb--;
 		close(fd);
 		file = file->next;
 	}
 	if (params->heredoc == 1)
 		dup2(params->fd_stdin, STDIN);
-	//close_fd(params);
-	close(params->fd_stdin);
-	dup2(params->fd_stdout, STDOUT);
+	close_fd(params);
 	return (0);
 }
 
