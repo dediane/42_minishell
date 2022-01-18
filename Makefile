@@ -6,7 +6,7 @@
 #    By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/26 19:30:34 by ddecourt          #+#    #+#              #
-#    Updated: 2022/01/18 15:02:39 by ddecourt         ###   ########.fr        #
+#    Updated: 2022/01/18 17:49:07 by ddecourt         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,7 @@ HEADER = inc/minishell.h
 
 CC = clang
 
-CFLAGS = -Wall -Werror -Wextra #-g3 -fsanitize=address 
+CFLAGS = -Wall -Werror -Wextra -g3 #-fsanitize=address 
 RM = rm -f
 
 .c.o:
@@ -58,7 +58,7 @@ RM = rm -f
 
 $(NAME):    ${OBJS}
 		make -C libft
-		${CC} ${CFLAGS} ${OBJS} -I -L./libft/ -lreadline -lm ./libft/libft.a -o${NAME}
+		${CC} ${CFLAGS} ${OBJS} -I -L./libft/ -lreadline -lm ./libft/libft.a -o ${NAME}
 
 all:	${NAME}
 

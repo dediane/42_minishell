@@ -6,7 +6,7 @@
 /*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 23:26:15 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/18 17:59:49 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2022/01/18 19:13:56 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,9 @@ char			**ft_exec(t_parsing *params, char **envp);
 //exec2.c
 int				check_pipe_built(t_parsing *params, int pid);
 char			*look_for_relative_path(t_parsing *params, char **envp);
+void			wait_process(t_parsing *params, int status);
+void			ft_init_exec( int *pid, int *status);
+void			ft_continue(t_parsing *params, t_parsing *head);
 
 //exec_utils.c
 int				open_file(t_parsing *params, char *file, char **envp);
@@ -105,6 +108,7 @@ void			free_first_maillon(t_parsing *params);
 //redirection.c
 t_parsing		*ft_redir(t_parsing *params, char**envp);
 t_parsing		*ft_exec_redir(t_parsing *params, char **envp);
+void			exec_in_redir(t_parsing*params, char **envp);
 
 //fd.c
 void			save_in_out(t_parsing *params);
