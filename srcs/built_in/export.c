@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 14:55:05 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/18 13:51:04 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/18 14:27:42 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ int	ft_check_arg(char	*arg)
 	
 	flag = 0;
 	i = 0;
-	if (arg[i] && (arg[i] >= '0' && arg[i] <= '9'))
+	if ((arg[i] && (arg[i] >= '0' && arg[i] <= '9')) || \
+	( arg[0] && arg[0] =='$'))
 	{
 		ft_putstr_fd("minishell: export: `", 1);
 		ft_putstr_fd(arg, 1);

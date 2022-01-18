@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 23:26:15 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/18 09:53:19 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2022/01/18 14:21:05 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -245,6 +245,8 @@ char			**ft_export(int fd, char **tabs, char **env);
 int				ft_parse_env(char *tab, char **key, char **value);
 int				ft_is_in_env(char *key, char **envp);
 void			ft_print_tab(char **tab);
+char			*ft_get_key(char *arg);
+
 
 //unset
 char			**ft_unset(int fd, char **tabs, char **env);
