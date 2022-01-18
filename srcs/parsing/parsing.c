@@ -6,7 +6,7 @@
 /*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 10:03:50 by bben-yaa          #+#    #+#             */
-/*   Updated: 2022/01/18 15:09:25 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2022/01/18 19:09:21 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	parsing(char *argv, t_parsing *param, char **envp)
 	t_param		arg;
 	t_parsing	*tmp;
 	int			ret;
+	int			ret2;
 
 	if (!ft_init(param, &arg, argv, envp))
 		return (0);
@@ -33,22 +34,18 @@ int	parsing(char *argv, t_parsing *param, char **envp)
 	while (arg.argv[arg.i])
 	{
 		ret = ft_first_if(param, tmp, &arg);
-		if (ret == 1)
-			return (1);
-		else if (ret == 0)
-			return (0);
-		else if (ret == -1)
+		if (ret == -1)
 			break ;
 		else if (ret == 2)
 		{
 			if (tmp->next)
 				tmp = tmp->next;
-			ret = ft_second_if(&arg, param, tmp);
-			if (ret == 0)
-				return (0);
-			else if (ret == 3)
+			ret2 = ft_second_if(&arg, param, tmp);
+			if (ret2 == 3)
 				ft_third_if(&arg, tmp);
 		}
+		if (ret2 == 0 || ret == 0)
+			return (0);
 	}
 	return (1);
 }
@@ -62,20 +59,13 @@ int	ft_first_if(t_parsing *param, t_parsing *tmp, t_param *arg)
 			return (0);
 		if (arg->line == 0)
 			return (-1);
-		mdquote2(arg->line, arg->envp, param);
+		mdquote2(arg->line, arg->envp, tmp);
 		if (!mdquote3(arg->argv, &(arg->i)))
 			return (-1);
 		arg->line = NULL;
 	}
 	else if (arg->argv[arg->i] == 39)
-	{
-		if (!ft_simple_quote(arg->line, &(arg->i), arg->argv, tmp))
-			return (0);
-		if (arg->argv[arg->i + 1] == '\0')
-			return (-1);
-		ft_pass_squote(arg->argv, &(arg->i));
-		arg->line = NULL;
-	}
+		return (s_quote(arg, tmp));
 	else if (arg->argv[arg->i] == '|')
 	{
 		if (!ft_mpipe(arg->argv, &(arg->i), tmp, param))
