@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 23:26:15 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/18 14:21:05 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/18 14:43:35 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,20 +127,11 @@ int				mdquote(char *argv, char *line, int *i, t_parsing *tmp);
 void			mdquote2(char *line, char **envp, t_parsing *param);
 int				mdquote3(char *argv, int *i);
 
-
-
-
-
 ////
-
-int			ft_first_if(t_parsing *param, t_parsing *tmp, t_param *arg);
-int			ft_second_if(t_param *arg, t_parsing *param, t_parsing *tmp);
-void		ft_third_if(t_param *arg, t_parsing *tmp);
-void		ft_init_param(char*argv, char **envp, t_param *arg);
-
-
-
-
+int				ft_first_if(t_parsing *param, t_parsing *tmp, t_param *arg);
+int				ft_second_if(t_param *arg, t_parsing *param, t_parsing *tmp);
+void			ft_third_if(t_param *arg, t_parsing *tmp);
+void			ft_init_param(char*argv, char **envp, t_param *arg);
 
 //parsing2.c
 int				ft_mredoc(char *line, int *i, char *argv, t_parsing *tmp);
@@ -157,8 +148,8 @@ int				init_parsing(t_parsing *param);
 char			*ft_line(char *line, char buf);
 char			ft_strcpy(char *dest, char *src);
 //int				ft_init(t_parsing *param, int *i, char *argv);
-int				ft_init(t_parsing *param, t_param *arg, char *argv, char **envp);
-
+int				ft_init(t_parsing *param, t_param *arg, \
+				char *argv, char **envp);
 
 int				ft_pass_space(char *argv, int *i);
 
@@ -239,14 +230,13 @@ int				ft_echo(int fd, t_parsing *params);
 char			**set_in_env(char *line, char **env);
 void			ft_print_export(char **env);
 int				ft_check_arg(char	*arg);
-char			**ft_export(int fd, char **tabs, char **env);
+char			**ft_export(char **tabs, char **env);
 
 //export2
 int				ft_parse_env(char *tab, char **key, char **value);
 int				ft_is_in_env(char *key, char **envp);
 void			ft_print_tab(char **tab);
 char			*ft_get_key(char *arg);
-
 
 //unset
 char			**ft_unset(int fd, char **tabs, char **env);

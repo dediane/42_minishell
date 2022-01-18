@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 14:55:05 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/18 14:27:42 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/18 14:46:26 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,12 @@ void	ft_print_export(char **env)
 int	ft_check_arg(char	*arg)
 {
 	int	i;
-	int flag;
-	
+	int	flag;
+
 	flag = 0;
 	i = 0;
 	if ((arg[i] && (arg[i] >= '0' && arg[i] <= '9')) || \
-	( arg[0] && arg[0] =='$'))
+	(arg[0] && arg[0] == '$'))
 	{
 		ft_putstr_fd("minishell: export: `", 1);
 		ft_putstr_fd(arg, 1);
@@ -89,18 +89,13 @@ int	ft_check_arg(char	*arg)
 	return (0);
 }
 
-char	**ft_export(int fd, char **tabs, char **env)
+char	**ft_export(char **tabs, char **env)
 {
 	char	*key;
 	char	*value;
-	char	**tmp;
-	int		is_in_env;
 
-	(void)fd;
 	key = NULL;
 	value = NULL;
-	tmp = NULL;
-	is_in_env = 0;
 	if (!tabs[1])
 	{
 		ft_print_export(env);
@@ -113,13 +108,10 @@ char	**ft_export(int fd, char **tabs, char **env)
 	ft_parse_env(tabs[1], &key, &value);
 	if (!ft_is_in_env(key, env))
 		env = set_in_env(tabs[1], env);
-	else
+	else if (value)
 	{
-		if (value)
-		{
-			value = ft_strtrim_first_letter(value);
-			change_env(env, key, value);
-		}
+		value = ft_strtrim_first_letter(value);
+		change_env(env, key, value);
 	}
 	free(key);
 	return (env);
