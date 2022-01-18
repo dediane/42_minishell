@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 20:24:05 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/18 00:51:48 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/18 17:15:35 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,7 @@ t_parsing	*ft_redir(t_parsing *params, char **envp)
 		set_fd(params, fd);
 	}
 	if (params->tabs)
-	{
-		if (!(params->is_built_in))
-			ft_exec(params, envp);
-		else
-			exec_built_in(params, params->tabs[0], &envp);
-	}
+		exec_in_redir(params, envp);
 	if (params->type != 0 && params->pipe == 0)
 	{
 		close(fd);
@@ -42,6 +37,14 @@ t_parsing	*ft_redir(t_parsing *params, char **envp)
 	params = params->next;
 	ft_free_params(tmp);
 	return (params);
+}
+
+void	exec_in_redir(t_parsing*params, char **envp)
+{
+	if (!(params->is_built_in))
+		ft_exec(params, envp);
+	else
+		exec_built_in(params, params->tabs[0], &envp);
 }
 
 int	get_nb_files(t_file *file)

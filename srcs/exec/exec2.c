@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 00:53:11 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/18 01:00:56 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/18 17:10:33 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,33 @@ char	*look_for_relative_path(t_parsing *params, char **envp)
 	right_path = ft_strjoin(right_path, "/");
 	right_path = ft_strjoin(right_path, params->tabs[0]);
 	return (right_path);
+}
+
+void	wait_process(t_parsing *params, int status)
+{
+	t_parsing	*head;
+
+	head = params;
+	while (params)
+	{
+		waitpid(-1, &status, 0);
+		if (WIFEXITED(status))
+			g_exit_value = WEXITSTATUS(status);
+		params = params->next;
+	}
+	ft_free_params(head);
+}
+
+void	ft_init_exec( int *pid, int *status)
+{
+	(*pid) = -1;
+	(*status) = 0;
+}
+
+void	ft_continue(t_parsing *params, t_parsing *head)
+{
+	ft_launch_signal();
+	if (params->fork)
+		exit(0);
+	ft_free_params(head);
 }

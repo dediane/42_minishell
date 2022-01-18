@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:03:55 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/18 14:49:25 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/18 16:39:05 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,14 +87,12 @@ void	ft_exec_2(t_parsing *params, t_parsing *prev)
 
 char	**ft_exec_all_cmd(t_parsing *params, char **envp)
 {
-	int			fd;
 	int			pid;
 	int			status;
 	t_parsing	*prev;
 	t_parsing	*head;
 
-	fd = 0;
-	pid = -1;
+	ft_init_exec(&pid, &status);
 	prev = NULL;
 	head = params;
 	while (params != NULL)
@@ -103,10 +101,7 @@ char	**ft_exec_all_cmd(t_parsing *params, char **envp)
 		if (pid == 0 || (params->is_built_in && params->fork == 0))
 		{
 			envp = ft_exec_1(params, prev, envp, pid);
-			ft_launch_signal();
-			if (params->fork)
-				exit(0);
-			ft_free_params(head);
+			ft_continue(params, head);
 			return (envp);
 		}
 		else
@@ -114,14 +109,6 @@ char	**ft_exec_all_cmd(t_parsing *params, char **envp)
 		prev = params;
 		params = params->next;
 	}
-	params = head;
-	while (params)
-	{
-		waitpid(-1, &status, 0);
-		if (WIFEXITED(status))
-			g_exit_value = WEXITSTATUS(status);
-		params = params->next;
-	}
-	ft_free_params(head);
+	wait_process(head, status);
 	return (envp);
 }
