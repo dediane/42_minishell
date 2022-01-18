@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:03:55 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/18 09:53:05 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2022/01/18 13:09:47 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ char	**ft_exec(t_parsing *params, char **envp)
 	return (envp);
 }
 
-void	ft_exec_1(t_parsing *params, t_parsing *prev, char **envp, int pid)
+char	**ft_exec_1(t_parsing *params, t_parsing *prev, char **envp, int pid)
 {
 	if (params->pipe)
 		dup2(prev->pipe_fd[0], 0);
@@ -71,7 +71,7 @@ void	ft_exec_1(t_parsing *params, t_parsing *prev, char **envp, int pid)
 		ft_exec_redir(params, envp);
 	else
 		envp = ft_exec(params, envp);
-	return ;
+	return (envp);
 }
 
 void	ft_exec_2(t_parsing *params, t_parsing *prev)
@@ -104,7 +104,7 @@ char	**ft_exec_all_cmd(t_parsing *params, char **envp)
 		pid = check_pipe_built(params, pid);
 		if (pid == 0 || (params->is_built_in && params->fork == 0))
 		{
-			ft_exec_1(params, prev, envp, pid);
+			envp = ft_exec_1(params, prev, envp, pid);
 			ft_launch_signal();
 			if (params->fork)
 				exit(0);
