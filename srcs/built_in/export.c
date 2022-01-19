@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 14:55:05 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/19 11:14:06 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/19 11:52:30 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	ft_check_arg(char	*arg)
 	flag = 0;
 	i = 0;
 	if ((arg[i] && (arg[i] >= '0' && arg[i] <= '9')) || \
-	(arg[0] && arg[0] == '$'))
+	(arg[0] && arg[0] == '$' && !arg[1]))
 	{
 		ft_putstr_fd("minishell: export: `", 1);
 		ft_putstr_fd(arg, 1);
@@ -78,41 +78,39 @@ int	ft_check_arg(char	*arg)
 		g_exit_value = 1;
 		return (0);
 	}
-	while (arg[i] && (ft_isalnum(arg[i]) || arg[i] == '='))
-	{
-		if (arg[i] == '=')
-			flag = 1;
-		i++;
-	}
-	if (i == ft_strlen(arg) && flag)
-		return (1);
-	return (0);
+	return (1);
+}
+
+char	**print(char **env)
+{
+	ft_print_export(env);
+	return (env);
 }
 
 char	**ft_export(char **tabs, char **env)
 {
 	char	*key;
 	char	*value;
+	int		i;
 
 	key = NULL;
 	value = NULL;
-	if (!tabs[1])
+	i = 0;
+	if (!tabs[1] || tabs[1][0] == ' ')
+		return (print(env));
+	while (tabs[++i])
 	{
-		ft_print_export(env);
-		return (env);
+		if (!ft_check_arg(tabs[i]))
+			return (env);
+		ft_parse_env(tabs[i], &key, &value);
+		if (!ft_is_in_env(key, env))
+			env = set_in_env(tabs[i], env);
+		else if (value)
+		{
+			value = ft_strtrim_first_letter(value);
+			change_env(env, key, value);
+		}
+		free(key);
 	}
-	else if (tabs[2])
-		return (0);
-	if (!ft_check_arg(tabs[1]))
-		return (env);
-	ft_parse_env(tabs[1], &key, &value);
-	if (!ft_is_in_env(key, env))
-		env = set_in_env(tabs[1], env);
-	else if (value)
-	{
-		value = ft_strtrim_first_letter(value);
-		change_env(env, key, value);
-	}
-	free(key);
 	return (env);
 }
