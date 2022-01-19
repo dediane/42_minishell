@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 23:26:15 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/19 13:57:14 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/19 20:19:25 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -241,6 +241,7 @@ int				ft_env(int fd, char **envp);
 
 //pwd.c
 int				wrong_file(char *path);
+int				wrong_file2(void);
 int				ft_pwd(int fd);
 
 //exit.c

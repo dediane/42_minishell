@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 00:14:45 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/19 13:57:31 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/19 20:18:54 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,11 @@ int	ft_cd(char **envp, char *path, t_parsing *params)
 
 	i = -1;
 	if (path == NULL)
+	{
 		path = ft_get_home(envp);
+		if (!path)
+			return (wrong_file2());
+	}
 	if (ft_strncmp(path, "-", 1) == 0)
 	{
 		free(path);
