@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack_alloc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 11:37:17 by bben-yaa          #+#    #+#             */
-/*   Updated: 2022/01/19 11:28:01 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/19 13:02:50 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,15 @@ int	alloue_elem(t_parsing *param)
 	else
 		free(new);
 	return (1);
+}
+
+void	ft_zero(t_parsing *new)
+{
+	new->calldoc = 0;
+	new->fd_stdout = 0;
+	new->fd_stdin = 0;
+	new->pipe_fd[0] = 0;
+	new->pipe_fd[1] = 0;
 }
 
 int	ft_add_maillon(t_parsing *param)
@@ -47,11 +56,7 @@ int	ft_add_maillon(t_parsing *param)
 	new->stop = 0;
 	new->is_built_in = 0;
 	new->fork = 0;
-	new->calldoc = 0;
-	new->fd_stdout = 0;
-	new->fd_stdin = 0;
-	new->pipe_fd[0] = 0;
-	new->pipe_fd[1] = 0;
+	ft_zero(new);
 	new->type = NONE;
 	new->file = NULL;
 	return (1);

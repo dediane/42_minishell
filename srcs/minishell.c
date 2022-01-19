@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 19:28:36 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/19 11:07:01 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/19 12:50:48 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char	*ft_readline_signal(char *line, char **env)
 	return (line);
 }
 
-void	line_hyst(char *line)
+void	line_hist(char *line)
 {
 	if (line)
 		add_history(line);
@@ -75,7 +75,7 @@ int	main(int ac, char **av, char **envp)
 	while (1)
 	{
 		line = ft_readline_signal(line, env);
-		line_hyst(line);
+		line_hist(line);
 		if (line[0] != '\0')
 		{
 			if (parsing(line, &param, env))

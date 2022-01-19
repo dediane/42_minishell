@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 20:11:36 by balkis            #+#    #+#             */
-/*   Updated: 2022/01/18 21:24:07 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/19 11:46:03 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void	ft_ignore(int sig)
 {
 	if (sig == SIGINT)
 		write(1, "\n", 1);
+	else if (sig == SIGQUIT)
+		ft_putstr("Quit (core dumped)\n");
 }
 
 void	ft_disable(int pid)
