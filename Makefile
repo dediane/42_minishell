@@ -6,18 +6,21 @@
 #    By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/26 19:30:34 by ddecourt          #+#    #+#              #
-#    Updated: 2022/01/13 19:27:18 by ddecourt         ###   ########.fr        #
+#    Updated: 2022/01/18 17:49:07 by ddecourt         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS =	srcs/minishell.c \
 		srcs/exec/exec.c \
+		srcs/exec/exec2.c \
 		srcs/exec/exec_utils.c \
 		srcs/exec/built_in.c \
 		srcs/exec/redirection.c \
 		srcs/exec/heredoc.c \
+		srcs/exec/fd.c \
 		srcs/parsing/parsing.c \
 		srcs/parsing/parsing2.c \
+		srcs/parsing/parsing3.c \
 		srcs/parsing/parsing_utils.c \
 		srcs/parsing/parsing_tabs.c \
 		srcs/parsing/parsing_quote.c \
@@ -28,6 +31,7 @@ SRCS =	srcs/minishell.c \
 		srcs/parsing/variable_env.c \
 		srcs/parsing/variable_env2.c \
 		srcs/parsing/env_liste.c \
+		srcs/parsing/ft_free.c \
 		srcs/built_in/env.c \
 		srcs/built_in/pwd.c \
 		srcs/built_in/exit.c \

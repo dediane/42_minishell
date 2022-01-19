@@ -6,13 +6,13 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 21:04:33 by balkis            #+#    #+#             */
-/*   Updated: 2022/01/12 00:06:17 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/19 11:28:58 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-int	init_param(t_parsing *param)
+int	init_parsing(t_parsing *param)
 {
 	param->nb_cmd = 0;
 	param->tabs = NULL;
@@ -21,7 +21,12 @@ int	init_param(t_parsing *param)
 	param->fd_stdin = 0;
 	param->fd_stdout = 0;
 	param->heredoc = 0;
+	param->is_built_in = 0;
+	param->fork = 0;
+	param->calldoc = 0;
 	param->stop = 0;
+	param->pipe_fd[0] = 0;
+	param->pipe_fd[1] = 0;
 	param->type = NONE;
 	param->file = NULL;
 	param->next = NULL;
@@ -69,20 +74,26 @@ char	ft_strcpy(char *dest, char *src)
 	return (*dest);
 }
 
-int	ft_init(t_parsing *param, int *i, char *argv)
+int	ft_init(t_parsing *param, t_param *arg, char *argv, char **envp)
 {
+	ft_init_param(argv, envp, arg);
+	init_parsing(param);
 	if (!alloue_elem(param))
 		return (0);
-	if (!init_param(param))
+	if (!init_parsing(param))
 		return (0);
 	param->next = NULL;
-	(*i) = 0;
-	ft_pass_space(argv, i);
+	arg->i = 0;
+	if (!ft_pass_space(argv, &(arg->i)))
+		return (0);
 	return (1);
 }
 
-void	ft_pass_space(char *argv, int *i)
+int	ft_pass_space(char *argv, int *i)
 {
 	while (argv[(*i)] == ' ' || argv[(*i)] == '\t')
 		(*i)++;
+	if (!argv[(*i)])
+		return (0);
+	return (1);
 }

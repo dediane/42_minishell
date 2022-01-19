@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 23:26:15 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/14 10:21:51 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2022/01/19 10:59:30 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,15 @@ typedef struct s_env
 	struct s_env	*next;
 }				t_env;
 
+typedef struct s_param
+{
+	char	*argv;
+	int		i;
+	char	*line;
+	char	**envp;
+	char	*buf;
+}				t_param;
+
 typedef struct s_parsing
 {
 	int					nb_cmd;
@@ -63,6 +72,9 @@ typedef struct s_parsing
 	int					fd_stdin;
 	int					heredoc;
 	int					stop;
+	int					is_built_in;
+	int					fork;
+	int					calldoc;
 	int					pipe_fd[2];
 	t_filetype			type;
 	t_file				*file;
@@ -77,21 +89,35 @@ char			**ft_copy_tab(char	**envp);
 ////////exec
 char			**ft_exec_all_cmd(t_parsing *params, char **envp);
 char			**ft_exec(t_parsing *params, char **envp);
-int				open_file(t_parsing *params, char *file);
+
+//exec2.c
+int				check_pipe_built(t_parsing *params, int pid);
+char			*look_for_relative_path(t_parsing *params, char **envp);
+void			wait_process(t_parsing *params, int status);
+void			ft_init_exec( int *pid, int *status);
+void			ft_continue(t_parsing *params, t_parsing *head);
 
 //exec_utils.c
-int				open_file(t_parsing *params, char *file);
+int				open_file(t_parsing *params, char *file, char **envp);
 char			*get_right_path(t_parsing *params, char **envp);
 char			**get_cmd_path(char **envp);
 void			ft_free_params(t_parsing *params);
 void			ft_free_file(t_file *file);
+void			free_first_maillon(t_parsing *params);
 
 //redirection.c
 t_parsing		*ft_redir(t_parsing *params, char**envp);
 t_parsing		*ft_exec_redir(t_parsing *params, char **envp);
+void			exec_in_redir(t_parsing*params, char **envp);
+
+//fd.c
+void			save_in_out(t_parsing *params);
+void			set_fd(t_parsing *params, int fd);
+void			close_fd(t_parsing *params);
 
 //build_in.c
-int				is_built_in(t_parsing *params, char *cmd, char ***envp);
+int				exec_built_in(t_parsing *params, char *cmd, char ***envp);
+void			is_built_in(t_parsing *params);
 
 //pipe.c
 t_parsing		*ft_pipe(t_parsing *params, char **envp);
@@ -105,6 +131,12 @@ int				mdquote(char *argv, char *line, int *i, t_parsing *tmp);
 void			mdquote2(char *line, char **envp, t_parsing *param);
 int				mdquote3(char *argv, int *i);
 
+////
+int				ft_first_if(t_parsing *param, t_parsing *tmp, t_param *arg);
+int				ft_second_if(t_param *arg, t_parsing *param, t_parsing *tmp);
+void			ft_third_if(t_param *arg, t_parsing *tmp);
+void			ft_init_param(char*argv, char **envp, t_param *arg);
+
 //parsing2.c
 int				ft_mredoc(char *line, int *i, char *argv, t_parsing *tmp);
 char			*ft_mdolar(char *argv, int *i, char *line, t_parsing *param);
@@ -112,12 +144,19 @@ char			*ft_mdolar2(char *argv, int *i, char *line, char **envp);
 int				ft_mpipe(char *argv, int *i, t_parsing *tmp, t_parsing *param);
 void			ft_mspace(char *argv, int *i, t_parsing *tmp, char *line);
 
+//parsing3.c
+int				check_heredoc(t_parsing *params, char **env);
+int				s_quote(t_param *arg, t_parsing *tmp);
+
 //parsing_utils.c
-int				init_param(t_parsing *param);
+int				init_parsing(t_parsing *param);
 char			*ft_line(char *line, char buf);
 char			ft_strcpy(char *dest, char *src);
-int				ft_init(t_parsing *param, int *i, char *argv);
-void			ft_pass_space(char *argv, int *i);
+//int				ft_init(t_parsing *param, int *i, char *argv);
+int				ft_init(t_parsing *param, t_param *arg, \
+				char *argv, char **envp);
+
+int				ft_pass_space(char *argv, int *i);
 
 //parsing_tabs.c
 int				ft_paste_tab(t_parsing *param, char **new, char *line);
@@ -161,11 +200,11 @@ void			ft_add_to_fstack2(t_file *tmp, char *new_name, t_file *new, \
 t_parsing *param);
 
 //env_liste.c
-int		env_list(t_env  **env, char **envp);
-int		ft_malloc_env(t_env	**env);
-int		ft_find_variable(t_env *env, char *envp);
-void	free_env(t_env **env);
-void	ft_def_env(t_env *tmp, t_env *new);
+int				env_list(t_env **env, char **envp);
+int				ft_malloc_env(t_env	**env);
+int				ft_find_variable(t_env *env, char *envp);
+void			free_env(t_env **env);
+void			ft_def_env(t_env *tmp, t_env *new);
 
 //varaible_env.c
 char			*find_var(char **envp, char *line);
@@ -188,25 +227,28 @@ int				change_env(char **envp, char *path, char *new_path);
 
 int				ft_env(int fd, char **envp);
 int				ft_pwd(int fd);
-void			ft_exit(char *exit_line);
+void			ft_exit(t_parsing *params, char **env);
+
+//void			ft_exit(char *exit_line);
 int				ft_echo(int fd, t_parsing *params);
 //export
 char			**set_in_env(char *line, char **env);
 void			ft_print_export(char **env);
 int				ft_check_arg(char	*arg);
-char			**ft_export(int fd, char **tabs, char **env);
+char			**ft_export(char **tabs, char **env);
 
 //export2
 int				ft_parse_env(char *tab, char **key, char **value);
 int				ft_is_in_env(char *key, char **envp);
 void			ft_print_tab(char **tab);
+char			*ft_get_key(char *arg);
 
 //unset
 char			**ft_unset(int fd, char **tabs, char **env);
 char			*ft_strtrim_first_letter(char *line);
 
 //heredoc
-int				ft_heredoc(char *eof, t_parsing *params);
+int				ft_heredoc(char *eof, t_parsing *params, char **env);
 
 ////////signal
 

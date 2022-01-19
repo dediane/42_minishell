@@ -6,11 +6,21 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 13:17:26 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/14 14:51:57 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/18 17:53:39 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
+
+void	ft_command_not_found(char **path_array, char *title)
+{
+	if (path_array)
+		free_tabs(path_array);
+	ft_putstr_fd(title, 2);
+	ft_putstr_fd(": command not found\n", 2);
+	g_exit_value = 127;
+	exit (127);
+}
 
 // Je récupère mon tableau de paths vers les commandes -> usr/bin etc...
 char	**get_cmd_path(char **envp)
@@ -22,6 +32,7 @@ char	**get_cmd_path(char **envp)
 
 	i = -1;
 	j = -1;
+	path = NULL;
 	while (envp[++i])
 	{
 		if (ft_strnstr(envp[i], "PATH", 4) != 0)
@@ -31,15 +42,6 @@ char	**get_cmd_path(char **envp)
 		return (NULL);
 	tmp = ft_split(path + 5, ':');
 	return (tmp);
-}
-
-void	ft_command_not_found(char **path_array, char *title)
-{
-	free_tabs(path_array);
-	ft_putstr_fd(title, 2);
-	ft_putstr_fd(": command not found\n", 2);
-	//g_exit_value = 127;
-	exit (127);
 }
 
 // Je checke tous les paths pour trouver le bon et je retourne le bon path
@@ -72,36 +74,23 @@ char	*get_right_path(t_parsing *params, char **envp)
 	return (NULL);
 }
 
-int	open_file(t_parsing *params, char *file)
+int	open_file(t_parsing *params, char *file, char **env)
 {
 	int	fd;
 
 	if (params->type == 1)
 		fd = open(file, O_RDONLY);
 	if (params->type == 2)
-		fd = open(file, O_RDWR | O_TRUNC | O_CREAT, 0664);
+		fd = open(file, O_WRONLY | O_TRUNC | O_CREAT, 0664);
 	if (params->type == 3)
-		fd = open(file, O_RDWR | O_APPEND | O_CREAT, 0664);
+		fd = open(file, O_WRONLY | O_APPEND | O_CREAT, 0664);
 	if (params->type == 4)
-		fd = ft_heredoc(file, params);
+		fd = ft_heredoc(file, params, env);
 	if (fd < 0)
 	{
 		g_exit_value = 1;
-		ft_putstr("minishell: ");
+		ft_putstr_fd("minishell: ", 2);
 		return (perror(file), -1);
 	}
 	return (fd);
-}
-
-void	ft_free_params(t_parsing *params)
-{
-	while (params->next)
-	{
-		if (params->file)
-			ft_free_file(params->file);
-		if (params->tabs)
-			free_tabs(params->tabs);
-		free(params);
-		params = params->next;
-	}
 }

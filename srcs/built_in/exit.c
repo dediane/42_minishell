@@ -6,48 +6,62 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 13:50:59 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/05 18:25:24 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/19 11:07:42 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-void	ft_exit(char *exit_line)
+void	ft_exit_mess(void)
 {
-	int	size;
-	int	flag;
-	int	i;
+	ft_putstr_fd("exit\n", 2);
+	exit(0);
+}
 
-	flag = 0;
+int	ft_num(char *s)
+{
+	int	i;
+	int	flag;
+
 	i = 0;
-	if (exit_line == NULL)
+	flag = ft_strlen(s);
+	while (s[i])
 	{
-		ft_putstr_fd("exit\n", 1);
-		exit(0);
+		if (s[i] >= '0' && s[i] <= '9')
+			i++;
+		else
+			return (0);
 	}
-	size = ft_strlen(exit_line);
-	while ((exit_line[i] > 8 && exit_line[i] < 14) || exit_line[i] == 32)
-		i++;
-	if (exit_line[i] != 'e')
-		flag = 1;
-	if (ft_strnstr(exit_line, "exit", ft_strlen(exit_line)) && flag == 0)
+	return (1);
+}
+
+void	ft_exit(t_parsing *params, char **env)
+{
+	if (params == NULL)
+		ft_exit_mess();
+	if (params->tabs[0] && params->tabs[1] && params->tabs[2])
 	{
-		//fonction pour free tous nos mallocs.
-		ft_putstr_fd("exit\n", 1);
-		exit(0);
+		ft_putstr_fd("exit\nminishell: exit: too many argument\n", 2);
+		g_exit_value = 1;
+		return ;
 	}
-	if (flag == 1)
+	else if (params->tabs[1])
 	{
-		if (exit_line[i] == ' ')
+		if (ft_num(params->tabs[1]))
+			exit(ft_atoi(params->tabs[1]));
+		else
 		{
-			//while ()
+			ft_putstr_fd("exit\nminishell: exit: ", 2);
+			ft_putstr_fd(params->tabs[1], 2);
+			ft_putstr_fd(": numeric argument required\n", 2);
+			free_tabs(env);
+			exit(2);
 		}
-		if (exit_line[i] != ' ')
-		{
-			//fonction pour free tous nos mallocs.
-			ft_putstr_fd(exit_line, 2);
-			ft_putstr_fd(": command not found\n", 2);
-		}
+	}
+	else
+	{
+		free_tabs(env);
+		exit(0);
 	}
 	return ;
 }

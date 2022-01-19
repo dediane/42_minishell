@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   add_file.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: balkis <balkis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 14:12:45 by bben-yaa          #+#    #+#             */
-/*   Updated: 2021/12/27 18:45:09 by balkis           ###   ########.fr       */
+/*   Updated: 2022/01/17 15:43:21 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int	ft_add_file(t_parsing *param, int *i, char *argv, char *line)
 	if (!line || !ft_add_to_fstack(param, line))
 	{
 		printf("Minishell: syntax error near unexpected token `newline'\n");
+		if (line)
+			free(line);
 		return (0);
 	}
 	free(line);

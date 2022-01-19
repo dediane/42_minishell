@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 19:28:36 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/11 22:41:53 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/19 11:07:01 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,25 @@ char	**ft_copy_tab(char **envp)
 	env = malloc(sizeof(char *) * (size + 1));
 	i = -1;
 	while (++i < size)
-	{
-		env[i] = envp[i];
-		//env[i] = ft_strjoin(env[i], "\n");
-	}
+		env[i] = ft_strdup(envp[i]);
 	env[i] = NULL;
 	return (env);
+}
+
+char	*ft_readline_signal(char *line, char **env)
+{
+	signal(SIGINT, ft_sigint);
+	signal(SIGQUIT, ft_sigquit);
+	line = readline("\033[1;35m~Minishell$\033[0m ");
+	if (!line)
+		ft_exit(NULL, env);
+	return (line);
+}
+
+void	line_hyst(char *line)
+{
+	if (line)
+		add_history(line);
 }
 
 int	main(int ac, char **av, char **envp)
@@ -51,44 +64,26 @@ int	main(int ac, char **av, char **envp)
 	char		*line;
 	char		**env;
 	t_parsing	param;
-	//t_env		*env; pour envp en liste 
 
-	(void)av;
 	g_exit_value = 0;
+	(void)av;
 	line = NULL;
 	env = ft_copy_tab(envp);
-	//env = set_ret_value(env);
-	//(void *)param = NULL;
-	//env = NULL;
 	if (ac != 1)
 		return (ft_putstr("Error: not argument accepted\n"), 1);
 	ft_print_title();
 	while (1)
 	{
-		signal(SIGINT, ft_sigint);
-		signal(SIGQUIT, ft_sigquit);
-		line = readline("\033[1;35m~Minishell$\033[0m ");
-		if (!line)
-			ft_exit(NULL); //gere le controle D
-		else
+		line = ft_readline_signal(line, env);
+		line_hyst(line);
+		if (line[0] != '\0')
 		{
-			if (line)
-				add_history(line);
-			if (ft_strnstr(line, "exit", ft_strlen(line)))
-			//if (ft_strncmp(line, "exit", ft_strlen(line)) == 0)
-				ft_exit(line);
-			if (line[0] != '\0')
-			{
-				//printf("line[0] vaut %c\n", line[0]);
-				if (parsing(line, &param, env)) //return -1 ou 0 si l'allocution echoue, les quotes ne sont pas fermees, 
-					// les > sont plus de deux, y'a rien apres les pipes (faut regarder le comportement de bash pck pour lui c'est pas une erreur),
-					// y'a aucun fichier après les redirection 
-				{
-					env = ft_exec_all_cmd(&param, env);
-				}
-				//free here
-			}
+			if (parsing(line, &param, env))
+				env = ft_exec_all_cmd(&param, env);
+			else
+				ft_free_params(&param);
 		}
 	}
+	free_tabs(env);
 	return (0);
 }

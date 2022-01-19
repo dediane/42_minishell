@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: balkis <balkis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 08:01:08 by balkis            #+#    #+#             */
-/*   Updated: 2022/01/11 15:38:05 by balkis           ###   ########.fr       */
+/*   Updated: 2022/01/18 09:20:50 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@ int	ft_mredoc(char *line, int *i, char *argv, t_parsing *tmp)
 {
 	if (!ft_check_redoc(argv, (*i)))
 	{
-		printf("Minishell: syntax error near \
-		unexpected token `newline'\n");
+		printf("Minishell: syntax error near unexpected token `newline'\n");
 		return (0);
 	}
 	if (line)
@@ -31,7 +30,6 @@ int	ft_mredoc(char *line, int *i, char *argv, t_parsing *tmp)
 		return (0);
 	while (argv[(*i)] == ' ')
 		(*i)++;
-	line = NULL;
 	return (1);
 }
 
@@ -69,7 +67,18 @@ int	ft_mpipe(char *argv, int *i, t_parsing *tmp, t_parsing *param)
 	while (argv[(*i)] && argv[(*i)] == ' ')
 		(*i)++;
 	if (!argv[(*i)])
+		tmp->calldoc = 1;
+	if (argv[(*i)] == '|')
+		(*i)++;
+	if (argv[(*i)] && argv[(*i)] == '|')
+	{
+		ft_putstr_fd("minishell: syntax error near unexpected token `||'\n", 2);
 		return (0);
+	}
+	while (argv[(*i)] && argv[(*i)] == ' ')
+		(*i)++;
+	if (!argv[(*i)])
+		tmp->calldoc = 1;
 	return (1);
 }
 
