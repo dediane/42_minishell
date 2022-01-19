@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 12:11:42 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/19 09:48:56 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/19 11:02:51 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	exec_built_in2(t_parsing *params, char *cmd, char ***envp)
 	if (ft_strncmp(cmd, "pwd", 4) == 0)
 		return (ft_pwd(STDOUT), 1);
 	else if (ft_strncmp(params->tabs[0], "exit", 6) == 0)
-		return (ft_exit(params), 1);
+		return (ft_exit(params, *envp), 1);
 	else if (ft_strncmp(params->tabs[0], "echo", 5) == 0)
 		return (ft_echo(1, params), 1);
 	else if (ft_strncmp(cmd, "env", 4) == 0)

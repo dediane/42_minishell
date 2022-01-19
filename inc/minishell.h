@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 23:26:15 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/18 19:13:56 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2022/01/19 10:59:30 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,7 +227,7 @@ int				change_env(char **envp, char *path, char *new_path);
 
 int				ft_env(int fd, char **envp);
 int				ft_pwd(int fd);
-void			ft_exit(t_parsing *params);
+void			ft_exit(t_parsing *params, char **env);
 
 //void			ft_exit(char *exit_line);
 int				ft_echo(int fd, t_parsing *params);

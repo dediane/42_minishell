@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 14:55:05 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/18 14:46:26 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/19 11:14:06 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	**set_in_env(char *line, char **env)
 	}
 	tmp[i] = ft_strdup(line);
 	tmp[++i] = NULL;
-	free(env);
+	free_tabs(env);
 	return (tmp);
 }
 
@@ -59,7 +59,7 @@ void	ft_print_export(char **env)
 		i++;
 	}
 	ft_print_tab(copy);
-	free(copy);
+	free_tabs(copy);
 }
 
 int	ft_check_arg(char	*arg)

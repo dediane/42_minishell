@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 19:28:36 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/19 09:49:48 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/19 11:07:01 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,20 +38,18 @@ char	**ft_copy_tab(char **envp)
 	env = malloc(sizeof(char *) * (size + 1));
 	i = -1;
 	while (++i < size)
-	{
 		env[i] = ft_strdup(envp[i]);
-	}
 	env[i] = NULL;
 	return (env);
 }
 
-char	*ft_readline_signal(char *line)
+char	*ft_readline_signal(char *line, char **env)
 {
 	signal(SIGINT, ft_sigint);
 	signal(SIGQUIT, ft_sigquit);
 	line = readline("\033[1;35m~Minishell$\033[0m ");
 	if (!line)
-		ft_exit(NULL);
+		ft_exit(NULL, env);
 	return (line);
 }
 
@@ -76,7 +74,7 @@ int	main(int ac, char **av, char **envp)
 	ft_print_title();
 	while (1)
 	{
-		line = ft_readline_signal(line);
+		line = ft_readline_signal(line, env);
 		line_hyst(line);
 		if (line[0] != '\0')
 		{
@@ -86,5 +84,6 @@ int	main(int ac, char **av, char **envp)
 				ft_free_params(&param);
 		}
 	}
+	free_tabs(env);
 	return (0);
 }
