@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 19:28:36 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/18 17:39:48 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/19 09:49:48 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	**ft_copy_tab(char **envp)
 	i = -1;
 	while (++i < size)
 	{
-		env[i] = envp[i];
+		env[i] = ft_strdup(envp[i]);
 	}
 	env[i] = NULL;
 	return (env);
