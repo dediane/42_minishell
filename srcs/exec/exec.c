@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:03:55 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/19 20:02:10 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/19 20:05:32 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ char	**ft_exec_1(t_parsing *params, t_parsing *prev, char **envp)
 	if (prev && params->pipe)
 	{
 		dup2(prev->pipe_fd[0], 0);
-		close(prev->pipe_fd[0]);		
+		close(prev->pipe_fd[0]);
 	}
 	if (params->next != NULL && params->next->pipe != 0)
 	{
@@ -83,7 +83,7 @@ char	**ft_exec_1(t_parsing *params, t_parsing *prev, char **envp)
 void	ft_exec_2(t_parsing *params, t_parsing *prev)
 {
 	if (params->pipe && prev)
-		close(prev->pipe_fd[0]);		
+		close(prev->pipe_fd[0]);
 	if (prev && prev->pipe)
 		close(prev->pipe_fd[1]);
 	if (params->next != NULL && params->next->pipe != 0)
