@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 13:50:59 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/17 19:25:02 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/19 11:07:42 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	ft_num(char *s)
 	return (1);
 }
 
-void	ft_exit(t_parsing *params)
+void	ft_exit(t_parsing *params, char **env)
 {
 	if (params == NULL)
 		ft_exit_mess();
@@ -54,10 +54,14 @@ void	ft_exit(t_parsing *params)
 			ft_putstr_fd("exit\nminishell: exit: ", 2);
 			ft_putstr_fd(params->tabs[1], 2);
 			ft_putstr_fd(": numeric argument required\n", 2);
+			free_tabs(env);
 			exit(2);
 		}
 	}
 	else
+	{
+		free_tabs(env);
 		exit(0);
+	}
 	return ;
 }
