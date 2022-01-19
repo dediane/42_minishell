@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack_alloc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 11:37:17 by bben-yaa          #+#    #+#             */
-/*   Updated: 2022/01/17 12:50:41 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2022/01/19 11:28:01 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ int	ft_add_maillon(t_parsing *param)
 	new->calldoc = 0;
 	new->fd_stdout = 0;
 	new->fd_stdin = 0;
+	new->pipe_fd[0] = 0;
+	new->pipe_fd[1] = 0;
 	new->type = NONE;
 	new->file = NULL;
 	return (1);

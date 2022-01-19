@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 21:04:33 by balkis            #+#    #+#             */
-/*   Updated: 2022/01/18 08:56:10 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2022/01/19 11:28:58 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ int	init_parsing(t_parsing *param)
 	param->fork = 0;
 	param->calldoc = 0;
 	param->stop = 0;
+	param->pipe_fd[0] = 0;
+	param->pipe_fd[1] = 0;
 	param->type = NONE;
 	param->file = NULL;
 	param->next = NULL;
