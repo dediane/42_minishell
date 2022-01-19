@@ -6,7 +6,7 @@
 /*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 13:50:59 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/19 13:07:45 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2022/01/19 13:28:22 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,12 @@ void	ft_pb_mess(void)
 	return ;
 }
 
+void	ft_exit_num(int n)
+{
+	ft_putstr_fd("exit\n", 2);
+	exit(n);
+}
+
 void	ft_exit(t_parsing *params, char **env)
 {
 	if (params == NULL)
@@ -51,7 +57,7 @@ void	ft_exit(t_parsing *params, char **env)
 	else if (params->tabs[1])
 	{
 		if (ft_num(params->tabs[1]))
-			exit(ft_atoi(params->tabs[1]));
+			ft_exit_num(ft_atoi(params->tabs[1]));
 		else
 		{
 			ft_putstr_fd("exit\nminishell: exit: ", 2);

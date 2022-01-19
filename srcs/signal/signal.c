@@ -6,7 +6,7 @@
 /*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 20:11:36 by balkis            #+#    #+#             */
-/*   Updated: 2022/01/19 11:46:03 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2022/01/19 13:33:55 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,25 @@ void	ft_sigint(int sig)
 	rl_replace_line("", 0);
 	rl_on_new_line();
 	rl_redisplay();
-	g_exit_value = 130;
 }
 
 void	ft_sigquit(int sig)
 {
 	(void)sig;
-	ft_putstr_fd("\b\b  \b\b", 1);
 }
 
 void	ft_ignore(int sig)
 {
 	if (sig == SIGINT)
+	{
 		write(1, "\n", 1);
+		g_exit_value = 130;
+	}
 	else if (sig == SIGQUIT)
+	{
 		ft_putstr("Quit (core dumped)\n");
+		g_exit_value = 131;
+	}
 }
 
 void	ft_disable(int pid)
