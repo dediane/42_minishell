@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 13:17:26 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/18 17:53:39 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/19 13:31:36 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ char	*get_right_path(t_parsing *params, char **envp)
 	return (NULL);
 }
 
+//fonction pour ouvrir les files et checker l'open selon le type de redirection
 int	open_file(t_parsing *params, char *file, char **env)
 {
 	int	fd;

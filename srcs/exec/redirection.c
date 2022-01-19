@@ -6,12 +6,13 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 20:24:05 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/19 10:56:03 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/19 13:41:44 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
+//execute redirection simple
 t_parsing	*ft_redir(t_parsing *params, char **envp)
 {
 	int			fd;
@@ -47,6 +48,7 @@ void	exec_in_redir(t_parsing*params, char **envp)
 		exec_built_in(params, params->tabs[0], &envp);
 }
 
+//check le nombre de file et le retourne
 int	get_nb_files(t_file *file)
 {
 	int	i;
@@ -60,6 +62,7 @@ int	get_nb_files(t_file *file)
 	return (i);
 }
 
+//execute quand plusieurs redirections
 int	ft_multiple_redir(int nb, t_file *file, t_parsing *params, char **envp)
 {
 	int	fd;
@@ -89,6 +92,7 @@ int	ft_multiple_redir(int nb, t_file *file, t_parsing *params, char **envp)
 	return (0);
 }
 
+//check si une ou plusieurs redirection
 t_parsing	*ft_exec_redir(t_parsing *params, char **envp)
 {
 	int			i;

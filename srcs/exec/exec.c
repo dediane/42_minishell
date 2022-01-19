@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:03:55 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/19 12:39:54 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/19 13:35:36 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	exec_process(char **cmd, char *path, char **envp, t_parsing *params)
 	return (0);
 }
 
+//cherche si built-in, sinon cherche path et execute la commande
 char	**ft_exec(t_parsing *params, char **envp)
 {
 	char	*right_path;
@@ -58,6 +59,7 @@ char	**ft_exec(t_parsing *params, char **envp)
 	return (envp);
 }
 
+//execute process enfant ou built-in
 char	**ft_exec_1(t_parsing *params, t_parsing *prev, char **envp)
 {
 	if (params->pipe)
@@ -71,6 +73,7 @@ char	**ft_exec_1(t_parsing *params, t_parsing *prev, char **envp)
 	return (envp);
 }
 
+//close si pipe ou fork
 void	ft_exec_2(t_parsing *params, t_parsing *prev)
 {
 	if (prev && prev->pipe)
@@ -84,6 +87,7 @@ void	ft_exec_2(t_parsing *params, t_parsing *prev)
 	}
 }
 
+//boucle sur chacun des maillons
 char	**ft_exec_all_cmd(t_parsing *params, char **envp)
 {
 	int			pid;

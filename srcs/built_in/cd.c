@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 00:14:45 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/19 09:51:31 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/19 13:57:31 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,7 @@ int	ft_cd(char **envp, char *path, t_parsing *params)
 	{
 		change_env(envp, "OLDPWD", getcwd(buffer, 4096));
 		if (chdir(path) == -1)
-		{
-			g_exit_value = 1;
-			return (perror(path), 2);
-		}
+			return (wrong_file(path));
 		change_env(envp, "PWD", getcwd(buffer, 4096));
 		free(path);
 		return (0);
