@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 22:43:27 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/18 14:30:58 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/19 13:06:07 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int	ft_parse_env(char *tab, char **key, char **value)
 	*value = ft_strchr(tab, '=');
 	return (0);
 }
-//LEAK->HAVE TO FREE l.28
 
 int	ft_is_in_env(char *key, char **envp)
 {

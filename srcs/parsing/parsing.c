@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 10:03:50 by bben-yaa          #+#    #+#             */
-/*   Updated: 2022/01/18 19:09:21 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2022/01/19 13:09:36 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,52 +111,3 @@ void	ft_third_if(t_param *arg, t_parsing *tmp)
 		ft_tabs(tmp, arg->line);
 	free(arg->buf);
 }
-
-//-->>>>> 6 fonction A faire pour la norme si elles return 0 break;	
-/*	t_parsing	*tmp2;
-	t_file		*curs;
-	tmp2 = param;
-	i = 0;
-	int l = 0;
-	int j = 0;
-	while(tmp2)
-	{
-		curs = tmp2->file;
-		printf("//////maillon %d//////\n", i);
-		printf("enume type %u\n", tmp2->type);
-		printf("valeur de pipe: %i\n", tmp2->pipe);
-		printf("index : %i\n", tmp2->index);
-		printf("nb_cmd : %i\n", tmp2->nb_cmd);
-		if (tmp2->tabs)
-		{
-			printf("il y'a des arguments\n");
-			while (tmp2->tabs[l])
-			{
-				printf("tab[%d] %s\n", l, tmp2->tabs[l]);
-				l++;
-			}
-			printf("tab[%d] %s\n", l, tmp2->tabs[l]);
-		}
-		printf("curs before = %p\n", curs);
-		if (curs)
-		{
-			printf("file existe\n");
-			while (curs)
-			{
-				printf("name_file %d vaut %s\n", j, curs->name);
-				printf("type_file %d vaut %d\n", j, curs->ftype);
-				j++;
-				curs = curs->next;
-			}
-		}
-		printf("on est d'accord que le next %p\n", tmp2->next);
-		l = 0;
-		j = 0;
-		tmp2 = tmp2->next;
-		i++;
-		
-	}
-	printf("----This is after parsing----\n");
-	////->print tabs tout en lisant la liste chainee	et les files et type
-	return (1);
-}*/
