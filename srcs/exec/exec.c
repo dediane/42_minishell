@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 12:03:55 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/19 13:35:36 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/19 20:02:10 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,16 @@ char	**ft_exec(t_parsing *params, char **envp)
 //execute process enfant ou built-in
 char	**ft_exec_1(t_parsing *params, t_parsing *prev, char **envp)
 {
-	if (params->pipe)
+	if (prev && params->pipe)
+	{
 		dup2(prev->pipe_fd[0], 0);
+		close(prev->pipe_fd[0]);		
+	}
 	if (params->next != NULL && params->next->pipe != 0)
+	{
 		dup2(params->pipe_fd[1], 1);
+		close(params->pipe_fd[0]);
+	}
 	if (params->file)
 		ft_exec_redir(params, envp);
 	else
@@ -76,12 +82,18 @@ char	**ft_exec_1(t_parsing *params, t_parsing *prev, char **envp)
 //close si pipe ou fork
 void	ft_exec_2(t_parsing *params, t_parsing *prev)
 {
+	if (params->pipe && prev)
+		close(prev->pipe_fd[0]);		
 	if (prev && prev->pipe)
-		close(prev->pipe_fd[0]);
+		close(prev->pipe_fd[1]);
 	if (params->next != NULL && params->next->pipe != 0)
 		close(params->pipe_fd[1]);
 	if (params->pipe && params->next == NULL)
 	{
+		dup2(params->fd_stdin, STDIN);
+		dup2(params->fd_stdout, STDOUT);
+		if (params->pipe_fd[1] && params->pipe_fd[1] != 0)
+			close(params->pipe_fd[1]);
 		if (params->pipe_fd[0] && params->pipe_fd[0] != 0)
 			close(params->pipe_fd[0]);
 	}
