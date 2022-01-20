@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   variable_env2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: balkis <balkis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 21:21:35 by balkis            #+#    #+#             */
-/*   Updated: 2021/12/21 22:07:42 by balkis           ###   ########.fr       */
+/*   Updated: 2022/01/20 14:42:41 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,20 @@ char	*ft_copy_var(char *var, char **envp, int j, int i)
 	free(var);
 	var = NULL;
 	var = ft_strdup(&envp[j][++i]);
+	return (var);
+}
+
+void	ft_la(int *i, char *name)
+{
+	i = 0;
+	free(name);
+	name = NULL;
+}
+
+char	*ft_var(char *var)
+{
+	free(var);
+	var = NULL;
+	var = ft_strdup(" ");
 	return (var);
 }

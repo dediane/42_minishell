@@ -6,7 +6,7 @@
 /*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 08:01:08 by balkis            #+#    #+#             */
-/*   Updated: 2022/01/20 10:37:42 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2022/01/20 14:08:38 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,17 @@ char	*ft_mdolar(char *argv, int *i, char *line, t_parsing *param)
 	if (line)
 	{
 		ft_tabs(param, line);
-		printf("pipe vaut\n");
 		line = NULL;
 	}
 	while (argv[(*i)] && argv[(*i)] != ' ')
 	{
 		line = ft_line(line, argv[(*i)]);
 		(*i)++;
+	}
+	if (line)
+	{
+		ft_tabs(param, line);
+		line = NULL;
 	}
 	return (line);
 }

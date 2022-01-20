@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 23:26:15 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/20 12:00:32 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/20 14:42:46 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -222,6 +222,8 @@ char			*ft_search_var(char *var, char **envp, char *line, int pos);
 //variable_env2.c
 char			*ft_copy_line(char *line, char **envp, int i, int j);
 char			*ft_copy_var(char *var, char **envp, int j, int i);
+void			ft_la(int *i, char *name);
+char			*ft_var(char *var);
 
 //ft_free.c
 void			ft_free_file(t_file *file);

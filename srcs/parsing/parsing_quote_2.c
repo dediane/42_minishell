@@ -6,7 +6,7 @@
 /*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 20:14:21 by balkis            #+#    #+#             */
-/*   Updated: 2022/01/03 15:09:36 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2022/01/20 15:45:25 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,9 @@ char	*ft_copy(char *var, char *line, char *exp, int pos)
 		i++;
 	}
 	ft_copy2(line, pos, var, i);
-	free(line);
+	if (line)
+		free(line);
+	free(exp);
 	return (var);
 }
 

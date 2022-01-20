@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   variable_env.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: balkis <balkis@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 21:18:28 by balkis            #+#    #+#             */
-/*   Updated: 2021/12/27 18:57:38 by balkis           ###   ########.fr       */
+/*   Updated: 2022/01/20 14:42:37 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,13 +122,11 @@ char	*ft_search_var(char *var, char **envp, char *line, int pos)
 		name = strndup(envp[j], i);
 		if (ft_strncmp(name, var, ft_strlen(name)) == 0 && \
 			ft_strncmp(name, var, ft_strlen(var)) == 0)
+		{
+			free(name);
 			return (ft_copy_var(var, envp, j, i));
-		i = 0;
-		free(name);
-		name = NULL;
+		}
+		ft_la(&i, name);
 	}
-	free(var);
-	var = NULL;
-	var = ft_strdup(" ");
-	return (var);
+	return (ft_var(var));
 }
