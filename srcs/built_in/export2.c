@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 22:43:27 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/20 10:55:53 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2022/01/20 11:44:09 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,9 @@ void	ft_print_tab(char **tab)
 		{
 			if (tab[i][j] == '=')
 			{
-				ft_putchar(tab[i][j]);
+				ft_putchar(tab[i][j++]);
 				flag = 1;
 				ft_putchar('\"');
-				++j;
 			}
 			ft_putchar(tab[i][j]);
 		}
