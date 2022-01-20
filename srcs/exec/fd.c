@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 20:16:28 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/19 18:07:02 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/20 18:19:39 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ void	set_fd(t_parsing *params, int fd)
 
 void	close_fd(t_parsing *params)
 {
-	close(params->fd_stdin);
 	dup2(params->fd_stdout, STDOUT);
+	close(params->fd_stdin);
+	close(params->fd_stdout);
 	return ;
 }
