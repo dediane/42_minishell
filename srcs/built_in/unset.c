@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 14:55:03 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/18 14:02:26 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/20 11:46:47 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ char	**unset_in_env(char *line, char **env)
 			tmp[j++] = ft_strdup(env[i]);
 		free(key);
 	}
+	free_tabs(env);
 	tmp[j] = NULL;
 	return (tmp);
 }

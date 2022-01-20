@@ -6,7 +6,7 @@
 /*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 10:03:50 by bben-yaa          #+#    #+#             */
-/*   Updated: 2022/01/18 19:09:21 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2022/01/20 10:40:28 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	parsing(char *argv, t_parsing *param, char **envp)
 		{
 			if (tmp->next)
 				tmp = tmp->next;
-			ret2 = ft_second_if(&arg, param, tmp);
+			ret2 = ft_second_if(&arg, tmp);
 			if (ret2 == 3)
 				ft_third_if(&arg, tmp);
 		}
@@ -76,7 +76,7 @@ int	ft_first_if(t_parsing *param, t_parsing *tmp, t_param *arg)
 	return (3);
 }
 
-int	ft_second_if(t_param *arg, t_parsing *param, t_parsing *tmp)
+int	ft_second_if(t_param *arg, t_parsing *tmp)
 {
 	if ((arg->argv[arg->i] == '<' || arg->argv[arg->i] == '>'))
 	{
@@ -84,10 +84,13 @@ int	ft_second_if(t_param *arg, t_parsing *param, t_parsing *tmp)
 			return (0);
 		arg->line = NULL;
 	}
-	else if (arg->argv[arg->i] == '$' && arg->argv[arg->i + 1] && \
-		arg->argv[arg->i + 1] != '?' && ft_change(&(arg->argv[arg->i])))
+	else if ((arg->argv[arg->i] == '$' && arg->argv[arg->i + 1] && \
+		arg->argv[arg->i + 1] != '?' && ft_change(&(arg->argv[arg->i]))) \
+		|| ft_dolar_v(arg))
 	{
-		arg->line = ft_mdolar(arg->argv, &(arg->i), arg->line, param);
+		if (ft_dolar_v(arg))
+			return (ft_dolar_q(arg, tmp));
+		arg->line = ft_mdolar(arg->argv, &(arg->i), arg->line, tmp);
 		arg->line = ft_mdolar2(arg->argv, &(arg->i), arg->line, arg->envp);
 		ft_tabs(tmp, arg->line);
 		arg->line = NULL;
@@ -111,52 +114,3 @@ void	ft_third_if(t_param *arg, t_parsing *tmp)
 		ft_tabs(tmp, arg->line);
 	free(arg->buf);
 }
-
-//-->>>>> 6 fonction A faire pour la norme si elles return 0 break;	
-/*	t_parsing	*tmp2;
-	t_file		*curs;
-	tmp2 = param;
-	i = 0;
-	int l = 0;
-	int j = 0;
-	while(tmp2)
-	{
-		curs = tmp2->file;
-		printf("//////maillon %d//////\n", i);
-		printf("enume type %u\n", tmp2->type);
-		printf("valeur de pipe: %i\n", tmp2->pipe);
-		printf("index : %i\n", tmp2->index);
-		printf("nb_cmd : %i\n", tmp2->nb_cmd);
-		if (tmp2->tabs)
-		{
-			printf("il y'a des arguments\n");
-			while (tmp2->tabs[l])
-			{
-				printf("tab[%d] %s\n", l, tmp2->tabs[l]);
-				l++;
-			}
-			printf("tab[%d] %s\n", l, tmp2->tabs[l]);
-		}
-		printf("curs before = %p\n", curs);
-		if (curs)
-		{
-			printf("file existe\n");
-			while (curs)
-			{
-				printf("name_file %d vaut %s\n", j, curs->name);
-				printf("type_file %d vaut %d\n", j, curs->ftype);
-				j++;
-				curs = curs->next;
-			}
-		}
-		printf("on est d'accord que le next %p\n", tmp2->next);
-		l = 0;
-		j = 0;
-		tmp2 = tmp2->next;
-		i++;
-		
-	}
-	printf("----This is after parsing----\n");
-	////->print tabs tout en lisant la liste chainee	et les files et type
-	return (1);
-}*/

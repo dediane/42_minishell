@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 22:43:27 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/19 10:21:32 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2022/01/20 11:44:09 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int	ft_parse_env(char *tab, char **key, char **value)
 	*value = ft_strchr(tab, '=');
 	return (0);
 }
-//LEAK->HAVE TO FREE l.28
 
 int	ft_is_in_env(char *key, char **envp)
 {
@@ -63,8 +62,9 @@ void	ft_print_tab(char **tab)
 		ft_putstr("declare -x ");
 		while (tab[i][++j])
 		{
-			if (tab[i][j - 1] == '=')
+			if (tab[i][j] == '=')
 			{
+				ft_putchar(tab[i][j++]);
 				flag = 1;
 				ft_putchar('\"');
 			}

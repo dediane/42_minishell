@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_liste.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/27 19:08:24 by balkis            #+#    #+#             */
-/*   Updated: 2022/01/14 10:21:37 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2022/01/19 13:20:27 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,6 @@ int	ft_malloc_env(t_env	**env)
 	}
 	return (1);
 }
-	/*while (tmp->next)
-			tmp = tmp->next;
-		tmp->next = new;
-		new->next = NULL;
-		new->variable = NULL;
-		new->var_def = NULL;   a mettre si def_tmp marche pas*/
 
 int	ft_find_variable(t_env *env, char *envp)
 {

@@ -6,11 +6,26 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 19:48:02 by ddecourt          #+#    #+#             */
-/*   Updated: 2021/12/19 22:18:33 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/20 12:00:15 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
+
+int	wrong_file(char *path)
+{
+	g_exit_value = 1;
+	perror(path);
+	free(path);
+	return (2);
+}
+
+int	wrong_file2(char *s)
+{
+	printf("bash: cd: %s not set\n", s);
+	g_exit_value = 1;
+	return (2);
+}
 
 int	ft_pwd(int fd)
 {

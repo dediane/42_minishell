@@ -6,12 +6,13 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 12:11:42 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/19 11:02:51 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/19 13:30:00 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
+//check si la commande est un built-in ou pas
 void	is_built_in(t_parsing *params)
 {
 	if (!params->tabs)
@@ -54,6 +55,7 @@ int	exec_built_in2(t_parsing *params, char *cmd, char ***envp)
 	return (78);
 }
 
+//execute le built-in
 int	exec_built_in(t_parsing *params, char *cmd, char ***envp)
 {
 	int	ret;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 13:50:59 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/19 11:07:42 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/19 13:28:22 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,20 +35,29 @@ int	ft_num(char *s)
 	return (1);
 }
 
+void	ft_pb_mess(void)
+{
+	ft_putstr_fd("exit\nminishell: exit: too many arguments\n", 2);
+	g_exit_value = 1;
+	return ;
+}
+
+void	ft_exit_num(int n)
+{
+	ft_putstr_fd("exit\n", 2);
+	exit(n);
+}
+
 void	ft_exit(t_parsing *params, char **env)
 {
 	if (params == NULL)
 		ft_exit_mess();
 	if (params->tabs[0] && params->tabs[1] && params->tabs[2])
-	{
-		ft_putstr_fd("exit\nminishell: exit: too many argument\n", 2);
-		g_exit_value = 1;
-		return ;
-	}
+		return (ft_pb_mess());
 	else if (params->tabs[1])
 	{
 		if (ft_num(params->tabs[1]))
-			exit(ft_atoi(params->tabs[1]));
+			ft_exit_num(ft_atoi(params->tabs[1]));
 		else
 		{
 			ft_putstr_fd("exit\nminishell: exit: ", 2);

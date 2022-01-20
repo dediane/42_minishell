@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 00:53:11 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/19 10:57:38 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/19 13:38:43 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	check_pipe_built(t_parsing *params, int pid)
 	return (pid);
 }
 
+//return le vrai path d'un relative path (path du home + path)
 char	*look_for_relative_path(t_parsing *params, char **envp)
 {
 	char	*right_path;
