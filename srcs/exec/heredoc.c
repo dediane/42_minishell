@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 23:11:44 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/17 19:40:23 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/20 18:01:56 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,28 @@ int	check_eof(char *line, char *eof)
 			return (1);
 	}
 	return (0);
+}
+
+char	*ft_value(char *line, char **env)
+{
+	int	i;
+	int	j;
+	int size;
+
+	i = 0;
+	j = 0;
+	size = ft_strlen(line);
+	size--;
+	while(env[i])
+	{
+		if (ft_strncmp(&line[1], env[i], size) == 0)
+		{
+			if(env[i][size] && env[i][size] == '=' && env[i][size + 1])
+				return (&env[i][size + 1]);
+		}
+		i++;
+	}
+	return (" ");
 }
 
 int	ft_heredoc(char *eof, t_parsing *params, char **env)
@@ -42,7 +64,10 @@ int	ft_heredoc(char *eof, t_parsing *params, char **env)
 			if (check_eof(line, eof))
 				break ;
 			if (line[0] == '$')
-				line = ft_replace_var(line, env);
+			{
+				line = ft_value(line, env);
+				printf("line %s\n", line);
+			}
 		}
 		write(pipe_fd[1], line, ft_strlen(line));
 		write(pipe_fd[1], "\n", 1);
