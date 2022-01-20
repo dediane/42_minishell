@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 23:26:15 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/20 12:00:32 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/20 20:04:11 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ typedef struct s_param
 	char	*line;
 	char	**envp;
 	char	*buf;
+	int		ret;
+	int		ret2;
 }				t_param;
 
 typedef struct s_parsing
@@ -106,7 +108,8 @@ void			ft_init_exec( int *pid, int *status);
 void			ft_continue(t_parsing *params, t_parsing *head);
 
 //exec_utils.c
-void			ft_command_not_found(char **path_array, char *title);
+void			ft_command_not_found(char **path_array, char *title, \
+				t_parsing *params);
 char			**get_cmd_path(char **envp);
 char			*get_right_path(t_parsing *params, char **envp);
 int				open_file(t_parsing *params, char *file, char **env);
@@ -222,6 +225,8 @@ char			*ft_search_var(char *var, char **envp, char *line, int pos);
 //variable_env2.c
 char			*ft_copy_line(char *line, char **envp, int i, int j);
 char			*ft_copy_var(char *var, char **envp, int j, int i);
+void			ft_la(int *i, char *name);
+char			*ft_var(char *var);
 
 //ft_free.c
 void			ft_free_file(t_file *file);
@@ -246,6 +251,7 @@ int				ft_env(int fd, char **envp);
 //pwd.c
 int				wrong_file(char *path);
 int				wrong_file2(char *s);
+int				check_cd_arg(t_parsing *params);
 int				ft_pwd(int fd);
 
 //exit.c
@@ -256,9 +262,9 @@ int				ft_num(char *s);
 //echo.c
 int				check_n(char *arg);
 int				check_size(int size, int fd, char **tabs);
-void			ft_write(int fd, t_parsing *params, int *i);
+void			ft_write(int fd, t_parsing *params, int *i, int *space);
 void			ft_plus(int *i, int *size);
-int				ft_echo(int fd, t_parsing *params);
+int				ft_echo(int fd, t_parsing *params, int space);
 
 //export
 char			**set_in_env(char *line, char **env);

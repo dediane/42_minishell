@@ -6,19 +6,20 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 13:17:26 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/19 13:31:36 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/20 19:44:00 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-void	ft_command_not_found(char **path_array, char *title)
+void	ft_command_not_found(char **path_array, char *title, t_parsing *params)
 {
 	if (path_array)
 		free_tabs(path_array);
 	ft_putstr_fd(title, 2);
 	ft_putstr_fd(": command not found\n", 2);
 	g_exit_value = 127;
+	ft_free_params(params);
 	exit (127);
 }
 
@@ -70,7 +71,7 @@ char	*get_right_path(t_parsing *params, char **envp)
 				free(path);
 		}
 	}
-	ft_command_not_found(path_array, params->tabs[0]);
+	ft_command_not_found(path_array, params->tabs[0], params);
 	return (NULL);
 }
 

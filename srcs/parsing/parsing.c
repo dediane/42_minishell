@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 10:03:50 by bben-yaa          #+#    #+#             */
-/*   Updated: 2022/01/20 10:40:28 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2022/01/20 20:05:52 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,32 +19,32 @@ void	ft_init_param(char*argv, char **envp, t_param *arg)
 	arg->line = NULL;
 	arg->envp = envp;
 	arg->buf = NULL;
+	arg->ret = 1;
+	arg->ret2 = 1;
 }
 
 int	parsing(char *argv, t_parsing *param, char **envp)
 {
 	t_param		arg;
 	t_parsing	*tmp;
-	int			ret;
-	int			ret2;
 
 	if (!ft_init(param, &arg, argv, envp))
 		return (0);
 	tmp = param;
 	while (arg.argv[arg.i])
 	{
-		ret = ft_first_if(param, tmp, &arg);
-		if (ret == -1)
+		arg.ret = ft_first_if(param, tmp, &arg);
+		if (arg.ret == -1)
 			break ;
-		else if (ret == 2)
+		else if (arg.ret == 2)
 		{
 			if (tmp->next)
 				tmp = tmp->next;
-			ret2 = ft_second_if(&arg, tmp);
-			if (ret2 == 3)
+			arg.ret2 = ft_second_if(&arg, tmp);
+			if (arg.ret2 == 3)
 				ft_third_if(&arg, tmp);
 		}
-		if (ret2 == 0 || ret == 0)
+		if ((arg.ret2 == 0) || (arg.ret == 0))
 			return (0);
 	}
 	return (1);
