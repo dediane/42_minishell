@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 23:11:44 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/20 18:01:56 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/20 18:20:55 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,7 @@ int	ft_heredoc(char *eof, t_parsing *params, char **env)
 			if (check_eof(line, eof))
 				break ;
 			if (line[0] == '$')
-			{
 				line = ft_value(line, env);
-				printf("line %s\n", line);
-			}
 		}
 		write(pipe_fd[1], line, ft_strlen(line));
 		write(pipe_fd[1], "\n", 1);
