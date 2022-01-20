@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 23:26:15 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/19 20:19:25 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/20 10:42:16 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ void			is_built_in(t_parsing *params);
 void			ft_init_param(char*argv, char **envp, t_param *arg);
 int				parsing(char *argv, t_parsing *param, char **envp);
 int				ft_first_if(t_parsing *param, t_parsing *tmp, t_param *arg);
-int				ft_second_if(t_param *arg, t_parsing *param, t_parsing *tmp);
+int				ft_second_if(t_param *arg, t_parsing *tmp);
 void			ft_third_if(t_param *arg, t_parsing *tmp);
 
 //parsing2.c
@@ -227,6 +227,10 @@ char			*ft_copy_var(char *var, char **envp, int j, int i);
 void			ft_free_file(t_file *file);
 void			ft_free_params(t_parsing *params);
 void			free_first_maillon(t_parsing *params);
+
+//parsing_dolar.c
+int				ft_dolar_q(t_param *arg, t_parsing *tmp);
+int				ft_dolar_v(t_param *arg);
 
 ////////----------------------built_in----------------------------
 

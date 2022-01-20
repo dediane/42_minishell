@@ -6,7 +6,7 @@
 /*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 08:01:08 by balkis            #+#    #+#             */
-/*   Updated: 2022/01/18 09:20:50 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2022/01/20 10:37:42 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ char	*ft_mdolar(char *argv, int *i, char *line, t_parsing *param)
 	if (line)
 	{
 		ft_tabs(param, line);
+		printf("pipe vaut\n");
 		line = NULL;
 	}
 	while (argv[(*i)] && argv[(*i)] != ' ')
@@ -89,5 +90,6 @@ void	ft_mspace(char *argv, int *i, t_parsing *tmp, char *line)
 		while (argv[(*i)] == ' ')
 			(*i)++;
 	}
-	ft_tabs(tmp, line);
+	if (line)
+		ft_tabs(tmp, line);
 }

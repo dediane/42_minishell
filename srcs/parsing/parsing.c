@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 10:03:50 by bben-yaa          #+#    #+#             */
-/*   Updated: 2022/01/19 13:09:36 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/20 10:40:28 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	parsing(char *argv, t_parsing *param, char **envp)
 		{
 			if (tmp->next)
 				tmp = tmp->next;
-			ret2 = ft_second_if(&arg, param, tmp);
+			ret2 = ft_second_if(&arg, tmp);
 			if (ret2 == 3)
 				ft_third_if(&arg, tmp);
 		}
@@ -76,7 +76,7 @@ int	ft_first_if(t_parsing *param, t_parsing *tmp, t_param *arg)
 	return (3);
 }
 
-int	ft_second_if(t_param *arg, t_parsing *param, t_parsing *tmp)
+int	ft_second_if(t_param *arg, t_parsing *tmp)
 {
 	if ((arg->argv[arg->i] == '<' || arg->argv[arg->i] == '>'))
 	{
@@ -84,10 +84,13 @@ int	ft_second_if(t_param *arg, t_parsing *param, t_parsing *tmp)
 			return (0);
 		arg->line = NULL;
 	}
-	else if (arg->argv[arg->i] == '$' && arg->argv[arg->i + 1] && \
-		arg->argv[arg->i + 1] != '?' && ft_change(&(arg->argv[arg->i])))
+	else if ((arg->argv[arg->i] == '$' && arg->argv[arg->i + 1] && \
+		arg->argv[arg->i + 1] != '?' && ft_change(&(arg->argv[arg->i]))) \
+		|| ft_dolar_v(arg))
 	{
-		arg->line = ft_mdolar(arg->argv, &(arg->i), arg->line, param);
+		if (ft_dolar_v(arg))
+			return (ft_dolar_q(arg, tmp));
+		arg->line = ft_mdolar(arg->argv, &(arg->i), arg->line, tmp);
 		arg->line = ft_mdolar2(arg->argv, &(arg->i), arg->line, arg->envp);
 		ft_tabs(tmp, arg->line);
 		arg->line = NULL;

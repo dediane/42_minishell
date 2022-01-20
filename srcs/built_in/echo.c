@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 00:47:40 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/17 22:17:10 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/20 10:38:28 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,7 @@ int	check_size(int size, int fd, char **tabs)
 
 void	ft_write(int fd, t_parsing *params, int *i)
 {
-	if (ft_strncmp(params->tabs[(*i)], "$?", 3) == 0)
-		ft_putnbr_fd(g_exit_value, fd);
-	else
-		ft_putstr_fd(params->tabs[(*i)], fd);
+	ft_putstr_fd(params->tabs[(*i)], fd);
 	if (params->tabs[(*i)++])
 		ft_putchar_fd(' ', fd);
 }
