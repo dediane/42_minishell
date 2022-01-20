@@ -6,7 +6,7 @@
 /*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 14:55:05 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/19 11:52:30 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2022/01/20 11:47:44 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,15 @@ char	**set_in_env(char *line, char **env)
 	while (env[++i])
 		size++;
 	tmp = malloc(sizeof(char *) * (size + 2));
-	i = -1;
-	while (++i < size)
+	i = 0;
+	while (i < size)
 	{
 		tmp[i] = ft_strdup(env[i]);
+		i++;
 	}
 	tmp[i] = ft_strdup(line);
-	tmp[++i] = NULL;
+	i++;
+	tmp[i] = NULL;
 	free_tabs(env);
 	return (tmp);
 }

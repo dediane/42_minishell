@@ -6,7 +6,7 @@
 /*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 19:28:36 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/19 12:50:48 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2022/01/20 11:49:53 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,12 @@ char	**ft_copy_tab(char **envp)
 	while (envp[++i])
 		size++;
 	env = malloc(sizeof(char *) * (size + 1));
-	i = -1;
-	while (++i < size)
+	i = 0;
+	while (i < size)
+	{
 		env[i] = ft_strdup(envp[i]);
+		i++;
+	}
 	env[i] = NULL;
 	return (env);
 }
