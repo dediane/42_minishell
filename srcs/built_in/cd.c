@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 00:14:45 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/19 20:18:54 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/20 12:19:14 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,25 +59,31 @@ int	change_env(char **envp, char *path, char *new_path)
 	return (0);
 }
 
+int	ft_cd_minus(char *path, char **envp, t_parsing *params)
+{
+	int	i;
+
+	i = -1;
+	free(path);
+	path = get_path(envp, "OLDPWD", &i);
+	if (!path)
+		return (wrong_file2("OLDPWD"));
+	printf("%s\n", path);
+	return (ft_cd(envp, path, params));
+}
+
 int	ft_cd(char **envp, char *path, t_parsing *params)
 {
 	char	buffer[4096];
-	int		i;
 
-	i = -1;
 	if (path == NULL)
 	{
 		path = ft_get_home(envp);
 		if (!path)
-			return (wrong_file2());
+			return (wrong_file2("HOME"));
 	}
 	if (ft_strncmp(path, "-", 1) == 0)
-	{
-		free(path);
-		path = get_path(envp, "OLDPWD", &i);
-		printf("%s\n", path);
-		return (ft_cd(envp, path, params));
-	}
+		return (ft_cd_minus(path, envp, params));
 	else
 	{
 		change_env(envp, "OLDPWD", getcwd(buffer, 4096));

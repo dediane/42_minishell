@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 19:48:02 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/19 20:17:55 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/20 12:00:15 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ int	wrong_file(char *path)
 	return (2);
 }
 
-int	wrong_file2(void)
+int	wrong_file2(char *s)
 {
-	printf("bash: cd: HOME not set\n");
+	printf("bash: cd: %s not set\n", s);
 	g_exit_value = 1;
 	return (2);
 }
