@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 23:11:44 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/20 18:20:55 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2022/01/20 19:14:23 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,17 @@ char	*ft_value(char *line, char **env)
 {
 	int	i;
 	int	j;
-	int size;
+	int	size;
 
 	i = 0;
 	j = 0;
 	size = ft_strlen(line);
 	size--;
-	while(env[i])
+	while (env[i])
 	{
 		if (ft_strncmp(&line[1], env[i], size) == 0)
 		{
-			if(env[i][size] && env[i][size] == '=' && env[i][size + 1])
+			if (env[i][size] && env[i][size] == '=' && env[i][size + 1])
 				return (&env[i][size + 1]);
 		}
 		i++;

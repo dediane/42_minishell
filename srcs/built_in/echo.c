@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 00:47:40 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/20 16:20:22 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/20 19:14:38 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,15 @@ int	check_size(int size, int fd, char **tabs)
 	return (1);
 }
 
-void	ft_write(int fd, t_parsing *params, int *i)
+void	ft_write(int fd, t_parsing *params, int *i, int *space)
 {
-	ft_putstr_fd(params->tabs[(*i)], fd);
-	if (params->tabs[(*i)++])
-		ft_putchar_fd(' ', fd);
+	if (params->tabs[(*i)])
+	{
+		if (*space)
+			ft_putchar_fd(' ', fd);
+		*space = 1;
+	}
+	ft_putstr_fd(params->tabs[(*i)++], fd);
 }
 
 void	ft_plus(int *i, int *size)
@@ -54,7 +58,7 @@ void	ft_plus(int *i, int *size)
 	(*i)++;
 }
 
-int	ft_echo(int fd, t_parsing *params)
+int	ft_echo(int fd, t_parsing *params, int space)
 {
 	int	size;
 	int	n;
@@ -74,7 +78,7 @@ int	ft_echo(int fd, t_parsing *params)
 			break ;
 	}
 	while (params->tabs[i])
-		ft_write(fd, params, &i);
+		ft_write(fd, params, &i, &space);
 	if (n == 1 && size == 0)
 		ft_putchar_fd('\n', fd);
 	g_exit_value = 0;

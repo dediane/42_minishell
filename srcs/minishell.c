@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 19:28:36 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/20 19:02:55 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2022/01/20 19:16:00 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,12 @@ char	**ft_copy_tab(char **envp)
 	return (env);
 }
 
+void	line_hist(char *line)
+{
+	if (line && *line)
+		add_history(line);
+}
+
 char	*ft_readline_signal(char *line, char **env)
 {
 	signal(SIGINT, ft_sigint);
@@ -53,13 +59,8 @@ char	*ft_readline_signal(char *line, char **env)
 	line = readline("\033[1;35m~Minishell$\033[0m ");
 	if (!line)
 		ft_exit(NULL, env);
+	line_hist(line);
 	return (line);
-}
-
-void	line_hist(char *line)
-{
-	if (line && *line)
-		add_history(line);
 }
 
 int	main(int ac, char **av, char **envp)
@@ -78,7 +79,6 @@ int	main(int ac, char **av, char **envp)
 	while (1)
 	{
 		line = ft_readline_signal(line, env);
-		line_hist(line);
 		if (line[0] != '\0')
 		{
 			if (parsing(line, &param, env))
