@@ -6,7 +6,7 @@
 /*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 19:28:36 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/20 11:49:53 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2022/01/20 19:02:55 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char	*ft_readline_signal(char *line, char **env)
 
 void	line_hist(char *line)
 {
-	if (line)
+	if (line && *line)
 		add_history(line);
 }
 
@@ -86,6 +86,7 @@ int	main(int ac, char **av, char **envp)
 			else
 				ft_free_params(&param);
 		}
+		free(line);
 	}
 	free_tabs(env);
 	return (0);
