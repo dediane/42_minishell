@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 00:14:45 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/20 12:19:14 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/20 16:07:46 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ int	ft_cd(char **envp, char *path, t_parsing *params)
 {
 	char	buffer[4096];
 
+	if (!check_cd_arg(params))
+		return (1);
 	if (path == NULL)
 	{
 		path = ft_get_home(envp);

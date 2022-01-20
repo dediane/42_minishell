@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 00:47:40 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/20 10:38:28 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2022/01/20 16:20:22 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	check_n(char *arg)
 	int	i;
 
 	i = 0;
-	while (arg[i] == '-' && arg[i])
+	while (arg[i] && arg[i] == '-' && arg[i + 1] && arg[i + 1] == 'n')
 	{
 		i++;
 		while (arg[i] == 'n')

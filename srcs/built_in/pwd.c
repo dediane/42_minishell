@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 19:48:02 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/20 12:00:15 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/20 16:11:56 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,21 @@ int	wrong_file(char *path)
 
 int	wrong_file2(char *s)
 {
-	printf("bash: cd: %s not set\n", s);
+	printf("minishell: cd: %s not set\n", s);
 	g_exit_value = 1;
 	return (2);
+}
+
+int	check_cd_arg(t_parsing *params)
+{
+	if (params->tabs[0] && params->tabs[1] && params->tabs[2])
+	{
+		printf("minishell: cd: too many arguments\n");
+		g_exit_value = 1;
+		return (0);
+	}
+	else
+		return (1);
 }
 
 int	ft_pwd(int fd)
