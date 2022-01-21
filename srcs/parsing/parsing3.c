@@ -6,7 +6,7 @@
 /*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 12:42:22 by bben-yaa          #+#    #+#             */
-/*   Updated: 2022/01/18 18:02:28 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2022/01/21 10:43:05 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ft_fill2(char *argv, char *line, t_parsing *tmp, int *i)
 
 void	mdquote2(char *line, char **envp, t_parsing *param)
 {
-	if (dolar_quotes(line))
+	while (dolar_quotes(line))
 		line = ft_replace_var(line, envp);
 	ft_tabs(param, line);
 }

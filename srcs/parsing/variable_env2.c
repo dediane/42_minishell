@@ -6,7 +6,7 @@
 /*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 21:21:35 by balkis            #+#    #+#             */
-/*   Updated: 2022/01/20 14:42:41 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2022/01/21 10:34:46 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*ft_copy_var(char *var, char **envp, int j, int i)
 
 void	ft_la(int *i, char *name)
 {
-	i = 0;
+	(*i) = 0;
 	free(name);
 	name = NULL;
 }

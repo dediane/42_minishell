@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 08:01:08 by balkis            #+#    #+#             */
-/*   Updated: 2022/01/20 16:37:15 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/21 10:37:47 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,19 +66,15 @@ int	ft_mpipe(char *argv, int *i, t_parsing *tmp, t_parsing *param)
 	(*i)++;
 	while (argv[(*i)] && argv[(*i)] == ' ')
 		(*i)++;
-	if (!argv[(*i)])
-		tmp->calldoc = 1;
-	if (argv[(*i)] == '|')
-		(*i)++;
-	if (argv[(*i)] && argv[(*i)] == '|')
+	if ((argv[(*i)] && argv[(*i)] == '|') || !argv[(*i)])
 	{
-		ft_putstr_fd("minishell: syntax error near unexpected token `||'\n", 2);
+		ft_putstr_fd("minishell: syntax error near unexpected token `|'\n", 2);
 		return (0);
 	}
 	while (argv[(*i)] && argv[(*i)] == ' ')
 		(*i)++;
 	if (!argv[(*i)])
-		tmp->calldoc = 1;
+		return (0);
 	return (1);
 }
 
