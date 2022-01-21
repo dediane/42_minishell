@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 23:11:44 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/21 11:56:07 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/21 12:12:14 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ int	ft_heredoc(char *eof, t_parsing *params, char **env)
 			if (line && line[0] == '$')
 				line = ft_value(line, env);
 			print_heredoc(pipe_fd, line);
+			free (line);
 		}
 		close_heredoc(pipe_fd, params, line);
 	}
