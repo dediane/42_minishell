@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 23:11:44 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/21 10:53:30 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/21 11:06:27 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	ft_heredoc_multiple(int nb, t_parsing *params, int stdout)
 	eof = 0;
 	if (pipe(pipe_fd))
 		return (1);
-	nb = ft_nb_files(params, nb);
+	nb = ft_nb_files(params->file, nb);
 	params->file = head;
 	while (1)
 	{

@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 23:26:15 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/21 10:51:05 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/21 11:05:46 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,7 @@ int				check_eof(char *line, char *eof);
 int				ft_heredoc(char *eof, t_parsing *params, char **env);
 
 //heredoc2.c
-int				ft_nb_files(t_parsing *params, int nb);
+int				ft_nb_files(t_file *file, int nb);
 
 //build_in.c
 int				exec_built_in(t_parsing *params, char *cmd, char ***envp);
