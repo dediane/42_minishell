@@ -6,7 +6,7 @@
 /*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/06 08:01:08 by balkis            #+#    #+#             */
-/*   Updated: 2022/01/21 10:37:47 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2022/01/21 14:47:17 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,9 @@ char	*ft_mdolar(char *argv, int *i, char *line, t_parsing *param)
 		ft_tabs(param, line);
 		line = NULL;
 	}
-	while (argv[(*i)] && argv[(*i)] != ' ')
-	{
+	line = ft_line(line, argv[(*i)]);
+	while (argv[(++*i)] && (ft_isalnum(argv[(*i)]) || argv[(*i)] == '_'))
 		line = ft_line(line, argv[(*i)]);
-		(*i)++;
-	}
 	return (line);
 }
 
