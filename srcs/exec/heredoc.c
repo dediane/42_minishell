@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 23:11:44 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/21 02:04:37 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/21 10:53:30 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,7 @@ int	ft_heredoc_multiple(int nb, t_parsing *params, int stdout)
 	eof = 0;
 	if (pipe(pipe_fd))
 		return (1);
-	while (params->file->next && params->file->next->ftype == 4)
-	{
-		params->file = params->file->next;
-		nb++;
-	}
-	nb++;
+	nb = ft_nb_files(params, nb);
 	params->file = head;
 	while (1)
 	{
@@ -86,16 +81,11 @@ int	ft_heredoc_multiple(int nb, t_parsing *params, int stdout)
 			eof += check_eof_multi(params, line);
 			if (eof == nb)
 				break ;
+			if (eof == nb -1)
+				print_heredoc(pipe_fd, line);
 		}
-		write(pipe_fd[1], line, ft_strlen(line));
-		write(pipe_fd[1], "\n", 1);
-		free(line);
 	}
-	free(line);
-	rl_clear_history();
-	dup2(pipe_fd[0], STDIN);
-	close(pipe_fd[1]);
-	close(pipe_fd[0]);
+	close_heredoc(pipe_fd, params, line);
 	return (stdout);
 }
 
@@ -113,22 +103,13 @@ int	ft_heredoc(char *eof, t_parsing *params, char **env)
 		while (1)
 		{
 			line = readline("> ");
-			if (line)
-			{
-				if (check_eof(line, eof))
-					break ;
-				if (line[0] == '$')
-					line = ft_value(line, env);
-			}
-			write(pipe_fd[1], line, ft_strlen(line));
-			write(pipe_fd[1], "\n", 1);
-			free(line);
+			if (line && check_eof(line, eof))
+				break ;
+			if (line && line[0] == '$')
+				line = ft_value(line, env);
+			print_heredoc(pipe_fd, line);
 		}
-		free(line);
-		dup2(pipe_fd[0], STDIN);
-		close(pipe_fd[1]);
-		close(pipe_fd[0]);
-		params->heredoc = 1;
+		close_heredoc(pipe_fd, params, line);
 	}
 	else
 		ft_heredoc_multiple(0, params, tmp_stdout);
