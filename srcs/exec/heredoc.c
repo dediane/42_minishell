@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 23:11:44 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/21 02:01:35 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/21 02:04:37 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ char	*ft_value(char *line, char **env)
 
 int	check_eof_multi(t_parsing *params, char *line)
 {
-	int size;
+	int	size;
 
 	size = ft_strlen(line);
 	if (size != 0 && ft_strncmp(line, params->file->name, size) == 0)
@@ -71,7 +71,7 @@ int	ft_heredoc_multiple(int nb, t_parsing *params, int stdout)
 	eof = 0;
 	if (pipe(pipe_fd))
 		return (1);
-	while(params->file->next && params->file->next->ftype == 4)
+	while (params->file->next && params->file->next->ftype == 4)
 	{
 		params->file = params->file->next;
 		nb++;
