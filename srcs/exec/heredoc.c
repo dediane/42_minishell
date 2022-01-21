@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 23:11:44 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/21 02:04:37 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/21 03:49:32 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,11 @@ int	ft_heredoc_multiple(int nb, t_parsing *params, int stdout)
 		if (line)
 		{
 			eof += check_eof_multi(params, line);
+			if (eof == nb - 1)
+			{
+				write(pipe_fd[1], line, ft_strlen(line));
+				write(pipe_fd[1], "\n", 1);
+			}
 			if (eof == nb)
 				break ;
 		}
