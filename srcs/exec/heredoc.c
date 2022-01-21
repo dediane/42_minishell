@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 23:11:44 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/21 03:49:32 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/21 10:17:40 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,16 +51,19 @@ int	check_eof_multi(t_parsing *params, char *line)
 {
 	int	size;
 
-	size = ft_strlen(line);
-	if (size != 0 && ft_strncmp(line, params->file->name, size) == 0)
+	if (line != NULL)
 	{
-		params->file = params->file->next;
-		return (1);
+		size = ft_strlen(line);
+		if (size != 0 && ft_strncmp(line, params->file->name, size) == 0)
+		{
+			params->file = params->file->next;
+			return (1);
+		}
 	}
 	return (0);
 }
 
-int	ft_heredoc_multiple(int nb, t_parsing *params, int stdout)
+int	ft_heredoc_multiple(int nb, t_parsing *params, int tmp_stdout)
 {
 	t_file		*head;
 	char		*line;
@@ -83,25 +86,23 @@ int	ft_heredoc_multiple(int nb, t_parsing *params, int stdout)
 		line = readline("> ");
 		if (line)
 		{
-			eof += check_eof_multi(params, line);
 			if (eof == nb - 1)
 			{
 				write(pipe_fd[1], line, ft_strlen(line));
 				write(pipe_fd[1], "\n", 1);
 			}
+			eof += check_eof_multi(params, line);
 			if (eof == nb)
 				break ;
 		}
-		write(pipe_fd[1], line, ft_strlen(line));
-		write(pipe_fd[1], "\n", 1);
 		free(line);
 	}
 	free(line);
-	rl_clear_history();
 	dup2(pipe_fd[0], STDIN);
 	close(pipe_fd[1]);
 	close(pipe_fd[0]);
-	return (stdout);
+	params->heredoc = 1;
+	return (tmp_stdout);
 }
 
 int	ft_heredoc(char *eof, t_parsing *params, char **env)
