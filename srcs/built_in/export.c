@@ -6,7 +6,7 @@
 /*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 14:55:05 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/20 11:47:44 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2022/01/21 15:39:17 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ char	**ft_export(char **tabs, char **env)
 		{
 			value = ft_strtrim_first_letter(value);
 			change_env(env, key, value);
+			free(value);
 		}
 		free(key);
 	}

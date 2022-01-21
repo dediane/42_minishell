@@ -6,7 +6,7 @@
 /*   By: bben-yaa <bben-yaa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 20:14:21 by balkis            #+#    #+#             */
-/*   Updated: 2022/01/20 15:45:25 by bben-yaa         ###   ########.fr       */
+/*   Updated: 2022/01/21 14:15:48 by bben-yaa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	pos_dolar(char *line)
 		if (line[i] == '$')
 		{
 			i++;
-			while (line[i] && line[i] != ' ')
+			while (line[i] && (ft_isalnum(line[i]) || line[i] == '_'))
 			{
 				i++;
 				len++;
