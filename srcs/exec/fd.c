@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/17 20:16:28 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/20 18:19:39 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/21 10:47:36 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,23 @@ void	close_fd(t_parsing *params)
 	dup2(params->fd_stdout, STDOUT);
 	close(params->fd_stdin);
 	close(params->fd_stdout);
+	return ;
+}
+
+void	close_heredoc(int pipe_fd[2], t_parsing *params, char *line)
+{
+	free(line);
+	dup2(pipe_fd[0], STDIN);
+	close(pipe_fd[1]);
+	close(pipe_fd[0]);
+	params->heredoc = 1;
+	return ;
+}
+
+void	print_heredoc(int pipe_fd[2], char *line)
+{
+	write(pipe_fd[1], line, ft_strlen(line));
+	write(pipe_fd[1], "\n", 1);
+	free(line);
 	return ;
 }
