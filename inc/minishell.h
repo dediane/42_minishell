@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/11 23:26:15 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/20 20:04:11 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/21 11:56:54 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,10 +126,17 @@ t_parsing		*ft_exec_redir(t_parsing *params, char **envp);
 void			save_in_out(t_parsing *params);
 void			set_fd(t_parsing *params, int fd);
 void			close_fd(t_parsing *params);
+void			close_heredoc(int pipe_fd[2], t_parsing *params, char *line);
+void			print_heredoc(int pipe_fd[2], char *line);
 
 //heredoc.c
 int				check_eof(char *line, char *eof);
 int				ft_heredoc(char *eof, t_parsing *params, char **env);
+
+//heredoc2.c
+int				ft_nb_files(t_file *file, int nb);
+int				ft_break(t_file *file, int eof, int nb, t_file *head);
+void			ft_print_heredoc(int pipe_fd[2], char *line, int eof, int nb);
 
 //build_in.c
 int				exec_built_in(t_parsing *params, char *cmd, char ***envp);

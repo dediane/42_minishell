@@ -6,7 +6,7 @@
 /*   By: ddecourt <ddecourt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/01 20:24:05 by ddecourt          #+#    #+#             */
-/*   Updated: 2022/01/19 13:41:44 by ddecourt         ###   ########.fr       */
+/*   Updated: 2022/01/21 12:02:44 by ddecourt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ int	ft_multiple_redir(int nb, t_file *file, t_parsing *params, char **envp)
 	while (nb > 0)
 	{
 		fd = open_file(params, file->name, envp);
+		if (params->file->ftype == 4 && params->file->next)
+			break ;
 		if (fd == 0)
 			return (0);
 		if (nb == 1)
@@ -86,8 +88,6 @@ int	ft_multiple_redir(int nb, t_file *file, t_parsing *params, char **envp)
 		close(fd);
 		file = file->next;
 	}
-	if (params->heredoc == 1)
-		dup2(params->fd_stdin, STDIN);
 	close_fd(params);
 	return (0);
 }
